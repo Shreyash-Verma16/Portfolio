@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyash Verma — The Creator</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Tailwind CSS, GSAP, & Chart.js -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            background: 'var(--background)',
+            surface: 'var(--surface)',
+            border: 'var(--border)',
+            'text-primary': 'var(--text-primary)',
+            'text-secondary': 'var(--text-secondary)',
+            'text-muted': 'var(--text-muted)',
+            accent: 'var(--accent)',
+          }
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ── Creator Theme Variables (Purple/Fuchsia) ── */
+    :root {
+      --background: #f3f6fc;
+      --surface: rgba(255, 255, 255, 0.78);
+      --border: rgba(203, 213, 225, 0.85);
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --accent: #d946ef; 
+      --glass-shine: rgba(255, 255, 255, 0.95);
+      --glow-shadow: rgba(217, 70, 239, 0.28);
+      --grid-color: rgba(15, 23, 42, 0.045);
+      --nav-tint: rgba(217, 70, 239, 0.16);
+      --nav-border: rgba(217, 70, 239, 0.45);
+      --island-bg: rgba(255, 255, 255, 0.88);
+    }
+
+    .dark {
+      --background: #020617;
+      --surface: rgba(15, 23, 42, 0.72);
+      --border: rgba(255, 255, 255, 0.12);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --accent: #e879f9; 
+      --glass-shine: rgba(255, 255, 255, 0.12);
+      --glow-shadow: rgba(232, 121, 249, 0.4);
+      --grid-color: rgba(255, 255, 255, 0.028);
+      --nav-tint: rgba(232, 121, 249, 0.18);
+      --nav-border: rgba(232, 121, 249, 0.5);
+      --island-bg: rgba(8, 12, 24, 0.96);
+    }
+
+    body { background-color: var(--background); color: var(--text-primary); overflow-x: hidden; transition: background-color 0.8s, color 0.8s; }
+
+    /* ── Apple-Style Utilities ── */
+    .apple-siri-shimmer {
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 25%, #ffffff 50%, #8b5cf6 75%, var(--text-primary) 100%);
+      background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: siriShimmerFlow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+    }
+    @keyframes siriShimmerFlow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+    .reveal-node { opacity: 0; filter: blur(14px); transform: translateY(48px) scale(0.96); transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), filter 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-node.is-visible { opacity: 1; filter: blur(0px); transform: translateY(0px) scale(1); }
+
+    .glass-panel { background: var(--surface); backdrop-filter: blur(36px); border: 1px solid var(--border); box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 35px -10px rgba(15, 23, 42, 0.08); transition: all 0.7s; }
+    .dark .glass-panel { box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 40px 0 rgba(0, 0, 0, 0.45); }
+
+    /* ── Spotlight Hover Cards & Purple Spinning Edge ── */
+    .spotlight-card { position: relative; overflow: hidden; --mouse-x: 50%; --mouse-y: 50%; transition: transform 0.7s, box-shadow 0.7s, border-color 0.6s; }
+    .spotlight-card:hover { transform: translateY(-8px) scale(1.015); border-color: rgba(217, 70, 239, 0.45); z-index: 10; }
+    .spotlight-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(217, 70, 239, 0.08), transparent 40%); z-index: 1; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
+    .dark .spotlight-card::before { background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 40%); }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @property --border-angle { syntax: "<angle>"; inherits: true; initial-value: 0turn; }
+    .spotlight-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--border-angle), transparent 60%, rgba(139, 92, 246, 0.8) 80%, rgba(217, 70, 239, 1) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; z-index: 20; pointer-events: none; animation: border-spin 4s linear infinite; opacity: 0; transition: opacity 0.5s ease; }
+    .spotlight-card:hover::after { opacity: 1; }
+    @keyframes border-spin { 100% { --border-angle: 1turn; } }
+    .click-shrink { transition: transform 0.4s; } .click-shrink:hover { transform: translateY(-2px) scale(1.03); } .click-shrink:active { transform: scale(0.94); }
+
+    /* ── Number Scramble Glow Animation ── */
+    .stat-glow-anim {
+      color: #fff;
+      text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+      animation: scramblePulse 0.1s infinite alternate;
+    }
+    .stat-glow-settle {
+      transition: text-shadow 0.8s ease, color 0.8s ease;
+      text-shadow: 0 0 0px transparent;
+    }
+    @keyframes scramblePulse { 0% { opacity: 0.8; transform: scale(0.98); } 100% { opacity: 1; transform: scale(1.02); } }
+
+    /* ── Adaptive Dynamic Island ── */
+    #nav-island-wrapper { position: fixed; top: 16px; left: 0; right: 0; z-index: 10000; display: flex; justify-content: center; pointer-events: none; opacity: 0; transform: translateY(-20px); animation: dropInNav 1s 0.2s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes dropInNav { to { opacity: 1; transform: translateY(0); } }
+    .nav-island { pointer-events: auto; background: var(--island-bg); backdrop-filter: blur(50px); border: 1.5px solid var(--nav-border); box-shadow: inset 0 1px 1px var(--glass-shine), 0 25px 60px -10px rgba(0, 0, 0, 0.75), 0 0 45px -5px var(--nav-tint); border-radius: 9999px; width: 96%; max-width: 1120px; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; transition: all 0.85s; }
+    .nav-island.is-collapsed { width: 340px; height: 52px; border-color: var(--nav-border); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 15px 35px -5px rgba(0, 0, 0, 0.3), 0 0 35px var(--nav-tint); }
+    .nav-island.is-collapsed.island-notify { width: 395px !important; height: 58px !important; border-color: var(--accent) !important; box-shadow: inset 0 1px 1px var(--glass-shine), 0 20px 45px -5px rgba(0, 0, 0, 0.45), 0 0 50px 12px var(--nav-tint) !important; transform: scale(1.03) translateY(2px); }
+    
+    .nav-link { padding: 7px 14px; border-radius: 9999px; font-weight: 600; font-size: 0.85rem; color: var(--text-secondary); transition: all 0.4s; }
+    .nav-link:hover, .nav-link.active-section { color: var(--accent); background: var(--nav-tint); border: 1px solid var(--nav-border); box-shadow: 0 0 22px var(--glow-shadow); }
+
+    .nav-view { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; white-space: nowrap; transition: all 0.5s; }
+    .nav-expanded-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+    .nav-island.is-collapsed .nav-expanded-view { opacity: 0; transform: scale(0.88) translateY(-12px); pointer-events: none; }
+    .nav-compact-view { opacity: 0; transform: scale(0.88) translateY(12px); pointer-events: none; }
+    .nav-island.is-collapsed .nav-compact-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; transition: opacity 0.55s 0.2s, transform 0.75s 0.12s; }
+    
+    #compact-section-badge { display: inline-flex; align-items: center; gap: 6px; transition: all 0.5s; }
+    .nav-island.island-notify #compact-section-badge { transform: scale(1.06); padding: 6px 16px; background: var(--nav-tint); border-color: var(--accent); box-shadow: 0 0 20px var(--glow-shadow); }
+
+    /* ── Background & General ── */
+    .bg-grid-pattern { position: fixed; inset: 0; z-index: -25; background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+    .grain-overlay { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.04; mix-blend-mode: overlay; }
+    .ambient-orb { animation: floatOrb 16s ease-in-out infinite alternate; } .ambient-orb-2 { animation: floatOrb 19s ease-in-out infinite alternate-reverse; } .ambient-orb-3 { animation: floatOrb 22s ease-in-out infinite alternate; }
+    @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(3%, 4%) scale(1.05); } 100% { transform: translate(-2%, -3%) scale(0.95); } }
+    
+    /* ── Timeline Styles ── */
+    .timeline-line { position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), #8b5cf6, transparent); opacity: 0.85; }
+    .timeline-dot { position: absolute; left: 9px; top: 6px; width: 14px; height: 14px; background: var(--surface); border: 2px solid var(--accent); border-radius: 50%; z-index: 2; box-shadow: 0 0 15px var(--accent); transition: transform 0.6s, box-shadow 0.6s; }
+    .spotlight-card:hover ~ .timeline-dot, .spotlight-card:hover + .timeline-dot { transform: scale(1.4); box-shadow: 0 0 28px var(--accent); }
+
+    /* ── Hero iPhone Styles ── */
+    .iphone-frame { width: 320px; height: 640px; background: #0a0a0a; border-radius: 60px; position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 0 0 10px #1f2937, 0 0 0 12px #334155, 0 30px 50px -15px rgba(0, 0, 0, 0.7), 0 0 40px var(--glow-shadow); padding: 12px; transform: perspective(1000px) rotateY(-8deg) rotateX(4deg); transition: transform 0.9s; }
+    .iphone-frame:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03); }
+    .iphone-screen { width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: #000; position: relative; }
+    .slideshow-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease-in-out; }
+    .slideshow-img.active { opacity: 1; }
+    .dynamic-island-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 120px; height: 32px; background: #000; border-radius: 20px; z-index: 30; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.15); }
+    .iphone-btn { position: absolute; background: #334155; border-radius: 2px; box-shadow: inset 1px 0 2px rgba(255,255,255,0.2); }
+
+    /* ── REFINED COMPACT PRO IPHONE MOCKUP STYLES ── */
+    .iphone-pro-container {
+      position: relative;
+      width: 100%;
+      max-width: 250px; /* Reduced to make mockups sleeker & clearer */
+      margin: 0 auto;
+      aspect-ratio: 9 / 18.2;
+      background: #000;
+      border-radius: 44px;
+      padding: 8px;
+      box-shadow: 
+        0 0 0 2px #334155,
+        0 0 0 5px #0f172a,
+        0 0 0 7px #1e293b,
+        0 20px 45px -12px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(217, 70, 239, 0.15);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .iphone-pro-container:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 0 0 2px var(--accent),
+        0 0 0 5px #0f172a,
+        0 0 0 8px var(--accent),
+        0 28px 55px -12px rgba(0, 0, 0, 0.9),
+        0 0 40px var(--glow-shadow);
+    }
+    .iphone-pro-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #020617;
+    }
+    .iphone-pro-island {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 76px;
+      height: 20px;
+      background: #000;
+      border-radius: 16px;
+      z-index: 30;
+      box-shadow: inset 0 -1px 2px rgba(255, 255, 255, 0.2);
+    }
+    .iphone-pro-glare {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 30%, transparent 60%);
+      pointer-events: none;
+      z-index: 25;
+    }
+
+    /* ── Social Card Pop-out Redirect CSS ── */
+    .social-card { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .dark .social-github:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
+    .social-linkedin:hover { color: #0a66c2; background: rgba(10,102,194,0.1); border-color: rgba(10,102,194,0.4); box-shadow: 0 10px 25px -5px rgba(10,102,194,0.3); }
+    .social-youtube:hover { color: #ff0000; background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.4); box-shadow: 0 10px 25px -5px rgba(255,0,0,0.3); }
+    .dark .social-x:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
+    .social-instagram:hover { color: #e1306c; background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.4); box-shadow: 0 10px 25px -5px rgba(225,48,108,0.3); }
+    .social-reddit:hover { color: #ff4500; background: rgba(255,69,0,0.1); border-color: rgba(255,69,0,0.4); box-shadow: 0 10px 25px -5px rgba(255,69,0,0.3); }
+    .dark .social-threads:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
+
+    .redirect-overlay { position: fixed; inset: 0; z-index: 9999999; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .redirect-overlay.active { opacity: 1; pointer-events: auto; }
+    .redirect-icon-wrapper { font-size: 4rem; transform: scale(0.5) translateY(30px); opacity: 0; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6)); }
+    .redirect-overlay.active .redirect-icon-wrapper { transform: scale(2) translateY(0); opacity: 1; }
+  </style>
+</head>
+<body class="antialiased selection:bg-accent/30 selection:text-text-primary">
+
+  <!-- Purple/Fuchsia Ambience -->
+  <div class="bg-grid-pattern"></div>
+  <div class="fixed inset-0 -z-30 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="ambient-orb absolute top-[-5%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-fuchsia-400/45 via-purple-500/35 to-pink-600/30 blur-[130px] opacity-80 dark:opacity-75"></div>
+    <div class="ambient-orb-2 absolute bottom-[-10%] right-[-5%] w-[65vw] h-[65vw] rounded-full bg-gradient-to-tr from-indigo-400/40 via-blue-500/30 to-purple-500/25 blur-[150px] opacity-75 dark:opacity-65"></div>
+  </div>
+  <canvas id="particle-canvas" class="fixed inset-0 -z-20 pointer-events-none"></canvas>
+  <svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
+
+  <!-- ── ADAPTIVE DYNAMIC ISLAND ── -->
+  <div id="nav-island-wrapper">
+    <nav id="dynamic-island-nav" class="nav-island">
+      <!-- Full Menu -->
+      <div class="nav-view nav-expanded-view flex justify-between w-full items-center">
+        <a href="#creator-home" class="flex items-center gap-3 group click-shrink">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 overflow-hidden border border-white/20">
+            <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Logo" class="w-full h-full object-cover" />
+          </div>
+          <div><span class="block text-text-primary font-bold tracking-tight leading-none text-base">SHREYASH</span><span class="block text-text-secondary text-[0.6rem] tracking-widest leading-none mt-1">VERMA</span></div>
+        </a>
+        <div id="island-links-container" class="hidden lg:flex items-center gap-0.5">
+          <a href="#creator-home" class="nav-link active-section" data-section="creator-home">Home</a>
+          <a href="#creator-philosophy" class="nav-link" data-section="creator-philosophy">Philosophy</a>
+          <a href="#creator-process" class="nav-link" data-section="creator-process">Process</a>
+          <a href="#creator-analytics" class="nav-link" data-section="creator-analytics">Analytics</a>
+          <a href="#creator-tools" class="nav-link" data-section="creator-tools">Tools</a>
+          <a href="#creator-vision" class="nav-link" data-section="creator-vision">Vision</a>
+          <a href="#latest-work" class="nav-link" data-section="latest-work">Work</a>
+          <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-full glass-panel hover:text-accent click-shrink"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
+          <a href="#contact" class="hidden sm:inline-flex items-center px-4 py-2 glass-panel text-xs font-bold rounded-full hover:border-accent click-shrink gap-2"><i class="fa-solid fa-paper-plane"></i> Collab</a>
+        </div>
+      </div>
+      <!-- Compact View -->
+      <div class="nav-view nav-compact-view flex justify-between w-full items-center">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full overflow-hidden border border-white/20"><img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" class="w-full h-full object-cover" /></div>
+          <span class="text-text-primary font-extrabold text-sm">SHREYASH</span>
+        </div>
+        <span id="compact-section-badge" class="px-3.5 py-1 bg-accent/15 border border-accent/50 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300"><i class="fa-solid fa-clapperboard text-accent mr-1"></i> <span class="font-extrabold tracking-wider">CREATOR</span></span>
+        <button class="theme-toggle-btn w-8 h-8 flex items-center justify-center rounded-full glass-panel click-shrink"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PAGE CONTENT: THE CREATOR -->
+  <!-- ========================================== -->
+  <main class="relative z-10">
+    
+    <!-- Hero -->
+    <section id="creator-home" data-section-name="HOME" class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center min-h-screen pt-28 pb-12">
+      <div class="space-y-8 reveal-node">
+        <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] apple-siri-shimmer">SHREYASH<br/>VERMA</h1>
+        <p class="text-xl sm:text-2xl text-text-secondary mt-6 font-semibold">Cinematic Tech Content Creator</p>
+        <div class="flex gap-4 pt-4">
+          <a href="#creator-process" class="px-8 py-4 bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white font-bold rounded-full click-shrink border border-white/20 shadow-[0_10px_30px_-10px_rgba(217,70,239,0.6)]"><i class="fa-solid fa-wand-magic-sparkles"></i> My Process</a>
+        </div>
+      </div>
+      <div class="flex justify-center lg:justify-end reveal-node">
+        <div class="iphone-frame scale-[0.85] sm:scale-100 origin-center lg:origin-right">
+          <div class="iphone-btn left-[-16px] top-[110px] w-[4px] h-[26px]"></div>
+          <div class="iphone-btn left-[-16px] top-[160px] w-[4px] h-[50px]"></div>
+          <div class="iphone-btn left-[-16px] top-[230px] w-[4px] h-[50px]"></div>
+          <div class="iphone-btn right-[-16px] top-[180px] w-[4px] h-[70px]"></div>
+          
+          <div class="iphone-screen bg-black">
+            <div class="dynamic-island-notch"></div>
+            <div class="phone-slideshow absolute inset-0 w-full h-full">
+              <img src="https://i.ibb.co/LDv7sc6S/Whats-App-Image-2026-07-06-at-3-04-26-PM.jpg" class="slideshow-img active" alt="Slide 1">
+              <img src="https://i.ibb.co/pB46JSRw/Whats-App-Image-2026-07-06-at-3-04-27-PM.jpg" class="slideshow-img" alt="Slide 2">
+              <img src="https://i.ibb.co/27wWsGwS/Whats-App-Image-2026-07-06-at-3-04-27-PM-1.jpg" class="slideshow-img" alt="Slide 3">
+              <img src="https://i.ibb.co/Df3n69BF/Whats-App-Image-2026-07-06-at-3-04-28-PM.jpg" class="slideshow-img" alt="Slide 4">
+            </div>
+            <div class="absolute top-4 left-6 right-6 flex items-center justify-between text-[11px] text-white/90 z-20 font-bold drop-shadow-md pointer-events-none">
+              <span>9:41</span>
+              <div class="flex gap-2"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-full"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="creator-philosophy" data-section-name="PHILOSOPHY" class="max-w-7xl mx-auto px-6 py-24">
+      <h2 class="text-4xl sm:text-5xl font-black mb-12 reveal-node text-center">🎥 As A Content Creator</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        <div class="spotlight-card glass-panel p-8 rounded-3xl reveal-node flex flex-col">
+          <div class="w-10 h-10 rounded-full bg-fuchsia-500 flex items-center justify-center text-white font-bold mb-5 shrink-0">01</div>
+          <h3 class="text-2xl font-bold mb-3">What I Create: Turning complicated technology into understandable stories</h3>
+          <p class="text-text-secondary font-medium text-base leading-relaxed mb-4 grow">I create technology-focused content that makes complicated technical ideas understandable, interesting, and memorable. My content explores the hidden mechanisms, engineering decisions, limitations, and unexpected behaviors behind the technology we use every day.</p>
+          <div class="glass-panel p-5 rounded-2xl border-fuchsia-500/30 font-mono text-xs space-y-2 text-text-secondary mt-auto">
+             <p>I don't just explain what something does. I explore:</p>
+             <p class="text-text-primary">> Why does it work this way?</p>
+             <p class="text-text-primary">> What is happening underneath?</p>
+             <p class="text-text-primary">> What problem led to this design?</p>
+             <p class="text-text-primary">> What happens when the system reaches its limits?</p>
+          </div>
+        </div>
+
+        <div class="spotlight-card glass-panel p-8 rounded-3xl reveal-node flex flex-col">
+          <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mb-5 shrink-0">02</div>
+          <h3 class="text-2xl font-bold mb-3">How I Explain Technology: Simple without making it inaccurate</h3>
+          <p class="text-text-secondary font-medium text-base leading-relaxed mb-4 grow">My approach is to take a technically accurate concept and reduce it to the simplest mental model that still preserves the important idea. I balance: <span class="text-fuchsia-500 font-bold">Technical Accuracy × Simplicity × Curiosity</span>.</p>
+          <div class="flex items-center gap-3 text-xs font-bold text-text-primary uppercase tracking-widest mt-auto flex-wrap">
+            <span class="glass-panel px-3 py-1.5 rounded-lg border border-border">Problem</span> ➜
+            <span class="glass-panel px-3 py-1.5 rounded-lg border border-border">Analogy</span> ➜
+            <span class="glass-panel px-3 py-1.5 rounded-lg border border-border">Tech</span> ➜
+            <span class="glass-panel px-3 py-1.5 rounded-lg text-fuchsia-500 border-fuchsia-500/50 shadow-[0_0_15px_rgba(217,70,239,0.2)]">Surprise</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Streamlined & Condensed Process Section -->
+    <section id="creator-process" data-section-name="PROCESS" class="py-24 sm:py-32 relative z-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-2xl mb-16 reveal-node text-center lg:text-left">
+          <span class="section-label glass-panel px-4 py-2 rounded-full inline-block mb-4 shadow-sm border-fuchsia-500/20 text-fuchsia-500">02 — Production Workflow</span>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary">How My Content Is Generated</h2>
+        </div>
+
+        <div class="relative pl-12 sm:pl-16">
+          <div class="timeline-line"></div>
+          
+          <div class="relative pb-12 reveal-node" style="transition-delay: 0.1s;">
+            <div class="timeline-dot"></div>
+            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8 hover:border-fuchsia-500/30">
+              <span class="section-label text-xs glass-panel px-3 py-1 rounded-full text-fuchsia-500 relative z-10">Step 01</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-3 relative z-10">Brainstorming & Research</h3>
+              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+               Blending AI-driven research with trending tech topics. Every concept is cross-referenced with official technical documentation to ensure absolute accuracy.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative pb-12 reveal-node" style="transition-delay: 0.2s;">
+            <div class="timeline-dot"></div>
+            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8 hover:border-fuchsia-500/30">
+              <span class="section-label text-xs glass-panel px-3 py-1 rounded-full text-fuchsia-500 relative z-10">Step 02</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-3 relative z-10">Script & Storyboarding</h3>
+              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+                Deconstructing complex technical systems into structured, engaging narratives built for maximum audience retention and clarity.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative pb-12 reveal-node" style="transition-delay: 0.3s;">
+            <div class="timeline-dot"></div>
+            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8 hover:border-fuchsia-500/30">
+              <span class="section-label text-xs glass-panel px-3 py-1 rounded-full text-fuchsia-500 relative z-10">Step 03</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-3 relative z-10">Production & Realistic Editing</h3>
+              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+               Recording energetic audio paired with high-end, realistic AI visual animations—avoiding fake hacker tropes to clearly demonstrate real hardware/software operations.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative reveal-node" style="transition-delay: 0.4s;">
+            <div class="timeline-dot"></div>
+            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8 hover:border-fuchsia-500/30">
+              <span class="section-label text-xs glass-panel px-3 py-1 rounded-full text-fuchsia-500 relative z-10">Step 04</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-3 relative z-10">Publish & Iterate</h3>
+              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+                Publishing to YouTube and Instagram while actively evaluating audience retention metrics and comments to continuously improve production quality.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE ANALYTICS -->
+    <section id="creator-analytics" data-section-name="ANALYTICS" class="max-w-7xl mx-auto px-6 py-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal-node mb-10">
+        <div>
+          <div class="inline-flex items-center gap-2 glass-panel text-xs font-mono font-bold text-accent px-4 py-1.5 rounded-full border border-accent/30 shadow-sm mb-3 uppercase tracking-wider">
+            <span class="w-2 h-2 bg-emerald-400 rounded-full pulse-dot"></span> Live Metric Stream
+          </div>
+          <h2 class="text-4xl sm:text-5xl font-black tracking-tight apple-siri-shimmer">Where I Publish & The Numbers</h2>
+          <p class="text-text-secondary text-sm sm:text-base font-medium mt-1">Real-time analytics and performance benchmarks.</p>
+        </div>
+        <div class="glass-panel p-1.5 rounded-2xl flex items-center gap-2 border border-border self-start md:self-auto shadow-lg">
+          <button id="btn-youtube" onclick="switchPlatform('youtube')" class="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg border border-white/20 click-shrink"><i class="fa-brands fa-youtube text-base"></i> YouTube</button>
+          <button id="btn-instagram" onclick="switchPlatform('instagram')" class="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary hover:bg-white/5 click-shrink"><i class="fa-brands fa-instagram text-base"></i> Instagram</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch reveal-node">
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8 relative group border border-border">
+            <div class="flex items-center gap-4">
+              <div class="relative w-16 h-16 rounded-2xl overflow-hidden border-2 border-accent/40 p-0.5 shadow-lg shrink-0">
+                <img id="platform-avatar" src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Profile" class="w-full h-full object-cover rounded-xl" />
+              </div>
+              <div class="overflow-hidden">
+                <div class="flex items-center gap-2"><h3 id="platform-title" class="text-xl font-extrabold text-text-primary tracking-tight truncate">Shreyash Verma</h3><i class="fa-solid fa-circle-check text-accent text-sm"></i></div>
+                <p id="platform-handle" class="text-text-muted font-mono text-xs font-semibold mt-0.5">@shreyashverse</p>
+              </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-border/60">
+              <span id="hero-stat-label" class="text-xs font-mono font-bold text-text-muted uppercase tracking-widest">Subscribers Count</span>
+              <div id="hero-stat-val" class="text-5xl sm:text-6xl font-black tracking-tight text-text-primary mt-1 font-mono animated-stat">135</div>
+              <p id="hero-stat-desc" class="text-xs font-medium text-emerald-500 mt-2 flex items-center gap-1.5"><i class="fa-solid fa-arrow-trend-up"></i> Updated via live API feed</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border"><div class="w-9 h-9 rounded-xl bg-accent/10 text-accent flex items-center justify-center text-sm font-bold mb-3 border border-accent/20"><i id="stat-1-icon" class="fa-solid fa-eye"></i></div><span id="stat-1-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Views</span><span id="stat-1-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">128K+</span></div>
+            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border"><div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center text-sm font-bold mb-3 border border-purple-500/20"><i id="stat-2-icon" class="fa-solid fa-video"></i></div><span id="stat-2-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Videos</span><span id="stat-2-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">100+</span></div>
+            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border"><div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-sm font-bold mb-3 border border-emerald-500/20"><i class="fa-solid fa-chart-line"></i></div><span id="stat-3-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Daily Subs</span><span id="stat-3-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">+2</span></div>
+            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border"><div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-sm font-bold mb-3 border border-rose-500/20"><i id="stat-4-icon" class="fa-solid fa-fire"></i></div><span id="stat-4-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Top Video Views</span><span id="stat-4-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">12.8K</span></div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 flex flex-col justify-between spotlight-card glass-panel rounded-3xl p-6 sm:p-8 border border-border">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div><span class="text-xs font-mono font-bold text-accent uppercase tracking-widest">Active Metric Canvas</span><h4 id="chart-heading" class="text-xl font-extrabold text-text-primary mt-0.5">Audience Growth Trend</h4></div>
+            <div class="flex items-center gap-1.5 glass-panel p-1 rounded-xl border border-border self-start sm:self-auto">
+              <button id="tab-subscribers" onclick="switchMetric('subscribers')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-accent bg-accent/15 border border-accent/40 transition-all">Subscribers</button>
+              <button id="tab-views" onclick="switchMetric('views')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all">Views</button>
+              <button id="tab-engagement" onclick="switchMetric('engagement')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all">Engagement</button>
+            </div>
+          </div>
+          <div class="relative w-full h-[280px] sm:h-[320px]"><canvas id="portfolioAnalyticsChart"></canvas></div>
+          <div class="mt-6 pt-4 border-t border-border/60 flex items-center justify-between text-xs text-text-muted font-mono font-semibold">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-rotate text-accent animate-spin"></i> Auto-Sync: 10 min interval</span>
+            <span id="live-countdown" class="text-accent font-bold tracking-wider">09:59</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools & Software -->
+    <section id="creator-tools" data-section-name="TOOLS" class="max-w-7xl mx-auto px-6 py-24">
+      <h2 class="text-4xl sm:text-5xl font-black mb-12 reveal-node text-center">Tools & Software</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-text-secondary font-medium reveal-node">
+        <div class="glass-panel p-6 rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-transparent hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.05)] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] group">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-xl mb-4 border border-emerald-500/30 group-hover:scale-110 transition-transform"><i class="fa-solid fa-robot"></i></div>
+          <b class="text-text-primary text-xl block mb-2">ChatGPT</b>
+          <p class="text-sm">Researching technology topics, exploring ideas, structuring scripts, simplifying complex concepts, and refining the final explanation.</p>
+        </div>
+        <div class="glass-panel p-6 rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 to-transparent hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.05)] hover:shadow-[0_0_30px_rgba(99,102,241,0.2)] group">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-500 flex items-center justify-center text-xl mb-4 border border-indigo-500/30 group-hover:scale-110 transition-transform"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <b class="text-text-primary text-xl block mb-2">Gemini</b>
+          <p class="text-sm">Exploring technical concepts, comparing information, brainstorming content angles, and finding different ways to present an idea.</p>
+        </div>
+        <div class="glass-panel p-6 rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-transparent hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.05)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] group">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-500 flex items-center justify-center text-xl mb-4 border border-cyan-500/30 group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib"></i></div>
+          <b class="text-text-primary text-xl block mb-2">Canva</b>
+          <p class="text-sm">Creating thumbnails, graphics, visual elements, layouts, and supporting assets for my videos.</p>
+        </div>
+        <div class="glass-panel p-6 rounded-3xl border border-fuchsia-500/30 bg-gradient-to-br from-fuchsia-500/10 to-transparent hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(217,70,239,0.05)] hover:shadow-[0_0_30px_rgba(217,70,239,0.2)] group">
+          <div class="w-12 h-12 rounded-2xl bg-fuchsia-500/20 text-fuchsia-500 flex items-center justify-center text-xl mb-4 border border-fuchsia-500/30 group-hover:scale-110 transition-transform"><i class="fa-solid fa-film"></i></div>
+          <b class="text-text-primary text-xl block mb-2">Clipchamp</b>
+          <p class="text-sm">Editing and arranging video footage, managing audio, adding text and transitions, and preparing the final video for publishing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Creator Vision -->
+    <section id="creator-vision" data-section-name="VISION" class="max-w-7xl mx-auto px-6 py-24">
+      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Creator Vision</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-node">
+        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+          <div class="text-xs font-mono font-bold text-fuchsia-500 uppercase tracking-widest mb-2">01 — Build a Recognizable Style</div>
+          <p class="text-lg font-bold text-text-primary">Develop a distinct visual and storytelling style for technology content.</p>
+        </div>
+        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+          <div class="text-xs font-mono font-bold text-fuchsia-500 uppercase tracking-widest mb-2">02 — Explore Longer Stories</div>
+          <p class="text-lg font-bold text-text-primary">Move from short explainers toward deeper, documentary-style videos.</p>
+        </div>
+        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+          <div class="text-xs font-mono font-bold text-fuchsia-500 uppercase tracking-widest mb-2">03 — Cover More Complex Ideas</div>
+          <p class="text-lg font-bold text-text-primary">Take difficult technology concepts and make them easier to understand.</p>
+        </div>
+        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+          <div class="text-xs font-mono font-bold text-fuchsia-500 uppercase tracking-widest mb-2">04 — Keep Improving the Craft</div>
+          <p class="text-lg font-bold text-text-primary">Continuously improve research, scripting, visuals, editing, and storytelling.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LATEST WORK (SLEEK COMPACT PHONES + LIVE METRIC CARDS) ── -->
+    <section id="latest-work" data-section-name="LATEST WORK" class="py-24 sm:py-32 relative z-10 bg-grid-color/30 border-y border-border/30">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal-node">
+          <span class="section-label glass-panel px-4 py-2 rounded-full inline-block mb-4 shadow-sm border-fuchsia-500/20 text-fuchsia-500">05 — Portfolio</span>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary">Latest Work</h2>
+          <p class="text-text-secondary mt-4 max-w-2xl mx-auto text-lg font-medium">Watch my recent tech explanations. Click any phone mockup to view directly on YouTube or Instagram.</p>
+        </div>
+
+        <!-- 3 Phone Grid (2 YouTube Shorts, 1 Instagram Reel) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 reveal-node items-start">
+          
+          <!-- YouTube Shorts #1 -->
+          <div class="flex flex-col items-center">
+            <a id="yt-work-link-1" href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="block group click-shrink w-full">
+              <div class="iphone-pro-container">
+                <div class="iphone-pro-island"></div>
+                <div class="iphone-pro-glare"></div>
+                <div class="iphone-pro-screen">
+                  <img id="yt-work-thumb-1" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop" alt="YouTube Short 1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all duration-500 z-10">
+                    <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-[0_0_20px_rgba(220,38,38,0.7)] group-hover:scale-110 transition-transform"><i class="fa-solid fa-play ml-1"></i></div>
+                  </div>
+                  <div class="absolute bottom-4 left-3 right-3 text-white z-20">
+                    <span class="text-[0.65rem] font-mono uppercase tracking-wider font-extrabold bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 w-max shadow-lg"><i class="fa-brands fa-youtube text-red-500 text-xs"></i> YT Shorts</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <!-- Live Video Metric Badge -->
+            <div class="mt-4 w-full max-w-[250px] glass-panel p-3 rounded-2xl border border-border grid grid-cols-3 gap-1 text-center font-mono text-xs shadow-md">
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-heart text-rose-500 mr-0.5"></i> Likes</span>
+                <span id="yt-1-likes" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-comment text-sky-400 mr-0.5"></i> Comments</span>
+                <span id="yt-1-comments" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-eye text-emerald-400 mr-0.5"></i> Views</span>
+                <span id="yt-1-views" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- YouTube Shorts #2 -->
+          <div class="flex flex-col items-center">
+            <a id="yt-work-link-2" href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="block group click-shrink w-full">
+              <div class="iphone-pro-container">
+                <div class="iphone-pro-island"></div>
+                <div class="iphone-pro-glare"></div>
+                <div class="iphone-pro-screen">
+                  <img id="yt-work-thumb-2" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop" alt="YouTube Short 2" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all duration-500 z-10">
+                    <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-[0_0_20px_rgba(220,38,38,0.7)] group-hover:scale-110 transition-transform"><i class="fa-solid fa-play ml-1"></i></div>
+                  </div>
+                  <div class="absolute bottom-4 left-3 right-3 text-white z-20">
+                    <span class="text-[0.65rem] font-mono uppercase tracking-wider font-extrabold bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 w-max shadow-lg"><i class="fa-brands fa-youtube text-red-500 text-xs"></i> YT Shorts</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <!-- Live Video Metric Badge -->
+            <div class="mt-4 w-full max-w-[250px] glass-panel p-3 rounded-2xl border border-border grid grid-cols-3 gap-1 text-center font-mono text-xs shadow-md">
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-heart text-rose-500 mr-0.5"></i> Likes</span>
+                <span id="yt-2-likes" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-comment text-sky-400 mr-0.5"></i> Comments</span>
+                <span id="yt-2-comments" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-eye text-emerald-400 mr-0.5"></i> Views</span>
+                <span id="yt-2-views" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instagram Reel #1 -->
+          <div class="flex flex-col items-center">
+            <a id="ig-work-link-1" href="https://www.instagram.com/techwith_shreyash/" target="_blank" class="block group click-shrink w-full">
+              <div class="iphone-pro-container">
+                <div class="iphone-pro-island"></div>
+                <div class="iphone-pro-glare"></div>
+                <div class="iphone-pro-screen">
+                  <img id="ig-work-thumb-1" src="https://images.unsplash.com/photo-1610818702807-68b209cbda8a?w=800&auto=format&fit=crop" alt="Instagram Reel" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all duration-500 z-10">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-orange-500 via-pink-500 to-purple-600 text-white flex items-center justify-center text-xl shadow-[0_0_20px_rgba(217,70,239,0.7)] group-hover:scale-110 transition-transform"><i class="fa-solid fa-play ml-1"></i></div>
+                  </div>
+                  <div class="absolute bottom-4 left-3 right-3 text-white z-20">
+                    <span class="text-[0.65rem] font-mono uppercase tracking-wider font-extrabold bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 w-max shadow-lg"><i class="fa-brands fa-instagram text-pink-400 text-xs"></i> IG Reels</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <!-- Live Reel Metric Badge -->
+            <div class="mt-4 w-full max-w-[250px] glass-panel p-3 rounded-2xl border border-border grid grid-cols-3 gap-1 text-center font-mono text-xs shadow-md">
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-heart text-rose-500 mr-0.5"></i> Likes</span>
+                <span id="ig-1-likes" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-comment text-sky-400 mr-0.5"></i> Comments</span>
+                <span id="ig-1-comments" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+              <div>
+                <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-eye text-emerald-400 mr-0.5"></i> Views</span>
+                <span id="ig-1-views" class="font-extrabold text-text-primary text-xs">--</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Block -->
+    <section id="contact" data-section-name="CONTACT" class="py-24 sm:py-32 relative z-10 border-t border-border/50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal-node">
+          <span class="section-label glass-panel px-4 py-2 rounded-full inline-block mb-4 shadow-sm border-fuchsia-500/20 text-fuchsia-500">06 — Connect</span>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-2 tracking-tighter text-text-primary transition-colors duration-500">Initiate Contact</h2>
+          <p class="text-text-secondary mt-4 max-w-lg mx-auto text-lg font-medium transition-colors duration-500">Find me on your preferred channel. Every platform is actively maintained.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto mb-16 reveal-node" style="transition-delay: 0.1s;">
+          <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 relative group">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-fuchsia-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-fuchsia-500/25 transition-all duration-500 ease-out"></div>
+            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-6 relative z-10">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Name</label><input type="text" name="name" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-accent shadow-inner" placeholder="John Doe"></div>
+                <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Email</label><input type="email" name="email" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-accent shadow-inner" placeholder="john@example.com"></div>
+              </div>
+              <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Message</label><textarea name="message" rows="4" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-accent shadow-inner resize-none" placeholder="Let's connect..."></textarea></div>
+              <button type="submit" class="w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-fuchsia-500 to-purple-600 px-6 py-4 rounded-xl font-bold shadow-lg click-shrink"><i class="fa-solid fa-paper-plane text-sm"></i> Send Message</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
+          <a href="https://github.com/Shreyash-Verma16" target="_blank" class="social-card social-github spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-github text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">GitHub</span></a>
+          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" class="social-card social-linkedin spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-linkedin-in text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">LinkedIn</span></a>
+          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="social-card social-youtube spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-youtube text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">YouTube</span></a>
+          <a href="mailto:shreyashverma.4518@gmail.com" class="social-card hover:border-accent hover:text-accent spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><div class="relative"><div class="absolute inset-0 bg-accent blur-md opacity-0 group-hover:opacity-50 transition-opacity"></div><i class="fa-solid fa-envelope text-4xl drop-shadow-md relative z-10"></i></div><span class="text-sm font-bold tracking-wide relative z-10">Email</span></a>
+          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" class="social-card social-instagram spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-instagram text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Instagram</span></a>
+          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" class="social-card social-reddit spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-reddit text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Reddit</span></a>
+          <a href="https://x.com/Shreyash_verma_" target="_blank" class="social-card social-x spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-x-twitter text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Twitter</span></a>
+          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" class="social-card social-threads spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-threads text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Threads</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── JAVASCRIPT ENGINE ── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- THEME TOGGLE ---
+      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => { e.stopPropagation(); document.documentElement.classList.toggle('dark'); });
+      });
+
+      // --- IPHONE HERO SLIDESHOW ---
+      const phoneSlideshows = document.querySelectorAll('.phone-slideshow');
+      phoneSlideshows.forEach(slideshow => {
+        const images = slideshow.querySelectorAll('.slideshow-img');
+        if (images.length === 0) return;
+        let currentIndex = 0;
+        setInterval(() => {
+          images[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % images.length;
+          images[currentIndex].classList.add('active');
+        }, 4000); 
+      });
+
+      // --- DYNAMIC ISLAND LOGIC ---
+      const navIsland = document.getElementById('dynamic-island-nav'), compactSectionBadge = document.getElementById('compact-section-badge');
+      let isHovered = false, idleTimer = null, currentSectionId = 'creator-home';
+
+      function expandIsland() { if (navIsland) navIsland.classList.remove('is-collapsed', 'island-notify'); }
+      function collapseIsland() { if (!isHovered && window.scrollY > 80 && navIsland) navIsland.classList.add('is-collapsed'); }
+
+      const wrapper = document.getElementById('nav-island-wrapper');
+      if(wrapper) {
+        wrapper.addEventListener('mouseenter', () => { isHovered = true; expandIsland(); });
+        wrapper.addEventListener('mouseleave', () => { isHovered = false; if (window.scrollY > 80) idleTimer = setTimeout(collapseIsland, 450); });
+      }
+
+      window.addEventListener('scroll', () => {
+        clearTimeout(idleTimer);
+        if (window.scrollY > 80) {
+          if (!isHovered) navIsland.classList.add('is-collapsed');
+          idleTimer = setTimeout(() => { if (!isHovered) expandIsland(); }, 2400);
+        } else { expandIsland(); }
+      });
+
+      const iconMap = {
+        'creator-home': '<i class="fa-solid fa-clapperboard text-accent mr-1"></i>',
+        'creator-philosophy': '<i class="fa-solid fa-brain text-accent mr-1"></i>',
+        'creator-process': '<i class="fa-solid fa-wand-magic-sparkles text-accent mr-1"></i>',
+        'creator-analytics': '<i class="fa-solid fa-chart-line text-accent mr-1"></i>',
+        'creator-tools': '<i class="fa-solid fa-screwdriver-wrench text-accent mr-1"></i>',
+        'creator-vision': '<i class="fa-solid fa-eye text-accent mr-1"></i>',
+        'latest-work': '<i class="fa-solid fa-mobile-screen text-accent mr-1"></i>',
+        'contact': '<i class="fa-solid fa-paper-plane text-accent mr-1"></i>'
+      };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const currentId = entry.target.getAttribute('id');
+            const sectionName = entry.target.getAttribute('data-section-name') || "SECTION";
+            if (currentSectionId !== currentId && navIsland.classList.contains('is-collapsed') && window.scrollY > 150) {
+              navIsland.classList.remove('island-notify'); void navIsland.offsetWidth; navIsland.classList.add('island-notify');
+              setTimeout(() => navIsland.classList.remove('island-notify'), 1800);
+            }
+            currentSectionId = currentId;
+            if (compactSectionBadge) compactSectionBadge.innerHTML = `${iconMap[currentId] || ''} <span class="font-extrabold tracking-wider">${sectionName}</span>`;
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+              if (link.getAttribute('href') === `#${currentId}`) link.classList.add('active-section');
+              else link.classList.remove('active-section');
+            });
+          }
+        });
+      }, { threshold: 0.35 });
+      document.querySelectorAll('section[id]').forEach(sec => sectionObserver.observe(sec));
+
+      // --- OTHER FX ---
+      const revealObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObserver.unobserve(e.target); } }); }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal-node').forEach(node => revealObserver.observe(node));
+      
+      let isMouseMoving = false;
+      document.body.addEventListener('mousemove', (e) => {
+        if(e.target.closest('.spotlight-card') && !isMouseMoving) {
+          isMouseMoving = true;
+          window.requestAnimationFrame(() => {
+            const card = e.target.closest('.spotlight-card');
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            isMouseMoving = false;
+          });
+        }
+      }, { passive: true });
+
+      const redirectOverlay = document.createElement('div'); redirectOverlay.className = 'redirect-overlay';
+      const redirectIconWrapper = document.createElement('div'); redirectIconWrapper.className = 'redirect-icon-wrapper';
+      redirectOverlay.appendChild(redirectIconWrapper); document.body.appendChild(redirectOverlay);
+
+      document.querySelectorAll('.social-card').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (this.href.startsWith('mailto:')) return;
+          e.preventDefault(); const targetUrl = this.href, targetBlank = this.target === '_blank', iconElement = this.querySelector('i');
+          if (iconElement) { redirectIconWrapper.innerHTML = iconElement.outerHTML; redirectIconWrapper.style.color = window.getComputedStyle(this).color; }
+          requestAnimationFrame(() => redirectOverlay.classList.add('active'));
+          setTimeout(() => { if (targetBlank) { window.open(targetUrl, '_blank'); redirectOverlay.classList.remove('active'); } else { window.location.href = targetUrl; } }, 1100); 
+        });
+      });
+
+      // Particles
+      const canvas = document.getElementById('particle-canvas'); const ctx = canvas.getContext('2d'); let particlesArray = [];
+      function initParticles() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particlesArray = []; for (let i = 0; i < 75; i++) particlesArray.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.6 + 0.5, speedX: (Math.random() - 0.5) * 0.35, speedY: (Math.random() - 0.5) * 0.35 }); }
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); const isDark = document.documentElement.classList.contains('dark');
+        particlesArray.forEach(p => { p.x += p.speedX; p.y += p.speedY; if (p.x > canvas.width) p.x = 0; else if (p.x < 0) p.x = canvas.width; if (p.y > canvas.height) p.y = 0; else if (p.y < 0) p.y = canvas.height; ctx.fillStyle = isDark ? 'rgba(248, 250, 252, 0.45)' : 'rgba(217, 70, 239, 0.45)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); });
+        requestAnimationFrame(animate);
+      }
+      initParticles(); animate(); window.addEventListener('resize', initParticles);
+      
+      // --- 10-MINUTE COUNTDOWN TIMER LOGIC ---
+      let countdownTime = 10 * 60; // 10 minutes in seconds
+      const countdownEl = document.getElementById('live-countdown');
+      if (countdownEl) {
+        setInterval(() => {
+          countdownTime--;
+          if (countdownTime <= 0) countdownTime = 10 * 60;
+          const mins = Math.floor(countdownTime / 60);
+          const secs = countdownTime % 60;
+          countdownEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }, 1000);
+      }
+    });
+
+    // ── LIVE ANALYTICS ENGINE ──
+    const platformData = {
+      youtube: {
+        title: "Shreyash Verma", handle: "@shreyashverse", avatar: "https://i.ibb.co/mrk9d9TV/channels4-profile.jpg",
+        heroLabel: "Subscribers Count", heroVal: "135", 
+        stat1Label: "Total Views", stat1Val: "128K+", stat1Icon: "fa-solid fa-eye",
+        stat2Label: "Total Videos", stat2Val: "100+", stat2Icon: "fa-solid fa-video", 
+        stat3Label: "Daily Subs", stat3Val: "+2",
+        stat4Label: "Top Video Views", stat4Val: "12.8K", stat4Icon: "fa-solid fa-fire",
+        metrics: { subscribers: [110, 115, 120, 125, 128, 131, 135], views: [120000, 122000, 124000, 125000, 126500, 127200, 128000], engagement: [8.2, 8.5, 8.9, 9.1, 9.4, 9.6, 9.8] }
+      },
+      instagram: {
+        title: "Tech With Shreyash", handle: "@techwith_shreyash", avatar: "https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg",
+        heroLabel: "Instagram Followers", heroVal: "185", 
+        stat1Label: "Recent Interactions", stat1Val: "193K+", stat1Icon: "fa-solid fa-heart",
+        stat2Label: "Total Posts", stat2Val: "27+", stat2Icon: "fa-solid fa-table-cells", 
+        stat3Label: "Profile Visits", stat3Val: "1.2K",
+        stat4Label: "Most Viral Reel", stat4Val: "1.3M+", stat4Icon: "fa-solid fa-bolt",
+        metrics: { subscribers: [120, 135, 148, 160, 172, 179, 185], views: [200000, 450000, 750000, 900000, 1100000, 1250000, 1300000], engagement: [11.2, 11.8, 12.1, 12.5, 13.0, 13.4, 13.8] }
+      }
+    };
+
+    let activePlatform = 'youtube', activeMetric = 'subscribers', chartInstance = null;
+    const ctxChart = document.getElementById('portfolioAnalyticsChart').getContext('2d');
+    function createGradient(cStart, cEnd) { const g = ctxChart.createLinearGradient(0, 0, 0, 300); g.addColorStop(0, cStart); g.addColorStop(1, cEnd); return g; }
+
+    function initChart() {
+      const isDark = document.documentElement.classList.contains('dark'), txtColor = isDark ? '#f8fafc' : '#0f172a', gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(15, 23, 42, 0.05)';
+      chartInstance = new Chart(ctxChart, {
+        type: 'line', data: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], datasets: [{ label: 'Analytics', data: platformData[activePlatform].metrics[activeMetric], borderColor: '#e879f9', borderWidth: 3, backgroundColor: createGradient('rgba(232, 121, 249, 0.25)', 'rgba(232, 121, 249, 0.0)'), fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#e879f9', pointHoverRadius: 7 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { color: txtColor, font: { family: 'JetBrains Mono', size: 11 } } }, y: { grid: { color: gridColor }, ticks: { color: txtColor, font: { family: 'JetBrains Mono', size: 11 } } } } }
+      });
+    }
+
+    function animateStatElement(el, finalString) {
+      el.classList.add('stat-glow-anim');
+      let dummyCount = 0;
+      let interval = setInterval(() => { dummyCount += Math.floor(Math.random() * 100); el.innerText = dummyCount; }, 30);
+      setTimeout(() => { clearInterval(interval); el.innerText = finalString; el.classList.remove('stat-glow-anim'); el.classList.add('stat-glow-settle'); setTimeout(() => el.classList.remove('stat-glow-settle'), 500); }, 1000);
+    }
+
+    function switchPlatform(platform) {
+      activePlatform = platform; const data = platformData[platform];
+      const btnYt = document.getElementById('btn-youtube'), btnIg = document.getElementById('btn-instagram');
+
+      if (platform === 'youtube') {
+        btnYt.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg border border-white/20 click-shrink";
+        btnIg.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary hover:bg-white/5 click-shrink";
+      } else {
+        btnIg.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white shadow-lg border border-white/20 click-shrink";
+        btnYt.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary hover:bg-white/5 click-shrink";
+      }
+
+      document.getElementById('platform-avatar').src = data.avatar; document.getElementById('platform-title').innerText = data.title; document.getElementById('platform-handle').innerText = data.handle;
+      document.getElementById('hero-stat-label').innerText = data.heroLabel;
+      
+      document.getElementById('stat-1-label').innerText = data.stat1Label; document.getElementById('stat-1-icon').className = data.stat1Icon;
+      document.getElementById('stat-2-label').innerText = data.stat2Label; document.getElementById('stat-2-icon').className = data.stat2Icon;
+      document.getElementById('stat-3-label').innerText = data.stat3Label;
+      document.getElementById('stat-4-label').innerText = data.stat4Label; document.getElementById('stat-4-icon').className = data.stat4Icon;
+
+      document.querySelectorAll('.animated-stat').forEach((el, index) => {
+        let finalVal = index === 0 ? data.heroVal : index === 1 ? data.stat1Val : index === 2 ? data.stat2Val : index === 3 ? data.stat3Val : data.stat4Val;
+        animateStatElement(el, finalVal);
+      });
+
+      updateChartData();
+    }
+
+    function switchMetric(metric) {
+      activeMetric = metric;
+      ['subscribers', 'views', 'engagement'].forEach(m => {
+        const btn = document.getElementById('tab-' + m);
+        if (m === metric) btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-accent bg-accent/15 border border-accent/40 transition-all";
+        else btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all";
+      });
+      updateChartData();
+    }
+
+    function updateChartData() {
+      if (!chartInstance) return;
+      chartInstance.data.datasets[0].data = platformData[activePlatform].metrics[activeMetric];
+      const isYoutube = activePlatform === 'youtube'; const mainColor = isYoutube ? '#e879f9' : '#e1306c';
+      chartInstance.data.datasets[0].borderColor = mainColor; chartInstance.data.datasets[0].pointBackgroundColor = mainColor;
+      chartInstance.data.datasets[0].backgroundColor = createGradient(isYoutube ? 'rgba(232, 121, 249, 0.25)' : 'rgba(225, 48, 108, 0.25)', 'rgba(0, 0, 0, 0.0)');
+      chartInstance.update();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initChart();
+      document.querySelectorAll('.animated-stat').forEach((el, index) => {
+        let data = platformData.youtube;
+        let finalVal = index === 0 ? data.heroVal : index === 1 ? data.stat1Val : index === 2 ? data.stat2Val : index === 3 ? data.stat3Val : data.stat4Val;
+        animateStatElement(el, finalVal);
+      });
+    });
+
+    // ── LIVE YOUTUBE API AUTO-UPDATER ──
+    const API_KEY = 'AIzaSyB7aAHA0NFJqfjELCvP-8mPGdMe5YVmcX4';
+    const CHANNEL_ID = 'UC-n2JCyBM5b61_gSOdsQ3sA';
+
+    async function fetchYouTubeStatsLive() {
+      if (API_KEY === 'AIzaSyB7aAHA0NFJqfjELCvP-8mPGdMe5YVmcX4') return;
+      try {
+        // 1. Fetch Overall Channel Stats
+        const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${CHANNEL_ID}&key=${API_KEY}`);
+        const data = await res.json();
+        if (data.items && data.items.length > 0) {
+          const stats = data.items[0].statistics;
+          platformData.youtube.heroVal = Number(stats.subscriberCount).toLocaleString();
+          platformData.youtube.stat1Val = Number(stats.viewCount).toLocaleString();
+          platformData.youtube.stat2Val = Number(stats.videoCount).toLocaleString();
+          if (activePlatform === 'youtube') switchPlatform('youtube');
+        }
+
+        // 2. Fetch Latest 2 Video IDs
+        const searchRes = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=2&type=video`);
+        const searchData = await searchRes.json();
+        if (searchData.items && searchData.items.length >= 2) {
+          const id1 = searchData.items[0].id.videoId;
+          const id2 = searchData.items[1].id.videoId;
+
+          // 3. Fetch Video Details (Likes, Comments, Views) for both Shorts
+          const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&part=snippet,statistics&id=${id1},${id2}`);
+          const videoData = await videoRes.json();
+
+          if (videoData.items && videoData.items.length >= 2) {
+            // Short 1
+            const v1 = videoData.items[0];
+            document.getElementById('yt-work-thumb-1').src = v1.snippet.thumbnails.high.url;
+            document.getElementById('yt-work-link-1').href = `https://www.youtube.com/shorts/${v1.id}`;
+            document.getElementById('yt-1-likes').innerText = Number(v1.statistics.likeCount || 0).toLocaleString();
+            document.getElementById('yt-1-comments').innerText = Number(v1.statistics.commentCount || 0).toLocaleString();
+            document.getElementById('yt-1-views').innerText = Number(v1.statistics.viewCount || 0).toLocaleString();
+
+            // Short 2
+            const v2 = videoData.items[1];
+            document.getElementById('yt-work-thumb-2').src = v2.snippet.thumbnails.high.url;
+            document.getElementById('yt-work-link-2').href = `https://www.youtube.com/shorts/${v2.id}`;
+            document.getElementById('yt-2-likes').innerText = Number(v2.statistics.likeCount || 0).toLocaleString();
+            document.getElementById('yt-2-comments').innerText = Number(v2.statistics.commentCount || 0).toLocaleString();
+            document.getElementById('yt-2-views').innerText = Number(v2.statistics.viewCount || 0).toLocaleString();
+          }
+        }
+      } catch (err) { console.error('YouTube API Fetch Error:', err); }
+    }
+
+
+    // ── LIVE INSTAGRAM API AUTO-UPDATER (VIA BEHOLD.SO) ──
+    const INSTAGRAM_FEED_URL = 'https://feeds.behold.so/fUEnJF2Hk4CpvG03xaGH';
+
+    async function fetchInstagramLive() {
+      try {
+        const res = await fetch(INSTAGRAM_FEED_URL);
+        const data = await res.json();
+        const posts = data.posts || data; 
+        
+        if (posts && posts.length > 0) {
+          // 1. Update the latest Instagram Reel Phone Thumbnail, Link & Metrics
+          const latestReel = posts[0]; 
+          const igPhoneImage = document.getElementById('ig-work-thumb-1');
+          const igPhoneLink = document.getElementById('ig-work-link-1');
+          
+          if(igPhoneImage && igPhoneLink) {
+             igPhoneImage.src = (latestReel.sizes && latestReel.sizes.large) ? latestReel.sizes.large.mediaUrl : latestReel.mediaUrl;
+             igPhoneLink.href = latestReel.permalink;
+          }
+
+          document.getElementById('ig-1-likes').innerText = Number(latestReel.likeCount || 0).toLocaleString();
+          document.getElementById('ig-1-comments').innerText = Number(latestReel.commentsCount || 0).toLocaleString();
+          document.getElementById('ig-1-views').innerText = latestReel.playCount ? Number(latestReel.playCount).toLocaleString() : (latestReel.viewCount ? Number(latestReel.viewCount).toLocaleString() : '1.3M+');
+
+          // 2. Calculate Recent Interactions Sum for Analytics
+          let recentInteractions = 0;
+          posts.forEach(post => {
+             recentInteractions += (post.likeCount || 0) + (post.commentsCount || 0);
+          });
+          
+          if(recentInteractions > 0) {
+             platformData.instagram.stat1Val = recentInteractions.toLocaleString() + "+";
+             if (activePlatform === 'instagram') switchPlatform('instagram');
+          }
+        }
+      } catch (err) { console.error('Instagram Fetch Error:', err); }
+    }
+
+    // ── INITIAL FETCH ON PAGE LOAD ──
+    fetchYouTubeStatsLive();
+    fetchInstagramLive();
+
+    // ── AUTO-REFRESH INTERVAL (FETCH EVERY 10 MINUTES IF USER STAYS ON PAGE) ──
+    const TEN_MINUTES_MS = 10 * 60 * 1000;
+    setInterval(() => {
+      fetchYouTubeStatsLive();
+      fetchInstagramLive();
+    }, TEN_MINUTES_MS);
+
+  </script>
+</body>
+</html>

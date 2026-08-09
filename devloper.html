@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyash Verma — The Developer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Tailwind CSS & GSAP -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            background: 'var(--background)',
+            surface: 'var(--surface)',
+            border: 'var(--border)',
+            'text-primary': 'var(--text-primary)',
+            'text-secondary': 'var(--text-secondary)',
+            'text-muted': 'var(--text-muted)',
+            accent: 'var(--accent)',
+          }
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ── Developer Theme Variables (Cyan/Blue) ── */
+    :root {
+      --background: #f3f6fc;
+      --surface: rgba(255, 255, 255, 0.78);
+      --border: rgba(203, 213, 225, 0.85);
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --accent: #06b6d4; 
+      --glass-shine: rgba(255, 255, 255, 0.95);
+      --glow-shadow: rgba(6, 182, 212, 0.28);
+      --grid-color: rgba(15, 23, 42, 0.045);
+      --nav-tint: rgba(6, 182, 212, 0.16);
+      --nav-border: rgba(6, 182, 212, 0.45);
+      --island-bg: rgba(255, 255, 255, 0.88);
+    }
+
+    .dark {
+      --background: #020617;
+      --surface: rgba(15, 23, 42, 0.72);
+      --border: rgba(255, 255, 255, 0.12);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --accent: #22d3ee; 
+      --glass-shine: rgba(255, 255, 255, 0.12);
+      --glow-shadow: rgba(34, 211, 238, 0.4);
+      --grid-color: rgba(255, 255, 255, 0.028);
+      --nav-tint: rgba(34, 211, 238, 0.18);
+      --nav-border: rgba(34, 211, 238, 0.5);
+      --island-bg: rgba(8, 12, 24, 0.96);
+    }
+
+    body { background-color: var(--background); color: var(--text-primary); overflow-x: hidden; transition: background-color 0.8s, color 0.8s; }
+
+    /* ── Apple-Style Utilities ── */
+    .apple-siri-shimmer {
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 25%, #ffffff 50%, #3b82f6 75%, var(--text-primary) 100%);
+      background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: siriShimmerFlow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+    }
+    @keyframes siriShimmerFlow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+    .reveal-node { opacity: 0; filter: blur(14px); transform: translateY(48px) scale(0.96); transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), filter 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-node.is-visible { opacity: 1; filter: blur(0px); transform: translateY(0px) scale(1); }
+
+    .glass-panel { background: var(--surface); backdrop-filter: blur(36px); border: 1px solid var(--border); box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 35px -10px rgba(15, 23, 42, 0.08); transition: all 0.7s; }
+    .dark .glass-panel { box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 40px 0 rgba(0, 0, 0, 0.45); }
+
+    /* ── Spotlight Hover Cards & Blue Spinning Edge ── */
+    .spotlight-card { position: relative; overflow: hidden; --mouse-x: 50%; --mouse-y: 50%; transition: transform 0.7s, box-shadow 0.7s, border-color 0.6s; }
+    .spotlight-card:hover { transform: translateY(-8px) scale(1.015); border-color: rgba(34, 211, 238, 0.45); z-index: 10; }
+    .spotlight-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(34, 211, 238, 0.08), transparent 40%); z-index: 1; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
+    .dark .spotlight-card::before { background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 40%); }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    @property --border-angle { syntax: "<angle>"; inherits: true; initial-value: 0turn; }
+    .spotlight-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--border-angle), transparent 60%, rgba(59, 130, 246, 0.8) 80%, rgba(34, 211, 238, 1) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; z-index: 20; pointer-events: none; animation: border-spin 4s linear infinite; opacity: 0; transition: opacity 0.5s ease; }
+    .spotlight-card:hover::after { opacity: 1; }
+    @keyframes border-spin { 100% { --border-angle: 1turn; } }
+    .click-shrink { transition: transform 0.4s; } .click-shrink:hover { transform: translateY(-2px) scale(1.03); } .click-shrink:active { transform: scale(0.94); }
+
+    /* ── Adaptive Dynamic Island ── */
+    #nav-island-wrapper { position: fixed; top: 16px; left: 0; right: 0; z-index: 10000; display: flex; justify-content: center; pointer-events: none; opacity: 0; transform: translateY(-20px); animation: dropInNav 1s 0.2s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes dropInNav { to { opacity: 1; transform: translateY(0); } }
+    .nav-island { pointer-events: auto; background: var(--island-bg); backdrop-filter: blur(50px); border: 1.5px solid var(--nav-border); box-shadow: inset 0 1px 1px var(--glass-shine), 0 25px 60px -10px rgba(0, 0, 0, 0.75), 0 0 45px -5px var(--nav-tint); border-radius: 9999px; width: 92%; max-width: 1080px; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; transition: all 0.85s; }
+    .nav-island.is-collapsed { width: 340px; height: 52px; border-color: var(--nav-border); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 15px 35px -5px rgba(0, 0, 0, 0.3), 0 0 35px var(--nav-tint); }
+    .nav-island.is-collapsed.island-notify { width: 395px !important; height: 58px !important; border-color: var(--accent) !important; box-shadow: inset 0 1px 1px var(--glass-shine), 0 20px 45px -5px rgba(0, 0, 0, 0.45), 0 0 50px 12px var(--nav-tint) !important; transform: scale(1.03) translateY(2px); }
+    
+    .nav-link { padding: 7px 16px; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; color: var(--text-secondary); transition: all 0.4s; }
+    .nav-link:hover, .nav-link.active-section { color: var(--accent); background: var(--nav-tint); border: 1px solid var(--nav-border); box-shadow: 0 0 22px var(--glow-shadow); }
+
+    .nav-view { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; white-space: nowrap; transition: all 0.5s; }
+    .nav-expanded-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+    .nav-island.is-collapsed .nav-expanded-view { opacity: 0; transform: scale(0.88) translateY(-12px); pointer-events: none; }
+    .nav-compact-view { opacity: 0; transform: scale(0.88) translateY(12px); pointer-events: none; }
+    .nav-island.is-collapsed .nav-compact-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; transition: opacity 0.55s 0.2s, transform 0.75s 0.12s; }
+    
+    #compact-section-badge { display: inline-flex; align-items: center; gap: 6px; transition: all 0.5s; }
+    .nav-island.island-notify #compact-section-badge { transform: scale(1.06); padding: 6px 16px; background: var(--nav-tint); border-color: var(--accent); box-shadow: 0 0 20px var(--glow-shadow); }
+
+    /* ── Apple Accordion & Dynamic Drop Box ── */
+    .island-drop-box { position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 50; display: flex; align-items: center; justify-content: center; background: rgba(10, 15, 30, 0.95); border: 2px solid var(--accent); box-shadow: 0 0 50px rgba(34, 211, 238, 0.6); overflow: hidden; pointer-events: none; white-space: nowrap; opacity: 0; }
+    .tabs-column { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
+    .apple-tab-btn { width: 100%; text-align: left; padding: 16px 22px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s; }
+    .apple-tab-btn:hover { background: var(--nav-tint); color: var(--text-primary); border-color: var(--accent); transform: translateX(4px); }
+    .apple-tab-btn.is-bulky { transform: scale(1.05) translateX(12px) !important; padding: 22px 28px !important; background: linear-gradient(135deg, rgba(34, 211, 238, 0.3) 0%, rgba(59, 130, 246, 0.2) 100%) !important; border-color: rgba(34, 211, 238, 0.8) !important; color: #ffffff !important; box-shadow: 0 15px 45px rgba(34, 211, 238, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5) !important; z-index: 30; }
+
+    /* ── Grouped Document Toast Notifications ── */
+    #toast-container { position: fixed; bottom: 28px; right: 28px; z-index: 99999; display: flex; flex-direction: column; gap: 16px; width: calc(100% - 56px); max-width: 380px; pointer-events: none; }
+    .toast-card { background: var(--surface); backdrop-filter: blur(35px); border: 1.5px solid var(--border); border-radius: 24px; padding: 20px; box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.25), 0 0 35px var(--glow-shadow); transform: translateY(150%) scale(0.88); opacity: 0; pointer-events: none; transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1); }
+    .dark .toast-card { box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.6), 0 0 35px var(--glow-shadow); }
+    .toast-card.toast-visible { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+    .story-progress-container { width: 100%; height: 6px; background: rgba(15, 23, 42, 0.1); border-radius: 9999px; overflow: hidden; margin-bottom: 14px; }
+    .dark .story-progress-container { background: rgba(255, 255, 255, 0.12); }
+    .story-progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent), #3b82f6); border-radius: 9999px; box-shadow: 0 0 14px var(--accent); transition: width 0.1s linear; }
+
+    /* ── Background & General ── */
+    .bg-grid-pattern { position: fixed; inset: 0; z-index: -25; background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+    .grain-overlay { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.04; mix-blend-mode: overlay; }
+    .ambient-orb { animation: floatOrb 16s ease-in-out infinite alternate; } .ambient-orb-2 { animation: floatOrb 19s ease-in-out infinite alternate-reverse; } .ambient-orb-3 { animation: floatOrb 22s ease-in-out infinite alternate; }
+    @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(3%, 4%) scale(1.05); } 100% { transform: translate(-2%, -3%) scale(0.95); } }
+
+    /* ── iPhone Styles ── */
+    .iphone-frame { width: 320px; height: 640px; background: #0a0a0a; border-radius: 60px; position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 0 0 10px #1f2937, 0 0 0 12px #334155, 0 30px 50px -15px rgba(0, 0, 0, 0.7), 0 0 40px var(--glow-shadow); padding: 12px; transform: perspective(1000px) rotateY(-8deg) rotateX(4deg); transition: transform 0.9s; }
+    .iphone-frame:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03); }
+    .iphone-screen { width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: #000; position: relative; }
+    .slideshow-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease-in-out; }
+    .slideshow-img.active { opacity: 1; }
+    .dynamic-island-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 120px; height: 32px; background: #000; border-radius: 20px; z-index: 30; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.15); }
+    .iphone-btn { position: absolute; background: #334155; border-radius: 2px; box-shadow: inset 1px 0 2px rgba(255,255,255,0.2); }
+
+    /* ── Social Card Pop-out Redirect CSS ── */
+    .social-card { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .dark .social-github:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
+    .social-linkedin:hover { color: #0a66c2; background: rgba(10,102,194,0.1); border-color: rgba(10,102,194,0.4); box-shadow: 0 10px 25px -5px rgba(10,102,194,0.3); }
+    .social-youtube:hover { color: #ff0000; background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.4); box-shadow: 0 10px 25px -5px rgba(255,0,0,0.3); }
+    .dark .social-x:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
+    .social-instagram:hover { color: #e1306c; background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.4); box-shadow: 0 10px 25px -5px rgba(225,48,108,0.3); }
+    .social-reddit:hover { color: #ff4500; background: rgba(255,69,0,0.1); border-color: rgba(255,69,0,0.4); box-shadow: 0 10px 25px -5px rgba(255,69,0,0.3); }
+    .dark .social-threads:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
+
+    .redirect-overlay { position: fixed; inset: 0; z-index: 9999999; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .redirect-overlay.active { opacity: 1; pointer-events: auto; }
+    .redirect-icon-wrapper { font-size: 4rem; transform: scale(0.5) translateY(30px); opacity: 0; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6)); }
+    .redirect-overlay.active .redirect-icon-wrapper { transform: scale(2) translateY(0); opacity: 1; }
+  </style>
+</head>
+<body class="antialiased selection:bg-accent/30 selection:text-text-primary">
+
+  <!-- Cyan/Blue/Indigo Ambience -->
+  <div class="bg-grid-pattern"></div>
+  <div class="fixed inset-0 -z-30 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div class="ambient-orb absolute top-[-5%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-cyan-400/45 via-blue-500/35 to-indigo-600/30 blur-[130px] opacity-80 dark:opacity-75"></div>
+    <div class="ambient-orb-2 absolute bottom-[-10%] right-[-5%] w-[65vw] h-[65vw] rounded-full bg-gradient-to-tr from-blue-400/40 via-cyan-500/30 to-teal-500/25 blur-[150px] opacity-75 dark:opacity-65"></div>
+    <div class="ambient-orb-3 absolute top-[25%] left-[25%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-r from-indigo-400/35 via-blue-400/25 to-cyan-500/20 blur-[140px] opacity-70 dark:opacity-55"></div>
+  </div>
+  <canvas id="particle-canvas" class="fixed inset-0 -z-20 pointer-events-none"></canvas>
+  <svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
+
+  <!-- ── ADAPTIVE DYNAMIC ISLAND ── -->
+  <div id="nav-island-wrapper">
+    <nav id="dynamic-island-nav" class="nav-island">
+      <!-- Full Menu -->
+      <div class="nav-view nav-expanded-view flex justify-between w-full items-center">
+        <a href="#dev-home" class="flex items-center gap-3 group click-shrink">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 overflow-hidden border border-white/20">
+            <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Logo" class="w-full h-full object-cover" />
+          </div>
+          <div><span class="block text-text-primary font-bold tracking-tight leading-none text-base">SHREYASH</span><span class="block text-text-secondary text-[0.6rem] tracking-widest leading-none mt-1">VERMA</span></div>
+        </a>
+        <div id="island-links-container" class="hidden lg:flex items-center gap-1">
+          <a href="#dev-home" class="nav-link active-section" data-section="dev-home">Home</a>
+          <a href="#dev-academic" class="nav-link" data-section="dev-academic">Academics</a>
+          <a href="#dev-skills" class="nav-link" data-section="dev-skills">Skills</a>
+          <a href="#dev-projects" class="nav-link" data-section="dev-projects">Projects</a>
+          <a href="#dev-tools" class="nav-link" data-section="dev-tools">Tools</a>
+          <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-full glass-panel hover:text-accent click-shrink"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
+          <a href="#contact" class="hidden sm:inline-flex items-center px-5 py-2.5 glass-panel text-xs font-bold rounded-full hover:border-accent click-shrink gap-2"><i class="fa-solid fa-paper-plane"></i> Message Me</a>
+        </div>
+      </div>
+      <!-- Compact View -->
+      <div class="nav-view nav-compact-view flex justify-between w-full items-center">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full overflow-hidden border border-white/20"><img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" class="w-full h-full object-cover" /></div>
+          <span class="text-text-primary font-extrabold text-sm">SHREYASH</span>
+        </div>
+        <span id="compact-section-badge" class="px-3.5 py-1 bg-accent/15 border border-accent/50 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300"><i class="fa-solid fa-microchip text-accent mr-1"></i> <span class="font-extrabold tracking-wider">DEVELOPER</span></span>
+        <button class="theme-toggle-btn w-8 h-8 flex items-center justify-center rounded-full glass-panel click-shrink"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PAGE CONTENT: THE DEVELOPER -->
+  <!-- ========================================== -->
+  <main class="relative z-10">
+    
+    <!-- Hero -->
+    <section id="dev-home" data-section-name="HOME" class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center min-h-screen pt-28 pb-12">
+      <div class="space-y-8 reveal-node">
+        <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] apple-siri-shimmer">SHREYASH<br/>VERMA</h1>
+        <p class="text-xl sm:text-2xl text-text-secondary mt-6 font-semibold">BCA Student <span class="text-border mx-2">|</span> Aspiring AI Software Engineer</p>
+        <div class="flex gap-4 pt-4">
+          <a href="#dev-projects" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full click-shrink border border-white/20 shadow-[0_10px_30px_-10px_rgba(6,182,212,0.6)]"><i class="fa-solid fa-code"></i> Projects</a>
+          <a href="#dev-skills" class="px-8 py-4 glass-panel font-bold rounded-full click-shrink hover:border-cyan-400">Skills</a>
+        </div>
+      </div>
+      <div class="flex justify-center lg:justify-end reveal-node">
+        <!-- Premium iPhone Frame & 4 Image Slideshow -->
+        <div class="iphone-frame scale-[0.85] sm:scale-100 origin-center lg:origin-right">
+          <div class="iphone-btn left-[-16px] top-[110px] w-[4px] h-[26px]"></div>
+          <div class="iphone-btn left-[-16px] top-[160px] w-[4px] h-[50px]"></div>
+          <div class="iphone-btn left-[-16px] top-[230px] w-[4px] h-[50px]"></div>
+          <div class="iphone-btn right-[-16px] top-[180px] w-[4px] h-[70px]"></div>
+          
+          <div class="iphone-screen bg-black">
+            <div class="dynamic-island-notch"></div>
+            <div class="phone-slideshow absolute inset-0 w-full h-full">
+              <!-- Insert 4 real thumbnails/screenshots of code or projects here -->
+              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img active" alt="Slide 1">
+              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img" alt="Slide 2">
+              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img" alt="Slide 3">
+              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img" alt="Slide 4">
+            </div>
+            <div class="absolute top-4 left-6 right-6 flex items-center justify-between text-[11px] text-white/90 z-20 font-bold drop-shadow-md pointer-events-none">
+              <span>9:41</span>
+              <div class="flex gap-2"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-full"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Core & Academics -->
+    <section id="dev-academic" data-section-name="ACADEMICS" class="max-w-7xl mx-auto px-6 py-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-6">
+        
+        <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node group">
+          <div class="h-2 w-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mb-6 group-hover:w-24 transition-all duration-500"></div>
+          <h3 class="text-3xl font-bold mb-4 text-text-primary">The Core</h3>
+          <p class="text-text-secondary font-medium leading-relaxed mb-4">BCA student & aspiring AI/ML engineer, building strong foundations in programming and applied AI. Focused on learning fundamentals deeply, not just collecting technologies.</p>
+          <p class="text-text-secondary font-medium leading-relaxed">Follow a project-driven approach — turning what I learn into working projects that are functional, testable, and explainable.</p>
+        </div>
+        
+        <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node group" style="transition-delay: 0.1s;">
+          <h3 class="text-2xl font-bold mb-6 text-text-primary">Academic Status</h3>
+          <ul class="space-y-4 text-text-secondary font-medium leading-relaxed">
+            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> Completed Class 10 & 12 from CBSE.</li>
+            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> Currently pursuing BCA at Rajiv Academy, 3rd semester.</li>
+            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> Scored 7.6 CGPA in my 1st semester.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Current Focus (3 Card Row) -->
+      <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node" style="transition-delay: 0.2s;">
+        <h3 class="text-2xl font-bold mb-6 text-text-primary">Current Focus</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="glass-panel p-5 rounded-2xl hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-400 flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
+            <div>
+              <b class="text-text-primary text-sm block">Building Projects</b>
+              <span class="text-xs text-text-secondary">From real-world problems</span>
+            </div>
+          </div>
+          <div class="glass-panel p-5 rounded-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-400 flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-laptop-code"></i></div>
+            <div>
+              <b class="text-text-primary text-sm block">Mastering Python</b>
+              <span class="text-xs text-text-secondary">Deep programming fundamentals</span>
+            </div>
+          </div>
+          <div class="glass-panel p-5 rounded-2xl hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all duration-400 flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-full bg-indigo-500/20 text-indigo-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-network-wired"></i></div>
+            <div>
+              <b class="text-text-primary text-sm block">Adapting Tech</b>
+              <span class="text-xs text-text-secondary">Learning new systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="dev-skills" data-section-name="SKILLS" class="max-w-7xl mx-auto px-6 py-24">
+      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Skills I Have</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold">01</div><p class="text-lg font-bold text-text-primary">Python Development</p>
+        </div>
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.1s;">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold">02</div><p class="text-lg font-bold text-text-primary">Problem Solving</p>
+        </div>
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.2s;">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold">03</div><p class="text-lg font-bold text-text-primary">Debugging & Troubleshooting</p>
+        </div>
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.3s;">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-500 flex items-center justify-center text-white font-bold">04</div><p class="text-lg font-bold text-text-primary">AI & Computer Vision</p>
+        </div>
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.4s;">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold">05</div><p class="text-lg font-bold text-text-primary">Software Engineering</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Accordion -->
+    <section id="dev-projects" data-section-name="PROJECTS" class="py-24 px-6 max-w-7xl mx-auto">
+      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Software Projects</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative min-h-[400px]">
+        
+        <!-- Animated Drop Box for Developer -->
+        <div id="dev-drop-box" class="island-drop-box w-14 h-14 rounded-full">
+          <div class="drop-logo w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-black text-xs mr-2 shrink-0">SV</div>
+          <span class="drop-text text-lg font-black tracking-tight opacity-0 pr-3 text-white">💻 My Coding Architecture</span>
+        </div>
+
+        <div id="dev-tabs-column" class="lg:col-span-5 flex flex-col gap-3.5 z-20 tabs-column">
+          <button class="apple-tab-btn dev-tab" data-proj="dev4"><span class="font-bold text-cyan-400">01 AI Content Creator Platform</span></button>
+          <button class="apple-tab-btn dev-tab" data-proj="dev1"><span class="font-bold text-cyan-400">02 TypeMind Platform</span></button>
+          <button class="apple-tab-btn dev-tab" data-proj="dev2"><span class="font-bold text-cyan-400">03 Live Bus Tracking System</span></button>
+          <button class="apple-tab-btn dev-tab" data-proj="dev3"><span class="font-bold text-cyan-400">04 Gesture Controller Interface</span></button>
+        </div>
+
+        <div id="stage-column" class="lg:col-span-7 sticky top-28 z-10 min-h-[440px]">
+          <div id="dev-stage" class="w-full hidden">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Tools -->
+    <section id="dev-tools" data-section-name="TOOLS" class="max-w-7xl mx-auto px-6 py-24">
+      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Tools I Know How To Use</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-text-secondary font-medium reveal-node">
+        <div class="glass-panel p-6 rounded-2xl border-t-4 border-blue-500 hover:scale-[1.02] transition-transform">
+          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-code text-blue-500 mr-2"></i> VS Code</b> 
+          Writing, testing, debugging, and managing code across projects.
+        </div>
+        <div class="glass-panel p-6 rounded-2xl border-t-4 border-indigo-500 hover:scale-[1.02] transition-transform">
+          <b class="text-text-primary text-xl block mb-2"><i class="fa-brands fa-git-alt text-indigo-500 mr-2"></i> Git / GitHub</b> 
+          Tracking code changes, managing versions, and hosting repositories.
+        </div>
+        <div class="glass-panel p-6 rounded-2xl border-t-4 border-purple-500 hover:scale-[1.02] transition-transform">
+          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-microchip text-purple-500 mr-2"></i> Google AI Studio</b> 
+          Experimenting with AI models, testing prompts, and AI APIs.
+        </div>
+        <div class="glass-panel p-6 rounded-2xl border-t-4 border-teal-500 hover:scale-[1.02] transition-transform">
+          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-robot text-teal-500 mr-2"></i> ChatGPT / Gemini</b> 
+          Research, technical exploration, brainstorming, and debugging.
+        </div>
+        <div class="glass-panel p-6 rounded-2xl border-t-4 border-cyan-500 md:col-span-2 hover:scale-[1.01] transition-transform">
+          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-wand-magic-sparkles text-cyan-500 mr-2"></i> GitHub Copilot / Antigravity</b> 
+          AI-assisted development and accelerating the development workflow.
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision -->
+    <section id="dev-vision" data-section-name="VISION" class="max-w-7xl mx-auto px-6 py-24">
+      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Future Vision</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-node">
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold"><i class="fa-brands fa-python text-xl"></i></div>
+          <p class="text-lg font-bold text-text-primary">Strengthen Python & DSA Foundation</p>
+        </div>
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold"><i class="fa-solid fa-layer-group text-xl"></i></div>
+          <p class="text-lg font-bold text-text-primary">Master Software Engineering</p>
+        </div>
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold"><i class="fa-solid fa-brain text-xl"></i></div>
+          <p class="text-lg font-bold text-text-primary">Learn Machine Learning</p>
+        </div>
+        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold"><i class="fa-solid fa-network-wired text-xl"></i></div>
+          <p class="text-lg font-bold text-text-primary">Explore Deep Learning & AI Systems</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exact Contact Block Restored -->
+    <section id="contact" data-section-name="CONTACT" class="py-24 sm:py-32 relative z-10 border-t border-border/50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 reveal-node">
+          <span class="section-label glass-panel px-4 py-2 rounded-full inline-block mb-4 shadow-sm border-cyan-500/20 text-cyan-500">05 — Connect</span>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-2 tracking-tighter text-text-primary transition-colors duration-500">Initiate Contact</h2>
+          <p class="text-text-secondary mt-4 max-w-lg mx-auto text-lg font-medium transition-colors duration-500">Find me on your preferred channel. Every platform is actively maintained.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto mb-16 reveal-node" style="transition-delay: 0.1s;">
+          <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 relative group">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-cyan-500/25 transition-all duration-500 ease-out"></div>
+            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-6 relative z-10">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Name</label><input type="text" name="name" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 shadow-inner" placeholder="John Doe"></div>
+                <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Email</label><input type="email" name="email" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 shadow-inner" placeholder="john@example.com"></div>
+              </div>
+              <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Message</label><textarea name="message" rows="4" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 shadow-inner resize-none" placeholder="Let's connect..."></textarea></div>
+              <button type="submit" class="w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-4 rounded-xl font-bold shadow-lg click-shrink"><i class="fa-solid fa-paper-plane text-sm"></i> Send Message</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
+          <a href="https://github.com/Shreyash-Verma16" target="_blank" class="social-card social-github spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-github text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">GitHub</span></a>
+          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" class="social-card social-linkedin spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-linkedin-in text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">LinkedIn</span></a>
+          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="social-card social-youtube spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-youtube text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">YouTube</span></a>
+          <a href="mailto:shreyashverma.4518@gmail.com" class="social-card hover:border-accent hover:text-accent spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><div class="relative"><div class="absolute inset-0 bg-accent blur-md opacity-0 group-hover:opacity-50 transition-opacity"></div><i class="fa-solid fa-envelope text-4xl drop-shadow-md relative z-10"></i></div><span class="text-sm font-bold tracking-wide relative z-10">Email</span></a>
+          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" class="social-card social-instagram spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-instagram text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Instagram</span></a>
+          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" class="social-card social-reddit spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-reddit text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Reddit</span></a>
+          <a href="https://x.com/Shreyash_verma_" target="_blank" class="social-card social-x spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-x-twitter text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Twitter</span></a>
+          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" class="social-card social-threads spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-threads text-4xl drop-shadow-md"></i><span class="text-sm font-bold tracking-wide">Threads</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Grouped Document Download Notifications (Resume & Marksheet) ── -->
+  <div id="toast-container" class="fixed bottom-7 right-7 z-[99999] flex flex-col gap-4 w-[calc(100%-56px)] max-w-[380px] pointer-events-none">
+    
+    <!-- 1st Sem Marksheet Toast -->
+    <div id="marksheet-toast" class="toast-card glass-panel rounded-3xl p-5 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.6),0_0_35px_rgba(6,182,212,0.28)] transform translate-y-[150%] scale-[0.88] opacity-0 transition-all duration-[0.85s] ease-[cubic-bezier(0.16,1,0.3,1)]">
+      <div class="w-full h-1.5 bg-slate-800/20 dark:bg-white/10 rounded-full overflow-hidden mb-3.5">
+        <div id="marksheet-progress" class="h-full bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full shadow-[0_0_14px_rgba(99,102,241,0.8)] w-0 transition-[width] duration-100 linear"></div>
+      </div>
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shrink-0 shadow-lg"><i class="fa-solid fa-graduation-cap text-lg"></i></div>
+          <div><h4 class="text-text-primary font-bold text-sm leading-tight">1st_Sem_Marksheet.pdf</h4><p class="text-text-secondary text-xs mt-0.5">View my academic performance?</p></div>
+        </div>
+        <button onclick="closeToast('marksheet-toast')" class="text-text-muted hover:text-text-primary transition-colors p-1 pointer-events-auto"><i class="fa-solid fa-xmark text-sm"></i></button>
+      </div>
+      <div class="mt-4 flex items-center gap-3 pointer-events-auto">
+        <a href="https://drive.google.com/uc?export=download&id=1Dd8OHWRdLq2Qkl2QVaE6JAd3JxJ_VAw2" onclick="closeToast('marksheet-toast')" class="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold text-xs rounded-xl text-center shadow-md border border-white/20 click-shrink">Yes, Download</a>
+        <button onclick="closeToast('marksheet-toast')" class="px-4 py-2.5 glass-panel text-text-secondary font-bold text-xs rounded-xl hover:text-text-primary click-shrink">Maybe Later</button>
+      </div>
+    </div>
+
+    <!-- Resume Toast -->
+    <div id="resume-toast" class="toast-card glass-panel rounded-3xl p-5 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.6),0_0_35px_rgba(6,182,212,0.28)] transform translate-y-[150%] scale-[0.88] opacity-0 transition-all duration-[0.85s] ease-[cubic-bezier(0.16,1,0.3,1)]">
+      <div class="w-full h-1.5 bg-slate-800/20 dark:bg-white/10 rounded-full overflow-hidden mb-3.5">
+        <div id="resume-progress" class="h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-[0_0_14px_rgba(6,182,212,0.8)] w-0 transition-[width] duration-100 linear"></div>
+      </div>
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg"><i class="fa-solid fa-file-arrow-down text-lg"></i></div>
+          <div><h4 class="text-text-primary font-bold text-sm leading-tight">Shreyash_Verma_Resume.pdf</h4><p class="text-text-secondary text-xs mt-0.5">Do you want to download my resume?</p></div>
+        </div>
+        <button onclick="closeToast('resume-toast')" class="text-text-muted hover:text-text-primary transition-colors p-1 pointer-events-auto"><i class="fa-solid fa-xmark text-sm"></i></button>
+      </div>
+      <div class="mt-4 flex items-center gap-3 pointer-events-auto">
+        <a href="https://drive.google.com/uc?export=download&id=15-IBTtkm7dF1BkifIkZoyIaAKkIxJGOW" onclick="closeToast('resume-toast')" class="flex-1 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs rounded-xl text-center shadow-md border border-white/20 click-shrink">Yes, Download</a>
+        <button onclick="closeToast('resume-toast')" class="px-4 py-2.5 glass-panel text-text-secondary font-bold text-xs rounded-xl hover:text-text-primary click-shrink">Maybe Later</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── JAVASCRIPT ENGINE ── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- THEME TOGGLE ---
+      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => { e.stopPropagation(); document.documentElement.classList.toggle('dark'); });
+      });
+
+      // --- IPHONE HERO SLIDESHOW ---
+      const phoneSlideshows = document.querySelectorAll('.phone-slideshow');
+      phoneSlideshows.forEach(slideshow => {
+        const images = slideshow.querySelectorAll('.slideshow-img');
+        if (images.length === 0) return;
+        let currentIndex = 0;
+        setInterval(() => {
+          images[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % images.length;
+          images[currentIndex].classList.add('active');
+        }, 4000); 
+      });
+
+      // --- DYNAMIC ISLAND LOGIC ---
+      const navIsland = document.getElementById('dynamic-island-nav');
+      const compactSectionBadge = document.getElementById('compact-section-badge');
+      let isHovered = false, idleTimer = null, currentSectionId = 'dev-home';
+
+      function expandIsland() { if (navIsland) navIsland.classList.remove('is-collapsed', 'island-notify'); }
+      function collapseIsland() { if (!isHovered && window.scrollY > 80 && navIsland) navIsland.classList.add('is-collapsed'); }
+
+      const wrapper = document.getElementById('nav-island-wrapper');
+      if(wrapper) {
+        wrapper.addEventListener('mouseenter', () => { isHovered = true; expandIsland(); });
+        wrapper.addEventListener('mouseleave', () => { isHovered = false; if (window.scrollY > 80) idleTimer = setTimeout(collapseIsland, 450); });
+      }
+
+      window.addEventListener('scroll', () => {
+        clearTimeout(idleTimer);
+        if (window.scrollY > 80) {
+          if (!isHovered) navIsland.classList.add('is-collapsed');
+          idleTimer = setTimeout(() => { if (!isHovered) expandIsland(); }, 2400);
+        } else { expandIsland(); }
+      });
+
+      const iconMap = {
+        'dev-home': '<i class="fa-solid fa-microchip text-accent mr-1"></i>',
+        'dev-academic': '<i class="fa-solid fa-graduation-cap text-accent mr-1"></i>',
+        'dev-skills': '<i class="fa-solid fa-layer-group text-accent mr-1"></i>',
+        'dev-projects': '<i class="fa-solid fa-code text-accent mr-1"></i>',
+        'dev-tools': '<i class="fa-solid fa-screwdriver-wrench text-accent mr-1"></i>',
+        'dev-vision': '<i class="fa-solid fa-eye text-accent mr-1"></i>',
+        'contact': '<i class="fa-solid fa-paper-plane text-accent mr-1"></i>'
+      };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const currentId = entry.target.getAttribute('id');
+            const sectionName = entry.target.getAttribute('data-section-name') || "SECTION";
+
+            if (currentSectionId !== currentId && navIsland.classList.contains('is-collapsed') && window.scrollY > 150) {
+              navIsland.classList.remove('island-notify'); void navIsland.offsetWidth; navIsland.classList.add('island-notify');
+              setTimeout(() => navIsland.classList.remove('island-notify'), 1800);
+            }
+            currentSectionId = currentId;
+            if (compactSectionBadge) compactSectionBadge.innerHTML = `${iconMap[currentId] || ''} <span class="font-extrabold tracking-wider">${sectionName}</span>`;
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+              if (link.getAttribute('href') === `#${currentId}`) link.classList.add('active-section');
+              else link.classList.remove('active-section');
+            });
+          }
+        });
+      }, { threshold: 0.35 });
+
+      document.querySelectorAll('section[id]').forEach(sec => sectionObserver.observe(sec));
+
+      // --- APPLE DROP ANIMATION FOR DEV PROJECTS ---
+      function runDropAnimation() {
+        const dropBox = document.getElementById('dev-drop-box');
+        const dropText = dropBox.querySelector('.drop-text');
+        const tabsColumn = document.getElementById('dev-tabs-column');
+        const tabBtns = tabsColumn.querySelectorAll('.apple-tab-btn');
+        const stage = document.getElementById('dev-stage');
+        
+        const islandRect = navIsland.getBoundingClientRect();
+        const parentRect = dropBox.parentElement.getBoundingClientRect();
+        const startY = islandRect.top - parentRect.top + (islandRect.height / 2) - 20;
+
+        gsap.set(dropBox, { xPercent: -50, y: startY, scale: 0.1, opacity: 0, width: "40px", height: "40px", borderRadius: "99px" });
+        gsap.set(stage, { opacity: 0, scale: 0.95 });
+
+        const tl = gsap.timeline();
+
+        tl.to(navIsland, { scale: 1.06, boxShadow: "0 0 80px rgba(6, 182, 212, 1), inset 0 0 20px rgba(6, 182, 212, 0.8)", borderColor: "rgba(6, 182, 212, 1)", duration: 0.8, ease: "power2.out" })
+          .to(dropBox, { y: 70, scale: 1, opacity: 1, width: "56px", height: "56px", duration: 1.2, ease: "back.out(1.0)" }, "-=0.2")
+          .to(navIsland, { scale: 1, boxShadow: "", borderColor: "", duration: 0.8, ease: "power2.inOut", clearProps: "all" }, "-=0.9")
+          .to(dropBox, { width: "370px", borderRadius: "24px", duration: 0.9, ease: "power3.inOut" }, "+=0.3")
+          .to(dropText, { opacity: 1, duration: 0.5, onComplete: () => { dropText.classList.add('apple-siri-shimmer'); } }, "-=0.3")
+          .to(dropBox, { y: 110, opacity: 0, scale: 0.9, filter: "blur(8px)", duration: 0.8, ease: "power2.in", onComplete: () => { dropBox.style.display = 'none'; } }, "+=1.5")
+          .fromTo(tabBtns, { x: -50, opacity: 0, scale: 0.95, filter: "blur(4px)" }, { x: 0, opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, stagger: 0.15, ease: "back.out(1.2)", onStart: () => { tabsColumn.style.opacity = "1"; tabsColumn.style.pointerEvents = "auto"; } }, "-=0.3")
+          .add(() => { document.querySelector('.dev-tab[data-proj="dev4"]').click(); }, "-=0.2");
+      }
+
+      let devDropPlayed = false;
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting && !devDropPlayed) { devDropPlayed = true; runDropAnimation(); } });
+      }, { threshold: 0.25 }).observe(document.getElementById('dev-projects'));
+
+
+      // --- ACCORDION CONTENT LOGIC ---
+      const devProjData = {
+        "dev4": { 
+          icon: "fa-clapperboard", color: "purple", 
+          title: "AI Content Creator Platform", 
+          desc: "A powerful web-based ecosystem that unifies social media publishing. Connect accounts once, upload a single short video, and let the AI analyze speech, visuals, tone, and context.<br><br>Generates platform-specific content like Instagram captions, YouTube Shorts metadata, and Facebook posts—all from one dashboard.",
+          webUrl: "#", repoUrl: "#"
+        },
+        "dev1": { 
+          icon: "fa-keyboard", color: "cyan", 
+          title: "TypeMind Platform", 
+          desc: "An intelligent communication interface designed to analyze typing ergonomics, speed (WPM), and cognitive reaction times. Built with custom algorithms that adapt text difficulty in real-time.",
+          webUrl: "https://shreyash-verma16.github.io/Type-Mind-/", repoUrl: "https://github.com/Shreyash-Verma16/Type-Mind-"
+        },
+        "dev2": { 
+          icon: "fa-bus-transit", color: "blue", 
+          title: "Live Bus Tracking System", 
+          desc: "A real-time transit tracking system that bridges GPS coordinates with a responsive map interface. Provides commuters with accurate ETAs and route optimization using live websocket data streams.",
+          webUrl: "#", repoUrl: "#"
+        },
+        "dev3": { 
+          icon: "fa-hand-sparkles", color: "indigo", 
+          title: "Gesture Controller", 
+          desc: "A computer vision application utilizing OpenCV and MediaPipe to translate hand gestures into system-level commands. Controls media playback, presentation slides, and volume touchlessly.",
+          webUrl: "#", repoUrl: "#"
+        }
+      };
+
+      document.querySelectorAll('.dev-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.dev-tab').forEach(b => { b.classList.remove('is-bulky'); b.querySelector('span').className = 'font-bold text-cyan-400'; });
+          btn.classList.add('is-bulky'); btn.querySelector('span').className = 'font-bold text-white';
+          const d = devProjData[btn.getAttribute('data-proj')];
+          
+          const stageWrapper = document.getElementById('dev-stage');
+          if(d) {
+            // Using template literal for project card + Buttons
+            stageWrapper.innerHTML = `
+              <div class="spotlight-card p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-${d.color}-950/80 via-slate-900/90 to-blue-950/80 border-${d.color}-500/50 shadow-[0_0_60px_rgba(6,182,212,0.25)] flex flex-col justify-between min-h-[440px] text-left">
+                <div>
+                  <div class="w-14 h-14 rounded-2xl bg-${d.color}-500/20 border border-${d.color}-500/40 text-${d.color}-400 flex items-center justify-center font-bold mb-8 shadow-[0_0_25px_rgba(6,182,212,0.35)]">
+                    <i class="fa-solid ${d.icon} text-2xl"></i>
+                  </div>
+                  <h3 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">${d.title}</h3>
+                  <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-medium">${d.desc}</p>
+                </div>
+                <div class="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between w-full gap-4">
+                  <a href="${d.webUrl}" target="_blank" class="px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:shadow-[0_0_20px_var(--glow-shadow)] flex items-center gap-2">
+                    <i class="fa-solid fa-globe text-sm"></i> Visit Website
+                  </a>
+                  <a href="${d.repoUrl}" target="_blank" class="px-6 py-3.5 glass-panel text-text-primary hover:text-accent font-bold text-xs uppercase tracking-wider rounded-xl border border-border flex items-center gap-2">
+                    <i class="fa-brands fa-github text-sm"></i> GitHub Repository
+                  </a>
+                </div>
+              </div>
+            `;
+            
+            stageWrapper.style.display = 'block';
+            gsap.fromTo(stageWrapper, { x: -180, scale: 0.15, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.35)" });
+          }
+        });
+      });
+
+      // --- GROUPED DOCUMENT TOAST LOGIC ---
+      let toastTriggered = false;
+      let toastAnimFrame = null;
+
+      // Close a specific toast
+      window.closeToast = function(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('!translate-y-0', '!scale-100', '!opacity-100', '!pointer-events-auto');
+      };
+
+      function startDualProgress(durationMs = 8000) {
+        let startTime = null;
+        const prog1 = document.getElementById('resume-progress');
+        const prog2 = document.getElementById('marksheet-progress');
+        
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const elapsed = timestamp - startTime;
+          const percentage = Math.min((elapsed / durationMs) * 100, 100);
+          
+          if (prog1) prog1.style.width = percentage + '%';
+          if (prog2) prog2.style.width = percentage + '%';
+          
+          if (elapsed < durationMs) {
+            toastAnimFrame = requestAnimationFrame(step);
+          } else {
+            closeToast('resume-toast');
+            closeToast('marksheet-toast');
+          }
+        }
+        toastAnimFrame = requestAnimationFrame(step);
+      }
+
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting && !toastTriggered) {
+            toastTriggered = true; 
+            // 1. First trigger Resume
+            setTimeout(() => { 
+              document.getElementById('resume-toast').classList.add('!translate-y-0', '!scale-100', '!opacity-100', '!pointer-events-auto');
+              // 2. A split second later, trigger Marksheet directly above it
+              setTimeout(() => {
+                  document.getElementById('marksheet-toast').classList.add('!translate-y-0', '!scale-100', '!opacity-100', '!pointer-events-auto');
+                  startDualProgress(8000);
+              }, 150);
+            }, 400);
+          }
+        });
+      }, { threshold: 0.25 }).observe(document.getElementById('contact'));
+
+
+      // --- OTHER FX (Particles, Reveal, Spotlight) ---
+      const revealObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObserver.unobserve(e.target); } }); }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal-node').forEach(node => revealObserver.observe(node));
+      
+      let isMouseMoving = false;
+      document.body.addEventListener('mousemove', (e) => {
+        if(e.target.closest('.spotlight-card') && !isMouseMoving) {
+          isMouseMoving = true;
+          window.requestAnimationFrame(() => {
+            const card = e.target.closest('.spotlight-card');
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            isMouseMoving = false;
+          });
+        }
+      }, { passive: true });
+
+      // Particles
+      const canvas = document.getElementById('particle-canvas'); const ctx = canvas.getContext('2d');
+      let particlesArray = [];
+      function initParticles() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particlesArray = []; for (let i = 0; i < 75; i++) particlesArray.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.6 + 0.5, speedX: (Math.random() - 0.5) * 0.35, speedY: (Math.random() - 0.5) * 0.35 }); }
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); const isDark = document.documentElement.classList.contains('dark');
+        particlesArray.forEach(p => { p.x += p.speedX; p.y += p.speedY; if (p.x > canvas.width) p.x = 0; else if (p.x < 0) p.x = canvas.width; if (p.y > canvas.height) p.y = 0; else if (p.y < 0) p.y = canvas.height; ctx.fillStyle = isDark ? 'rgba(248, 250, 252, 0.45)' : 'rgba(6, 182, 212, 0.45)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); });
+        requestAnimationFrame(animate);
+      }
+      initParticles(); animate(); window.addEventListener('resize', initParticles);
+      
+      // Redirect links code
+      const redirectOverlay = document.createElement('div');
+      redirectOverlay.className = 'redirect-overlay';
+      const redirectIconWrapper = document.createElement('div');
+      redirectIconWrapper.className = 'redirect-icon-wrapper';
+      redirectOverlay.appendChild(redirectIconWrapper);
+      document.body.appendChild(redirectOverlay);
+
+      document.querySelectorAll('.social-card').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (this.href.startsWith('mailto:')) return;
+          e.preventDefault(); 
+          const targetUrl = this.href;
+          const targetBlank = this.target === '_blank';
+          const iconElement = this.querySelector('i');
+          if (iconElement) {
+            redirectIconWrapper.innerHTML = iconElement.outerHTML;
+            redirectIconWrapper.style.color = window.getComputedStyle(this).color;
+          }
+          requestAnimationFrame(() => redirectOverlay.classList.add('active'));
+          setTimeout(() => { if (targetBlank) { window.open(targetUrl, '_blank'); redirectOverlay.classList.remove('active'); } else { window.location.href = targetUrl; } }, 1100); 
+        });
+      });
+    });
+  </script>
+</body>
+</html>

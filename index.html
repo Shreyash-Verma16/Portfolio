@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyash Verma — Tech Creator & Developer</title>
+  <meta name="description" content="Shreyash Verma — Solo Tech Content Creator. Cinematic technology visualizations, AI/ML learner, and software developer." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Tailwind CSS & GSAP Animation Engine -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            background: 'var(--background)',
+            surface: 'var(--surface)',
+            border: 'var(--border)',
+            'text-primary': 'var(--text-primary)',
+            'text-secondary': 'var(--text-secondary)',
+            'text-muted': 'var(--text-muted)',
+            accent: 'var(--accent)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --background: #f3f6fc;
+      --surface: rgba(255, 255, 255, 0.78);
+      --border: rgba(203, 213, 225, 0.85);
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --glass-shine: rgba(255, 255, 255, 0.95);
+      --glow-shadow: rgba(2, 132, 199, 0.28);
+      --grid-color: rgba(15, 23, 42, 0.045);
+    }
+
+    .dark {
+      --background: #020617;
+      --surface: rgba(15, 23, 42, 0.72);
+      --border: rgba(255, 255, 255, 0.12);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --glass-shine: rgba(255, 255, 255, 0.12);
+      --glow-shadow: rgba(56, 189, 248, 0.4);
+      --grid-color: rgba(255, 255, 255, 0.028);
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── Siri-Style Hero Text Shimmer ── */
+    .apple-siri-shimmer {
+      background: linear-gradient(
+        135deg,
+        var(--text-primary) 0%,
+        var(--accent) 25%,
+        #ffffff 50%,
+        #d946ef 75%,
+        var(--text-primary) 100%
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: siriShimmerFlow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+      filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.3));
+    }
+
+    @keyframes siriShimmerFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bg-grid-pattern {
+      position: fixed; inset: 0; z-index: -25;
+      background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    #splash-screen {
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    
+    .splash-flex-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .splash-logo-outer {
+      flex-shrink: 0;
+      transform: scale(0);
+      opacity: 0;
+      animation: logoEnter 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      perspective: 1200px;
+    }
+
+    @keyframes logoEnter {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .splash-logo-inner {
+      position: relative;
+      width: 116px; height: 116px;
+      transform-style: preserve-3d;
+      transition: transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 25px var(--glow-shadow);
+      border-radius: 9999px;
+      animation: logoPulse 2s 2.2s infinite alternate ease-in-out;
+    }
+
+    @media (min-width: 640px) {
+      .splash-logo-inner { width: 160px; height: 160px; }
+    }
+
+    @keyframes logoPulse {
+      0% { box-shadow: 0 0 20px var(--glow-shadow); }
+      100% { box-shadow: 0 0 45px var(--glow-shadow), 0 0 18px var(--accent); }
+    }
+
+    .splash-front, .splash-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 9999px;
+      object-fit: cover;
+      backface-visibility: hidden;
+      border: 2px solid var(--accent);
+    }
+    .splash-back { transform: rotateY(180deg); }
+
+    .splash-text-wrapper {
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: all 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(-20px) scale(0.95);
+      filter: blur(5px);
+    }
+
+    .splash-flex-container.expand .splash-text-wrapper {
+      max-width: 500px;
+      opacity: 1;
+      margin-left: 1.5rem;
+      transform: translateX(0) scale(1);
+      filter: blur(0);
+    }
+
+    .splash-flex-container.absorb .splash-text-wrapper {
+      max-width: 0;
+      opacity: 0;
+      margin-left: 0;
+      transform: translateX(-40px) scale(0.6);
+      filter: blur(10px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-panel {
+      background: var(--surface);
+      backdrop-filter: blur(36px);
+      border: 1px solid var(--border);
+      box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 35px -10px rgba(15, 23, 42, 0.08);
+    }
+
+    /* ── TRUE 3D REALISTIC HOLOGRAPHIC GAME UI GATEWAY ── */
+    #holo-gateway {
+      background: radial-gradient(circle at 50% 40%, #0f172a 0%, #020617 80%);
+    }
+
+    .holo-item {
+      --holo-rgb: 56, 189, 248; 
+      width: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .holo-item:hover { transform: scale(1.05) translateY(-10px); }
+
+    .holo-photo {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      border: 3px solid rgb(var(--holo-rgb));
+      box-shadow: 0 0 40px rgba(var(--holo-rgb), 0.8), inset 0 0 25px rgba(var(--holo-rgb), 0.8);
+      padding: 3px; background: rgba(var(--holo-rgb), 0.2);
+      animation: floatHolo 3.5s ease-in-out infinite;
+      position: relative; z-index: 10; backdrop-filter: blur(5px);
+      transition: all 0.4s ease;
+    }
+
+    .holo-photo img {
+      width: 100%; height: 100%; border-radius: 50%; object-fit: cover; opacity: 0.85;
+      mix-blend-mode: luminosity; transition: all 0.4s ease;
+    }
+
+    .holo-item:hover .holo-photo {
+      box-shadow: 0 0 60px rgba(var(--holo-rgb), 1), inset 0 0 30px rgba(var(--holo-rgb), 1);
+      background: rgba(var(--holo-rgb), 0.4);
+    }
+
+    .holo-item:hover .holo-photo img { mix-blend-mode: normal; opacity: 1; }
+
+    @keyframes floatHolo {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+    }
+
+    .holo-beam {
+      width: 140px; height: 120px;
+      background: linear-gradient(to top, rgba(var(--holo-rgb), 0.6) 0%, rgba(var(--holo-rgb), 0.1) 60%, transparent 100%);
+      clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
+      margin-top: -35px; position: relative; z-index: 5;
+    }
+    
+    .holo-base-container {
+      position: relative; width: 180px; height: 70px; margin-top: -20px; transform-style: preserve-3d; perspective: 800px;
+    }
+
+    .holo-base-bottom {
+      position: absolute; inset: -20px -30px; background: rgba(var(--holo-rgb), 0.05); border: 1px solid rgba(var(--holo-rgb), 0.4);
+      transform: rotateX(70deg) translateZ(-15px); box-shadow: 0 15px 35px rgba(0,0,0,0.9); clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+    }
+
+    .holo-base-middle {
+      position: absolute; inset: -5px -10px; background: rgba(var(--holo-rgb), 0.15); border: 2px solid rgba(var(--holo-rgb), 0.7);
+      transform: rotateX(70deg) translateZ(0px); box-shadow: 0 0 20px rgba(var(--holo-rgb), 0.4); clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
+    }
+
+    .holo-base-top {
+      position: absolute; inset: 10px; background: rgba(var(--holo-rgb), 0.4); border: 2px solid rgb(var(--holo-rgb));
+      transform: rotateX(70deg) translateZ(15px); box-shadow: 0 0 40px rgb(var(--holo-rgb)), inset 0 0 20px rgba(255,255,255,0.6);
+    }
+
+    .holo-base-core { position: absolute; inset: 0; background: #ffffff; filter: blur(8px); opacity: 0.4; }
+
+    .holo-label {
+      margin-top: 35px; color: #94a3b8; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 10px;
+      background: rgba(15, 23, 42, 0.6); padding: 6px 18px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease;
+    }
+
+    .holo-item:hover .holo-label {
+      color: #fff; text-shadow: 0 0 15px rgb(var(--holo-rgb)); border-color: rgba(var(--holo-rgb), 0.5);
+      background: rgba(var(--holo-rgb), 0.15); box-shadow: 0 0 20px rgba(var(--holo-rgb), 0.3);
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ── Splash Screen Preloader ── -->
+  <div id="splash-screen" class="fixed inset-0 z-[999999] bg-background flex flex-col items-center justify-center select-none" title="Click or Tap Anywhere to Enter Website">
+    <div class="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none"></div>
+    
+    <div id="splash-flex" class="splash-flex-container relative z-10 w-full px-6 pointer-events-none">
+      <div class="splash-logo-outer">
+        <div id="splash-logo-inner" class="splash-logo-inner bg-surface">
+          <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Channel Logo" class="splash-front" />
+          <img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Face Logo" class="splash-back" />
+        </div>
+      </div>
+
+      <div class="splash-text-wrapper">
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tighter apple-siri-shimmer pb-1 leading-none">SHREYASH VERMA</h1>
+        <p class="text-text-secondary text-xs sm:text-sm font-bold tracking-[0.15em] mt-2 uppercase">
+          BCA <span class="text-accent mx-1">/</span> Tech Content
+        </p>
+      </div>
+    </div>
+
+    <div class="absolute bottom-10 z-20 text-xs font-mono tracking-widest text-text-muted uppercase animate-pulse flex items-center gap-2">
+      <i class="fa-solid fa-mouse-pointer text-accent"></i> Click or Tap Anywhere to Enter Website
+    </div>
+  </div>
+
+  <!-- ── 3D HOLOGRAPHIC LAB GATEWAY ── -->
+  <div id="holo-gateway" class="fixed inset-0 z-[99990] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-700 ease-out">
+    <div class="flex flex-wrap justify-center gap-12 lg:gap-24 w-full px-4">
+      
+      <!-- DEVELOPER PEDESTAL -> developer.html -->
+      <div class="holo-item" onclick="location.href='devloper.html'" style="--holo-rgb: 34, 211, 238;">
+        <div class="holo-photo"><img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" alt="Developer Photo"></div>
+        <div class="holo-beam"></div>
+        <div class="holo-base-container">
+          <div class="holo-base-bottom"></div>
+          <div class="holo-base-middle"></div>
+          <div class="holo-base-top"><div class="holo-base-core"></div></div>
+        </div>
+        <div class="holo-label"><i class="fa-solid fa-microchip text-cyan-400"></i> DEVELOPER</div>
+      </div>
+
+      <!-- CREATOR PEDESTAL -> creator.html -->
+      <div class="holo-item" onclick="location.href='creator.html'" style="--holo-rgb: 192, 132, 252;">
+        <div class="holo-photo" style="animation-delay: -1s;"><img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Creator Photo"></div>
+        <div class="holo-beam"></div>
+        <div class="holo-base-container">
+          <div class="holo-base-bottom"></div>
+          <div class="holo-base-middle"></div>
+          <div class="holo-base-top"><div class="holo-base-core"></div></div>
+        </div>
+        <div class="holo-label"><i class="fa-solid fa-clapperboard text-purple-400"></i> CREATOR</div>
+      </div>
+
+      <!-- PERSON PEDESTAL -> person.html -->
+      <div class="holo-item" onclick="location.href='person.html'" style="--holo-rgb: 52, 211, 153;">
+        <div class="holo-photo" style="animation-delay: -2s;"><img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Person Photo"></div>
+        <div class="holo-beam"></div>
+        <div class="holo-base-container">
+          <div class="holo-base-bottom"></div>
+          <div class="holo-base-middle"></div>
+          <div class="holo-base-top"><div class="holo-base-core"></div></div>
+        </div>
+        <div class="holo-label"><i class="fa-solid fa-id-badge text-emerald-400"></i> PERSON</div>
+      </div>
+
+    </div>
+
+    <!-- Fallback / Bypass Option -->
+    <button onclick="location.href='all-in-one.html'" class="absolute bottom-10 px-6 py-3 glass-panel text-white text-xs font-mono uppercase tracking-widest rounded-full hover:border-accent transition-all">
+      Skip Gateway & View Main Portfolio <i class="fa-solid fa-arrow-right ml-2"></i>
+    </button>
+  </div>
+
+  <div class="bg-grid-pattern"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const splashScreen = document.getElementById('splash-screen');
+      const splashFlex = document.getElementById('splash-flex');
+      const splashLogoInner = document.getElementById('splash-logo-inner');
+      const holoGateway = document.getElementById('holo-gateway');
+      let splashTimeouts = [];
+
+      function closeSplashScreenImmediately() {
+        if (!splashScreen || splashScreen.style.opacity === '0') return;
+        splashTimeouts.forEach(timer => clearTimeout(timer));
+        splashScreen.style.opacity = '0';
+        splashScreen.style.pointerEvents = 'none';
+        
+        if (holoGateway) {
+          holoGateway.style.opacity = '1';
+          holoGateway.style.pointerEvents = 'auto';
+        }
+        setTimeout(() => { if (splashScreen.parentNode) splashScreen.remove(); }, 600);
+      }
+
+      if (splashScreen && splashFlex) {
+        splashScreen.addEventListener('click', closeSplashScreenImmediately);
+        splashTimeouts.push(setTimeout(() => { if (splashLogoInner) splashLogoInner.style.transform = 'rotateY(180deg)'; }, 1400));
+        splashTimeouts.push(setTimeout(() => { if (splashFlex) splashFlex.classList.add('expand'); }, 2400));
+        splashTimeouts.push(setTimeout(() => { if (splashFlex) { splashFlex.classList.remove('expand'); splashFlex.classList.add('absorb'); } }, 4400)); 
+        splashTimeouts.push(setTimeout(() => { closeSplashScreenImmediately(); }, 5100)); 
+      }
+    });
+  </script>
+</body>
+</html>
