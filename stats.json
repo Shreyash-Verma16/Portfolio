@@ -1,1 +1,37 @@
-
+[
+  {
+    "date": "04 Oct",
+    "youtube": { "subscribers": 131, "views": 126500, "uploads": 98, "engagement": 3120 },
+    "instagram": { "followers": 179, "views": 1250000, "uploads": 26, "engagement": 188000 }
+  },
+  {
+    "date": "05 Oct",
+    "youtube": { "subscribers": 132, "views": 126900, "uploads": 99, "engagement": 3150 },
+    "instagram": { "followers": 180, "views": 1260000, "uploads": 26, "engagement": 189500 }
+  },
+  {
+    "date": "06 Oct",
+    "youtube": { "subscribers": 133, "views": 127200, "uploads": 99, "engagement": 3175 },
+    "instagram": { "followers": 181, "views": 1275000, "uploads": 27, "engagement": 190200 }
+  },
+  {
+    "date": "07 Oct",
+    "youtube": { "subscribers": 133, "views": 127500, "uploads": 100, "engagement": 3200 },
+    "instagram": { "followers": 182, "views": 1282000, "uploads": 27, "engagement": 191000 }
+  },
+  {
+    "date": "08 Oct",
+    "youtube": { "subscribers": 134, "views": 127800, "uploads": 100, "engagement": 3220 },
+    "instagram": { "followers": 183, "views": 1290000, "uploads": 27, "engagement": 191800 }
+  },
+  {
+    "date": "09 Oct",
+    "youtube": { "subscribers": 134, "views": 128000, "uploads": 100, "engagement": 3240 },
+    "instagram": { "followers": 184, "views": 1295000, "uploads": 27, "engagement": 192400 }
+  },
+  {
+    "date": "10 Oct",
+    "youtube": { "subscribers": 135, "views": 128400, "uploads": 100, "engagement": 3260 },
+    "instagram": { "followers": 185, "views": 1300000, "uploads": 27, "engagement": 193000 }
+  }
+]
