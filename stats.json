@@ -1,37 +1,122 @@
 [
   {
     "date": "04 Oct",
-    "youtube": { "subscribers": 139, "views": 152000, "uploads": 98, "engagement": 3800 },
-    "instagram": { "followers": 180, "views": 1250000, "uploads": 26, "engagement": 188000 }
+    "youtube": {
+      "subscribers": 139,
+      "views": 152000,
+      "uploads": 98,
+      "engagement": 3800
+    },
+    "instagram": {
+      "followers": 180,
+      "views": 1250000,
+      "uploads": 26,
+      "engagement": 188000
+    }
   },
   {
     "date": "05 Oct",
-    "youtube": { "subscribers": 140, "views": 153100, "uploads": 99, "engagement": 3850 },
-    "instagram": { "followers": 180, "views": 1260000, "uploads": 26, "engagement": 189500 }
+    "youtube": {
+      "subscribers": 140,
+      "views": 153100,
+      "uploads": 99,
+      "engagement": 3850
+    },
+    "instagram": {
+      "followers": 180,
+      "views": 1260000,
+      "uploads": 26,
+      "engagement": 189500
+    }
   },
   {
     "date": "06 Oct",
-    "youtube": { "subscribers": 141, "views": 154000, "uploads": 99, "engagement": 3890 },
-    "instagram": { "followers": 181, "views": 1275000, "uploads": 27, "engagement": 190200 }
+    "youtube": {
+      "subscribers": 141,
+      "views": 154000,
+      "uploads": 99,
+      "engagement": 3890
+    },
+    "instagram": {
+      "followers": 181,
+      "views": 1275000,
+      "uploads": 27,
+      "engagement": 190200
+    }
   },
   {
     "date": "07 Oct",
-    "youtube": { "subscribers": 142, "views": 155200, "uploads": 100, "engagement": 3920 },
-    "instagram": { "followers": 182, "views": 1282000, "uploads": 27, "engagement": 191000 }
+    "youtube": {
+      "subscribers": 142,
+      "views": 155200,
+      "uploads": 100,
+      "engagement": 3920
+    },
+    "instagram": {
+      "followers": 182,
+      "views": 1282000,
+      "uploads": 27,
+      "engagement": 191000
+    }
   },
   {
     "date": "08 Oct",
-    "youtube": { "subscribers": 143, "views": 156100, "uploads": 100, "engagement": 3960 },
-    "instagram": { "followers": 183, "views": 1290000, "uploads": 27, "engagement": 191800 }
+    "youtube": {
+      "subscribers": 143,
+      "views": 156100,
+      "uploads": 100,
+      "engagement": 3960
+    },
+    "instagram": {
+      "followers": 183,
+      "views": 1290000,
+      "uploads": 27,
+      "engagement": 191800
+    }
   },
   {
     "date": "09 Oct",
-    "youtube": { "subscribers": 143, "views": 157000, "uploads": 100, "engagement": 3990 },
-    "instagram": { "followers": 184, "views": 1295000, "uploads": 27, "engagement": 192400 }
+    "youtube": {
+      "subscribers": 143,
+      "views": 157000,
+      "uploads": 100,
+      "engagement": 3990
+    },
+    "instagram": {
+      "followers": 184,
+      "views": 1295000,
+      "uploads": 27,
+      "engagement": 192400
+    }
   },
   {
     "date": "10 Oct",
-    "youtube": { "subscribers": 144, "views": 157846, "uploads": 104, "engagement": 4050 },
-    "instagram": { "followers": 185, "views": 1300000, "uploads": 27, "engagement": 193000 }
+    "youtube": {
+      "subscribers": 144,
+      "views": 157846,
+      "uploads": 104,
+      "engagement": 4050
+    },
+    "instagram": {
+      "followers": 185,
+      "views": 1300000,
+      "uploads": 27,
+      "engagement": 193000
+    }
+  },
+  {
+    "date": "11 Oct",
+    "youtube": {
+      "subscribers": 144,
+      "views": 157846,
+      "uploads": 104,
+      "engagement": 4050
+    },
+    "instagram": {
+      "followers": 185,
+      "views": 1904,
+      "uploads": 6,
+      "engagement": 138
+    }
   }
 ]
