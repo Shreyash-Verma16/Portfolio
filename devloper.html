@@ -42,6 +42,7 @@
     :root {
       --background: #f8fafc;
       --surface: rgba(255, 255, 255, 0.84);
+      --card-solid: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(241, 245, 249, 0.96) 100%);
       --border: rgba(203, 213, 225, 0.85);
       --text-primary: #0f172a;
       --text-secondary: #334155;
@@ -49,7 +50,7 @@
       --accent: #06b6d4;
       --dot-color: rgba(15, 23, 42, 0.16);
       --glass-shine: rgba(255, 255, 255, 0.95);
-      --glow-shadow: rgba(6, 182, 212, 0.28);
+      --glow-shadow: rgba(6, 182, 212, 0.25);
       --nav-tint: rgba(6, 182, 212, 0.14);
       --nav-border: rgba(6, 182, 212, 0.45);
       --island-bg: rgba(255, 255, 255, 0.90);
@@ -59,15 +60,16 @@
 
     html.dark {
       --background: #03050a;
-      --surface: rgba(12, 16, 28, 0.76);
-      --border: rgba(255, 255, 255, 0.10);
+      --surface: rgba(12, 16, 28, 0.72);
+      --card-solid: linear-gradient(145deg, rgba(17, 23, 38, 0.95) 0%, rgba(10, 14, 24, 0.97) 100%);
+      --border: rgba(255, 255, 255, 0.11);
       --text-primary: #f8fafc;
       --text-secondary: #cbd5e1;
       --text-muted: #64748b;
       --accent: #22d3ee;
       --dot-color: rgba(255, 255, 255, 0.18);
-      --glass-shine: rgba(255, 255, 255, 0.12);
-      --glow-shadow: rgba(34, 211, 238, 0.40);
+      --glass-shine: rgba(255, 255, 255, 0.14);
+      --glow-shadow: rgba(34, 211, 238, 0.36);
       --nav-tint: rgba(34, 211, 238, 0.16);
       --nav-border: rgba(34, 211, 238, 0.48);
       --island-bg: rgba(8, 12, 24, 0.88);
@@ -83,6 +85,10 @@
       transition: background-color 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s ease;
     }
 
+    body.intro-blackout {
+      background-color: #000000 !important;
+    }
+
     /* ── GOOGLE STITCH LOWER-CRADLE BACKGROUND (15s ON / 5s OFF) ── */
     #stitch-bg-container {
       position: fixed;
@@ -90,6 +96,7 @@
       z-index: -20;
       pointer-events: none;
       overflow: hidden;
+      opacity: 0;
     }
 
     #stitch-dot-grid {
@@ -103,6 +110,7 @@
       mask-image: radial-gradient(circle at 50% 35%, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.95) 75%);
       -webkit-mask-image: radial-gradient(circle at 50% 35%, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.95) 75%);
       transition: background-image 0.5s ease;
+      opacity: 0;
     }
 
     #stitch-canvas-wrapper {
@@ -135,7 +143,7 @@
       mix-blend-mode: var(--canvas-blend);
     }
 
-    /* ── Apple-Style Shimmer Typography ── */
+    /* ── Apple-Style Shimmer & Antigravity Typing Cursor ── */
     .apple-siri-shimmer {
       background: linear-gradient(135deg, #090d16 0%, #0284c7 30%, #4f46e5 65%, #090d16 100%);
       background-size: 280% 280%;
@@ -154,6 +162,28 @@
       100% { background-position: 100% 50%; }
     }
 
+    .typing-cursor {
+      display: inline-block;
+      width: 5px;
+      height: 0.86em;
+      margin-left: 8px;
+      vertical-align: -0.06em;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #4285f4 0%, #22d3ee 35%, #fbbc05 70%, #ea4335 100%);
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.75);
+      animation: cursorPulse 0.75s ease-in-out infinite alternate;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .typing-cursor.cursor-done {
+      opacity: 0 !important;
+      transform: scaleY(0.2);
+      animation: none;
+    }
+    @keyframes cursorPulse {
+      0% { opacity: 1; }
+      100% { opacity: 0.25; }
+    }
+
     /* ── 2-STATE LERP NAVIGATION (ADHERENT <-> DYNAMIC ISLAND) ── */
     #nav-wrapper {
       position: fixed;
@@ -164,6 +194,8 @@
       display: flex;
       justify-content: center;
       pointer-events: none;
+      opacity: 0;
+      transform: translateY(-24px);
     }
 
     #dynamic-nav {
@@ -272,11 +304,11 @@
     ::view-transition-new(root) { z-index: 9999; }
     ::view-transition-old(root) { z-index: 1; }
 
-    /* ── Glass Panels & Spotlight Hover Cards with Spinning Edge ── */
+    /* ── Glass Panels & Clean Spotlight Cards ── */
     .glass-panel {
       background: var(--surface);
-      backdrop-filter: blur(36px);
-      -webkit-backdrop-filter: blur(36px);
+      backdrop-filter: blur(36px) saturate(180%);
+      -webkit-backdrop-filter: blur(36px) saturate(180%);
       border: 1px solid var(--border);
       box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 35px -10px rgba(15, 23, 42, 0.08);
       transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
@@ -293,15 +325,15 @@
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.5s ease;
     }
     .spotlight-card:hover {
-      transform: translateY(-7px) scale(1.012);
-      border-color: rgba(34, 211, 238, 0.45);
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(34, 211, 238, 0.32);
       z-index: 10;
     }
     .spotlight-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(700px circle at var(--mouse-x) var(--mouse-y), rgba(34, 211, 238, 0.10), transparent 40%);
+      background: radial-gradient(650px circle at var(--mouse-x) var(--mouse-y), rgba(34, 211, 238, 0.09), transparent 40%);
       z-index: 1;
       pointer-events: none;
       opacity: 0;
@@ -309,105 +341,257 @@
     }
     .spotlight-card:hover::before { opacity: 1; }
 
-    @property --border-angle { syntax: "<angle>"; inherits: true; initial-value: 0turn; }
-    .spotlight-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1.5px;
-      background: conic-gradient(from var(--border-angle), transparent 60%, rgba(59, 130, 246, 0.8) 80%, rgba(34, 211, 238, 1) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      z-index: 20;
-      pointer-events: none;
-      animation: border-spin 4s linear infinite;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .spotlight-card:hover::after { opacity: 1; }
-    @keyframes border-spin { 100% { --border-angle: 1turn; } }
-
     .click-shrink { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
     .click-shrink:hover { transform: translateY(-2px) scale(1.03); }
     .click-shrink:active { transform: scale(0.95); }
 
-    /* ── Apple Accordion & Dynamic Drop Box ── */
-    .island-drop-box {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 50;
+    /* ========================================================= */
+    /* 3D COVER FLOW PROJECT CAROUSEL + STAGED SCROLL INTRO      */
+    /* ========================================================= */
+    .coverflow-section {
+      overflow-x: clip;
+    }
+
+    .coverflow-viewport {
+      perspective: 1800px;
+      perspective-origin: 50% 50%;
+      position: relative;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(10, 15, 30, 0.95);
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 50px rgba(34, 211, 238, 0.6);
-      overflow: hidden;
-      pointer-events: none;
-      white-space: nowrap;
-      opacity: 0;
-    }
-    .tabs-column { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
-    .apple-tab-btn {
-      width: 100%;
-      text-align: left;
-      padding: 16px 22px;
-      border-radius: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-weight: 600;
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .apple-tab-btn:hover {
-      background: var(--nav-tint);
-      color: var(--text-primary);
-      border-color: var(--accent);
-      transform: translateX(4px);
-    }
-    .apple-tab-btn.is-bulky {
-      transform: scale(1.04) translateX(12px) !important;
-      padding: 22px 28px !important;
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.28) 0%, rgba(59, 130, 246, 0.22) 100%) !important;
-      border-color: rgba(34, 211, 238, 0.85) !important;
-      color: var(--text-primary) !important;
-      box-shadow: 0 15px 45px rgba(34, 211, 238, 0.30), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
-      z-index: 30;
+      padding: 16px 0 24px;
+      user-select: none;
     }
 
-    /* ── iPhone Frame Styles ── */
-    .iphone-frame {
-      width: 320px;
-      height: 640px;
-      background: #0a0a0a;
-      border-radius: 60px;
+    .coverflow-stage {
       position: relative;
+      width: 100%;
+      max-width: 850px;
+      min-height: 450px;
+      transform-style: preserve-3d;
+      display: grid;
+      grid-template-areas: "slot";
+      align-items: center;
+      justify-items: center;
+    }
+
+    .coverflow-card {
+      grid-area: slot;
+      width: 100%;
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
       box-shadow:
-        inset 0 2px 4px rgba(255,255,255,0.15),
-        0 0 0 10px #1f2937,
-        0 0 0 12px #334155,
-        0 30px 50px -15px rgba(0, 0, 0, 0.7),
-        0 0 40px var(--glow-shadow);
-      padding: 12px;
-      transform: perspective(1000px) rotateY(-8deg) rotateX(4deg);
-      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        inset 0 1px 1.5px var(--glass-shine),
+        0 28px 70px -18px rgba(0, 0, 0, 0.72);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: transform, opacity, filter;
+      transition:
+        transform 720ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+        filter 720ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 500ms ease,
+        box-shadow 720ms cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .iphone-frame:hover {
-      transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03);
+
+    .coverflow-card.no-transition {
+      transition: none !important;
     }
-    .iphone-screen { width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: #000; position: relative; }
-    .slideshow-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease-in-out; }
-    .slideshow-img.active { opacity: 1; }
-    .dynamic-island-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 120px; height: 32px; background: #000; border-radius: 20px; z-index: 30; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.15); }
-    .iphone-btn { position: absolute; background: #334155; border-radius: 2px; box-shadow: inset 1px 0 2px rgba(255,255,255,0.2); }
+
+    /* CENTER: Active Project Card */
+    .coverflow-card[data-offset="0"] {
+      transform: translate3d(0%, 0, 0px) rotateY(0deg) scale(1);
+      opacity: 1;
+      filter: blur(0px);
+      z-index: 30;
+      pointer-events: auto;
+      border-color: rgba(34, 211, 238, 0.32);
+      box-shadow:
+        inset 0 1px 2px var(--glass-shine),
+        inset 0 -1px 1px rgba(34, 211, 238, 0.14),
+        0 32px 80px -18px rgba(0, 0, 0, 0.78),
+        0 0 48px -10px var(--glow-shadow);
+    }
+
+    /* LEFT: Previous Project Preview */
+    .coverflow-card[data-offset="-1"] {
+      transform: translate3d(-52%, 0, -160px) rotateY(22deg) scale(0.82);
+      opacity: 0.44;
+      filter: blur(2px);
+      z-index: 20;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .coverflow-card[data-offset="-1"]:hover {
+      opacity: 0.62;
+      border-color: rgba(34, 211, 238, 0.28);
+    }
+
+    /* RIGHT: Upcoming Project Preview */
+    .coverflow-card[data-offset="1"] {
+      transform: translate3d(52%, 0, -160px) rotateY(-22deg) scale(0.82);
+      opacity: 0.44;
+      filter: blur(2px);
+      z-index: 20;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .coverflow-card[data-offset="1"]:hover {
+      opacity: 0.62;
+      border-color: rgba(34, 211, 238, 0.28);
+    }
+
+    /* FAR-LEFT: Outgoing / Incoming Queue */
+    .coverflow-card[data-offset="-2"] {
+      transform: translate3d(-86%, 0, -310px) rotateY(32deg) scale(0.68);
+      opacity: 0;
+      filter: blur(3.5px);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* FAR-RIGHT: Outgoing / Incoming Queue */
+    .coverflow-card[data-offset="2"] {
+      transform: translate3d(86%, 0, -310px) rotateY(-32deg) scale(0.68);
+      opacity: 0;
+      filter: blur(3.5px);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* BACKSTAGE: Remaining cards in pool */
+    .coverflow-card[data-offset="hidden"] {
+      transform: translate3d(0%, 0, -420px) rotateY(0deg) scale(0.6);
+      opacity: 0;
+      filter: blur(0px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .coverflow-card:not([data-offset="0"]) a {
+      pointer-events: none;
+    }
+
+    /* Staged Entrance States for Proof of Work */
+    #dev-projects.proof-pre-intro .coverflow-card[data-offset="0"] {
+      opacity: 0 !important;
+      transform: translate3d(0%, 34px, -90px) rotateY(0deg) scale(0.91) !important;
+      filter: blur(10px) !important;
+      pointer-events: none !important;
+    }
+
+    #dev-projects.proof-pre-intro .coverflow-card[data-offset="-1"],
+    #dev-projects.proof-stage-center-only .coverflow-card[data-offset="-1"] {
+      opacity: 0 !important;
+      transform: translate3d(-16%, 0, -260px) rotateY(12deg) scale(0.74) !important;
+      filter: blur(8px) !important;
+      pointer-events: none !important;
+    }
+
+    #dev-projects.proof-pre-intro .coverflow-card[data-offset="1"],
+    #dev-projects.proof-stage-center-only .coverflow-card[data-offset="1"] {
+      opacity: 0 !important;
+      transform: translate3d(16%, 0, -260px) rotateY(-12deg) scale(0.74) !important;
+      filter: blur(8px) !important;
+      pointer-events: none !important;
+    }
+
+    @media (max-width: 1180px) {
+      .coverflow-stage {
+        max-width: 740px;
+      }
+      .coverflow-card[data-offset="-1"] {
+        transform: translate3d(-40%, 0, -170px) rotateY(20deg) scale(0.80);
+        opacity: 0.36;
+      }
+      .coverflow-card[data-offset="1"] {
+        transform: translate3d(40%, 0, -170px) rotateY(-20deg) scale(0.80);
+        opacity: 0.36;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .coverflow-stage {
+        max-width: 100%;
+        min-height: 540px;
+      }
+      .coverflow-card[data-offset="-1"],
+      .coverflow-card[data-offset="1"] {
+        transform: translate3d(0%, 0, -200px) scale(0.86);
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    /* Numbered 1-8 Pagination Buttons */
+    .proof-num-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      background: transparent;
+      transition:
+        background-color 0.32s ease,
+        color 0.32s ease,
+        border-color 0.32s ease,
+        box-shadow 0.32s ease,
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .proof-num-btn:hover {
+      color: var(--text-primary);
+      border-color: rgba(34, 211, 238, 0.35);
+      background: rgba(34, 211, 238, 0.08);
+    }
+    .proof-num-btn.is-active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 16px rgba(34, 211, 238, 0.55);
+      transform: scale(1.06);
+    }
+
+    .proof-divider {
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--border) 15%,
+        rgba(34, 211, 238, 0.55) 50%,
+        var(--border) 85%,
+        transparent 100%
+      );
+    }
+
+    .proof-photo-frame {
+      position: relative;
+      overflow: hidden;
+      background: rgba(8, 12, 24, 0.85);
+      border: 1px solid var(--border);
+      box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 40px -12px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Accessibility: Respect prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .coverflow-card {
+        transition: opacity 200ms linear, transform 200ms ease-out !important;
+        filter: none !important;
+      }
+      .coverflow-card[data-offset="-1"] {
+        transform: translate3d(-44%, 0, 0px) scale(0.86);
+      }
+      .coverflow-card[data-offset="1"] {
+        transform: translate3d(44%, 0, 0px) scale(0.86);
+      }
+    }
 
     /* ── Social Card Pop-out Redirect CSS ── */
     .social-card { transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -448,12 +632,12 @@
 
     .reveal-node {
       opacity: 0;
-      filter: blur(12px);
-      transform: translateY(40px) scale(0.97);
+      filter: blur(10px);
+      transform: translateY(32px) scale(0.98);
       transition:
-        opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 1.1s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal-node.is-visible {
       opacity: 1;
@@ -462,7 +646,7 @@
     }
   </style>
 </head>
-<body class="antialiased selection:bg-cyan-500/30 selection:text-text-primary">
+<body class="antialiased intro-blackout selection:bg-cyan-500/30 selection:text-text-primary">
 
   <!-- ========================================================= -->
   <!-- STITCH LOWER-CRADLE SILK WAVE BACKGROUND (15s ON / 5s OFF)-->
@@ -478,13 +662,13 @@
   <!-- 2-STATE LERP NAV: ADHERENT BAR <-> DYNAMIC ISLAND         -->
   <!-- ========================================================= -->
   <div id="nav-wrapper">
-    <nav id="dynamic-nav" class="is-adherent" style="width: 100vw; height: 72px; border-radius: 0px; padding: 0 28px;">
+    <nav id="dynamic-nav" class="is-adherent" style="width: 100vw; height: 72px; border-radius: 0px; padding: 0 28px;" aria-label="Primary Navigation">
       <div class="nav-inner">
         
         <!-- Left Brand -->
         <a href="#dev-home" class="flex items-center gap-3 group click-shrink shrink-0">
           <div class="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 p-[1.5px] overflow-hidden">
-            <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Logo" class="w-full h-full rounded-full object-cover" />
+            <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Shreyash Verma" width="36" height="36" class="w-full h-full rounded-full object-cover" />
           </div>
           <div>
             <span class="block text-text-primary font-bold tracking-tight leading-none text-base">SHREYASH</span>
@@ -497,10 +681,7 @@
           <div id="nav-liquid-pill"></div>
           <a href="#dev-home" class="nav-link active-section" data-section="dev-home">Home</a>
           <a href="#dev-academic" class="nav-link" data-section="dev-academic">Academics</a>
-          <a href="#dev-skills" class="nav-link" data-section="dev-skills">Skills</a>
-          <a href="#dev-projects" class="nav-link" data-section="dev-projects">Projects</a>
-          <a href="#dev-tools" class="nav-link" data-section="dev-tools">Tools</a>
-          <a href="#dev-vision" class="nav-link" data-section="dev-vision">Vision</a>
+          <a href="#dev-projects" class="nav-link" data-section="dev-projects">Proof of Work</a>
           <a href="#contact" class="nav-link" data-section="contact">Contact</a>
         </div>
 
@@ -523,42 +704,38 @@
   <!-- ========================================== -->
   <main class="relative z-10">
     
-    <!-- Hero -->
-    <section id="dev-home" data-section-name="HOME" class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center min-h-screen pt-28 pb-12">
-      <div class="space-y-8 reveal-node">
-        <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] apple-siri-shimmer">SHREYASH<br/>VERMA</h1>
-        <p class="text-xl sm:text-2xl text-text-secondary mt-6 font-semibold">BCA Student <span class="text-border mx-2">|</span> Aspiring AI Software Engineer</p>
-        <div class="flex gap-4 pt-4">
-          <a href="#dev-projects" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full click-shrink border border-white/20 shadow-[0_10px_30px_-10px_rgba(6,182,212,0.6)]"><i class="fa-solid fa-code mr-1.5"></i> Projects</a>
-          <a href="#dev-skills" class="px-8 py-4 glass-panel font-bold rounded-full click-shrink hover:border-cyan-400">Skills</a>
+    <!-- ========================================================= -->
+    <!-- CENTERED HERO SECTION WITH STAGED INTRO SEQUENCE          -->
+    <!-- ========================================================= -->
+    <section id="dev-home" data-section-name="HOME" class="max-w-6xl mx-auto px-6 flex flex-col items-center justify-center text-center min-h-screen pt-24 pb-16">
+      <div class="space-y-8 max-w-4xl mx-auto flex flex-col items-center">
+        
+        <!-- 1. Typed Name Heading -->
+        <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[6.25rem] font-black tracking-tighter leading-[0.95] min-h-[1.05em] flex items-center justify-center flex-wrap">
+          <span id="hero-typed-name" class="apple-siri-shimmer"></span><span id="hero-typing-cursor" class="typing-cursor" aria-hidden="true"></span>
+        </h1>
+
+        <!-- 2. Subtitle (Appears after Name completes typing) -->
+        <p id="hero-subtitle" class="text-xl sm:text-2xl md:text-3xl text-text-secondary font-semibold tracking-tight opacity-0 translate-y-5">
+          BCA Student <span class="text-cyan-500/60 mx-3">|</span> Aspiring AI Software Engineer
+        </p>
+
+        <!-- 3. Centered Buttons (Appear after Subtitle completes) -->
+        <div id="hero-actions" class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 pt-4 opacity-0 translate-y-5">
+          <a href="#dev-projects" class="min-w-[165px] px-9 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full click-shrink border border-white/20 shadow-[0_10px_30px_-10px_rgba(6,182,212,0.65)] text-base tracking-wide">
+            <i class="fa-solid fa-code mr-2"></i>Projects
+          </a>
+          <a href="#dev-academic" class="min-w-[165px] px-9 py-4 glass-panel font-bold rounded-full click-shrink hover:border-cyan-400 text-text-primary text-base tracking-wide">
+            <i class="fa-solid fa-layer-group mr-2 text-cyan-400"></i>Skills
+          </a>
         </div>
-      </div>
-      <div class="flex justify-center lg:justify-end reveal-node">
-        <!-- Premium iPhone Frame & 4 Image Slideshow -->
-        <div class="iphone-frame scale-[0.85] sm:scale-100 origin-center lg:origin-right">
-          <div class="iphone-btn left-[-16px] top-[110px] w-[4px] h-[26px]"></div>
-          <div class="iphone-btn left-[-16px] top-[160px] w-[4px] h-[50px]"></div>
-          <div class="iphone-btn left-[-16px] top-[230px] w-[4px] h-[50px]"></div>
-          <div class="iphone-btn right-[-16px] top-[180px] w-[4px] h-[70px]"></div>
-          
-          <div class="iphone-screen bg-black">
-            <div class="dynamic-island-notch"></div>
-            <div class="phone-slideshow absolute inset-0 w-full h-full">
-              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img active" alt="Slide 1">
-              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img" alt="Slide 2">
-              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img" alt="Slide 3">
-              <img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" class="slideshow-img" alt="Slide 4">
-            </div>
-            <div class="absolute top-4 left-6 right-6 flex items-center justify-between text-[11px] text-white/90 z-20 font-bold drop-shadow-md pointer-events-none">
-              <span>9:41</span>
-              <div class="flex gap-2"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-full"></i></div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
 
-    <!-- The Core & Academics -->
+    <!-- ========================================================= -->
+    <!-- THE CORE & ACADEMICS                                      -->
+    <!-- ========================================================= -->
     <section id="dev-academic" data-section-name="ACADEMICS" class="max-w-7xl mx-auto px-6 py-24 border-t border-border/40">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-6">
         
@@ -608,106 +785,63 @@
       </div>
     </section>
 
-    <!-- Skills -->
-    <section id="dev-skills" data-section-name="SKILLS" class="max-w-7xl mx-auto px-6 py-24 border-t border-border/40">
-      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Skills I Have</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold">01</div><p class="text-lg font-bold text-text-primary">Python Development</p>
-        </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.1s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold">02</div><p class="text-lg font-bold text-text-primary">Problem Solving</p>
-        </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.2s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold">03</div><p class="text-lg font-bold text-text-primary">Debugging & Troubleshooting</p>
-        </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.3s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-500 flex items-center justify-center text-white font-bold">04</div><p class="text-lg font-bold text-text-primary">AI & Computer Vision</p>
-        </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.4s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold">05</div><p class="text-lg font-bold text-text-primary">Software Engineering</p>
+    <!-- ========================================================= -->
+    <!-- PROOF OF WORK — 3D COVER FLOW WITH STAGED REVEAL          -->
+    <!-- ========================================================= -->
+    <section id="dev-projects" data-section-name="PROOF OF WORK" class="coverflow-section proof-pre-intro py-24 px-4 sm:px-6 max-w-7xl mx-auto border-t border-border/40" aria-roledescription="carousel" aria-label="Proof of Work Projects">
+      
+      <!-- Section Heading (Appears with Stage 1) -->
+      <div id="proof-header-block" class="text-center mb-12 opacity-0 translate-y-6">
+        <span class="glass-panel px-4 py-1.5 rounded-full inline-block mb-4 border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-mono font-bold text-xs uppercase tracking-widest">
+          Verified Execution
+        </span>
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-text-primary">Proof of Work</h2>
+        <p class="text-text-secondary mt-3 max-w-xl mx-auto text-base sm:text-lg font-medium">
+          Interactive showcase of software builds, algorithmic problem-solving, and technical milestones.
+        </p>
+      </div>
+
+      <!-- 3D Cover Flow Viewport (Stage 1: Center Card -> Stage 2: Left & Right Blurred Previews) -->
+      <div class="coverflow-viewport">
+        <div id="proof-coverflow-stage" class="coverflow-stage">
+          <!-- All 8 project cards are rendered here once on load -->
         </div>
       </div>
-    </section>
 
-    <!-- Projects Accordion -->
-    <section id="dev-projects" data-section-name="PROJECTS" class="py-24 px-6 max-w-7xl mx-auto border-t border-border/40">
-      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Software Projects</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative min-h-[400px]">
-        
-        <!-- Animated Drop Box for Developer -->
-        <div id="dev-drop-box" class="island-drop-box w-14 h-14 rounded-full">
-          <div class="drop-logo w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-black text-xs mr-2 shrink-0">SV</div>
-          <span class="drop-text text-lg font-black tracking-tight opacity-0 pr-3 text-white">💻 My Coding Architecture</span>
-        </div>
+      <!-- Bottom Slide Controls (Stage 3: Prev + 1 to 8 Numbers + Next Slide) -->
+      <div id="proof-controls-wrapper" class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 relative z-40 opacity-0 translate-y-5">
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <button
+            id="proof-prev-btn"
+            type="button"
+            class="px-5 py-3.5 glass-panel rounded-2xl font-bold text-sm text-text-primary hover:border-cyan-400 flex items-center gap-2.5 click-shrink"
+            aria-label="Previous Project"
+          >
+            <i class="fa-solid fa-chevron-left text-cyan-400 text-xs"></i>
+            <span>Prev</span>
+          </button>
 
-        <div id="dev-tabs-column" class="lg:col-span-5 flex flex-col gap-3.5 z-20 tabs-column">
-          <button class="apple-tab-btn dev-tab" data-proj="dev4"><span class="font-bold text-cyan-500 dark:text-cyan-400">01 AI Content Creator Platform</span></button>
-          <button class="apple-tab-btn dev-tab" data-proj="dev1"><span class="font-bold text-cyan-500 dark:text-cyan-400">02 TypeMind Platform</span></button>
-          <button class="apple-tab-btn dev-tab" data-proj="dev2"><span class="font-bold text-cyan-500 dark:text-cyan-400">03 Live Bus Tracking System</span></button>
-          <button class="apple-tab-btn dev-tab" data-proj="dev3"><span class="font-bold text-cyan-500 dark:text-cyan-400">04 Gesture Controller Interface</span></button>
-        </div>
-
-        <div id="stage-column" class="lg:col-span-7 sticky top-28 z-10 min-h-[440px]">
-          <div id="dev-stage" class="w-full hidden">
-            <!-- Injected by JS -->
+          <!-- Numbered 1 to 8 Slide Selector Bar -->
+          <div id="proof-dots-container" class="flex items-center gap-1.5 px-3 py-2 glass-panel rounded-full" role="tablist" aria-label="Project slides 1 to 8">
+            <!-- Populated with 1..8 buttons by JS -->
           </div>
-        </div>
 
-      </div>
-    </section>
-
-    <!-- Tools -->
-    <section id="dev-tools" data-section-name="TOOLS" class="max-w-7xl mx-auto px-6 py-24 border-t border-border/40">
-      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Tools I Know How To Use</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-text-secondary font-medium reveal-node">
-        <div class="spotlight-card glass-panel p-6 rounded-2xl border-t-4 border-blue-500">
-          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-code text-blue-500 mr-2"></i> VS Code</b> 
-          Writing, testing, debugging, and managing code across projects.
-        </div>
-        <div class="spotlight-card glass-panel p-6 rounded-2xl border-t-4 border-indigo-500">
-          <b class="text-text-primary text-xl block mb-2"><i class="fa-brands fa-git-alt text-indigo-500 mr-2"></i> Git / GitHub</b> 
-          Tracking code changes, managing versions, and hosting repositories.
-        </div>
-        <div class="spotlight-card glass-panel p-6 rounded-2xl border-t-4 border-purple-500">
-          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-microchip text-purple-500 mr-2"></i> Google AI Studio</b> 
-          Experimenting with AI models, testing prompts, and AI APIs.
-        </div>
-        <div class="spotlight-card glass-panel p-6 rounded-2xl border-t-4 border-teal-500">
-          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-robot text-teal-500 mr-2"></i> ChatGPT / Gemini</b> 
-          Research, technical exploration, brainstorming, and debugging.
-        </div>
-        <div class="spotlight-card glass-panel p-6 rounded-2xl border-t-4 border-cyan-500 md:col-span-2">
-          <b class="text-text-primary text-xl block mb-2"><i class="fa-solid fa-wand-magic-sparkles text-cyan-500 mr-2"></i> GitHub Copilot / Antigravity</b> 
-          AI-assisted development and accelerating the development workflow.
+          <button
+            id="proof-next-btn"
+            type="button"
+            class="px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-2xl font-bold text-sm shadow-[0_8px_25px_-6px_rgba(6,182,212,0.65)] border border-white/20 flex items-center gap-2.5 click-shrink"
+            aria-label="Next Project"
+          >
+            <span>Next Slide</span>
+            <i class="fa-solid fa-chevron-right text-xs"></i>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- Vision -->
-    <section id="dev-vision" data-section-name="VISION" class="max-w-7xl mx-auto px-6 py-24 border-t border-border/40">
-      <h2 class="text-5xl font-black mb-12 reveal-node text-center">Future Vision</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-node">
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold"><i class="fa-brands fa-python text-xl"></i></div>
-          <p class="text-lg font-bold text-text-primary">Strengthen Python & DSA Foundation</p>
-        </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold"><i class="fa-solid fa-layer-group text-xl"></i></div>
-          <p class="text-lg font-bold text-text-primary">Master Software Engineering</p>
-        </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold"><i class="fa-solid fa-brain text-xl"></i></div>
-          <p class="text-lg font-bold text-text-primary">Learn Machine Learning</p>
-        </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold"><i class="fa-solid fa-network-wired text-xl"></i></div>
-          <p class="text-lg font-bold text-text-primary">Explore Deep Learning & AI Systems</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Block -->
+    <!-- ========================================================= -->
+    <!-- CONTACT BLOCK                                             -->
+    <!-- ========================================================= -->
     <section id="contact" data-section-name="CONTACT" class="py-24 sm:py-32 relative z-10 border-t border-border/50">
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16 reveal-node">
@@ -792,8 +926,438 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // =========================================================
-      // 1. IRON MAN MARK 85 ARC REACTOR THEME TOGGLE ANIMATION
+      // 0. STAGED HERO INTRO ANIMATION (VIDEO-STYLE TYPING -> REVEAL)
+      // =========================================================
+      const typedNameEl = document.getElementById('hero-typed-name');
+      const typingCursorEl = document.getElementById('hero-typing-cursor');
+      const heroSubtitleEl = document.getElementById('hero-subtitle');
+      const heroActionsEl = document.getElementById('hero-actions');
+      const navWrapperEl = document.getElementById('nav-wrapper');
+      const stitchBgEl = document.getElementById('stitch-bg-container');
+      const stitchDotsEl = document.getElementById('stitch-dot-grid');
+
+      const fullNameText = "SHREYASH VERMA";
+
+      function runStagedHeroIntro() {
+        if (prefersReducedMotion) {
+          typedNameEl.textContent = fullNameText;
+          typingCursorEl.classList.add('cursor-done');
+          document.body.classList.remove('intro-blackout');
+          gsap.set([heroSubtitleEl, heroActionsEl, stitchDotsEl, stitchBgEl, navWrapperEl], { opacity: 1, y: 0, filter: "blur(0px)" });
+          return;
+        }
+
+        let charIndex = 0;
+
+        setTimeout(() => {
+          const typeTimer = setInterval(() => {
+            charIndex++;
+            typedNameEl.textContent = fullNameText.slice(0, charIndex);
+
+            if (charIndex >= fullNameText.length) {
+              clearInterval(typeTimer);
+
+              setTimeout(() => {
+                typingCursorEl.classList.add('cursor-done');
+
+                const introTl = gsap.timeline({
+                  defaults: { ease: "power3.out" }
+                });
+
+                introTl
+                  .fromTo(
+                    heroSubtitleEl,
+                    { opacity: 0, y: 22, filter: "blur(10px)" },
+                    { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.75 }
+                  )
+                  .fromTo(
+                    heroActionsEl,
+                    { opacity: 0, y: 22, filter: "blur(10px)" },
+                    { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.75 },
+                    "+=0.15"
+                  )
+                  .add(() => {
+                    document.body.classList.remove('intro-blackout');
+                  }, "+=0.1")
+                  .to(
+                    [stitchDotsEl, stitchBgEl],
+                    { opacity: 1, duration: 1.35, ease: "power2.inOut" },
+                    "<"
+                  )
+                  .to(
+                    navWrapperEl,
+                    { opacity: 1, y: 0, duration: 0.95, ease: "expo.out" },
+                    "-=0.95"
+                  );
+              }, 280);
+            }
+          }, 72);
+        }, 350);
+      }
+
+      runStagedHeroIntro();
+
+
+      // =========================================================
+      // 1. 3D COVER FLOW PROJECT CAROUSEL + STAGED SCROLL REVEAL
+      // =========================================================
+      const proofItems = [
+        {
+          badge: "01 / 08",
+          category: "AI Content Creator Platform",
+          title: "01. Project One",
+          desc: "A practical project built to solve a real-world problem, showcasing my technical skills, implementation approach, and ability to turn ideas into working software.",
+          linkText: "Explore Project One",
+          linkUrl: "https://github.com/Shreyash-Verma16",
+          caption: "project_01_ai_creator.png",
+          photo: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+          badge: "02 / 08",
+          category: "TypeMind Spark Platform",
+          title: "02. Project Two",
+          desc: "A software project focused on practical functionality, clean implementation, and solving challenges through structured problem-solving and development.",
+          linkText: "Launch TypeMind",
+          linkUrl: "https://shreyash-verma16.github.io/Type-Mind-/",
+          caption: "project_02_typemind.png",
+          photo: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+          badge: "03 / 08",
+          category: "Live Bus Tracking System",
+          title: "03. Project Three",
+          desc: "A project demonstrating my ability to work with relevant technologies, handle technical challenges, and build a functional solution from concept to implementation.",
+          linkText: "Explore Project Three",
+          linkUrl: "https://github.com/Shreyash-Verma16",
+          caption: "project_03_transit_tracker.png",
+          photo: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+          badge: "04 / 08",
+          category: "Gesture Controller Interface",
+          title: "04. Project Four",
+          desc: "An application highlighting my development experience, technical decision-making, and ability to create reliable and useful software.",
+          linkText: "Explore Project Four",
+          linkUrl: "https://github.com/Shreyash-Verma16",
+          caption: "project_04_gesture_cv.png",
+          photo: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+          badge: "05 / 08",
+          category: "500+ Algorithmic & Topic Solutions",
+          title: "05. Python Problem Solving",
+          desc: "A structured collection of 500+ Python practice problems covering fundamental concepts and topic-wise solutions, demonstrating consistent coding practice and understanding of Python.",
+          linkText: "View Python Repository",
+          linkUrl: "https://github.com/Shreyash-Verma16",
+          caption: "python_500_problems.png",
+          photo: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+          badge: "06 / 08",
+          category: "Data Structures & Algorithms",
+          title: "06. LeetCode",
+          desc: "My LeetCode profile showcasing my progress in algorithmic problem-solving, data structures, and writing efficient solutions to coding challenges.",
+          linkText: "View LeetCode Profile",
+          linkUrl: "https://leetcode.com/",
+          caption: "leetcode_profile.png",
+          photo: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+          badge: "07 / 08",
+          category: "Verified Programming Challenges",
+          title: "07. HackerRank",
+          desc: "My HackerRank profile highlighting coding practice, technical problem-solving, and verified achievements across relevant programming challenges.",
+          linkText: "View HackerRank Profile",
+          linkUrl: "https://www.hackerrank.com/",
+          caption: "hackerrank_badges.png",
+          photo: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1000&q=80"
+        },
+        {
+          badge: "08 / 08",
+          category: "Verified Credentials & Milestones",
+          title: "08. Certifications",
+          desc: "A collection of relevant technical certifications demonstrating completed learning, acquired knowledge, and continued development of my technical skills.",
+          linkText: "View Certifications",
+          linkUrl: "https://www.linkedin.com/in/shreyash-verma-9b791b400",
+          caption: "technical_certifications.png",
+          photo: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80"
+        }
+      ];
+
+      const projSectionEl = document.getElementById('dev-projects');
+      const proofHeaderBlock = document.getElementById('proof-header-block');
+      const proofControlsWrapper = document.getElementById('proof-controls-wrapper');
+      const stageContainer = document.getElementById('proof-coverflow-stage');
+      const dotsContainer = document.getElementById('proof-dots-container');
+      const totalItems = proofItems.length;
+      let activeIndex = 0;
+
+      proofItems.forEach((item) => {
+        const preloadImg = new Image();
+        preloadImg.src = item.photo;
+        if (preloadImg.decode) {
+          preloadImg.decode().catch(() => {});
+        }
+      });
+
+      function getCircularOffset(cardIdx, centerIdx) {
+        let diff = (cardIdx - centerIdx) % totalItems;
+        if (diff < 0) diff += totalItems;
+        if (diff > totalItems / 2) diff -= totalItems;
+        return diff;
+      }
+
+      function mapOffsetToSlot(diff) {
+        if (diff === 0) return "0";
+        if (diff === -1) return "-1";
+        if (diff === 1) return "1";
+        if (diff === -2) return "-2";
+        if (diff === 2) return "2";
+        return "hidden";
+      }
+
+      const cardElements = proofItems.map((item, idx) => {
+        const article = document.createElement('article');
+        article.className = 'coverflow-card p-6 sm:p-9 lg:p-11';
+        article.setAttribute('data-index', idx);
+        article.setAttribute('role', 'group');
+        article.setAttribute('aria-roledescription', 'slide');
+        article.setAttribute('aria-label', `${idx + 1} of ${totalItems}: ${item.title}`);
+
+        article.innerHTML = `
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-9 items-center">
+            
+            <!-- LEFT COLUMN: Topic Name, Description, Action Button -->
+            <div class="lg:col-span-6 flex flex-col justify-between space-y-5 text-left">
+              <div class="space-y-3.5">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span class="px-3.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/40 text-cyan-500 dark:text-cyan-400 font-mono font-bold text-xs tracking-wider">
+                    ${item.badge}
+                  </span>
+                  <span class="text-xs font-mono uppercase tracking-widest text-text-muted font-semibold">
+                    ${item.category}
+                  </span>
+                </div>
+
+                <h3 class="text-3xl sm:text-4xl lg:text-[2.35rem] font-black tracking-tight text-text-primary leading-tight">
+                  ${item.title}
+                </h3>
+
+                <p class="text-text-secondary text-sm sm:text-base lg:text-[1.05rem] leading-relaxed font-medium pt-0.5">
+                  ${item.desc}
+                </p>
+              </div>
+
+              <!-- Button with Link -->
+              <div class="pt-3 flex flex-wrap items-center gap-4">
+                <a href="${item.linkUrl}" target="_blank" rel="noopener noreferrer" class="proof-cta-btn inline-flex items-center gap-3 px-7 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm rounded-2xl shadow-[0_10px_28px_-8px_rgba(6,182,212,0.65)] border border-white/20 click-shrink">
+                  <span>${item.linkText}</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- CENTER VERTICAL DIVIDER (Desktop) -->
+            <div class="hidden lg:flex lg:col-span-1 justify-center self-stretch">
+              <div class="proof-divider w-[1.5px] h-full rounded-full"></div>
+            </div>
+
+            <!-- RIGHT COLUMN: Project Photo Showcase -->
+            <div class="lg:col-span-5">
+              <div class="proof-photo-frame rounded-2xl aspect-[16/11] w-full flex flex-col justify-between group">
+                <!-- Top Window Bar -->
+                <div class="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 border-b border-white/10 z-10">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/85"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400/85"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/85"></span>
+                  </div>
+                  <span class="text-[11px] font-mono text-slate-300 truncate max-w-[180px]">
+                    ${item.caption}
+                  </span>
+                  <i class="fa-solid fa-expand text-[11px] text-slate-400"></i>
+                </div>
+
+                <!-- Image Container with explicit width/height -->
+                <div class="relative flex-1 w-full h-full overflow-hidden bg-slate-950">
+                  <img
+                    src="${item.photo}"
+                    alt="${item.title} preview"
+                    width="800"
+                    height="550"
+                    loading="eager"
+                    decoding="async"
+                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        `;
+
+        article.addEventListener('click', (e) => {
+          const currentSlot = article.getAttribute('data-offset');
+          if (currentSlot === "-1") {
+            e.preventDefault();
+            goToSlide((activeIndex - 1 + totalItems) % totalItems);
+          } else if (currentSlot === "1") {
+            e.preventDefault();
+            goToSlide((activeIndex + 1) % totalItems);
+          }
+        });
+
+        stageContainer.appendChild(article);
+        return article;
+      });
+
+      const dotElements = proofItems.map((_, idx) => {
+        const numBtn = document.createElement('button');
+        numBtn.type = 'button';
+        numBtn.setAttribute('role', 'tab');
+        numBtn.setAttribute('aria-label', `Go to project ${idx + 1}`);
+        numBtn.textContent = String(idx + 1);
+        numBtn.className = 'proof-num-btn opacity-0 translate-y-2';
+        numBtn.addEventListener('click', () => {
+          if (idx !== activeIndex) {
+            goToSlide(idx);
+          }
+        });
+        dotsContainer.appendChild(numBtn);
+        return numBtn;
+      });
+
+      function updateCarouselPositions(newIndex, isInitial = false) {
+        activeIndex = newIndex;
+
+        cardElements.forEach((card, idx) => {
+          const prevSlot = card.getAttribute('data-offset');
+          const diff = getCircularOffset(idx, activeIndex);
+          const nextSlot = mapOffsetToSlot(diff);
+
+          const wasVisible = prevSlot === "0" || prevSlot === "-1" || prevSlot === "1";
+          const willBeVisible = nextSlot === "0" || nextSlot === "-1" || nextSlot === "1";
+
+          if (isInitial || (!wasVisible && !willBeVisible)) {
+            card.classList.add('no-transition');
+            card.setAttribute('data-offset', nextSlot);
+            void card.offsetWidth;
+            card.classList.remove('no-transition');
+          } else {
+            card.setAttribute('data-offset', nextSlot);
+          }
+
+          const isActive = nextSlot === "0";
+          card.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+          const ctaLink = card.querySelector('.proof-cta-btn');
+          if (ctaLink) {
+            ctaLink.tabIndex = isActive ? 0 : -1;
+          }
+        });
+
+        dotElements.forEach((btn, i) => {
+          const isCurrent = i === activeIndex;
+          btn.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+          btn.classList.toggle('is-active', isCurrent);
+        });
+      }
+
+      let lastNavTimestamp = 0;
+      const MIN_NAV_INTERVAL_MS = 110;
+
+      function goToSlide(targetIdx) {
+        const now = performance.now();
+        if (now - lastNavTimestamp < MIN_NAV_INTERVAL_MS) return;
+        lastNavTimestamp = now;
+        updateCarouselPositions(targetIdx, false);
+      }
+
+      updateCarouselPositions(0, true);
+
+      let proofIntroPlayed = false;
+
+      function runProofOfWorkStagedReveal() {
+        if (proofIntroPlayed) return;
+        proofIntroPlayed = true;
+
+        if (prefersReducedMotion) {
+          projSectionEl.classList.remove('proof-pre-intro', 'proof-stage-center-only');
+          gsap.set([proofHeaderBlock, proofControlsWrapper, dotElements], { opacity: 1, y: 0 });
+          return;
+        }
+
+        gsap.to(proofHeaderBlock, {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: "power3.out"
+        });
+
+        setTimeout(() => {
+          projSectionEl.classList.add('proof-stage-center-only');
+          projSectionEl.classList.remove('proof-pre-intro');
+
+          setTimeout(() => {
+            projSectionEl.classList.remove('proof-stage-center-only');
+
+            setTimeout(() => {
+              gsap.to(proofControlsWrapper, {
+                opacity: 1,
+                y: 0,
+                duration: 0.55,
+                ease: "power3.out"
+              });
+              gsap.to(dotElements, {
+                opacity: 1,
+                y: 0,
+                duration: 0.42,
+                stagger: 0.055,
+                ease: "back.out(1.4)"
+              });
+            }, 520);
+
+          }, 560);
+
+        }, 120);
+      }
+
+      new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runProofOfWorkStagedReveal();
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.22 }).observe(projSectionEl);
+
+      document.getElementById('proof-next-btn').addEventListener('click', () => {
+        goToSlide((activeIndex + 1) % totalItems);
+      });
+
+      document.getElementById('proof-prev-btn').addEventListener('click', () => {
+        goToSlide((activeIndex - 1 + totalItems) % totalItems);
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        const rect = projSectionEl.getBoundingClientRect();
+        const isInViewport = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
+        if (!isInViewport) return;
+
+        if (e.key === 'ArrowRight') {
+          goToSlide((activeIndex + 1) % totalItems);
+        } else if (e.key === 'ArrowLeft') {
+          goToSlide((activeIndex - 1 + totalItems) % totalItems);
+        }
+      });
+
+
+      // =========================================================
+      // 2. IRON MAN MARK 85 ARC REACTOR THEME TOGGLE ANIMATION
       // =========================================================
       const themeToggleBtn = document.getElementById('theme-toggle-btn');
       const themeIcon = document.getElementById('theme-icon');
@@ -934,8 +1498,7 @@
 
 
       // =========================================================
-      // 2. DEVELOPER-EDITION STITCH LOWER-CRADLE SILK ANIMATION
-      //    (Strictly Below Red Boundary Line + 15s ON / 5s OFF)
+      // 3. DEVELOPER-EDITION STITCH LOWER-CRADLE SILK ANIMATION
       // =========================================================
       const canvas = document.getElementById('stitch-silk-canvas');
       const canvasWrapper = document.getElementById('stitch-canvas-wrapper');
@@ -962,7 +1525,6 @@
         return height * (centerFloor - edgeRise);
       }
 
-      // Developer Cyan / Electric Blue / Indigo Silk Strand Palette
       function getDevStitchStrandColor(sRatio, alpha, darkTheme) {
         let r, g, b;
         if (darkTheme) {
@@ -1008,7 +1570,6 @@
         ctx.clearRect(0, 0, width, height);
         ctx.save();
 
-        // Strictly clip to the lower cradle region below the hero text & buttons
         ctx.beginPath();
         const clipSteps = 60;
         for (let i = 0; i <= clipSteps; i++) {
@@ -1079,7 +1640,6 @@
       }
       requestAnimationFrame(renderLowerCradleStitch);
 
-      // 15 Seconds Active -> Smooth Disappear -> 5 Seconds Off Loop
       function start15sOn5sOffCycle() {
         const activeDuration = 15000;
         const disappearDuration = 5000;
@@ -1097,7 +1657,7 @@
 
 
       // =========================================================
-      // 3. STRICT 2-STATE LERP DYNAMIC ISLAND (ADHERENT <-> ISLAND, 8s TIMEOUT)
+      // 4. STRICT 2-STATE LERP DYNAMIC ISLAND (ADHERENT <-> ISLAND)
       // =========================================================
       const navEl = document.getElementById('dynamic-nav');
       const linksContainer = document.getElementById('island-links-container');
@@ -1245,123 +1805,7 @@
 
 
       // =========================================================
-      // 4. IPHONE HERO SLIDESHOW
-      // =========================================================
-      const phoneSlideshows = document.querySelectorAll('.phone-slideshow');
-      phoneSlideshows.forEach(slideshow => {
-        const images = slideshow.querySelectorAll('.slideshow-img');
-        if (images.length === 0) return;
-        let currentIndex = 0;
-        setInterval(() => {
-          images[currentIndex].classList.remove('active');
-          currentIndex = (currentIndex + 1) % images.length;
-          images[currentIndex].classList.add('active');
-        }, 4000); 
-      });
-
-
-      // =========================================================
-      // 5. APPLE DROP ANIMATION & ACCORDION FOR DEV PROJECTS
-      // =========================================================
-      function runDropAnimation() {
-        const dropBox = document.getElementById('dev-drop-box');
-        const dropText = dropBox.querySelector('.drop-text');
-        const tabsColumn = document.getElementById('dev-tabs-column');
-        const tabBtns = tabsColumn.querySelectorAll('.apple-tab-btn');
-        const stage = document.getElementById('dev-stage');
-        
-        const islandRect = navEl.getBoundingClientRect();
-        const parentRect = dropBox.parentElement.getBoundingClientRect();
-        const startY = islandRect.top - parentRect.top + (islandRect.height / 2) - 20;
-
-        gsap.set(dropBox, { xPercent: -50, y: startY, scale: 0.1, opacity: 0, width: "40px", height: "40px", borderRadius: "99px" });
-        gsap.set(stage, { opacity: 0, scale: 0.95 });
-
-        const tl = gsap.timeline();
-
-        tl.to(navEl, { boxShadow: "0 0 80px rgba(6, 182, 212, 0.95), inset 0 0 20px rgba(6, 182, 212, 0.7)", borderColor: "rgba(6, 182, 212, 1)", duration: 0.65, ease: "power2.out" })
-          .to(dropBox, { y: 70, scale: 1, opacity: 1, width: "56px", height: "56px", duration: 1.0, ease: "back.out(1.2)" }, "-=0.2")
-          .to(navEl, { boxShadow: "", borderColor: "", duration: 0.7, ease: "power2.inOut" }, "-=0.7")
-          .to(dropBox, { width: "370px", borderRadius: "24px", duration: 0.75, ease: "power3.inOut" }, "+=0.2")
-          .to(dropText, { opacity: 1, duration: 0.4, onComplete: () => { dropText.classList.add('apple-siri-shimmer'); } }, "-=0.25")
-          .to(dropBox, { y: 110, opacity: 0, scale: 0.9, filter: "blur(8px)", duration: 0.65, ease: "power2.in", onComplete: () => { dropBox.style.display = 'none'; } }, "+=1.1")
-          .fromTo(tabBtns, { x: -50, opacity: 0, scale: 0.95, filter: "blur(4px)" }, { x: 0, opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.65, stagger: 0.12, ease: "back.out(1.2)", onStart: () => { tabsColumn.style.opacity = "1"; tabsColumn.style.pointerEvents = "auto"; } }, "-=0.25")
-          .add(() => { document.querySelector('.dev-tab[data-proj="dev4"]').click(); }, "-=0.15");
-      }
-
-      let devDropPlayed = false;
-      new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting && !devDropPlayed) { devDropPlayed = true; runDropAnimation(); } });
-      }, { threshold: 0.25 }).observe(document.getElementById('dev-projects'));
-
-      const devProjData = {
-        "dev4": { 
-          icon: "fa-clapperboard",
-          title: "AI Content Creator Platform", 
-          desc: "A powerful web-based ecosystem that unifies social media publishing. Connect accounts once, upload a single short video, and let the AI analyze speech, visuals, tone, and context.<br><br>Generates platform-specific content like Instagram captions, YouTube Shorts metadata, and Facebook posts—all from one dashboard.",
-          webUrl: "#", repoUrl: "#"
-        },
-        "dev1": { 
-          icon: "fa-keyboard",
-          title: "TypeMind Platform", 
-          desc: "An intelligent communication interface designed to analyze typing ergonomics, speed (WPM), and cognitive reaction times. Built with custom algorithms that adapt text difficulty in real-time.",
-          webUrl: "https://shreyash-verma16.github.io/Type-Mind-/", repoUrl: "https://github.com/Shreyash-Verma16/Type-Mind-"
-        },
-        "dev2": { 
-          icon: "fa-bus-transit",
-          title: "Live Bus Tracking System", 
-          desc: "A real-time transit tracking system that bridges GPS coordinates with a responsive map interface. Provides commuters with accurate ETAs and route optimization using live websocket data streams.",
-          webUrl: "#", repoUrl: "#"
-        },
-        "dev3": { 
-          icon: "fa-hand-sparkles",
-          title: "Gesture Controller", 
-          desc: "A computer vision application utilizing OpenCV and MediaPipe to translate hand gestures into system-level commands. Controls media playback, presentation slides, and volume touchlessly.",
-          webUrl: "#", repoUrl: "#"
-        }
-      };
-
-      document.querySelectorAll('.dev-tab').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.dev-tab').forEach(b => {
-            b.classList.remove('is-bulky');
-            b.querySelector('span').className = 'font-bold text-cyan-500 dark:text-cyan-400';
-          });
-          btn.classList.add('is-bulky');
-          btn.querySelector('span').className = 'font-bold text-slate-900 dark:text-white';
-          const d = devProjData[btn.getAttribute('data-proj')];
-          
-          const stageWrapper = document.getElementById('dev-stage');
-          if (d) {
-            stageWrapper.innerHTML = `
-              <div class="spotlight-card glass-panel p-8 sm:p-12 rounded-3xl border border-cyan-500/40 shadow-[0_0_50px_rgba(6,182,212,0.18)] flex flex-col justify-between min-h-[440px] text-left">
-                <div class="relative z-10">
-                  <div class="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-500/40 text-cyan-500 dark:text-cyan-400 flex items-center justify-center font-bold mb-8 shadow-[0_0_25px_rgba(6,182,212,0.25)]">
-                    <i class="fa-solid ${d.icon} text-2xl"></i>
-                  </div>
-                  <h3 class="text-3xl sm:text-4xl font-extrabold text-text-primary mt-2 mb-4">${d.title}</h3>
-                  <p class="text-text-secondary text-base sm:text-lg leading-relaxed font-medium">${d.desc}</p>
-                </div>
-                <div class="mt-8 pt-6 border-t border-border flex flex-wrap items-center justify-between w-full gap-4 relative z-10">
-                  <a href="${d.webUrl}" target="_blank" class="px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:shadow-[0_0_20px_var(--glow-shadow)] flex items-center gap-2 click-shrink">
-                    <i class="fa-solid fa-globe text-sm"></i> Visit Website
-                  </a>
-                  <a href="${d.repoUrl}" target="_blank" class="px-6 py-3.5 glass-panel text-text-primary hover:text-accent font-bold text-xs uppercase tracking-wider rounded-xl border border-border flex items-center gap-2 click-shrink">
-                    <i class="fa-brands fa-github text-sm"></i> GitHub Repository
-                  </a>
-                </div>
-              </div>
-            `;
-            
-            stageWrapper.style.display = 'block';
-            gsap.fromTo(stageWrapper, { x: -120, scale: 0.85, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.25)" });
-          }
-        });
-      });
-
-
-      // =========================================================
-      // 6. GROUPED DOCUMENT TOAST LOGIC (RESUME & MARKSHEET)
+      // 5. GROUPED DOCUMENT TOAST LOGIC (RESUME & MARKSHEET)
       // =========================================================
       let toastTriggered = false;
       let toastAnimFrame = null;
@@ -1411,7 +1855,7 @@
 
 
       // =========================================================
-      // 7. REVEAL EFFECTS, SPOTLIGHT TRACKING & SOCIAL REDIRECT
+      // 6. REVEAL EFFECTS, SPOTLIGHT TRACKING & SOCIAL REDIRECT
       // =========================================================
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(e => {
@@ -1429,9 +1873,11 @@
           isMouseMoving = true;
           window.requestAnimationFrame(() => {
             const card = e.target.closest('.spotlight-card');
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            if (card) {
+              const rect = card.getBoundingClientRect();
+              card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+              card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            }
             isMouseMoving = false;
           });
         }
