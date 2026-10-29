@@ -373,5 +373,20 @@
       "uploads": 6,
       "engagement": 187
     }
+  },
+  {
+    "date": "29 Oct",
+    "youtube": {
+      "subscribers": 144,
+      "views": 157846,
+      "uploads": 104,
+      "engagement": 4050
+    },
+    "instagram": {
+      "followers": 185,
+      "views": 2548,
+      "uploads": 6,
+      "engagement": 188
+    }
   }
 ]
