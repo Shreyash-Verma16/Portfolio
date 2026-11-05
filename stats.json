@@ -1,20 +1,5 @@
 [
   {
-    "date": "06 Oct",
-    "youtube": {
-      "subscribers": 141,
-      "views": 154000,
-      "uploads": 99,
-      "engagement": 3890
-    },
-    "instagram": {
-      "followers": 181,
-      "views": 1275000,
-      "uploads": 27,
-      "engagement": 190200
-    }
-  },
-  {
     "date": "07 Oct",
     "youtube": {
       "subscribers": 142,
@@ -447,6 +432,21 @@
       "views": 3136,
       "uploads": 6,
       "engagement": 230
+    }
+  },
+  {
+    "date": "05 Nov",
+    "youtube": {
+      "subscribers": 144,
+      "views": 157846,
+      "uploads": 104,
+      "engagement": 4050
+    },
+    "instagram": {
+      "followers": 185,
+      "views": 3122,
+      "uploads": 6,
+      "engagement": 228
     }
   }
 ]
