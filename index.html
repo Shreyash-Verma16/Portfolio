@@ -5,15 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shreyash Verma — Tech Creator & Developer</title>
   <meta name="description" content="Shreyash Verma — Solo Tech Content Creator. Cinematic technology visualizations, AI/ML learner, and software developer." />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        var isDark = saved ? saved === 'dark' : true;
+        document.documentElement.classList.toggle('dark', isDark);
+        var meta = document.querySelector('meta[name="color-scheme"]');
+        if (meta) meta.content = isDark ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   
-  <!-- Tailwind CSS & GSAP Animation Engine -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -40,6 +51,7 @@
 
   <style>
     :root {
+      color-scheme: light;
       --background: #f3f6fc;
       --surface: rgba(255, 255, 255, 0.78);
       --border: rgba(203, 213, 225, 0.85);
@@ -53,6 +65,7 @@
     }
 
     .dark {
+      color-scheme: dark;
       --background: #020617;
       --surface: rgba(15, 23, 42, 0.72);
       --border: rgba(255, 255, 255, 0.12);
@@ -207,10 +220,18 @@
       align-items: center;
       cursor: pointer;
       position: relative;
+      text-decoration: none;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .holo-item:hover { transform: scale(1.05) translateY(-10px); }
+    .holo-item:hover,
+    .holo-item:focus-visible { transform: scale(1.05) translateY(-10px); outline: none; }
+
+    .holo-item:focus-visible .holo-label {
+      color: #fff;
+      border-color: rgb(var(--holo-rgb));
+      box-shadow: 0 0 0 3px rgba(var(--holo-rgb), 0.35);
+    }
 
     .holo-photo {
       width: 140px; height: 140px;
@@ -308,51 +329,53 @@
   </div>
 
   <!-- ── 3D HOLOGRAPHIC LAB GATEWAY ── -->
-  <div id="holo-gateway" class="fixed inset-0 z-[99990] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-700 ease-out">
-    <div class="flex flex-wrap justify-center gap-12 lg:gap-24 w-full px-4">
-      
-      <!-- DEVELOPER PEDESTAL -> developer.html -->
-      <div class="holo-item" onclick="location.href='devloper.html'" style="--holo-rgb: 34, 211, 238;">
-        <div class="holo-photo"><img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" alt="Developer Photo"></div>
-        <div class="holo-beam"></div>
-        <div class="holo-base-container">
-          <div class="holo-base-bottom"></div>
-          <div class="holo-base-middle"></div>
-          <div class="holo-base-top"><div class="holo-base-core"></div></div>
-        </div>
-        <div class="holo-label"><i class="fa-solid fa-microchip text-cyan-400"></i> DEVELOPER</div>
+  <div id="holo-gateway" class="fixed inset-0 z-[99990] overflow-y-auto overscroll-contain opacity-0 pointer-events-none transition-all duration-700 ease-out">
+    <div class="min-h-full w-full flex flex-col items-center justify-center py-12 px-4 gap-10 sm:gap-14">
+      <div class="flex flex-wrap justify-center gap-10 sm:gap-12 lg:gap-24 w-full max-w-6xl">
+        
+        <!-- DEVELOPER PEDESTAL -> developer.html -->
+        <a href="developer.html" class="holo-item" style="--holo-rgb: 34, 211, 238;" aria-label="Enter Developer Portfolio">
+          <div class="holo-photo"><img src="https://i.ibb.co/5XStLzHW/Chat-GPT-Image-Jul-30-2026-07-14-35-PM.png" alt="Developer Photo"></div>
+          <div class="holo-beam"></div>
+          <div class="holo-base-container">
+            <div class="holo-base-bottom"></div>
+            <div class="holo-base-middle"></div>
+            <div class="holo-base-top"><div class="holo-base-core"></div></div>
+          </div>
+          <div class="holo-label"><i class="fa-solid fa-microchip text-cyan-400"></i> DEVELOPER</div>
+        </a>
+
+        <!-- CREATOR PEDESTAL -> creator.html -->
+        <a href="creator.html" class="holo-item" style="--holo-rgb: 192, 132, 252;" aria-label="Enter Creator Portfolio">
+          <div class="holo-photo" style="animation-delay: -1s;"><img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Creator Photo"></div>
+          <div class="holo-beam"></div>
+          <div class="holo-base-container">
+            <div class="holo-base-bottom"></div>
+            <div class="holo-base-middle"></div>
+            <div class="holo-base-top"><div class="holo-base-core"></div></div>
+          </div>
+          <div class="holo-label"><i class="fa-solid fa-clapperboard text-purple-400"></i> CREATOR</div>
+        </a>
+
+        <!-- PERSON PEDESTAL -> person.html -->
+        <a href="person.html" class="holo-item" style="--holo-rgb: 52, 211, 153;" aria-label="Enter Person Portfolio">
+          <div class="holo-photo" style="animation-delay: -2s;"><img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Person Photo"></div>
+          <div class="holo-beam"></div>
+          <div class="holo-base-container">
+            <div class="holo-base-bottom"></div>
+            <div class="holo-base-middle"></div>
+            <div class="holo-base-top"><div class="holo-base-core"></div></div>
+          </div>
+          <div class="holo-label"><i class="fa-solid fa-id-badge text-emerald-400"></i> PERSON</div>
+        </a>
+
       </div>
 
-      <!-- CREATOR PEDESTAL -> creator.html -->
-      <div class="holo-item" onclick="location.href='creator.html'" style="--holo-rgb: 192, 132, 252;">
-        <div class="holo-photo" style="animation-delay: -1s;"><img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Creator Photo"></div>
-        <div class="holo-beam"></div>
-        <div class="holo-base-container">
-          <div class="holo-base-bottom"></div>
-          <div class="holo-base-middle"></div>
-          <div class="holo-base-top"><div class="holo-base-core"></div></div>
-        </div>
-        <div class="holo-label"><i class="fa-solid fa-clapperboard text-purple-400"></i> CREATOR</div>
-      </div>
-
-      <!-- PERSON PEDESTAL -> person.html -->
-      <div class="holo-item" onclick="location.href='person.html'" style="--holo-rgb: 52, 211, 153;">
-        <div class="holo-photo" style="animation-delay: -2s;"><img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Person Photo"></div>
-        <div class="holo-beam"></div>
-        <div class="holo-base-container">
-          <div class="holo-base-bottom"></div>
-          <div class="holo-base-middle"></div>
-          <div class="holo-base-top"><div class="holo-base-core"></div></div>
-        </div>
-        <div class="holo-label"><i class="fa-solid fa-id-badge text-emerald-400"></i> PERSON</div>
-      </div>
-
+      <!-- Fallback / Bypass Option -->
+      <a href="developer.html" class="inline-flex items-center px-6 py-3 glass-panel text-white text-xs font-mono uppercase tracking-widest rounded-full hover:border-accent transition-all shrink-0">
+        Skip Gateway &amp; View Main Portfolio <i class="fa-solid fa-arrow-right ml-2"></i>
+      </a>
     </div>
-
-    <!-- Fallback / Bypass Option -->
-    <button onclick="location.href='all-in-one.html'" class="absolute bottom-10 px-6 py-3 glass-panel text-white text-xs font-mono uppercase tracking-widest rounded-full hover:border-accent transition-all">
-      Skip Gateway & View Main Portfolio <i class="fa-solid fa-arrow-right ml-2"></i>
-    </button>
   </div>
 
   <div class="bg-grid-pattern"></div>
@@ -363,6 +386,7 @@
       const splashFlex = document.getElementById('splash-flex');
       const splashLogoInner = document.getElementById('splash-logo-inner');
       const holoGateway = document.getElementById('holo-gateway');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let splashTimeouts = [];
 
       function closeSplashScreenImmediately() {
@@ -378,8 +402,26 @@
         setTimeout(() => { if (splashScreen.parentNode) splashScreen.remove(); }, 600);
       }
 
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'portfolio-theme' && e.newValue) {
+          const isDark = e.newValue === 'dark';
+          document.documentElement.classList.toggle('dark', isDark);
+          const meta = document.querySelector('meta[name="color-scheme"]');
+          if (meta) meta.content = isDark ? 'dark' : 'light';
+        }
+      });
+
       if (splashScreen && splashFlex) {
+        if (prefersReducedMotion) {
+          closeSplashScreenImmediately();
+          return;
+        }
         splashScreen.addEventListener('click', closeSplashScreenImmediately);
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+            closeSplashScreenImmediately();
+          }
+        }, { once: true });
         splashTimeouts.push(setTimeout(() => { if (splashLogoInner) splashLogoInner.style.transform = 'rotateY(180deg)'; }, 1400));
         splashTimeouts.push(setTimeout(() => { if (splashFlex) splashFlex.classList.add('expand'); }, 2400));
         splashTimeouts.push(setTimeout(() => { if (splashFlex) { splashFlex.classList.remove('expand'); splashFlex.classList.add('absorb'); } }, 4400)); 
