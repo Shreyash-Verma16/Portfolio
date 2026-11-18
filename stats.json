@@ -1,452 +1,962 @@
 [
   {
-    "date": "20 Oct",
+    "date": "2026-10-20",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 1918,
-      "uploads": 6,
-      "engagement": 139
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 139,
+        "estimatedFeedViewsLegacy": 1918,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "21 Oct",
+    "date": "2026-10-21",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2366,
-      "uploads": 6,
-      "engagement": 172
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 172,
+        "estimatedFeedViewsLegacy": 2366,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "22 Oct",
+    "date": "2026-10-22",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 1974,
-      "uploads": 6,
-      "engagement": 143
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 143,
+        "estimatedFeedViewsLegacy": 1974,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "23 Oct",
+    "date": "2026-10-23",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2128,
-      "uploads": 6,
-      "engagement": 154
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 154,
+        "estimatedFeedViewsLegacy": 2128,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "24 Oct",
+    "date": "2026-10-24",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2772,
-      "uploads": 6,
-      "engagement": 201
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 201,
+        "estimatedFeedViewsLegacy": 2772,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "25 Oct",
+    "date": "2026-10-25",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2786,
-      "uploads": 6,
-      "engagement": 203
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 203,
+        "estimatedFeedViewsLegacy": 2786,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "26 Oct",
+    "date": "2026-10-26",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2786,
-      "uploads": 6,
-      "engagement": 203
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 203,
+        "estimatedFeedViewsLegacy": 2786,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "27 Oct",
+    "date": "2026-10-27",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2562,
-      "uploads": 6,
-      "engagement": 187
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 187,
+        "estimatedFeedViewsLegacy": 2562,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "28 Oct",
+    "date": "2026-10-28",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2562,
-      "uploads": 6,
-      "engagement": 187
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 187,
+        "estimatedFeedViewsLegacy": 2562,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "29 Oct",
+    "date": "2026-10-29",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2548,
-      "uploads": 6,
-      "engagement": 188
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 188,
+        "estimatedFeedViewsLegacy": 2548,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "30 Oct",
+    "date": "2026-10-30",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 2604,
-      "uploads": 6,
-      "engagement": 191
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 191,
+        "estimatedFeedViewsLegacy": 2604,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "31 Oct",
+    "date": "2026-10-31",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3066,
-      "uploads": 6,
-      "engagement": 224
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 224,
+        "estimatedFeedViewsLegacy": 3066,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "01 Nov",
+    "date": "2026-11-01",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 230
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 230,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "02 Nov",
+    "date": "2026-11-02",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 230
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 230,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "03 Nov",
+    "date": "2026-11-03",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 230
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 230,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "04 Nov",
+    "date": "2026-11-04",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 230
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 230,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "05 Nov",
+    "date": "2026-11-05",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3122,
-      "uploads": 6,
-      "engagement": 228
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 228,
+        "estimatedFeedViewsLegacy": 3122,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "06 Nov",
+    "date": "2026-11-06",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "07 Nov",
+    "date": "2026-11-07",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "08 Nov",
+    "date": "2026-11-08",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "09 Nov",
+    "date": "2026-11-09",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "10 Nov",
+    "date": "2026-11-10",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "11 Nov",
+    "date": "2026-11-11",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "12 Nov",
+    "date": "2026-11-12",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "13 Nov",
+    "date": "2026-11-13",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "14 Nov",
+    "date": "2026-11-14",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "15 Nov",
+    "date": "2026-11-15",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "16 Nov",
+    "date": "2026-11-16",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "17 Nov",
+    "date": "2026-11-17",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   },
   {
-    "date": "18 Nov",
+    "date": "2026-11-18",
     "youtube": {
       "subscribers": 144,
       "views": 157846,
       "uploads": 104,
-      "engagement": 4050
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "legacy_snapshot"
     },
     "instagram": {
       "followers": 185,
-      "views": 3136,
-      "uploads": 6,
-      "engagement": 229
+      "views": null,
+      "uploads": null,
+      "engagement": null,
+      "scope": "recent_feed_snapshot",
+      "status": "legacy_snapshot",
+      "lifetime": {
+        "followers": 185,
+        "views": null,
+        "uploads": null,
+        "engagement": null
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "engagement": 229,
+        "estimatedFeedViewsLegacy": 3136,
+        "views": null,
+        "source": "behold_recent_feed"
+      }
     }
   }
 ]

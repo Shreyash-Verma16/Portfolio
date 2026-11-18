@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: daily-metrics-logger
+  cancel-in-progress: false
+
 jobs:
   track-and-commit:
     runs-on: ubuntu-latest
@@ -22,12 +26,18 @@ jobs:
 
       - name: Run Tracker Script
         env:
-          YT_KEY: ${{ secrets.YT_KEY || 'AIzaSyB7aAHA0NFJqfjELCvP-8mPGdMe5YVmcX4' }}
+          YT_KEY: ${{ secrets.YT_KEY }}
+          IG_FEED_URL: ${{ secrets.IG_FEED_URL }}
         run: node scripts/tracker.js
 
       - name: Commit & Push Changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update daily metrics" && git push)
+          if git diff --staged --quiet; then
+            echo "No changes to stats.json."
+          else
+            git commit -m "chore: auto-update daily metrics"
+            git push
+          fi
