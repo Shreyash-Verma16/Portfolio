@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shreyash Verma — Portfolio</title>
+  <title>Shreyash Verma — The Creator</title>
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        var isDark = saved ? saved === 'dark' : true;
+        document.documentElement.classList.toggle('dark', isDark);
+        var meta = document.querySelector('meta[name="color-scheme"]');
+        if (meta) meta.content = isDark ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,6 +53,7 @@
   <style>
     /* ── Clean Day / Night Architectural Palette ── */
     :root {
+      color-scheme: light;
       --background: #f8fafc;
       --surface: rgba(255, 255, 255, 0.84);
       --border: rgba(203, 213, 225, 0.85);
@@ -59,6 +72,7 @@
     }
 
     html.dark {
+      color-scheme: dark;
       --background: #03050a;
       --surface: rgba(12, 15, 26, 0.76);
       --border: rgba(255, 255, 255, 0.10);
@@ -275,6 +289,86 @@
     }
     ::view-transition-new(root) { z-index: 9999; }
     ::view-transition-old(root) { z-index: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-group(*),
+      ::view-transition-old(*),
+      ::view-transition-new(*) {
+        animation: none !important;
+      }
+    }
+
+    /* ── MOBILE NAVIGATION DRAWER (Native <dialog> + Scroll-Snap Swipe) ── */
+    .mobile-drawer {
+      --drawer-width: min(20rem, 84dvw, 100dvw - 24px);
+      --drawer-backdrop: 0;
+      inset: 0;
+      width: auto;
+      height: auto;
+      max-width: none;
+      max-height: none;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      overflow: visible;
+      color: var(--text-primary);
+    }
+    .mobile-drawer::backdrop {
+      background: rgba(2, 6, 23, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: var(--drawer-backdrop);
+    }
+    .mobile-drawer-scroller {
+      position: relative;
+      display: grid;
+      grid-template-columns: var(--drawer-width) 100%;
+      overflow-x: scroll;
+      overscroll-behavior: none;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+    }
+    .mobile-drawer-scroller::-webkit-scrollbar { display: none; }
+    @media (prefers-reduced-motion: no-preference) {
+      .mobile-drawer-scroller { scroll-behavior: smooth; }
+    }
+    .mobile-drawer-scroller::after {
+      content: '';
+      scroll-snap-align: end;
+      scroll-initial-target: nearest;
+    }
+    .mobile-drawer-sheet {
+      display: flex;
+      flex-direction: column;
+      height: 100svh;
+      background: var(--island-bg);
+      backdrop-filter: blur(42px) saturate(180%);
+      -webkit-backdrop-filter: blur(42px) saturate(180%);
+      border-right: 1px solid var(--nav-border);
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.75);
+      overflow-y: auto;
+      scroll-snap-align: start;
+      scrollbar-width: none;
+    }
+    @supports (animation-timeline: scroll()) {
+      .mobile-drawer {
+        timeline-scope: --drawer-fade;
+        animation: fade-drawer-backdrop linear both;
+        animation-timeline: --drawer-fade;
+      }
+      .mobile-drawer-scroller {
+        scroll-timeline: --drawer-fade x;
+      }
+      @property --drawer-backdrop {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+      @keyframes fade-drawer-backdrop {
+        0% { --drawer-backdrop: 1; }
+        100% { --drawer-backdrop: 0; }
+      }
+    }
 
     /* ── Glass Panels & Spotlight Hover Cards ── */
     .glass-panel {
@@ -548,20 +642,79 @@
           <a href="#contact" class="nav-link" data-section="contact">Contact</a>
         </div>
 
-        <!-- Right Actions: Mark 85 Arc Reactor Theme Toggle + Collab -->
+        <!-- Right Actions: Gateway Link + Mark 85 Arc Reactor Theme Toggle + Collab + Mobile Menu -->
         <div class="flex items-center gap-2.5 shrink-0">
-          <button id="theme-toggle-btn" class="w-9 h-9 rounded-full bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300 dark:border-cyan-400/40 flex items-center justify-center text-slate-700 dark:text-amber-400 shadow-sm" title="Toggle Day / Night Mode (Arc Reactor Transition)" aria-label="Toggle Day / Night Mode">
+          <a href="index.html" class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent click-shrink" title="Back to Portfolio Gateway" aria-label="Back to Portfolio Gateway">
+            <i class="fa-solid fa-table-cells-large text-xs"></i>
+          </a>
+          <button id="theme-toggle-btn" type="button" class="w-9 h-9 rounded-full bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300 dark:border-cyan-400/40 flex items-center justify-center text-slate-700 dark:text-amber-400 shadow-sm" title="Toggle Day / Night Mode (Arc Reactor Transition)" aria-label="Toggle Day / Night Mode">
             <i id="theme-icon" class="fa-solid fa-sun text-sm text-amber-400"></i>
           </button>
-          <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-xs font-bold tracking-wide click-shrink shadow-sm">
+          <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-xs font-bold tracking-wide click-shrink shadow-sm">
             <i class="fa-solid fa-paper-plane text-[0.68rem]"></i>
             <span>Collab</span>
           </a>
+          <button id="mobile-menu-open" type="button" class="lg:hidden w-9 h-9 rounded-full glass-panel flex items-center justify-center text-text-primary hover:border-accent click-shrink" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <i class="fa-solid fa-bars text-sm"></i>
+          </button>
         </div>
 
       </div>
     </nav>
   </div>
+
+  <!-- ── MOBILE NAVIGATION DRAWER ── -->
+  <dialog id="mobile-drawer" class="mobile-drawer" aria-label="Navigation menu">
+    <div class="mobile-drawer-scroller">
+      <nav class="mobile-drawer-sheet p-6 justify-between" aria-label="Mobile Navigation">
+        <div class="space-y-6">
+          <div class="flex items-center justify-between pb-4 border-b border-border">
+            <a href="#home" class="mobile-drawer-link flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 p-[1.5px] overflow-hidden">
+                <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Shreyash Verma" class="w-full h-full rounded-full object-cover" />
+              </div>
+              <div>
+                <span class="block text-text-primary font-bold tracking-tight leading-none text-sm">SHREYASH VERMA</span>
+                <span class="block text-purple-500 dark:text-purple-400 text-[0.65rem] font-mono uppercase tracking-widest mt-1">Creator</span>
+              </div>
+            </a>
+            <button id="mobile-menu-close" type="button" autofocus class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-text-secondary hover:text-text-primary" aria-label="Close navigation menu">
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+          </div>
+
+          <div>
+            <p class="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-text-muted px-3 mb-2">On This Page</p>
+            <ul class="space-y-1">
+              <li><a href="#home" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-house w-4 text-purple-400 text-xs"></i> Home</a></li>
+              <li><a href="#creator-process" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-wand-magic-sparkles w-4 text-purple-400 text-xs"></i> Process</a></li>
+              <li><a href="#creator-analytics" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-chart-line w-4 text-purple-400 text-xs"></i> Analytics</a></li>
+              <li><a href="#creator-tools" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-screwdriver-wrench w-4 text-purple-400 text-xs"></i> Tools</a></li>
+              <li><a href="#creator-vision" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-compass w-4 text-purple-400 text-xs"></i> Vision</a></li>
+              <li><a href="#latest-work" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-mobile-screen w-4 text-purple-400 text-xs"></i> Work</a></li>
+              <li><a href="#contact" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-paper-plane w-4 text-purple-400 text-xs"></i> Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="pt-4 border-t border-border">
+            <p class="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-text-muted px-3 mb-2">Portfolio Views</p>
+            <ul class="space-y-1">
+              <li><a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5 transition-colors"><i class="fa-solid fa-table-cells-large w-4 text-sky-400 text-xs"></i> Gateway</a></li>
+              <li><a href="developer.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-cyan-500/10 transition-colors"><i class="fa-solid fa-microchip w-4 text-cyan-400 text-xs"></i> Developer</a></li>
+              <li><a href="creator.html" aria-current="page" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-purple-500 dark:text-purple-400 bg-purple-500/10 border border-purple-500/30"><span class="flex items-center gap-3"><i class="fa-solid fa-clapperboard w-4 text-xs"></i> Creator</span><span class="text-[0.65rem] font-mono uppercase">Active</span></a></li>
+              <li><a href="person.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-emerald-500/10 transition-colors"><i class="fa-solid fa-id-badge w-4 text-emerald-400 text-xs"></i> Person</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-border">
+          <a href="#contact" class="mobile-drawer-link w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-cyan-400 text-white text-xs font-bold rounded-xl shadow-lg">
+            <i class="fa-solid fa-paper-plane"></i> Collab With Me
+          </a>
+        </div>
+      </nav>
+    </div>
+  </dialog>
 
   <main class="relative z-10">
     
@@ -573,10 +726,10 @@
       <!-- Text Side -->
       <div class="space-y-8 relative z-10">
         <div class="flex items-center gap-4 mb-4 reveal-node">
-          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="social-btn flex items-center justify-center w-12 h-12 rounded-full border border-border hover:border-red-500 hover:text-red-500 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]">
+          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel" class="social-btn flex items-center justify-center w-12 h-12 rounded-full border border-border hover:border-red-500 hover:text-red-500 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]">
             <i class="fa-brands fa-youtube text-2xl"></i>
           </a>
-          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" class="social-btn flex items-center justify-center w-12 h-12 rounded-full border border-border hover:border-pink-500 hover:text-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]">
+          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile" class="social-btn flex items-center justify-center w-12 h-12 rounded-full border border-border hover:border-pink-500 hover:text-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]">
             <i class="fa-brands fa-instagram text-2xl"></i>
           </a>
         </div>
@@ -746,10 +899,16 @@
               <button id="tab-engagement" onclick="switchMetric('engagement')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all">Engagement</button>
             </div>
           </div>
-          <div class="relative w-full h-[280px] sm:h-[320px]"><canvas id="portfolioAnalyticsChart"></canvas></div>
-          <div class="mt-6 pt-4 border-t border-border/60 flex items-center justify-between text-xs text-text-muted font-mono font-semibold">
-            <span class="flex items-center gap-2"><i class="fa-solid fa-shield-check text-emerald-400"></i> 100% Accurate Data</span>
-            <span class="text-emerald-400 font-bold tracking-wider">STATUS: VERIFIED (MONTHLY)</span>
+          <div class="relative w-full h-[280px] sm:h-[320px]">
+            <canvas id="portfolioAnalyticsChart"></canvas>
+            <div id="chart-state-overlay" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center px-6 rounded-2xl bg-surface/80 backdrop-blur-sm border border-border/60">
+              <i id="chart-state-icon" class="fa-solid fa-spinner fa-spin text-2xl text-accent mb-2"></i>
+              <p id="chart-state-text" class="text-xs sm:text-sm font-mono font-semibold text-text-secondary max-w-md">Loading verified history from stats.json...</p>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-2 text-xs text-text-muted font-mono font-semibold">
+            <span id="analytics-source-label" class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Synced from stats.json</span>
+            <span id="analytics-status-badge" class="text-emerald-400 font-bold tracking-wider">STATUS: LOADING...</span>
           </div>
         </div>
       </div>
@@ -824,7 +983,7 @@
           
           <!-- YouTube Shorts #1 -->
           <div class="flex flex-col items-center">
-            <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="block group click-shrink w-full">
+            <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full">
               <div class="iphone-pro-container">
                 <div class="iphone-pro-island"></div>
                 <div class="iphone-pro-glare"></div>
@@ -857,7 +1016,7 @@
 
           <!-- YouTube Shorts #2 -->
           <div class="flex flex-col items-center">
-            <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="block group click-shrink w-full">
+            <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full">
               <div class="iphone-pro-container">
                 <div class="iphone-pro-island"></div>
                 <div class="iphone-pro-glare"></div>
@@ -890,7 +1049,7 @@
 
           <!-- Instagram Reel #1 -->
           <div class="flex flex-col items-center">
-            <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" class="block group click-shrink w-full">
+            <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full">
               <div class="iphone-pro-container">
                 <div class="iphone-pro-island"></div>
                 <div class="iphone-pro-glare"></div>
@@ -940,24 +1099,24 @@
           <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 relative group">
             <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-6 relative z-10">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Name</label><input type="text" name="name" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="John Doe"></div>
-                <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Email</label><input type="email" name="email" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="john@example.com"></div>
+                <div class="space-y-2"><label for="creator-contact-name" class="text-xs font-bold font-mono text-text-secondary uppercase">Name</label><input type="text" id="creator-contact-name" name="name" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="John Doe"></div>
+                <div class="space-y-2"><label for="creator-contact-email" class="text-xs font-bold font-mono text-text-secondary uppercase">Email</label><input type="email" id="creator-contact-email" name="email" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="john@example.com"></div>
               </div>
-              <div class="space-y-2"><label class="text-xs font-bold font-mono text-text-secondary uppercase">Message</label><textarea name="message" rows="4" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 resize-none" placeholder="Let's connect..."></textarea></div>
+              <div class="space-y-2"><label for="creator-contact-message" class="text-xs font-bold font-mono text-text-secondary uppercase">Message</label><textarea id="creator-contact-message" name="message" rows="4" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 resize-none" placeholder="Let's connect..."></textarea></div>
               <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-cyan-400 text-white px-6 py-4 rounded-xl font-bold shadow-lg click-shrink"><i class="fa-solid fa-paper-plane text-sm"></i> Send Message</button>
             </form>
           </div>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
-          <a href="https://github.com/Shreyash-Verma16" target="_blank" class="social-card social-github spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-github text-4xl"></i><span class="text-sm font-bold tracking-wide">GitHub</span></a>
-          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" class="social-card social-linkedin spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-linkedin-in text-4xl"></i><span class="text-sm font-bold tracking-wide">LinkedIn</span></a>
-          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" class="social-card social-youtube spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-youtube text-4xl"></i><span class="text-sm font-bold tracking-wide">YouTube</span></a>
+          <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card social-github spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-github text-4xl"></i><span class="text-sm font-bold tracking-wide">GitHub</span></a>
+          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card social-linkedin spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-linkedin-in text-4xl"></i><span class="text-sm font-bold tracking-wide">LinkedIn</span></a>
+          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card social-youtube spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-youtube text-4xl"></i><span class="text-sm font-bold tracking-wide">YouTube</span></a>
           <a href="mailto:shreyashverma.4518@gmail.com" class="social-card hover:border-purple-500 hover:text-purple-500 spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-solid fa-envelope text-4xl"></i><span class="text-sm font-bold tracking-wide">Email</span></a>
-          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" class="social-card social-instagram spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-instagram text-4xl"></i><span class="text-sm font-bold tracking-wide">Instagram</span></a>
-          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" class="social-card social-reddit spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-reddit text-4xl"></i><span class="text-sm font-bold tracking-wide">Reddit</span></a>
-          <a href="https://x.com/Shreyash_verma_" target="_blank" class="social-card social-x spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-x-twitter text-4xl"></i><span class="text-sm font-bold tracking-wide">Twitter</span></a>
-          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" class="social-card social-threads spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-threads text-4xl"></i><span class="text-sm font-bold tracking-wide">Threads</span></a>
+          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card social-instagram spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-instagram text-4xl"></i><span class="text-sm font-bold tracking-wide">Instagram</span></a>
+          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card social-reddit spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-reddit text-4xl"></i><span class="text-sm font-bold tracking-wide">Reddit</span></a>
+          <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card social-x spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-x-twitter text-4xl"></i><span class="text-sm font-bold tracking-wide">Twitter</span></a>
+          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card social-threads spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-threads text-4xl"></i><span class="text-sm font-bold tracking-wide">Threads</span></a>
         </div>
       </div>
     </section>
@@ -966,185 +1125,203 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // =========================================================
       // 1. IRON MAN MARK 85 ARC REACTOR THEME TOGGLE ANIMATION
+      //    + SAFE TRY/CATCH/FINALLY + LOCALSTORAGE PERSISTENCE
       // =========================================================
       const themeToggleBtn = document.getElementById('theme-toggle-btn');
       const themeIcon = document.getElementById('theme-icon');
-      let isDark = true;
+      const colorSchemeMeta = document.querySelector('meta[name="color-scheme"]');
+      let isDark = document.documentElement.classList.contains('dark');
       let isThemeAnimating = false;
 
-      function applyThemeState(darkState) {
-        isDark = darkState;
-        if (isDark) {
-          document.documentElement.classList.add('dark');
-          if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-sm text-amber-400';
-        } else {
-          document.documentElement.classList.remove('dark');
-          if (themeIcon) themeIcon.className = 'fa-solid fa-moon text-sm text-slate-700';
+      function persistTheme(darkState) {
+        try {
+          localStorage.setItem('portfolio-theme', darkState ? 'dark' : 'light');
+        } catch (err) {
+          // Ignore unavailable storage
         }
-        updateChartTheme();
       }
+
+      function applyThemeState(darkState, shouldPersist = true) {
+        isDark = Boolean(darkState);
+        document.documentElement.classList.toggle('dark', isDark);
+        if (colorSchemeMeta) colorSchemeMeta.content = isDark ? 'dark' : 'light';
+        if (themeIcon) {
+          themeIcon.className = isDark
+            ? 'fa-solid fa-sun text-sm text-amber-400'
+            : 'fa-solid fa-moon text-sm text-slate-700';
+        }
+        if (shouldPersist) persistTheme(isDark);
+        if (typeof updateChartTheme === 'function') updateChartTheme();
+      }
+
+      // Sync icon to restored theme without writing storage again
+      applyThemeState(isDark, false);
+
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'portfolio-theme' && e.newValue) {
+          applyThemeState(e.newValue === 'dark', false);
+        }
+      });
 
       if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
           if (isThemeAnimating) return;
+
+          const isGoingDark = !isDark;
+
+          if (prefersReducedMotion || typeof document.startViewTransition !== 'function') {
+            applyThemeState(isGoingDark, true);
+            return;
+          }
+
           isThemeAnimating = true;
           themeToggleBtn.style.pointerEvents = 'none';
 
-          const isGoingDark = !isDark;
-          const rect = themeToggleBtn.getBoundingClientRect();
-          const originX = e.clientX || (rect.left + rect.width / 2);
-          const originY = e.clientY || (rect.top + rect.height / 2);
+          let freezeStyles = null;
+          let animStyles = null;
+          let glowEdge = null;
 
-          const maxRadius = Math.hypot(
-            Math.max(originX, window.innerWidth - originX),
-            Math.max(originY, window.innerHeight - originY)
-          );
+          try {
+            const rect = themeToggleBtn.getBoundingClientRect();
+            const originX = e.clientX || (rect.left + rect.width / 2);
+            const originY = e.clientY || (rect.top + rect.height / 2);
 
-          // Pause CSS transitions during ViewTransition snapshot
-          const freezeStyles = document.createElement('style');
-          freezeStyles.innerHTML = `* { transition: none !important; }`;
-          document.head.appendChild(freezeStyles);
+            const maxRadius = Math.hypot(
+              Math.max(originX, window.innerWidth - originX),
+              Math.max(originY, window.innerHeight - originY)
+            );
 
-          const uid = Date.now();
-          const animStyles = document.createElement('style');
+            freezeStyles = document.createElement('style');
+            freezeStyles.textContent = `* { transition: none !important; }`;
+            document.head.appendChild(freezeStyles);
 
-          let transitionCSS = `
-            ::view-transition-old(root),
-            ::view-transition-new(root) {
-              animation: none;
-              mix-blend-mode: normal;
-            }
-          `;
+            const uid = Date.now();
+            animStyles = document.createElement('style');
 
-          if (isGoingDark) {
-            // LIGHT -> DARK: Collapses inward like Mark 85 nanotech suit-up with glowing cyan arc-reactor ring
-            transitionCSS += `
-              ::view-transition-old(root) {
-                z-index: 2;
-                clip-path: circle(${maxRadius}px at ${originX}px ${originY}px);
-                animation: sweep-in-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
-              }
-              ::view-transition-new(root) { z-index: 1; }
-              @keyframes sweep-in-${uid} {
-                to { clip-path: circle(0px at ${originX}px ${originY}px); }
-              }
-              .smooth-glow-ring {
-                position: fixed;
-                top: ${originY}px;
-                left: ${originX}px;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999999;
-                width: ${maxRadius * 2}px;
-                height: ${maxRadius * 2}px;
-                opacity: 0;
-                box-shadow: 0 0 55px 12px rgba(56, 189, 248, 0.45), inset 0 0 24px 3px rgba(56, 189, 248, 0.85);
-                border: 2.5px solid rgba(56, 189, 248, 1);
-                animation: ring-shrink-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
-              }
-              @keyframes ring-shrink-${uid} {
-                0% { width: ${maxRadius * 2}px; height: ${maxRadius * 2}px; opacity: 0; }
-                15% { opacity: 1; }
-                100% { width: 0px; height: 0px; opacity: 1; }
-              }
-            `;
-          } else {
-            // DARK -> LIGHT: Expands outward from button with solar gold arc-reactor ring
-            transitionCSS += `
-              ::view-transition-old(root) { z-index: 1; }
+            let transitionCSS = `
+              ::view-transition-old(root),
               ::view-transition-new(root) {
-                z-index: 2;
-                clip-path: circle(0px at ${originX}px ${originY}px);
-                animation: sweep-out-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
-              }
-              @keyframes sweep-out-${uid} {
-                to { clip-path: circle(${maxRadius}px at ${originX}px ${originY}px); }
-              }
-              .smooth-glow-ring {
-                position: fixed;
-                top: ${originY}px;
-                left: ${originX}px;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999999;
-                width: 0px;
-                height: 0px;
-                opacity: 1;
-                box-shadow: 0 0 55px 12px rgba(245, 158, 11, 0.38), inset 0 0 24px 3px rgba(245, 158, 11, 0.85);
-                border: 2.5px solid rgba(245, 158, 11, 1);
-                animation: ring-expand-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
-              }
-              @keyframes ring-expand-${uid} {
-                to { width: ${maxRadius * 2}px; height: ${maxRadius * 2}px; opacity: 0; }
+                animation: none;
+                mix-blend-mode: normal;
               }
             `;
-          }
 
-          animStyles.innerHTML = transitionCSS;
-          document.head.appendChild(animStyles);
+            if (isGoingDark) {
+              transitionCSS += `
+                ::view-transition-old(root) {
+                  z-index: 2;
+                  clip-path: circle(${maxRadius}px at ${originX}px ${originY}px);
+                  animation: sweep-in-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+                }
+                ::view-transition-new(root) { z-index: 1; }
+                @keyframes sweep-in-${uid} {
+                  to { clip-path: circle(0px at ${originX}px ${originY}px); }
+                }
+                .smooth-glow-ring {
+                  position: fixed;
+                  top: ${originY}px;
+                  left: ${originX}px;
+                  transform: translate(-50%, -50%);
+                  border-radius: 50%;
+                  pointer-events: none;
+                  z-index: 9999999;
+                  width: ${maxRadius * 2}px;
+                  height: ${maxRadius * 2}px;
+                  opacity: 0;
+                  box-shadow: 0 0 55px 12px rgba(56, 189, 248, 0.45), inset 0 0 24px 3px rgba(56, 189, 248, 0.85);
+                  border: 2.5px solid rgba(56, 189, 248, 1);
+                  animation: ring-shrink-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+                }
+                @keyframes ring-shrink-${uid} {
+                  0% { width: ${maxRadius * 2}px; height: ${maxRadius * 2}px; opacity: 0; }
+                  15% { opacity: 1; }
+                  100% { width: 0px; height: 0px; opacity: 1; }
+                }
+              `;
+            } else {
+              transitionCSS += `
+                ::view-transition-old(root) { z-index: 1; }
+                ::view-transition-new(root) {
+                  z-index: 2;
+                  clip-path: circle(0px at ${originX}px ${originY}px);
+                  animation: sweep-out-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+                }
+                @keyframes sweep-out-${uid} {
+                  to { clip-path: circle(${maxRadius}px at ${originX}px ${originY}px); }
+                }
+                .smooth-glow-ring {
+                  position: fixed;
+                  top: ${originY}px;
+                  left: ${originX}px;
+                  transform: translate(-50%, -50%);
+                  border-radius: 50%;
+                  pointer-events: none;
+                  z-index: 9999999;
+                  width: 0px;
+                  height: 0px;
+                  opacity: 1;
+                  box-shadow: 0 0 55px 12px rgba(245, 158, 11, 0.38), inset 0 0 24px 3px rgba(245, 158, 11, 0.85);
+                  border: 2.5px solid rgba(245, 158, 11, 1);
+                  animation: ring-expand-${uid} 1.25s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+                }
+                @keyframes ring-expand-${uid} {
+                  to { width: ${maxRadius * 2}px; height: ${maxRadius * 2}px; opacity: 0; }
+                }
+              `;
+            }
 
-          const glowEdge = document.createElement('div');
-          glowEdge.className = 'smooth-glow-ring';
-          document.body.appendChild(glowEdge);
+            animStyles.textContent = transitionCSS;
+            document.head.appendChild(animStyles);
 
-          if (document.startViewTransition) {
+            glowEdge = document.createElement('div');
+            glowEdge.className = 'smooth-glow-ring';
+            document.body.appendChild(glowEdge);
+
             const transition = document.startViewTransition(() => {
-              applyThemeState(isGoingDark);
+              applyThemeState(isGoingDark, true);
             });
             await transition.finished;
-          } else {
-            applyThemeState(isGoingDark);
-            await new Promise(r => setTimeout(r, 1250));
+          } catch (err) {
+            if (isDark !== isGoingDark) {
+              applyThemeState(isGoingDark, true);
+            }
+          } finally {
+            if (freezeStyles && freezeStyles.parentNode) freezeStyles.remove();
+            if (animStyles && animStyles.parentNode) animStyles.remove();
+            if (glowEdge && glowEdge.parentNode) glowEdge.remove();
+            themeToggleBtn.style.pointerEvents = 'auto';
+            isThemeAnimating = false;
           }
-
-          freezeStyles.remove();
-          animStyles.remove();
-          glowEdge.remove();
-          themeToggleBtn.style.pointerEvents = 'auto';
-          isThemeAnimating = false;
         });
       }
 
 
       // =========================================================
-      // 2. STITCH LOWER-CRADLE SILK ANIMATION (BELOW RED LINE)
-      //    + 15s ON / 5s OFF SMOOTH BREATHING LOOP
+      // 2. STITCH LOWER-CRADLE SILK ANIMATION (PAUSEABLE)
       // =========================================================
       const canvas = document.getElementById('stitch-silk-canvas');
       const canvasWrapper = document.getElementById('stitch-canvas-wrapper');
       const ctx = canvas.getContext('2d');
       let width = 0, height = 0;
 
-      function resizeCanvas() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      let mouse = { x: width * 0.5, y: height * 0.75, lx: width * 0.5, ly: height * 0.75 };
+      let mouse = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.75, lx: window.innerWidth * 0.5, ly: window.innerHeight * 0.75 };
       window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
       }, { passive: true });
 
-      // Red-line boundary curve function from user's screenshot:
-      // Starts around 42% height on far left edge, dips down to 76% height under Hero buttons & cards,
-      // and rises to 44% height on far right edge.
       function getRedLineBoundaryY(x) {
-        const u = (x / width) * 2 - 1; // -1 (left) to +1 (right)
+        const u = (x / width) * 2 - 1;
         const centerFloor = 0.77;
         const edgeRise = 0.34 * Math.pow(u, 2);
         return height * (centerFloor - edgeRise);
       }
 
-      // Color interpolation for Stitch Silk Strands (Adapts to Dark & Light Mode)
       function getStitchStrandColor(sRatio, alpha, darkTheme) {
         let r, g, b;
         if (darkTheme) {
@@ -1165,7 +1342,6 @@
             b = Math.round(252 + (238 - 252) * k);
           }
         } else {
-          // Crisp vibrant palette for Light Mode
           if (sRatio < 0.5) {
             const k = sRatio / 0.5;
             r = Math.round(2 + (124 - 2) * k);
@@ -1182,8 +1358,10 @@
       }
 
       let time = 0;
+      let stitchRafId = null;
+      let isStitchReceded = false;
 
-      function renderLowerCradleStitch() {
+      function drawStitchFrame() {
         time += 0.015;
         mouse.lx += (mouse.x - mouse.lx) * 0.06;
         mouse.ly += (mouse.y - mouse.ly) * 0.06;
@@ -1191,7 +1369,6 @@
         ctx.clearRect(0, 0, width, height);
         ctx.save();
 
-        // HARD BOUNDARY CLIP: Strictly clip the canvas to the region UNDERNEATH the curved red line
         ctx.beginPath();
         const clipSteps = 60;
         for (let i = 0; i <= clipSteps; i++) {
@@ -1207,7 +1384,6 @@
 
         ctx.globalCompositeOperation = isDark ? 'screen' : 'source-over';
 
-        // Subtle ambient glow nodes strictly anchored in the lower cradle
         const glows = [
           { xr: 0.14, yr: 0.82, rad: width * 0.32, col: isDark ? 'rgba(109, 40, 217, 0.26)' : 'rgba(56, 189, 248, 0.18)' },
           { xr: 0.50, yr: 0.92, rad: width * 0.36, col: isDark ? 'rgba(147, 51, 234, 0.24)' : 'rgba(124, 58, 237, 0.16)' },
@@ -1223,7 +1399,6 @@
           ctx.fillRect(0, 0, width, height);
         });
 
-        // Draw 32 continuous U-shaped 3D twisted silk strands that hug the lower cradle
         const totalStrands = 32;
         const steps = 54;
         const mxNorm = (mouse.lx / width - 0.5) * 2;
@@ -1233,14 +1408,12 @@
           ctx.beginPath();
 
           for (let i = 0; i <= steps; i++) {
-            const u = (i / steps) * 2 - 1; // -1 to +1
+            const u = (i / steps) * 2 - 1;
             const x = (i / steps) * width;
 
-            // Base U-cradle curve staying safely below the red boundary line
             const boundaryY = getRedLineBoundaryY(x);
             const depthOffset = 35 + (1 - sRatio) * 145;
 
-            // Harmonic 3D silk twist & fold waves
             const wave1 = Math.sin(u * 4.5 + time * 1.15 + sRatio * 2.5) * 34;
             const wave2 = Math.cos(u * 3.0 - time * 0.85 + sRatio * 1.7) * 22;
             const cursorWave = Math.exp(-Math.pow(x - mouse.lx, 2) / 110000) * mxNorm * 28;
@@ -1262,20 +1435,52 @@
         }
 
         ctx.restore();
-        requestAnimationFrame(renderLowerCradleStitch);
       }
-      requestAnimationFrame(renderLowerCradleStitch);
 
-      // 15 Seconds ON -> Smooth Disappear -> 5 Seconds OFF -> Smooth Return Loop
+      function renderLowerCradleStitch() {
+        if (document.hidden || isStitchReceded || prefersReducedMotion) {
+          stitchRafId = null;
+          return;
+        }
+        drawStitchFrame();
+        stitchRafId = requestAnimationFrame(renderLowerCradleStitch);
+      }
+
+      function startStitchLoop() {
+        if (prefersReducedMotion) {
+          drawStitchFrame();
+          return;
+        }
+        if (stitchRafId === null && !document.hidden && !isStitchReceded) {
+          stitchRafId = requestAnimationFrame(renderLowerCradleStitch);
+        }
+      }
+
+      function resizeCanvas() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        if (prefersReducedMotion) drawStitchFrame();
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) startStitchLoop();
+      });
+      startStitchLoop();
+
       function start15sOn5sOffCycle() {
-        const activeDuration = 15000;     // Works for 15 seconds
-        const disappearDuration = 5000;   // Disappears for 5 seconds
+        if (prefersReducedMotion) return;
+        const activeDuration = 15000;
+        const disappearDuration = 5000;
 
         setInterval(() => {
           if (canvasWrapper) {
             canvasWrapper.classList.add('stitch-recede');
+            setTimeout(() => { isStitchReceded = true; }, 2200);
             setTimeout(() => {
+              isStitchReceded = false;
               canvasWrapper.classList.remove('stitch-recede');
+              startStitchLoop();
             }, disappearDuration);
           }
         }, activeDuration + disappearDuration);
@@ -1284,7 +1489,7 @@
 
 
       // =========================================================
-      // 3. STRICT 2-STATE LERP DYNAMIC ISLAND (ADHERENT <-> ISLAND, 8s TIMEOUT)
+      // 3. EVENT-DRIVEN 2-STATE LERP DYNAMIC ISLAND (ZERO IDLE REFLOW)
       // =========================================================
       const navEl = document.getElementById('dynamic-nav');
       const linksContainer = document.getElementById('island-links-container');
@@ -1293,6 +1498,7 @@
       let navMode = 'adherent';
       let watchTimeout8s = null;
       let isMouseOverNav = false;
+      let navRafId = null;
 
       let curW = window.innerWidth;
       let curH = 72;
@@ -1304,10 +1510,99 @@
       let pillCurW = 0, pillTargetW = 0;
       let pillReady = false;
 
+      let lastAppliedNav = { w: '', h: '', top: '', r: '', pad: '', px: '', pw: '' };
+
+      function applyNavStyles() {
+        const w = `${curW.toFixed(2)}px`;
+        const h = `${curH.toFixed(2)}px`;
+        const top = `translate3d(0, ${curTop.toFixed(2)}px, 0)`;
+        const r = `${curRadius.toFixed(2)}px`;
+        const pad = `${curPadX.toFixed(2)}px`;
+
+        if (lastAppliedNav.w !== w) { navEl.style.width = w; lastAppliedNav.w = w; }
+        if (lastAppliedNav.h !== h) { navEl.style.height = h; lastAppliedNav.h = h; }
+        if (lastAppliedNav.top !== top) { navEl.style.transform = top; lastAppliedNav.top = top; }
+        if (lastAppliedNav.r !== r) { navEl.style.borderRadius = r; lastAppliedNav.r = r; }
+        if (lastAppliedNav.pad !== pad) {
+          navEl.style.paddingLeft = pad;
+          navEl.style.paddingRight = pad;
+          lastAppliedNav.pad = pad;
+        }
+
+        if (liquidPill && pillReady) {
+          const px = `translate3d(${pillCurX.toFixed(2)}px, 0, 0)`;
+          const pw = `${pillCurW.toFixed(2)}px`;
+          if (lastAppliedNav.px !== px) { liquidPill.style.transform = px; lastAppliedNav.px = px; }
+          if (lastAppliedNav.pw !== pw) { liquidPill.style.width = pw; lastAppliedNav.pw = pw; }
+        }
+      }
+
+      const lerpFactor = 0.14;
+      const SETTLE_EPSILON = 0.15;
+      function lerp(start, end, amt) {
+        return start + (end - start) * amt;
+      }
+
+      function animateNavLerp() {
+        const isIsland = navMode === 'island';
+        const targetW = isIsland ? Math.min(window.innerWidth * 0.94, 980) : window.innerWidth;
+        const targetH = isIsland ? 60 : 72;
+        const targetTop = isIsland ? 18 : 0;
+        const targetRadius = isIsland ? 32 : 0;
+        const targetPadX = isIsland ? 20 : 28;
+
+        curW = lerp(curW, targetW, lerpFactor);
+        curH = lerp(curH, targetH, lerpFactor);
+        curTop = lerp(curTop, targetTop, lerpFactor);
+        curRadius = lerp(curRadius, targetRadius, lerpFactor);
+        curPadX = lerp(curPadX, targetPadX, lerpFactor);
+
+        let settled =
+          Math.abs(curW - targetW) < SETTLE_EPSILON &&
+          Math.abs(curH - targetH) < SETTLE_EPSILON &&
+          Math.abs(curTop - targetTop) < SETTLE_EPSILON &&
+          Math.abs(curRadius - targetRadius) < SETTLE_EPSILON &&
+          Math.abs(curPadX - targetPadX) < SETTLE_EPSILON;
+
+        if (liquidPill && pillReady) {
+          pillCurX = lerp(pillCurX, pillTargetX, 0.24);
+          pillCurW = lerp(pillCurW, pillTargetW, 0.24);
+          const pillSettled =
+            Math.abs(pillCurX - pillTargetX) < SETTLE_EPSILON &&
+            Math.abs(pillCurW - pillTargetW) < SETTLE_EPSILON;
+          settled = settled && pillSettled;
+          if (pillSettled) {
+            pillCurX = pillTargetX;
+            pillCurW = pillTargetW;
+          }
+        }
+
+        if (settled) {
+          curW = targetW;
+          curH = targetH;
+          curTop = targetTop;
+          curRadius = targetRadius;
+          curPadX = targetPadX;
+          applyNavStyles();
+          navRafId = null;
+          return;
+        }
+
+        applyNavStyles();
+        navRafId = requestAnimationFrame(animateNavLerp);
+      }
+
+      function scheduleNavFrame() {
+        if (navRafId === null) {
+          navRafId = requestAnimationFrame(animateNavLerp);
+        }
+      }
+
       function setLiquidPillTarget(linkEl) {
         if (!linkEl || !linksContainer) return;
         const cRect = linksContainer.getBoundingClientRect();
         const lRect = linkEl.getBoundingClientRect();
+        if (lRect.width === 0) return;
         pillTargetX = lRect.left - cRect.left;
         pillTargetW = lRect.width;
         if (!pillReady) {
@@ -1316,11 +1611,13 @@
           pillReady = true;
         }
         if (liquidPill) liquidPill.style.opacity = '1';
+        scheduleNavFrame();
       }
 
       function syncPillToActive() {
         const activeLink = document.querySelector('#island-links-container .nav-link.active-section');
         if (activeLink) setLiquidPillTarget(activeLink);
+        scheduleNavFrame();
       }
 
       document.querySelectorAll('#island-links-container .nav-link').forEach(link => {
@@ -1331,15 +1628,19 @@
       }
 
       function switchToAdherent() {
+        if (navMode === 'adherent') return;
         navMode = 'adherent';
         navEl.classList.add('is-adherent');
         navEl.classList.remove('is-island');
+        scheduleNavFrame();
       }
 
       function switchToIsland() {
+        if (navMode === 'island') return;
         navMode = 'island';
         navEl.classList.add('is-island');
         navEl.classList.remove('is-adherent');
+        scheduleNavFrame();
       }
 
       function schedule8sReturnToAdherent() {
@@ -1373,44 +1674,12 @@
         }
       });
 
-      const lerpFactor = 0.11;
-      function lerp(start, end, amt) {
-        return start + (end - start) * amt;
-      }
-
-      function animateNavLerp() {
-        const isIsland = navMode === 'island';
-        const targetW = isIsland ? Math.min(window.innerWidth * 0.94, 980) : window.innerWidth;
-        const targetH = isIsland ? 60 : 72;
-        const targetTop = isIsland ? 18 : 0;
-        const targetRadius = isIsland ? 32 : 0;
-        const targetPadX = isIsland ? 20 : 28;
-
-        curW = lerp(curW, targetW, lerpFactor);
-        curH = lerp(curH, targetH, lerpFactor);
-        curTop = lerp(curTop, targetTop, lerpFactor);
-        curRadius = lerp(curRadius, targetRadius, lerpFactor);
-        curPadX = lerp(curPadX, targetPadX, lerpFactor);
-
-        navEl.style.width = `${curW.toFixed(2)}px`;
-        navEl.style.height = `${curH.toFixed(2)}px`;
-        navEl.style.transform = `translate3d(0, ${curTop.toFixed(2)}px, 0)`;
-        navEl.style.borderRadius = `${curRadius.toFixed(2)}px`;
-        navEl.style.paddingLeft = `${curPadX.toFixed(2)}px`;
-        navEl.style.paddingRight = `${curPadX.toFixed(2)}px`;
-
-        if (liquidPill && pillReady) {
-          pillCurX = lerp(pillCurX, pillTargetX, 0.22);
-          pillCurW = lerp(pillCurW, pillTargetW, 0.22);
-          liquidPill.style.transform = `translate3d(${pillCurX.toFixed(2)}px, 0, 0)`;
-          liquidPill.style.width = `${pillCurW.toFixed(2)}px`;
-        }
-
-        requestAnimationFrame(animateNavLerp);
-      }
-      requestAnimationFrame(animateNavLerp);
+      scheduleNavFrame();
       setTimeout(syncPillToActive, 120);
-      window.addEventListener('resize', syncPillToActive);
+      window.addEventListener('resize', () => {
+        syncPillToActive();
+        scheduleNavFrame();
+      });
 
       const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1429,6 +1698,86 @@
       }, { threshold: 0.35 });
 
       document.querySelectorAll('section[id]').forEach(sec => navObserver.observe(sec));
+
+
+      // =========================================================
+      // 3B. MOBILE NAVIGATION DRAWER (Native <dialog> + Swipe)
+      // =========================================================
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      const mobileOpenBtn = document.getElementById('mobile-menu-open');
+      const mobileCloseBtn = document.getElementById('mobile-menu-close');
+
+      if (mobileDrawer && mobileOpenBtn && mobileCloseBtn) {
+        const drawerScroller = mobileDrawer.querySelector('.mobile-drawer-scroller');
+        const drawerSheet = mobileDrawer.querySelector('.mobile-drawer-sheet');
+        const supportsInitialTarget = CSS.supports && CSS.supports('scroll-initial-target', 'nearest');
+        const supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+
+        if (!supportsScrollTimeline) {
+          drawerScroller.addEventListener('scroll', () => {
+            if (drawerSheet.offsetWidth > 0) {
+              const ratio = Math.max(0, Math.min(1, 1 - drawerScroller.scrollLeft / drawerSheet.offsetWidth));
+              mobileDrawer.style.setProperty('--drawer-backdrop', ratio.toFixed(3));
+            }
+          }, { passive: true });
+        }
+
+        async function openMobileDrawer() {
+          if (mobileDrawer.open) return;
+          mobileDrawer.showModal();
+          mobileOpenBtn.setAttribute('aria-expanded', 'true');
+          if (!supportsInitialTarget) {
+            drawerScroller.scrollTo({ left: drawerScroller.offsetWidth, behavior: 'instant' });
+            await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+          }
+          drawerScroller.scrollTo({ left: 0, behavior: 'auto' });
+          if (!supportsScrollTimeline) mobileDrawer.style.setProperty('--drawer-backdrop', '1');
+        }
+
+        function closeMobileDrawer() {
+          if (!mobileDrawer.open) return;
+          if (prefersReducedMotion) {
+            mobileDrawer.close();
+            mobileOpenBtn.setAttribute('aria-expanded', 'false');
+            return;
+          }
+          drawerScroller.scrollTo({ left: drawerScroller.offsetWidth, behavior: 'auto' });
+        }
+
+        const visibleThreshold = Math.max(0.01, 1 / Math.max(window.innerWidth, 320));
+        const drawerObserver = new IntersectionObserver((entries) => {
+          const entry = entries[entries.length - 1];
+          if (!entry) return;
+          if (mobileDrawer.open && entry.intersectionRatio < visibleThreshold) {
+            mobileDrawer.close();
+            mobileOpenBtn.setAttribute('aria-expanded', 'false');
+          } else if (mobileDrawer.open && entry.intersectionRatio >= 0.99) {
+            mobileOpenBtn.setAttribute('aria-expanded', 'true');
+          }
+        }, { root: mobileDrawer, threshold: [visibleThreshold, 1] });
+        drawerObserver.observe(drawerSheet);
+
+        mobileOpenBtn.addEventListener('click', openMobileDrawer);
+        mobileCloseBtn.addEventListener('click', closeMobileDrawer);
+        mobileDrawer.addEventListener('click', (e) => {
+          if (!drawerSheet.contains(e.target)) closeMobileDrawer();
+        });
+        mobileDrawer.addEventListener('cancel', (e) => {
+          if (e.cancelable) {
+            e.preventDefault();
+            closeMobileDrawer();
+          }
+        });
+        mobileDrawer.addEventListener('close', () => {
+          mobileOpenBtn.setAttribute('aria-expanded', 'false');
+        });
+        mobileDrawer.querySelectorAll('.mobile-drawer-link').forEach((link) => {
+          link.addEventListener('click', () => {
+            mobileDrawer.close();
+            mobileOpenBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
 
 
       // =========================================================
@@ -1495,7 +1844,7 @@
 
 
       // =========================================================
-      // 5. SOCIAL CARD POP-OUT REDIRECT OVERLAY
+      // 5. POPUP-SAFE SOCIAL CARD OVERLAY
       // =========================================================
       const redirectOverlay = document.createElement('div');
       redirectOverlay.className = 'redirect-overlay';
@@ -1504,32 +1853,45 @@
       redirectOverlay.appendChild(redirectIconWrapper);
       document.body.appendChild(redirectOverlay);
 
+      let redirectCleanupTimer = null;
+      function clearRedirectOverlay() {
+        clearTimeout(redirectCleanupTimer);
+        redirectOverlay.classList.remove('active');
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) clearRedirectOverlay();
+      });
+      window.addEventListener('pageshow', clearRedirectOverlay);
+
       document.querySelectorAll('.social-card').forEach(link => {
         link.addEventListener('click', function(e) {
-          if (this.href.startsWith('mailto:')) return;
-          e.preventDefault();
-          const targetUrl = this.href;
-          const targetBlank = this.target === '_blank';
+          if (this.href.startsWith('mailto:') || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
+            return;
+          }
           const iconElement = this.querySelector('i');
           if (iconElement) {
             redirectIconWrapper.innerHTML = iconElement.outerHTML;
             redirectIconWrapper.style.color = window.getComputedStyle(this).color;
           }
-          requestAnimationFrame(() => redirectOverlay.classList.add('active'));
-          setTimeout(() => {
-            if (targetBlank) {
-              window.open(targetUrl, '_blank');
-              redirectOverlay.classList.remove('active');
-            } else {
+          if (this.target === '_blank') {
+            requestAnimationFrame(() => redirectOverlay.classList.add('active'));
+            clearTimeout(redirectCleanupTimer);
+            redirectCleanupTimer = setTimeout(clearRedirectOverlay, 750);
+          } else {
+            e.preventDefault();
+            const targetUrl = this.href;
+            requestAnimationFrame(() => redirectOverlay.classList.add('active'));
+            clearTimeout(redirectCleanupTimer);
+            redirectCleanupTimer = setTimeout(() => {
               window.location.href = targetUrl;
-            }
-          }, 950);
+            }, 650);
+          }
         });
       });
 
 
       // =========================================================
-      // 6. REVEAL EFFECTS & SPOTLIGHT HOVER
+      // 6. REVEAL EFFECTS & NULL-SAFE SPOTLIGHT HOVER
       // =========================================================
       const revealObserver = new IntersectionObserver((entries) => { 
         entries.forEach(e => {
@@ -1543,85 +1905,213 @@
       
       let isMouseMoving = false;
       document.body.addEventListener('mousemove', (e) => {
-        if (e.target.closest('.spotlight-card') && !isMouseMoving) {
-          isMouseMoving = true;
-          window.requestAnimationFrame(() => {
-            const card = e.target.closest('.spotlight-card');
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        const targetCard = e.target && e.target.closest ? e.target.closest('.spotlight-card') : null;
+        if (!targetCard || isMouseMoving) return;
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+        isMouseMoving = true;
+        window.requestAnimationFrame(() => {
+          try {
+            if (targetCard && targetCard.isConnected) {
+              const rect = targetCard.getBoundingClientRect();
+              targetCard.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+              targetCard.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
+            }
+          } finally {
             isMouseMoving = false;
-          });
-        }
+          }
+        });
       }, { passive: true });
 
     });
 
     // =========================================================
-    // 7. HARDCODED STATIC ANALYTICS ENGINE
+    // 7. REAL DATA ANALYTICS ENGINE (CONNECTED TO stats.json)
     // =========================================================
-    const platformData = {
+    const PLATFORM_META = {
       youtube: {
-        title: "Shreyash Verma", handle: "@shreyashverse", avatar: "https://i.ibb.co/mrk9d9TV/channels4-profile.jpg",
-        heroLabel: "Subscribers Count", heroVal: "144", 
-        stat1Label: "Total Views", stat1Val: "157.8K", stat1Icon: "fa-solid fa-eye",
-        stat2Label: "Uploads", stat2Val: "111", stat2Icon: "fa-solid fa-upload", 
-        stat3Label: "Total Engagement", stat3Val: "10K+", stat3Icon: "fa-solid fa-heart",
-        stat4Label: "Subscribers", stat4Val: "144", stat4Icon: "fa-solid fa-user-plus",
-        rawViews: 157846, rawEngagement: 10000
+        title: "Shreyash Verma",
+        handle: "@shreyashverse",
+        avatar: "https://i.ibb.co/mrk9d9TV/channels4-profile.jpg",
+        heroLabel: "Subscribers Count"
       },
       instagram: {
-        title: "Tech With Shreyash", handle: "@techwith_shreyash", avatar: "https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg",
-        heroLabel: "Instagram Followers", heroVal: "170", 
-        stat1Label: "Total Views", stat1Val: "1.3M+", stat1Icon: "fa-solid fa-eye",
-        stat2Label: "Uploads", stat2Val: "47", stat2Icon: "fa-solid fa-upload", 
-        stat3Label: "Total Engagement", stat3Val: "150K+", stat3Icon: "fa-solid fa-heart",
-        stat4Label: "Followers", stat4Val: "170", stat4Icon: "fa-solid fa-user-plus",
-        rawViews: 1311196, rawEngagement: 150000
+        title: "Tech With Shreyash",
+        handle: "@techwith_shreyash",
+        avatar: "https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg",
+        heroLabel: "Instagram Followers"
       }
     };
 
-    let activePlatform = 'youtube', activeMetric = 'views', chartInstance = null;
-    const ctxChart = document.getElementById('portfolioAnalyticsChart').getContext('2d');
+    let statsHistory = [];
+    let statsLoadState = 'loading'; // 'loading' | 'ready' | 'empty' | 'error'
+    let statsErrorMessage = '';
+    let activePlatform = 'youtube';
+    let activeMetric = 'views';
+    let chartInstance = null;
+    let statsRenderVersion = 0;
+    const statTimers = new WeakMap();
+
+    const chartCanvas = document.getElementById('portfolioAnalyticsChart');
+    const ctxChart = chartCanvas ? chartCanvas.getContext('2d') : null;
+
     function createGradient(cStart, cEnd) {
+      if (!ctxChart) return cStart;
       const g = ctxChart.createLinearGradient(0, 0, 0, 300);
       g.addColorStop(0, cStart);
       g.addColorStop(1, cEnd);
       return g;
     }
 
-    function getTrajectoryCurve(currentPeak) {
-      return [
-        Math.round(currentPeak * 0.72),
-        Math.round(currentPeak * 0.78),
-        Math.round(currentPeak * 0.83),
-        Math.round(currentPeak * 0.89),
-        Math.round(currentPeak * 0.93),
-        Math.round(currentPeak * 0.97),
-        currentPeak
-      ];
+    function toFiniteNumber(val) {
+      if (val === null || val === undefined || val === '') return null;
+      const num = Number(val);
+      return Number.isFinite(num) ? num : null;
+    }
+
+    function formatCompactNumber(val) {
+      const n = toFiniteNumber(val);
+      if (n === null) return 'N/A';
+      if (n >= 1000000) return (n / 1000000).toFixed(2).replace(/\.?0+$/, '') + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      return n.toLocaleString('en-US');
+    }
+
+    function formatDateShort(dateStr) {
+      if (typeof dateStr !== 'string') return 'Unknown';
+      const isoMatch = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (isoMatch) {
+        const dt = new Date(Date.UTC(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3])));
+        if (!Number.isNaN(dt.getTime())) {
+          return dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', timeZone: 'UTC' });
+        }
+      }
+      return dateStr;
+    }
+
+    function setChartOverlay(visible, iconClass, message) {
+      const overlay = document.getElementById('chart-state-overlay');
+      const iconEl = document.getElementById('chart-state-icon');
+      const textEl = document.getElementById('chart-state-text');
+      if (!overlay) return;
+      overlay.classList.toggle('hidden', !visible);
+      if (iconEl && iconClass) iconEl.className = iconClass;
+      if (textEl && typeof message === 'string') textEl.textContent = message;
+    }
+
+    /**
+     * Extracts normalized, honest YouTube metrics from a single stats.json record.
+     */
+    function extractYouTubePoint(entry) {
+      const yt = entry && entry.youtube && typeof entry.youtube === 'object' ? entry.youtube : {};
+      return {
+        subscribers: toFiniteNumber(yt.subscribers),
+        views: toFiniteNumber(yt.views),
+        uploads: toFiniteNumber(yt.uploads),
+        engagement: toFiniteNumber(yt.engagement),
+        status: yt.status || 'snapshot'
+      };
+    }
+
+    /**
+     * Extracts normalized, honest Instagram metrics from a single stats.json record.
+     * Distinguishes lifetime totals from Behold's 6-post recent feed window.
+     */
+    function extractInstagramPoint(entry) {
+      const ig = entry && entry.instagram && typeof entry.instagram === 'object' ? entry.instagram : {};
+      const lifetime = ig.lifetime && typeof ig.lifetime === 'object' ? ig.lifetime : {};
+      const recent = ig.recentFeed && typeof ig.recentFeed === 'object' ? ig.recentFeed : null;
+
+      const followers = toFiniteNumber(lifetime.followers ?? ig.followers);
+      const lifetimeViews = toFiniteNumber(lifetime.views);
+      const lifetimeUploads = toFiniteNumber(lifetime.uploads);
+      const lifetimeEngagement = toFiniteNumber(lifetime.engagement);
+
+      const recentPostCount = recent ? toFiniteNumber(recent.postCount) : (toFiniteNumber(ig.uploads) !== null && toFiniteNumber(ig.uploads) <= 6 ? toFiniteNumber(ig.uploads) : null);
+      const recentNativeViews = recent ? toFiniteNumber(recent.views) : null;
+      const recentLegacyEstViews = recent ? toFiniteNumber(recent.estimatedFeedViewsLegacy) : null;
+      const recentEngagement = recent ? toFiniteNumber(recent.engagement) : null;
+
+      const isLifetime = lifetimeViews !== null && lifetimeUploads !== null;
+      return {
+        isLifetime,
+        followers,
+        views: isLifetime ? lifetimeViews : (recentNativeViews ?? recentLegacyEstViews ?? toFiniteNumber(ig.views)),
+        viewsIsLegacyEstimate: !isLifetime && recentNativeViews === null && (recentLegacyEstViews !== null || toFiniteNumber(ig.views) !== null),
+        uploads: isLifetime ? lifetimeUploads : null,
+        recentPostCount,
+        engagement: isLifetime ? lifetimeEngagement : (recentEngagement ?? toFiniteNumber(ig.engagement)),
+        status: ig.status || 'recent_feed_snapshot'
+      };
+    }
+
+    function clearStatTimer(el) {
+      const prev = statTimers.get(el);
+      if (prev) {
+        clearInterval(prev.intervalId);
+        clearTimeout(prev.timeoutId);
+        clearTimeout(prev.settleId);
+        statTimers.delete(el);
+      }
+      el.classList.remove('stat-glow-anim', 'stat-glow-settle');
+    }
+
+    function animateStatElement(el, finalString, renderToken) {
+      clearStatTimer(el);
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isNonNumeric = finalString === '--' || finalString === 'N/A' || !/\d/.test(finalString);
+      if (prefersReduced || isNonNumeric) {
+        el.textContent = finalString;
+        return;
+      }
+
+      el.classList.add('stat-glow-anim');
+      let dummyCount = 0;
+      const intervalId = setInterval(() => {
+        if (renderToken !== statsRenderVersion) {
+          clearStatTimer(el);
+          return;
+        }
+        dummyCount += Math.floor(Math.random() * 100);
+        el.textContent = String(dummyCount);
+      }, 30);
+
+      const timeoutId = setTimeout(() => {
+        clearInterval(intervalId);
+        if (renderToken !== statsRenderVersion) return;
+        el.textContent = finalString;
+        el.classList.remove('stat-glow-anim');
+        el.classList.add('stat-glow-settle');
+        const settleId = setTimeout(() => {
+          el.classList.remove('stat-glow-settle');
+        }, 450);
+        statTimers.set(el, { intervalId: null, timeoutId: null, settleId });
+      }, 420);
+
+      statTimers.set(el, { intervalId, timeoutId, settleId: null });
     }
 
     function initChart() {
-      const isDark = document.documentElement.classList.contains('dark');
-      const txtColor = isDark ? '#f8fafc' : '#09090b';
-      const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(9, 9, 11, 0.05)';
-      const lineColor = isDark ? '#a855f7' : '#7c3aed';
-      const peak = activeMetric === 'views' ? platformData[activePlatform].rawViews : platformData[activePlatform].rawEngagement;
-      
+      if (!ctxChart || typeof Chart === 'undefined') return;
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      const txtColor = isDarkMode ? '#f8fafc' : '#09090b';
+      const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.06)' : 'rgba(9, 9, 11, 0.06)';
+
       chartInstance = new Chart(ctxChart, {
         type: 'line',
         data: {
-          labels: ['Point 1', 'Point 2', 'Point 3', 'Point 4', 'Point 5', 'Recent', 'Current'],
+          labels: [],
           datasets: [{
-            label: 'Analytics',
-            data: getTrajectoryCurve(peak),
-            borderColor: lineColor,
+            label: 'Recorded Metric',
+            data: [],
+            borderColor: '#a855f7',
             borderWidth: 2.8,
             backgroundColor: createGradient('rgba(168, 85, 247, 0.25)', 'rgba(0, 0, 0, 0.0)'),
             fill: true,
-            tension: 0.4,
-            pointRadius: 4,
+            tension: 0.35,
+            spanGaps: true,
+            pointRadius: 3,
             pointBackgroundColor: '#22d3ee',
             pointHoverRadius: 6
           }]
@@ -1631,8 +2121,14 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { grid: { display: false }, ticks: { color: txtColor, font: { family: 'JetBrains Mono', size: 11 } } },
-            y: { grid: { color: gridColor }, ticks: { color: txtColor, font: { family: 'JetBrains Mono', size: 11 } } }
+            x: {
+              grid: { display: false },
+              ticks: { color: txtColor, maxTicksLimit: 8, font: { family: 'JetBrains Mono', size: 11 } }
+            },
+            y: {
+              grid: { color: gridColor },
+              ticks: { color: txtColor, font: { family: 'JetBrains Mono', size: 11 } }
+            }
           }
         }
       });
@@ -1640,56 +2136,147 @@
 
     function updateChartTheme() {
       if (!chartInstance) return;
-      const isDark = document.documentElement.classList.contains('dark');
-      const txtColor = isDark ? '#f8fafc' : '#09090b';
-      const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(9, 9, 11, 0.05)';
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      const txtColor = isDarkMode ? '#f8fafc' : '#09090b';
+      const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.06)' : 'rgba(9, 9, 11, 0.06)';
       chartInstance.options.scales.x.ticks.color = txtColor;
       chartInstance.options.scales.y.ticks.color = txtColor;
       chartInstance.options.scales.y.grid.color = gridColor;
       updateChartData();
     }
 
-    function animateStatElement(el, finalString) {
-      el.classList.add('stat-glow-anim');
-      let dummyCount = 0;
-      let interval = setInterval(() => {
-        dummyCount += Math.floor(Math.random() * 100);
-        el.innerText = dummyCount;
-      }, 30);
-      setTimeout(() => {
-        clearInterval(interval);
-        el.innerText = finalString;
-        el.classList.remove('stat-glow-anim');
-        el.classList.add('stat-glow-settle');
-        setTimeout(() => el.classList.remove('stat-glow-settle'), 500);
-      }, 650);
-    }
-
     function updateDOMStats() {
-      const data = platformData[activePlatform];
-      document.getElementById('platform-avatar').src = data.avatar; 
-      document.getElementById('platform-title').innerText = data.title; 
-      document.getElementById('platform-handle').innerText = data.handle;
-      document.getElementById('hero-stat-label').innerText = data.heroLabel;
-      document.getElementById('stat-1-label').innerText = data.stat1Label; 
-      document.getElementById('stat-1-icon').className = data.stat1Icon;
-      document.getElementById('stat-2-label').innerText = data.stat2Label; 
-      document.getElementById('stat-2-icon').className = data.stat2Icon;
-      document.getElementById('stat-3-label').innerText = data.stat3Label;
-      document.getElementById('stat-3-icon').className = data.stat3Icon;
-      document.getElementById('stat-4-label').innerText = data.stat4Label; 
-      document.getElementById('stat-4-icon').className = data.stat4Icon;
+      const renderToken = ++statsRenderVersion;
+      const meta = PLATFORM_META[activePlatform];
 
-      document.querySelectorAll('.animated-stat').forEach((el, index) => {
-        let finalVal = index === 0 ? data.heroVal : index === 1 ? data.stat1Val : index === 2 ? data.stat2Val : index === 3 ? data.stat3Val : data.stat4Val;
-        animateStatElement(el, finalVal);
+      document.getElementById('platform-avatar').src = meta.avatar;
+      document.getElementById('platform-title').textContent = meta.title;
+      document.getElementById('platform-handle').textContent = meta.handle;
+      document.getElementById('hero-stat-label').textContent = meta.heroLabel;
+
+      const heroDescEl = document.getElementById('hero-stat-desc');
+      const sourceLabelEl = document.getElementById('analytics-source-label');
+      const statusBadgeEl = document.getElementById('analytics-status-badge');
+      const statEls = document.querySelectorAll('.animated-stat');
+
+      if (statsLoadState === 'loading') {
+        statEls.forEach((el) => animateStatElement(el, '--', renderToken));
+        setChartOverlay(true, 'fa-solid fa-spinner fa-spin text-2xl text-accent mb-2', 'Loading recorded history from stats.json...');
+        if (statusBadgeEl) statusBadgeEl.textContent = 'STATUS: LOADING...';
+        return;
+      }
+
+      if (statsLoadState !== 'ready' || statsHistory.length === 0) {
+        const reason = statsLoadState === 'empty'
+          ? 'No historical records found in stats.json.'
+          : (statsErrorMessage || 'Could not load stats.json. Serve over HTTP/HTTPS or check file availability.');
+        document.getElementById('stat-1-label').textContent = 'Views';
+        document.getElementById('stat-2-label').textContent = 'Uploads';
+        document.getElementById('stat-3-label').textContent = 'Engagement';
+        document.getElementById('stat-4-label').textContent = 'Last Synced';
+        statEls.forEach((el) => animateStatElement(el, 'N/A', renderToken));
+        if (heroDescEl) {
+          heroDescEl.className = 'text-xs font-medium text-amber-400 mt-2 flex items-center gap-1.5';
+          heroDescEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Live Data Unavailable';
+        }
+        if (sourceLabelEl) sourceLabelEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-amber-400"></i> stats.json unavailable';
+        if (statusBadgeEl) {
+          statusBadgeEl.className = 'text-amber-400 font-bold tracking-wider';
+          statusBadgeEl.textContent = 'STATUS: UNAVAILABLE';
+        }
+        setChartOverlay(true, 'fa-solid fa-circle-exclamation text-2xl text-amber-400 mb-2', reason);
+        updateChartData();
+        return;
+      }
+
+      const latest = statsHistory[statsHistory.length - 1];
+      const latestDateFormatted = formatDateShort(latest.date);
+
+      let values = [];
+      if (activePlatform === 'youtube') {
+        const yt = extractYouTubePoint(latest);
+        document.getElementById('stat-1-label').textContent = 'Total Views';
+        document.getElementById('stat-1-icon').className = 'fa-solid fa-eye';
+        document.getElementById('stat-2-label').textContent = 'Uploads';
+        document.getElementById('stat-2-icon').className = 'fa-solid fa-upload';
+        document.getElementById('stat-3-label').textContent = 'Recorded Engagement';
+        document.getElementById('stat-3-icon').className = 'fa-solid fa-heart';
+        document.getElementById('stat-4-label').textContent = 'Last Synced';
+        document.getElementById('stat-4-icon').className = 'fa-solid fa-calendar-check';
+
+        values = [
+          formatCompactNumber(yt.subscribers),
+          formatCompactNumber(yt.views),
+          formatCompactNumber(yt.uploads),
+          formatCompactNumber(yt.engagement),
+          latestDateFormatted
+        ];
+
+        if (heroDescEl) {
+          heroDescEl.className = 'text-xs font-medium text-emerald-500 mt-2 flex items-center gap-1.5';
+          heroDescEl.innerHTML = `<i class="fa-solid fa-check-circle"></i> Channel Snapshot (${latest.date})`;
+        }
+        if (sourceLabelEl) {
+          sourceLabelEl.innerHTML = `<i class="fa-solid fa-shield-halved text-emerald-400"></i> YouTube Channel History (${statsHistory.length} days in stats.json)`;
+        }
+        if (statusBadgeEl) {
+          statusBadgeEl.className = 'text-emerald-400 font-bold tracking-wider';
+          statusBadgeEl.textContent = `SYNCED: ${latest.date}`;
+        }
+      } else {
+        const ig = extractInstagramPoint(latest);
+        document.getElementById('stat-1-label').textContent = ig.isLifetime
+          ? 'Total Views'
+          : (ig.viewsIsLegacyEstimate ? 'Recent Feed Est. Views' : 'Recent Feed Views');
+        document.getElementById('stat-1-icon').className = 'fa-solid fa-eye';
+        document.getElementById('stat-2-label').textContent = ig.isLifetime ? 'Total Uploads' : 'Tracked Feed Window';
+        document.getElementById('stat-2-icon').className = 'fa-solid fa-layer-group';
+        document.getElementById('stat-3-label').textContent = ig.isLifetime ? 'Total Engagement' : 'Recent Feed Engagement';
+        document.getElementById('stat-3-icon').className = 'fa-solid fa-heart';
+        document.getElementById('stat-4-label').textContent = 'Last Synced';
+        document.getElementById('stat-4-icon').className = 'fa-solid fa-calendar-check';
+
+        const uploadsDisplay = ig.isLifetime
+          ? formatCompactNumber(ig.uploads)
+          : (ig.recentPostCount !== null ? `${ig.recentPostCount} posts` : 'N/A');
+
+        values = [
+          formatCompactNumber(ig.followers),
+          formatCompactNumber(ig.views),
+          uploadsDisplay,
+          formatCompactNumber(ig.engagement),
+          latestDateFormatted
+        ];
+
+        if (heroDescEl) {
+          heroDescEl.className = 'text-xs font-medium text-sky-400 mt-2 flex items-center gap-1.5';
+          heroDescEl.innerHTML = ig.isLifetime
+            ? `<i class="fa-solid fa-check-circle"></i> Lifetime Account Snapshot (${latest.date})`
+            : `<i class="fa-solid fa-circle-info"></i> Baseline Followers + Latest ${ig.recentPostCount || 6}-Post Feed Window`;
+        }
+        if (sourceLabelEl) {
+          sourceLabelEl.innerHTML = ig.isLifetime
+            ? `<i class="fa-solid fa-shield-halved text-emerald-400"></i> Instagram History (${statsHistory.length} days in stats.json)`
+            : `<i class="fa-solid fa-shield-halved text-sky-400"></i> Recent-Feed Snapshot Window (Behold Feed, ${statsHistory.length} days)`;
+        }
+        if (statusBadgeEl) {
+          statusBadgeEl.className = 'text-sky-400 font-bold tracking-wider';
+          statusBadgeEl.textContent = `SYNCED: ${latest.date}`;
+        }
+      }
+
+      statEls.forEach((el, index) => {
+        animateStatElement(el, values[index] ?? 'N/A', renderToken);
       });
+
       updateChartData();
     }
 
     function switchPlatform(platform) {
+      if (platform !== 'youtube' && platform !== 'instagram') return;
       activePlatform = platform;
-      const btnYt = document.getElementById('btn-youtube'), btnIg = document.getElementById('btn-instagram');
+      const btnYt = document.getElementById('btn-youtube');
+      const btnIg = document.getElementById('btn-instagram');
       if (platform === 'youtube') {
         btnYt.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
         btnIg.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
@@ -1701,9 +2288,11 @@
     }
 
     function switchMetric(metric) {
+      if (metric !== 'views' && metric !== 'engagement') return;
       activeMetric = metric;
       ['views', 'engagement'].forEach(m => {
         const btn = document.getElementById('tab-' + m);
+        if (!btn) return;
         if (m === metric) btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-purple-500/15 border border-purple-500/40 transition-all";
         else btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all";
       });
@@ -1712,19 +2301,108 @@
 
     function updateChartData() {
       if (!chartInstance) return;
+      const headingEl = document.getElementById('chart-heading');
+
+      if (statsLoadState !== 'ready' || statsHistory.length === 0) {
+        chartInstance.data.labels = [];
+        chartInstance.data.datasets[0].data = [];
+        chartInstance.update();
+        return;
+      }
+
       const isYoutube = activePlatform === 'youtube';
       const lineColor = isYoutube ? '#a855f7' : '#ec4899';
-      const peak = activeMetric === 'views' ? platformData[activePlatform].rawViews : platformData[activePlatform].rawEngagement;
-      chartInstance.data.datasets[0].data = getTrajectoryCurve(peak);
-      chartInstance.data.datasets[0].borderColor = lineColor; 
+      const labels = statsHistory.map((entry) => formatDateShort(entry.date));
+      const series = statsHistory.map((entry) => {
+        const pt = isYoutube ? extractYouTubePoint(entry) : extractInstagramPoint(entry);
+        return activeMetric === 'views' ? pt.views : pt.engagement;
+      });
+
+      const hasValidPoints = series.some((v) => v !== null);
+
+      if (headingEl) {
+        if (isYoutube) {
+          headingEl.textContent = activeMetric === 'views'
+            ? 'YouTube Channel Views History'
+            : 'YouTube Recorded Engagement History';
+        } else {
+          const latestIg = extractInstagramPoint(statsHistory[statsHistory.length - 1]);
+          if (activeMetric === 'views') {
+            headingEl.textContent = latestIg.isLifetime
+              ? 'Instagram Lifetime Views History'
+              : 'Instagram Recent-Feed Snapshot Views';
+          } else {
+            headingEl.textContent = latestIg.isLifetime
+              ? 'Instagram Lifetime Engagement History'
+              : 'Instagram Recent-Feed Engagement (Latest 6 Posts)';
+          }
+        }
+      }
+
+      if (!hasValidPoints) {
+        chartInstance.data.labels = labels;
+        chartInstance.data.datasets[0].data = [];
+        chartInstance.update();
+        setChartOverlay(
+          true,
+          'fa-solid fa-chart-line text-2xl text-text-muted mb-2',
+          `No recorded ${activeMetric} data available for ${isYoutube ? 'YouTube' : 'Instagram'} in stats.json.`
+        );
+        return;
+      }
+
+      setChartOverlay(false);
+      chartInstance.data.labels = labels;
+      chartInstance.data.datasets[0].label = activeMetric === 'views' ? 'Views' : 'Engagement';
+      chartInstance.data.datasets[0].data = series;
+      chartInstance.data.datasets[0].borderColor = lineColor;
       chartInstance.data.datasets[0].pointBackgroundColor = '#22d3ee';
-      chartInstance.data.datasets[0].backgroundColor = createGradient(isYoutube ? 'rgba(168, 85, 247, 0.24)' : 'rgba(236, 72, 153, 0.24)', 'rgba(0, 0, 0, 0.0)');
+      chartInstance.data.datasets[0].backgroundColor = createGradient(
+        isYoutube ? 'rgba(168, 85, 247, 0.24)' : 'rgba(236, 72, 153, 0.24)',
+        'rgba(0, 0, 0, 0.0)'
+      );
       chartInstance.update();
+    }
+
+    async function loadAnalyticsHistory() {
+      statsLoadState = 'loading';
+      updateDOMStats();
+
+      try {
+        const res = await fetch(`./stats.json?t=${Date.now()}`, { cache: 'no-cache' });
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status} while loading stats.json`);
+        }
+
+        const raw = await res.json();
+        if (!Array.isArray(raw)) {
+          throw new Error('Malformed stats.json: expected a JSON array.');
+        }
+
+        const validEntries = raw.filter(
+          (item) => item && typeof item === 'object' && typeof item.date === 'string' && (item.youtube || item.instagram)
+        );
+
+        if (validEntries.length === 0) {
+          statsHistory = [];
+          statsLoadState = 'empty';
+        } else {
+          statsHistory = validEntries;
+          statsLoadState = 'ready';
+        }
+      } catch (err) {
+        console.error('[Analytics] Failed to load stats.json:', err);
+        statsHistory = [];
+        statsLoadState = 'error';
+        statsErrorMessage = 'Unable to load stats.json. Verify network access or serve over HTTP/HTTPS.';
+      }
+
+      updateDOMStats();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       initChart();
-      updateDOMStats();
+      loadAnalyticsHistory();
     });
   </script>
 </body>
