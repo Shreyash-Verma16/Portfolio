@@ -89,13 +89,19 @@
       --canvas-filter: blur(16px) saturate(160%) contrast(125%);
     }
 
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
+
     body {
       background-color: var(--background);
       color: var(--text-primary);
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       transition: background-color 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s ease;
     }
+
+    a, button { touch-action: manipulation; }
 
     html.dark body.intro-blackout {
       background-color: #000000 !important;
@@ -622,7 +628,7 @@
   <!-- 2-STATE LERP NAV: ADHERENT BAR <-> DYNAMIC ISLAND         -->
   <!-- ========================================================= -->
   <div id="nav-wrapper">
-    <nav id="dynamic-nav" class="is-adherent" style="width: 100vw; height: 72px; border-radius: 0px; padding: 0 28px;" aria-label="Primary Navigation">
+    <nav id="dynamic-nav" class="is-adherent" style="width: 100%; height: 64px; border-radius: 0px; padding: 0 16px;" aria-label="Primary Navigation">
       <div class="nav-inner">
         
         <!-- Left Brand -->
@@ -725,25 +731,25 @@
     <!-- ========================================================= -->
     <!-- CENTERED HERO SECTION WITH STAGED INTRO SEQUENCE          -->
     <!-- ========================================================= -->
-    <section id="dev-home" data-section-name="HOME" class="max-w-6xl mx-auto px-6 flex flex-col items-center justify-center text-center min-h-screen pt-24 pb-16">
-      <div class="space-y-8 max-w-4xl mx-auto flex flex-col items-center">
+    <section id="dev-home" data-section-name="HOME" class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center text-center min-h-[100svh] pt-24 pb-16">
+      <div class="space-y-6 sm:space-y-8 max-w-4xl mx-auto flex flex-col items-center w-full">
         
         <!-- 1. Typed Name Heading -->
-        <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[6.25rem] font-black tracking-tighter leading-[0.95] min-h-[1.05em] flex items-center justify-center flex-wrap">
+        <h1 class="text-[2.4rem] sm:text-7xl md:text-8xl lg:text-[6.25rem] font-black tracking-tighter leading-[0.98] min-h-[1.05em] flex items-center justify-center flex-wrap break-words max-w-full">
           <span id="hero-typed-name" class="apple-siri-shimmer"></span><span id="hero-typing-cursor" class="typing-cursor" aria-hidden="true"></span>
         </h1>
 
         <!-- 2. Subtitle (Appears after Name completes typing) -->
-        <p id="hero-subtitle" class="text-xl sm:text-2xl md:text-3xl text-text-secondary font-semibold tracking-tight opacity-0 translate-y-5">
-          BCA Student <span class="text-cyan-500/60 mx-3">|</span> Aspiring AI Software Engineer
+        <p id="hero-subtitle" class="text-base sm:text-2xl md:text-3xl text-text-secondary font-semibold tracking-tight opacity-0 translate-y-5 px-2 leading-snug">
+          BCA Student <span class="text-cyan-500/60 mx-2 sm:mx-3">|</span> Aspiring AI Software Engineer
         </p>
 
         <!-- 3. Centered Buttons (Appear after Subtitle completes) -->
-        <div id="hero-actions" class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 pt-4 opacity-0 translate-y-5">
-          <a href="#dev-projects" class="min-w-[165px] px-9 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full click-shrink border border-white/20 shadow-[0_10px_30px_-10px_rgba(6,182,212,0.65)] text-base tracking-wide">
+        <div id="hero-actions" class="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-8 pt-3 sm:pt-4 opacity-0 translate-y-5 w-full max-w-xs sm:max-w-none">
+          <a href="#dev-projects" class="w-full sm:w-auto sm:min-w-[165px] px-8 sm:px-9 py-3.5 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-full click-shrink border border-white/20 shadow-[0_10px_30px_-10px_rgba(6,182,212,0.65)] text-sm sm:text-base tracking-wide text-center">
             <i class="fa-solid fa-code mr-2"></i>Projects
           </a>
-          <a href="#dev-skills" class="min-w-[165px] px-9 py-4 glass-panel font-bold rounded-full click-shrink hover:border-cyan-400 text-text-primary text-base tracking-wide">
+          <a href="#dev-skills" class="w-full sm:w-auto sm:min-w-[165px] px-8 sm:px-9 py-3.5 sm:py-4 glass-panel font-bold rounded-full click-shrink hover:border-cyan-400 text-text-primary text-sm sm:text-base tracking-wide text-center">
             <i class="fa-solid fa-layer-group mr-2 text-cyan-400"></i>Skills
           </a>
         </div>
@@ -754,30 +760,30 @@
     <!-- ========================================================= -->
     <!-- THE CORE & ACADEMICS                                      -->
     <!-- ========================================================= -->
-    <section id="dev-academic" data-section-name="ACADEMICS" class="max-w-7xl mx-auto px-6 py-24 border-t border-border/40">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-6">
+    <section id="dev-academic" data-section-name="ACADEMICS" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 border-t border-border/40">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch mb-5 sm:mb-6">
         
-        <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node group">
-          <div class="h-2 w-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mb-6 group-hover:w-24 transition-all duration-500"></div>
-          <h3 class="text-3xl font-bold mb-4 text-text-primary">The Core</h3>
-          <p class="text-text-secondary font-medium leading-relaxed mb-4">BCA student & aspiring AI/ML engineer, building strong foundations in programming and applied AI. Focused on learning fundamentals deeply, not just collecting technologies.</p>
-          <p class="text-text-secondary font-medium leading-relaxed">Follow a project-driven approach — turning what I learn into working projects that are functional, testable, and explainable.</p>
+        <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-10 reveal-node group">
+          <div class="h-2 w-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mb-5 sm:mb-6 group-hover:w-24 transition-all duration-500"></div>
+          <h3 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-text-primary">The Core</h3>
+          <p class="text-sm sm:text-base text-text-secondary font-medium leading-relaxed mb-4">BCA student & aspiring AI/ML engineer, building strong foundations in programming and applied AI. Focused on learning fundamentals deeply, not just collecting technologies.</p>
+          <p class="text-sm sm:text-base text-text-secondary font-medium leading-relaxed">Follow a project-driven approach — turning what I learn into working projects that are functional, testable, and explainable.</p>
         </div>
         
-        <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node group" style="transition-delay: 0.1s;">
-          <h3 class="text-2xl font-bold mb-6 text-text-primary">Academic Status</h3>
-          <ul class="space-y-4 text-text-secondary font-medium leading-relaxed">
-            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> Completed Class 10 & 12 from CBSE.</li>
-            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> Currently pursuing BCA at Rajiv Academy, 3rd semester.</li>
-            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1"></i> Scored 7.6 CGPA in my 1st semester.</li>
+        <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-10 reveal-node group" style="transition-delay: 0.1s;">
+          <h3 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-text-primary">Academic Status</h3>
+          <ul class="space-y-3 sm:space-y-4 text-sm sm:text-base text-text-secondary font-medium leading-relaxed">
+            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1 shrink-0"></i><span>Completed Class 10 & 12 from CBSE.</span></li>
+            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1 shrink-0"></i><span>Currently pursuing BCA at Rajiv Academy, 3rd semester.</span></li>
+            <li class="flex items-start gap-3 glass-panel p-3 rounded-xl border-cyan-500/20"><i class="fa-solid fa-check text-cyan-500 mt-1 shrink-0"></i><span>Scored 7.6 CGPA in my 1st semester.</span></li>
           </ul>
         </div>
       </div>
 
       <!-- Current Focus (3 Card Row) -->
-      <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node" style="transition-delay: 0.2s;">
-        <h3 class="text-2xl font-bold mb-6 text-text-primary">Current Focus</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-10 reveal-node" style="transition-delay: 0.2s;">
+        <h3 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-text-primary">Current Focus</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           <div class="glass-panel p-5 rounded-2xl hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-400 flex items-center gap-4 group">
             <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
             <div>
@@ -806,33 +812,33 @@
     <!-- ========================================================= -->
     <!-- SKILLS                                                    -->
     <!-- ========================================================= -->
-    <section id="dev-skills" data-section-name="SKILLS" class="max-w-7xl mx-auto px-6 py-24 border-t border-border/40">
-      <div class="text-center mb-12 reveal-node">
+    <section id="dev-skills" data-section-name="SKILLS" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 border-t border-border/40">
+      <div class="text-center mb-10 sm:mb-12 reveal-node">
         <span class="glass-panel px-4 py-1.5 rounded-full inline-block mb-4 border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-mono font-bold text-xs uppercase tracking-widest">
           Core Capabilities
         </span>
-        <h2 class="text-4xl sm:text-5xl font-black tracking-tighter text-text-primary">Skills I Have</h2>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tighter text-text-primary">Skills I Have</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold font-mono shrink-0">01</div>
-          <p class="text-lg font-bold text-text-primary">Python Development</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div class="spotlight-card flex items-center gap-4 sm:gap-6 glass-panel p-5 sm:p-6 rounded-2xl sm:rounded-3xl reveal-node">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white font-bold font-mono shrink-0 text-sm sm:text-base">01</div>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Python Development</p>
         </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.1s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold font-mono shrink-0">02</div>
-          <p class="text-lg font-bold text-text-primary">Problem Solving</p>
+        <div class="spotlight-card flex items-center gap-4 sm:gap-6 glass-panel p-5 sm:p-6 rounded-2xl sm:rounded-3xl reveal-node" style="transition-delay: 0.1s;">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold font-mono shrink-0 text-sm sm:text-base">02</div>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Problem Solving</p>
         </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.2s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold font-mono shrink-0">03</div>
-          <p class="text-lg font-bold text-text-primary">Debugging &amp; Troubleshooting</p>
+        <div class="spotlight-card flex items-center gap-4 sm:gap-6 glass-panel p-5 sm:p-6 rounded-2xl sm:rounded-3xl reveal-node" style="transition-delay: 0.2s;">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold font-mono shrink-0 text-sm sm:text-base">03</div>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Debugging &amp; Troubleshooting</p>
         </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node" style="transition-delay: 0.3s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-500 flex items-center justify-center text-white font-bold font-mono shrink-0">04</div>
-          <p class="text-lg font-bold text-text-primary">AI &amp; Computer Vision</p>
+        <div class="spotlight-card flex items-center gap-4 sm:gap-6 glass-panel p-5 sm:p-6 rounded-2xl sm:rounded-3xl reveal-node" style="transition-delay: 0.3s;">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-500 flex items-center justify-center text-white font-bold font-mono shrink-0 text-sm sm:text-base">04</div>
+          <p class="text-base sm:text-lg font-bold text-text-primary">AI &amp; Computer Vision</p>
         </div>
-        <div class="spotlight-card flex items-center gap-6 glass-panel p-6 rounded-3xl reveal-node md:col-span-2" style="transition-delay: 0.4s;">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold font-mono shrink-0">05</div>
-          <p class="text-lg font-bold text-text-primary">Software Engineering</p>
+        <div class="spotlight-card flex items-center gap-4 sm:gap-6 glass-panel p-5 sm:p-6 rounded-2xl sm:rounded-3xl reveal-node md:col-span-2" style="transition-delay: 0.4s;">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold font-mono shrink-0 text-sm sm:text-base">05</div>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Software Engineering</p>
         </div>
       </div>
     </section>
@@ -840,21 +846,21 @@
     <!-- ========================================================= -->
     <!-- PROOF OF WORK — ALTERNATING EDITORIAL ZIG-ZAG SHOWCASE    -->
     <!-- ========================================================= -->
-    <section id="dev-projects" data-section-name="PROOF OF WORK" class="proof-zigzag-section py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border/40" aria-label="Proof of Work Projects">
+    <section id="dev-projects" data-section-name="PROOF OF WORK" class="proof-zigzag-section py-16 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border/40" aria-label="Proof of Work Projects">
       
       <!-- Section Header -->
-      <div id="proof-header-block" class="text-center mb-20 sm:mb-28 reveal-node">
+      <div id="proof-header-block" class="text-center mb-14 sm:mb-24 reveal-node">
         <span class="glass-panel px-4 py-1.5 rounded-full inline-block mb-4 border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-mono font-bold text-xs uppercase tracking-widest">
           Verified Execution
         </span>
-        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-text-primary">Proof of Work</h2>
-        <p class="text-text-secondary mt-3 max-w-2xl mx-auto text-base sm:text-lg font-medium leading-relaxed">
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-text-primary">Proof of Work</h2>
+        <p class="text-text-secondary mt-3 max-w-2xl mx-auto text-sm sm:text-lg font-medium leading-relaxed">
           Editorial showcase of software builds, algorithmic problem-solving, and technical milestones.
         </p>
       </div>
 
       <!-- Alternating Zig-Zag List (Row 1: LHS Photo / RHS Text -> Row 2: LHS Text / RHS Photo) -->
-      <div id="proof-zigzag-list" class="space-y-24 sm:space-y-32">
+      <div id="proof-zigzag-list" class="space-y-16 sm:space-y-28">
         <!-- Populated by JS -->
       </div>
     </section>
@@ -862,18 +868,18 @@
     <!-- ========================================================= -->
     <!-- GET IN TOUCH — DEDICATED FORM SECTION                     -->
     <!-- ========================================================= -->
-    <section id="contact" data-section-name="CONTACT" class="py-24 sm:py-32 relative z-10 border-t border-border/50">
-      <div class="max-w-3xl mx-auto px-6">
-        <div class="text-center mb-14 reveal-node">
+    <section id="contact" data-section-name="CONTACT" class="py-16 sm:py-28 relative z-10 border-t border-border/50">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-14 reveal-node">
           <span class="section-label glass-panel px-4 py-2 rounded-full inline-block mb-4 shadow-sm border-cyan-500/30 text-cyan-600 dark:text-cyan-400 font-mono font-bold text-xs uppercase tracking-wider">05 — Contact</span>
-          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary transition-colors duration-500">Get in Touch</h2>
-          <p class="text-text-secondary mt-4 max-w-lg mx-auto text-base sm:text-lg font-medium transition-colors duration-500">
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary transition-colors duration-500">Get in Touch</h2>
+          <p class="text-text-secondary mt-3 sm:mt-4 max-w-lg mx-auto text-sm sm:text-lg font-medium transition-colors duration-500">
             Have a project, opportunity, or question in mind? Send me a message directly below.
           </p>
         </div>
 
         <div class="reveal-node" style="transition-delay: 0.1s;">
-          <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 relative group">
+          <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-10 relative group">
             <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-cyan-500/25 transition-all duration-500 ease-out"></div>
             <form id="dev-contact-form" action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-6 relative z-10">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -1042,7 +1048,7 @@
   </main>
 
   <!-- ── Grouped Document Download Notifications (Resume & Marksheet) ── -->
-  <div id="toast-container" class="fixed bottom-7 right-7 z-[99999] flex flex-col gap-4 w-[calc(100%-56px)] max-w-[380px] pointer-events-none">
+  <div id="toast-container" class="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:bottom-7 sm:right-7 z-[99999] flex flex-col gap-3 sm:gap-4 sm:w-[380px] pointer-events-none">
     
     <!-- 1st Sem Marksheet Toast -->
     <div id="marksheet-toast" class="toast-card glass-panel rounded-3xl p-5 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.6),0_0_35px_rgba(6,182,212,0.28)] transform translate-y-[150%] scale-[0.88] opacity-0 transition-all duration-[0.85s] ease-[cubic-bezier(0.16,1,0.3,1)]">
@@ -1721,10 +1727,10 @@
       let navRafId = null;
 
       let curW = window.innerWidth;
-      let curH = 72;
+      let curH = window.innerWidth < 640 ? 64 : 72;
       let curTop = 0;
       let curRadius = 0;
-      let curPadX = 28;
+      let curPadX = window.innerWidth < 640 ? 14 : 28;
 
       let pillCurX = 0, pillTargetX = 0;
       let pillCurW = 0, pillTargetW = 0;
@@ -1765,11 +1771,12 @@
 
       function animateNavLerp() {
         const isIsland = navMode === 'island';
-        const targetW = isIsland ? Math.min(window.innerWidth * 0.94, 1020) : window.innerWidth;
-        const targetH = isIsland ? 62 : 72;
-        const targetTop = isIsland ? 18 : 0;
-        const targetRadius = isIsland ? 32 : 0;
-        const targetPadX = isIsland ? 22 : 28;
+        const isMobile = window.innerWidth < 640;
+        const targetW = isIsland ? Math.min(window.innerWidth - (isMobile ? 20 : 32), 1020) : window.innerWidth;
+        const targetH = isMobile ? (isIsland ? 56 : 64) : (isIsland ? 62 : 72);
+        const targetTop = isIsland ? (isMobile ? 10 : 18) : 0;
+        const targetRadius = isIsland ? (isMobile ? 24 : 32) : 0;
+        const targetPadX = isMobile ? 14 : (isIsland ? 22 : 28);
 
         curW = lerp(curW, targetW, lerpFactor);
         curH = lerp(curH, targetH, lerpFactor);
