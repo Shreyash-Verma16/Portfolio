@@ -90,12 +90,18 @@
       --canvas-filter: blur(16px) saturate(160%) contrast(125%);
     }
 
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
     body {
       background-color: var(--background);
       color: var(--text-primary);
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       transition: background-color 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.6s ease;
+    }
+    a, button {
+      touch-action: manipulation;
     }
 
     /* ── GOOGLE STITCH LOWER-CRADLE BACKGROUND & 15s/5s BREATHING CYCLE ── */
@@ -421,7 +427,7 @@
     /* ── Timeline ── */
     .timeline-line {
       position: absolute;
-      left: 15px;
+      left: 11px;
       top: 0;
       bottom: 0;
       width: 2px;
@@ -430,7 +436,7 @@
     }
     .timeline-dot {
       position: absolute;
-      left: 9px;
+      left: 5px;
       top: 6px;
       width: 14px;
       height: 14px;
@@ -440,6 +446,10 @@
       z-index: 2;
       box-shadow: 0 0 14px rgba(168, 85, 247, 0.65);
       transition: transform 0.4s ease;
+    }
+    @media (min-width: 640px) {
+      .timeline-line { left: 15px; }
+      .timeline-dot { left: 9px; }
     }
 
     .stat-glow-anim {
@@ -459,8 +469,8 @@
     .fanned-cards-wrapper {
       position: relative;
       width: 100%;
-      max-width: 320px;
-      height: 520px;
+      max-width: 100%;
+      height: 330px;
       margin: 0 auto;
       display: flex;
       justify-content: center;
@@ -470,15 +480,15 @@
     .fan-card {
       position: absolute;
       bottom: 10px;
-      width: 260px;
-      height: 480px;
-      border-radius: 32px;
+      width: 168px;
+      height: 300px;
+      border-radius: 22px;
       background: var(--surface);
       backdrop-filter: blur(36px);
       -webkit-backdrop-filter: blur(36px);
       border: 1px solid var(--border);
-      box-shadow: inset 0 1px 1px var(--glass-shine), 0 25px 50px -12px rgba(0, 0, 0, 0.75);
-      padding: 12px;
+      box-shadow: inset 0 1px 1px var(--glass-shine), 0 20px 40px -12px rgba(0, 0, 0, 0.75);
+      padding: 8px;
       transform-origin: bottom center;
       cursor: pointer;
       transition: box-shadow 0.4s ease, border-color 0.4s ease;
@@ -491,8 +501,23 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 20px;
+      border-radius: 15px;
       pointer-events: none;
+    }
+    @media (min-width: 640px) {
+      .fanned-cards-wrapper {
+        max-width: 320px;
+        height: 520px;
+      }
+      .fan-card {
+        width: 260px;
+        height: 480px;
+        border-radius: 32px;
+        padding: 12px;
+      }
+      .fan-card img {
+        border-radius: 20px;
+      }
     }
 
     /* ── Latest Work / iPhone Pro Mockup ── */
@@ -619,15 +644,15 @@
   <!-- 2-STATE LERP NAV: ADHERENT BAR <-> DYNAMIC ISLAND         -->
   <!-- ========================================================= -->
   <div id="nav-wrapper">
-    <nav id="dynamic-nav" class="is-adherent" style="width: 100vw; height: 72px; border-radius: 0px; padding: 0 28px;">
+    <nav id="dynamic-nav" class="is-adherent" style="width: 100%; height: 64px; border-radius: 0px; padding: 0 16px;">
       <div class="nav-inner">
         
         <!-- Left Brand -->
-        <a href="#home" class="flex items-center gap-3 click-shrink shrink-0">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 p-[1.5px] overflow-hidden">
+        <a href="#home" class="flex items-center gap-2.5 sm:gap-3 click-shrink shrink-0">
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 p-[1.5px] overflow-hidden">
             <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Shreyash Verma" class="w-full h-full rounded-full object-cover" />
           </div>
-          <span class="font-extrabold text-base tracking-tight text-text-primary">SHREYASH</span>
+          <span class="font-extrabold text-sm sm:text-base tracking-tight text-text-primary">SHREYASH</span>
         </a>
 
         <!-- Center Navigation Links -->
@@ -721,26 +746,26 @@
     <!-- ========================================== -->
     <!-- 1. HOME SECTION                            -->
     <!-- ========================================== -->
-    <section id="home" class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center min-h-screen pt-32 pb-12">
+    <section id="home" class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100svh-1rem)] pt-24 sm:pt-32 pb-12">
       
       <!-- Text Side -->
-      <div class="space-y-8 relative z-10">
-        <div class="flex items-center gap-4 mb-4 reveal-node">
-          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel" class="social-btn flex items-center justify-center w-12 h-12 rounded-full border border-border hover:border-red-500 hover:text-red-500 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]">
-            <i class="fa-brands fa-youtube text-2xl"></i>
+      <div class="space-y-6 sm:space-y-8 relative z-10">
+        <div class="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-4 reveal-node">
+          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel" class="social-btn flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-border hover:border-red-500 hover:text-red-500 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]">
+            <i class="fa-brands fa-youtube text-xl sm:text-2xl"></i>
           </a>
-          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile" class="social-btn flex items-center justify-center w-12 h-12 rounded-full border border-border hover:border-pink-500 hover:text-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]">
-            <i class="fa-brands fa-instagram text-2xl"></i>
+          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile" class="social-btn flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-border hover:border-pink-500 hover:text-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]">
+            <i class="fa-brands fa-instagram text-xl sm:text-2xl"></i>
           </a>
         </div>
 
-        <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] apple-siri-shimmer reveal-node">SHREYASH<br/>VERMA</h1>
+        <h1 class="text-[2.6rem] sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.95] sm:leading-[0.9] apple-siri-shimmer reveal-node break-words">SHREYASH<br/>VERMA</h1>
         
-        <div class="flex flex-wrap gap-4 pt-4 reveal-node">
-          <a href="#creator-process" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-cyan-400 text-white font-bold rounded-full transition-transform hover:scale-105 shadow-[0_10px_30px_-10px_rgba(168,85,247,0.65)] border border-white/20">
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4 reveal-node">
+          <a href="#creator-process" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-purple-600 via-fuchsia-500 to-cyan-400 text-white font-bold rounded-full transition-transform hover:scale-105 shadow-[0_10px_30px_-10px_rgba(168,85,247,0.65)] border border-white/20">
             <i class="fa-solid fa-play text-xs"></i> Watch Process
           </a>
-          <a href="#creator-analytics" class="inline-flex items-center gap-3 px-8 py-4 glass-panel text-text-primary font-bold rounded-full transition-transform hover:scale-105 border border-border hover:border-cyan-400/60">
+          <a href="#creator-analytics" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base glass-panel text-text-primary font-bold rounded-full transition-transform hover:scale-105 border border-border hover:border-cyan-400/60">
             <i class="fa-solid fa-chart-line text-cyan-400"></i> Channel Metrics
           </a>
         </div>
@@ -768,46 +793,46 @@
     <!-- ========================================== -->
     <!-- 2. PROCESS SECTION                         -->
     <!-- ========================================== -->
-    <section id="creator-process" class="py-24 sm:py-32 relative z-10 border-t border-border/40">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="max-w-2xl mb-16 reveal-node text-center lg:text-left">
-          <span class="glass-panel px-4 py-2 rounded-full inline-block mb-4 border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-cyan-300 font-mono font-bold text-xs uppercase tracking-wider">
+    <section id="creator-process" class="py-16 sm:py-24 lg:py-32 relative z-10 border-t border-border/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="max-w-2xl mb-10 sm:mb-16 reveal-node text-center lg:text-left">
+          <span class="glass-panel px-4 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4 border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-cyan-300 font-mono font-bold text-xs uppercase tracking-wider">
             <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> 02 — Production Workflow
           </span>
-          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary">How My Content Is Generated</h2>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary">How My Content Is Generated</h2>
         </div>
 
-        <div class="relative pl-12 sm:pl-16">
+        <div class="relative pl-9 sm:pl-16">
           <div class="timeline-line"></div>
           
-          <div class="relative pb-12 reveal-node" style="transition-delay: 0.1s;">
+          <div class="relative pb-8 sm:pb-12 reveal-node" style="transition-delay: 0.1s;">
             <div class="timeline-dot"></div>
-            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8">
+            <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8">
               <span class="text-xs font-mono bg-surface border border-border px-3 py-1 rounded-full text-purple-600 dark:text-cyan-300 relative z-10 font-bold uppercase">Step 01</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-4 relative z-10">Brainstorming & Research</h3>
-              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+              <h3 class="text-lg sm:text-2xl font-bold text-text-primary mt-3 sm:mt-4 relative z-10">Brainstorming & Research</h3>
+              <p class="text-sm sm:text-base text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
                 Blending AI-driven research with trending tech topics. Every concept is cross-referenced with official technical documentation to ensure absolute accuracy.
               </p>
             </div>
           </div>
 
-          <div class="relative pb-12 reveal-node" style="transition-delay: 0.2s;">
+          <div class="relative pb-8 sm:pb-12 reveal-node" style="transition-delay: 0.2s;">
             <div class="timeline-dot"></div>
-            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8">
+            <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8">
               <span class="text-xs font-mono bg-surface border border-border px-3 py-1 rounded-full text-purple-600 dark:text-cyan-300 relative z-10 font-bold uppercase">Step 02</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-4 relative z-10">Script & Storyboarding</h3>
-              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+              <h3 class="text-lg sm:text-2xl font-bold text-text-primary mt-3 sm:mt-4 relative z-10">Script & Storyboarding</h3>
+              <p class="text-sm sm:text-base text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
                 Deconstructing complex technical systems into structured, engaging narratives built for maximum audience retention and clarity.
               </p>
             </div>
           </div>
 
-          <div class="relative pb-12 reveal-node" style="transition-delay: 0.3s;">
+          <div class="relative pb-8 sm:pb-12 reveal-node" style="transition-delay: 0.3s;">
             <div class="timeline-dot"></div>
-            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8">
+            <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8">
               <span class="text-xs font-mono bg-surface border border-border px-3 py-1 rounded-full text-purple-600 dark:text-cyan-300 relative z-10 font-bold uppercase">Step 03</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-4 relative z-10">Production & Realistic Editing</h3>
-              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+              <h3 class="text-lg sm:text-2xl font-bold text-text-primary mt-3 sm:mt-4 relative z-10">Production & Realistic Editing</h3>
+              <p class="text-sm sm:text-base text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
                 Recording energetic audio paired with high-end, realistic AI visual animations—avoiding fake hacker tropes to clearly demonstrate real hardware/software operations.
               </p>
             </div>
@@ -815,10 +840,10 @@
 
           <div class="relative reveal-node" style="transition-delay: 0.4s;">
             <div class="timeline-dot"></div>
-            <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8">
+            <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8">
               <span class="text-xs font-mono bg-surface border border-border px-3 py-1 rounded-full text-purple-600 dark:text-cyan-300 relative z-10 font-bold uppercase">Step 04</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-text-primary mt-4 relative z-10">Publish & Iterate</h3>
-              <p class="text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
+              <h3 class="text-lg sm:text-2xl font-bold text-text-primary mt-3 sm:mt-4 relative z-10">Publish & Iterate</h3>
+              <p class="text-sm sm:text-base text-text-secondary mt-2 leading-relaxed font-medium relative z-10">
                 Publishing to YouTube and Instagram while actively evaluating audience retention metrics and comments to continuously improve production quality.
               </p>
             </div>
@@ -830,83 +855,83 @@
     <!-- ========================================== -->
     <!-- 3. REAL TIME ANALYTICS SECTION             -->
     <!-- ========================================== -->
-    <section id="creator-analytics" class="max-w-7xl mx-auto px-6 py-24 relative z-10 border-t border-border/40">
+    <section id="creator-analytics" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative z-10 border-t border-border/40">
       
-      <div class="text-center max-w-3xl mx-auto mb-12 reveal-node">
-        <div class="inline-flex items-center gap-2 glass-panel text-xs font-mono font-bold text-text-primary px-4 py-1.5 rounded-full border border-border shadow-sm mb-4 uppercase tracking-wider">
+      <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 reveal-node">
+        <div class="inline-flex items-center gap-2 glass-panel text-xs font-mono font-bold text-text-primary px-4 py-1.5 rounded-full border border-border shadow-sm mb-3 sm:mb-4 uppercase tracking-wider">
           <span class="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span> Live Metric Stream
         </div>
-        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight apple-siri-shimmer">Real Time Analytics</h2>
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight apple-siri-shimmer">Real Time Analytics</h2>
         <p class="text-text-secondary text-sm sm:text-base font-medium mt-3">Verified and synchronized directly from official platform data.</p>
         
-        <div class="inline-flex items-center gap-2 glass-panel p-1.5 rounded-2xl border border-border mt-8 shadow-lg">
-          <button id="btn-youtube" onclick="switchPlatform('youtube')" class="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink"><i class="fa-brands fa-youtube text-base text-red-500"></i> YouTube</button>
-          <button id="btn-instagram" onclick="switchPlatform('instagram')" class="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink"><i class="fa-brands fa-instagram text-base text-pink-500"></i> Instagram</button>
+        <div class="inline-flex items-center gap-1.5 sm:gap-2 glass-panel p-1.5 rounded-2xl border border-border mt-6 sm:mt-8 shadow-lg">
+          <button id="btn-youtube" onclick="switchPlatform('youtube')" class="px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink"><i class="fa-brands fa-youtube text-base text-red-500"></i> YouTube</button>
+          <button id="btn-instagram" onclick="switchPlatform('instagram')" class="px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink"><i class="fa-brands fa-instagram text-base text-pink-500"></i> Instagram</button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch reveal-node">
-        <div class="lg:col-span-5 flex flex-col gap-6">
-          <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-8 relative group border border-border">
-            <div class="flex items-center gap-4">
-              <div class="relative w-16 h-16 rounded-2xl overflow-hidden border border-border p-0.5 shadow-lg shrink-0">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch reveal-node">
+        <div class="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
+          <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 relative group border border-border">
+            <div class="flex items-center gap-3.5 sm:gap-4">
+              <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border border-border p-0.5 shadow-lg shrink-0">
                 <img id="platform-avatar" src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Profile" class="w-full h-full object-cover rounded-xl" />
               </div>
               <div class="overflow-hidden">
-                <div class="flex items-center gap-2"><h3 id="platform-title" class="text-xl font-extrabold text-text-primary tracking-tight truncate">Shreyash Verma</h3><i class="fa-solid fa-circle-check text-sky-400 text-sm"></i></div>
-                <p id="platform-handle" class="text-text-muted font-mono text-xs font-semibold mt-0.5">@shreyashverse</p>
+                <div class="flex items-center gap-2"><h3 id="platform-title" class="text-lg sm:text-xl font-extrabold text-text-primary tracking-tight truncate">Shreyash Verma</h3><i class="fa-solid fa-circle-check text-sky-400 text-sm shrink-0"></i></div>
+                <p id="platform-handle" class="text-text-muted font-mono text-xs font-semibold mt-0.5 truncate">@shreyashverse</p>
               </div>
             </div>
-            <div class="mt-8 pt-6 border-t border-border/60">
+            <div class="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border/60">
               <span id="hero-stat-label" class="text-xs font-mono font-bold text-text-muted uppercase tracking-widest">Subscribers Count</span>
-              <div id="hero-stat-val" class="text-5xl sm:text-6xl font-black tracking-tight text-text-primary mt-1 font-mono animated-stat">--</div>
+              <div id="hero-stat-val" class="text-4xl sm:text-6xl font-black tracking-tight text-text-primary mt-1 font-mono animated-stat">--</div>
               <p id="hero-stat-desc" class="text-xs font-medium text-emerald-500 mt-2 flex items-center gap-1.5"><i class="fa-solid fa-check-circle"></i> Authenticated Snapshot</p>
             </div>
           </div>
           
-          <div class="grid grid-cols-2 gap-4">
-            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border">
-              <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-500 dark:text-purple-400 flex items-center justify-center text-sm font-bold mb-3 border border-purple-500/20"><i id="stat-1-icon" class="fa-solid fa-eye"></i></div>
-              <span id="stat-1-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Views</span>
-              <span id="stat-1-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+          <div class="grid grid-cols-2 gap-3 sm:gap-4">
+            <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
+              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 text-purple-500 dark:text-purple-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-purple-500/20"><i id="stat-1-icon" class="fa-solid fa-eye"></i></div>
+              <span id="stat-1-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Views</span>
+              <span id="stat-1-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
             </div>
-            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border">
-              <div class="w-9 h-9 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-sm font-bold mb-3 border border-cyan-500/20"><i id="stat-2-icon" class="fa-solid fa-upload"></i></div>
-              <span id="stat-2-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Uploads</span>
-              <span id="stat-2-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+            <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
+              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-cyan-500/20"><i id="stat-2-icon" class="fa-solid fa-upload"></i></div>
+              <span id="stat-2-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Uploads</span>
+              <span id="stat-2-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
             </div>
-            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border">
-              <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-sm font-bold mb-3 border border-emerald-500/20"><i id="stat-3-icon" class="fa-solid fa-heart"></i></div>
-              <span id="stat-3-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Engagement</span>
-              <span id="stat-3-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+            <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
+              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-emerald-500/20"><i id="stat-3-icon" class="fa-solid fa-heart"></i></div>
+              <span id="stat-3-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Engagement</span>
+              <span id="stat-3-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
             </div>
-            <div class="spotlight-card glass-panel rounded-2xl p-5 border border-border">
-              <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-sm font-bold mb-3 border border-rose-500/20"><i id="stat-4-icon" class="fa-solid fa-user-plus"></i></div>
-              <span id="stat-4-label" class="text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Subscriber Count</span>
-              <span id="stat-4-val" class="text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+            <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
+              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-rose-500/20"><i id="stat-4-icon" class="fa-solid fa-user-plus"></i></div>
+              <span id="stat-4-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Subscriber Count</span>
+              <span id="stat-4-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-7 flex flex-col justify-between spotlight-card glass-panel rounded-3xl p-6 sm:p-8 border border-border">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div class="lg:col-span-7 flex flex-col justify-between spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-border">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
             <div>
               <span class="text-xs font-mono font-bold text-purple-600 dark:text-cyan-400 uppercase tracking-widest">Active Metric Canvas</span>
-              <h4 id="chart-heading" class="text-xl font-extrabold text-text-primary mt-0.5">Verified Trajectory Trend</h4>
+              <h4 id="chart-heading" class="text-lg sm:text-xl font-extrabold text-text-primary mt-0.5">Verified Trajectory Trend</h4>
             </div>
             <div class="flex items-center gap-1.5 glass-panel p-1 rounded-xl border border-border self-start sm:self-auto">
               <button id="tab-views" onclick="switchMetric('views')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-purple-500/15 border border-purple-500/40 transition-all">Views</button>
               <button id="tab-engagement" onclick="switchMetric('engagement')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all">Engagement</button>
             </div>
           </div>
-          <div class="relative w-full h-[280px] sm:h-[320px]">
+          <div class="relative w-full h-[230px] sm:h-[320px]">
             <canvas id="portfolioAnalyticsChart"></canvas>
-            <div id="chart-state-overlay" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center px-6 rounded-2xl bg-surface/80 backdrop-blur-sm border border-border/60">
+            <div id="chart-state-overlay" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 rounded-2xl bg-surface/80 backdrop-blur-sm border border-border/60">
               <i id="chart-state-icon" class="fa-solid fa-spinner fa-spin text-2xl text-accent mb-2"></i>
               <p id="chart-state-text" class="text-xs sm:text-sm font-mono font-semibold text-text-secondary max-w-md">Loading verified history from stats.json...</p>
             </div>
           </div>
-          <div class="mt-6 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-2 text-xs text-text-muted font-mono font-semibold">
+          <div class="mt-5 sm:mt-6 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-2 text-[0.7rem] sm:text-xs text-text-muted font-mono font-semibold">
             <span id="analytics-source-label" class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Synced from stats.json</span>
             <span id="analytics-status-badge" class="text-emerald-400 font-bold tracking-wider">STATUS: LOADING...</span>
           </div>
@@ -917,27 +942,27 @@
     <!-- ========================================== -->
     <!-- 4. TOOLS & SOFTWARE SECTION                -->
     <!-- ========================================== -->
-    <section id="creator-tools" class="max-w-7xl mx-auto px-6 py-24 relative z-10 border-t border-border/40">
-      <h2 class="text-4xl sm:text-5xl font-black mb-12 reveal-node text-center">Tools & Software</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-text-secondary font-medium reveal-node">
-        <div class="spotlight-card glass-panel p-6 sm:p-8 rounded-3xl border border-border group">
-          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-robot"></i></div>
-          <b class="text-text-primary text-xl block mb-2">ChatGPT</b>
+    <section id="creator-tools" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative z-10 border-t border-border/40">
+      <h2 class="text-3xl sm:text-5xl font-black mb-8 sm:mb-12 reveal-node text-center">Tools & Software</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-text-secondary font-medium reveal-node">
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border group">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg sm:text-xl mb-3 sm:mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-robot"></i></div>
+          <b class="text-text-primary text-lg sm:text-xl block mb-1.5 sm:mb-2">ChatGPT</b>
           <p class="text-sm leading-relaxed">Researching technology topics, exploring ideas, structuring scripts, simplifying complex concepts, and refining the final explanation.</p>
         </div>
-        <div class="spotlight-card glass-panel p-6 sm:p-8 rounded-3xl border border-border group">
-          <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4 border border-indigo-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-          <b class="text-text-primary text-xl block mb-2">Gemini</b>
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border group">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg sm:text-xl mb-3 sm:mb-4 border border-indigo-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <b class="text-text-primary text-lg sm:text-xl block mb-1.5 sm:mb-2">Gemini</b>
           <p class="text-sm leading-relaxed">Exploring technical concepts, comparing information, brainstorming content angles, and finding different ways to present an idea.</p>
         </div>
-        <div class="spotlight-card glass-panel p-6 sm:p-8 rounded-3xl border border-border group">
-          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4 border border-cyan-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib"></i></div>
-          <b class="text-text-primary text-xl block mb-2">Canva</b>
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border group">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg sm:text-xl mb-3 sm:mb-4 border border-cyan-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-pen-nib"></i></div>
+          <b class="text-text-primary text-lg sm:text-xl block mb-1.5 sm:mb-2">Canva</b>
           <p class="text-sm leading-relaxed">Creating thumbnails, graphics, visual elements, layouts, and supporting assets for my videos.</p>
         </div>
-        <div class="spotlight-card glass-panel p-6 sm:p-8 rounded-3xl border border-border group">
-          <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4 border border-purple-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-film"></i></div>
-          <b class="text-text-primary text-xl block mb-2">Clipchamp</b>
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border group">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg sm:text-xl mb-3 sm:mb-4 border border-purple-500/20 group-hover:scale-110 transition-transform"><i class="fa-solid fa-film"></i></div>
+          <b class="text-text-primary text-lg sm:text-xl block mb-1.5 sm:mb-2">Clipchamp</b>
           <p class="text-sm leading-relaxed">Editing and arranging video footage, managing audio, adding text and transitions, and preparing the final video for publishing.</p>
         </div>
       </div>
@@ -946,24 +971,24 @@
     <!-- ========================================== -->
     <!-- 5. CREATOR VISION SECTION                  -->
     <!-- ========================================== -->
-    <section id="creator-vision" class="max-w-7xl mx-auto px-6 py-24 relative z-10 border-t border-border/40">
-      <h2 class="text-4xl sm:text-5xl font-black mb-12 reveal-node text-center">Creator Vision</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-node">
-        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+    <section id="creator-vision" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative z-10 border-t border-border/40">
+      <h2 class="text-3xl sm:text-5xl font-black mb-8 sm:mb-12 reveal-node text-center">Creator Vision</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 reveal-node">
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border">
           <div class="text-xs font-mono font-bold text-purple-600 dark:text-cyan-400 uppercase tracking-widest mb-2">01 — Build a Recognizable Style</div>
-          <p class="text-lg font-bold text-text-primary">Develop a distinct visual and storytelling style for technology content.</p>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Develop a distinct visual and storytelling style for technology content.</p>
         </div>
-        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border">
           <div class="text-xs font-mono font-bold text-purple-600 dark:text-cyan-400 uppercase tracking-widest mb-2">02 — Explore Longer Stories</div>
-          <p class="text-lg font-bold text-text-primary">Move from short explainers toward deeper, documentary-style videos.</p>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Move from short explainers toward deeper, documentary-style videos.</p>
         </div>
-        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border">
           <div class="text-xs font-mono font-bold text-purple-600 dark:text-cyan-400 uppercase tracking-widest mb-2">03 — Cover More Complex Ideas</div>
-          <p class="text-lg font-bold text-text-primary">Take difficult technology concepts and make them easier to understand.</p>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Take difficult technology concepts and make them easier to understand.</p>
         </div>
-        <div class="spotlight-card glass-panel p-8 rounded-3xl border border-border">
+        <div class="spotlight-card glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-border">
           <div class="text-xs font-mono font-bold text-purple-600 dark:text-cyan-400 uppercase tracking-widest mb-2">04 — Keep Improving the Craft</div>
-          <p class="text-lg font-bold text-text-primary">Continuously improve research, scripting, visuals, editing, and storytelling.</p>
+          <p class="text-base sm:text-lg font-bold text-text-primary">Continuously improve research, scripting, visuals, editing, and storytelling.</p>
         </div>
       </div>
     </section>
@@ -971,15 +996,15 @@
     <!-- ========================================== -->
     <!-- 6. LATEST WORK / PORTFOLIO SECTION         -->
     <!-- ========================================== -->
-    <section id="latest-work" class="py-24 sm:py-32 relative z-10 border-t border-border/40">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16 reveal-node">
-          <span class="glass-panel px-4 py-2 rounded-full inline-block mb-4 border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-cyan-300 font-mono font-bold text-xs uppercase tracking-wider"><i class="fa-solid fa-mobile-screen mr-1"></i> 05 — Portfolio</span>
-          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary">Latest Work</h2>
-          <p class="text-text-secondary mt-4 max-w-2xl mx-auto text-lg font-medium">Watch my recent tech explanations. Click any phone mockup to view directly on YouTube or Instagram.</p>
+    <section id="latest-work" class="py-16 sm:py-24 lg:py-32 relative z-10 border-t border-border/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-16 reveal-node">
+          <span class="glass-panel px-4 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4 border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-cyan-300 font-mono font-bold text-xs uppercase tracking-wider"><i class="fa-solid fa-mobile-screen mr-1"></i> 05 — Portfolio</span>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary">Latest Work</h2>
+          <p class="text-text-secondary mt-3 sm:mt-4 max-w-2xl mx-auto text-sm sm:text-lg font-medium">Watch my recent tech explanations. Click any phone mockup to view directly on YouTube or Instagram.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 reveal-node items-start">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 reveal-node items-start">
           
           <!-- YouTube Shorts #1 -->
           <div class="flex flex-col items-center">
@@ -1087,36 +1112,36 @@
     <!-- ========================================== -->
     <!-- 7. CONTACT / COLLAB SECTION                -->
     <!-- ========================================== -->
-    <section id="contact" class="py-24 sm:py-32 relative z-10 border-t border-border/40">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16 reveal-node">
-          <span class="glass-panel px-4 py-2 rounded-full inline-block mb-4 border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-cyan-300 font-mono font-bold text-xs uppercase tracking-wider">06 — Connect</span>
-          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-2 tracking-tighter text-text-primary">Initiate Contact</h2>
-          <p class="text-text-secondary mt-4 max-w-lg mx-auto text-lg font-medium">Find me on your preferred channel. Every platform is actively maintained.</p>
+    <section id="contact" class="py-16 sm:py-24 lg:py-32 relative z-10 border-t border-border/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-16 reveal-node">
+          <span class="glass-panel px-4 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4 border border-purple-500/40 bg-purple-500/10 text-purple-600 dark:text-cyan-300 font-mono font-bold text-xs uppercase tracking-wider">06 — Connect</span>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold mt-2 tracking-tighter text-text-primary">Initiate Contact</h2>
+          <p class="text-text-secondary mt-3 sm:mt-4 max-w-lg mx-auto text-sm sm:text-lg font-medium">Find me on your preferred channel. Every platform is actively maintained.</p>
         </div>
 
-        <div class="max-w-3xl mx-auto mb-16 reveal-node" style="transition-delay: 0.1s;">
-          <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 relative group">
-            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-6 relative z-10">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="space-y-2"><label for="creator-contact-name" class="text-xs font-bold font-mono text-text-secondary uppercase">Name</label><input type="text" id="creator-contact-name" name="name" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="John Doe"></div>
-                <div class="space-y-2"><label for="creator-contact-email" class="text-xs font-bold font-mono text-text-secondary uppercase">Email</label><input type="email" id="creator-contact-email" name="email" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="john@example.com"></div>
+        <div class="max-w-3xl mx-auto mb-10 sm:mb-16 reveal-node" style="transition-delay: 0.1s;">
+          <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 relative group">
+            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-5 sm:space-y-6 relative z-10">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div class="space-y-2"><label for="creator-contact-name" class="text-xs font-bold font-mono text-text-secondary uppercase">Name</label><input type="text" id="creator-contact-name" name="name" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:border-purple-500" placeholder="John Doe"></div>
+                <div class="space-y-2"><label for="creator-contact-email" class="text-xs font-bold font-mono text-text-secondary uppercase">Email</label><input type="email" id="creator-contact-email" name="email" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:border-purple-500" placeholder="john@example.com"></div>
               </div>
-              <div class="space-y-2"><label for="creator-contact-message" class="text-xs font-bold font-mono text-text-secondary uppercase">Message</label><textarea id="creator-contact-message" name="message" rows="4" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 resize-none" placeholder="Let's connect..."></textarea></div>
-              <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-cyan-400 text-white px-6 py-4 rounded-xl font-bold shadow-lg click-shrink"><i class="fa-solid fa-paper-plane text-sm"></i> Send Message</button>
+              <div class="space-y-2"><label for="creator-contact-message" class="text-xs font-bold font-mono text-text-secondary uppercase">Message</label><textarea id="creator-contact-message" name="message" rows="4" required class="w-full bg-white dark:bg-zinc-900 border border-border text-zinc-900 dark:text-white rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:border-purple-500 resize-none" placeholder="Let's connect..."></textarea></div>
+              <button type="submit" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-cyan-400 text-white px-6 py-3.5 sm:py-4 rounded-xl font-bold shadow-lg click-shrink"><i class="fa-solid fa-paper-plane text-sm"></i> Send Message</button>
             </form>
           </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
-          <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card social-github spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-github text-4xl"></i><span class="text-sm font-bold tracking-wide">GitHub</span></a>
-          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card social-linkedin spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-linkedin-in text-4xl"></i><span class="text-sm font-bold tracking-wide">LinkedIn</span></a>
-          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card social-youtube spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-youtube text-4xl"></i><span class="text-sm font-bold tracking-wide">YouTube</span></a>
-          <a href="mailto:shreyashverma.4518@gmail.com" class="social-card hover:border-purple-500 hover:text-purple-500 spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-solid fa-envelope text-4xl"></i><span class="text-sm font-bold tracking-wide">Email</span></a>
-          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card social-instagram spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-instagram text-4xl"></i><span class="text-sm font-bold tracking-wide">Instagram</span></a>
-          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card social-reddit spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-reddit text-4xl"></i><span class="text-sm font-bold tracking-wide">Reddit</span></a>
-          <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card social-x spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-x-twitter text-4xl"></i><span class="text-sm font-bold tracking-wide">Twitter</span></a>
-          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card social-threads spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-threads text-4xl"></i><span class="text-sm font-bold tracking-wide">Threads</span></a>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-4xl mx-auto">
+          <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card social-github spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-github text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">GitHub</span></a>
+          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card social-linkedin spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-linkedin-in text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">LinkedIn</span></a>
+          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card social-youtube spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-youtube text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">YouTube</span></a>
+          <a href="mailto:shreyashverma.4518@gmail.com" class="social-card hover:border-purple-500 hover:text-purple-500 spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-solid fa-envelope text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Email</span></a>
+          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card social-instagram spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-instagram text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Instagram</span></a>
+          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card social-reddit spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-reddit text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Reddit</span></a>
+          <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card social-x spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-x-twitter text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Twitter</span></a>
+          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card social-threads spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-threads text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Threads</span></a>
         </div>
       </div>
     </section>
@@ -1501,10 +1526,10 @@
       let navRafId = null;
 
       let curW = window.innerWidth;
-      let curH = 72;
+      let curH = window.innerWidth < 640 ? 64 : 72;
       let curTop = 0;
       let curRadius = 0;
-      let curPadX = 28;
+      let curPadX = window.innerWidth < 640 ? 16 : 28;
 
       let pillCurX = 0, pillTargetX = 0;
       let pillCurW = 0, pillTargetW = 0;
@@ -1545,11 +1570,14 @@
 
       function animateNavLerp() {
         const isIsland = navMode === 'island';
-        const targetW = isIsland ? Math.min(window.innerWidth * 0.94, 980) : window.innerWidth;
-        const targetH = isIsland ? 60 : 72;
-        const targetTop = isIsland ? 18 : 0;
-        const targetRadius = isIsland ? 32 : 0;
-        const targetPadX = isIsland ? 20 : 28;
+        const isMobile = window.innerWidth < 640;
+        const targetW = isIsland
+          ? (isMobile ? Math.max(window.innerWidth - 20, 280) : Math.min(window.innerWidth * 0.94, 980))
+          : window.innerWidth;
+        const targetH = isIsland ? (isMobile ? 56 : 60) : (isMobile ? 64 : 72);
+        const targetTop = isIsland ? (isMobile ? 10 : 18) : 0;
+        const targetRadius = isIsland ? (isMobile ? 24 : 32) : 0;
+        const targetPadX = isMobile ? 14 : (isIsland ? 20 : 28);
 
         curW = lerp(curW, targetW, lerpFactor);
         curH = lerp(curH, targetH, lerpFactor);
@@ -1695,7 +1723,7 @@
             });
           }
         });
-      }, { threshold: 0.35 });
+      }, { rootMargin: '-35% 0px -50% 0px', threshold: 0 });
 
       document.querySelectorAll('section[id]').forEach(sec => navObserver.observe(sec));
 
@@ -1781,25 +1809,36 @@
 
 
       // =========================================================
-      // 4. FANNED CARDS
+      // 4. FANNED CARDS (RESPONSIVE MOBILE & DESKTOP SPREAD)
       // =========================================================
       const fanCards = document.querySelectorAll('.fan-card');
-      const fanAngles = [-18, -6, 6, 18]; 
-      const fanX = [-85, -28, 28, 85];
-      const fanY = [15, 0, 0, 15];
       let cardResetTimer = null;
       let isCardsFocused = false;
 
+      function getFanLayout() {
+        const isMobile = window.innerWidth < 640;
+        return {
+          angles: isMobile ? [-11, -4, 4, 11] : [-18, -6, 6, 18],
+          x: isMobile ? [-42, -14, 14, 42] : [-85, -28, 28, 85],
+          y: isMobile ? [10, 0, 0, 10] : [15, 0, 0, 15]
+        };
+      }
+
       function animateFanOut() {
         isCardsFocused = false;
+        const layout = getFanLayout();
         fanCards.forEach((card, i) => {
           gsap.to(card, {
-            rotationZ: fanAngles[i], x: fanX[i], y: fanY[i], scale: 1, zIndex: i + 1,
+            rotationZ: layout.angles[i], x: layout.x[i], y: layout.y[i], scale: 1, zIndex: i + 1,
             opacity: 1, filter: 'blur(0px) brightness(1)', duration: 0.8, ease: "power3.out", overwrite: "auto"
           });
           card.style.pointerEvents = "auto";
         });
       }
+
+      window.addEventListener('resize', () => {
+        if (!isCardsFocused && typeof gsap !== 'undefined') animateFanOut();
+      });
 
       fanCards.forEach((card, index) => {
         card.addEventListener('mouseenter', () => {
@@ -2278,11 +2317,11 @@
       const btnYt = document.getElementById('btn-youtube');
       const btnIg = document.getElementById('btn-instagram');
       if (platform === 'youtube') {
-        btnYt.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
-        btnIg.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
+        btnYt.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
+        btnIg.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
       } else {
-        btnIg.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
-        btnYt.className = "px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
+        btnIg.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
+        btnYt.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
       }
       updateDOMStats();
     }

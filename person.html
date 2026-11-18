@@ -85,9 +85,16 @@
       --island-bg: rgba(8, 12, 24, 0.96);
     }
 
+    html, body {
+      overflow-x: clip;
+      max-width: 100%;
+    }
     body {
       background-color: var(--background); color: var(--text-primary);
-      overflow-x: hidden; transition: background-color 0.8s, color 0.8s;
+      transition: background-color 0.8s, color 0.8s;
+    }
+    a, button {
+      touch-action: manipulation;
     }
 
     /* ── Apple-Style Utilities ── */
@@ -168,8 +175,13 @@
       position: relative;
       background: var(--surface);
       border-radius: 1.5rem;
-      padding: 3rem;
+      padding: 1.75rem 1.25rem;
       z-index: 1;
+    }
+    @media (min-width: 640px) {
+      .flashy-note {
+        padding: 3rem;
+      }
     }
     .flashy-note::before {
       content: "";
@@ -199,28 +211,37 @@
     }
 
     /* ── Adaptive Dynamic Island ── */
-    #nav-island-wrapper { position: fixed; top: 16px; left: 0; right: 0; z-index: 10000; display: flex; justify-content: center; pointer-events: none; transition: all 0.8s; opacity: 0; transform: translateY(-20px); animation: dropInNav 1s 0.2s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+    #nav-island-wrapper { position: fixed; top: 10px; left: 0; right: 0; z-index: 10000; display: flex; justify-content: center; pointer-events: none; transition: all 0.8s; opacity: 0; transform: translateY(-20px); animation: dropInNav 1s 0.2s forwards cubic-bezier(0.16, 1, 0.3, 1); }
     @keyframes dropInNav { to { opacity: 1; transform: translateY(0); } }
     
     .nav-island {
       pointer-events: auto; background: var(--island-bg); backdrop-filter: blur(50px); border: 1.5px solid var(--nav-border);
       box-shadow: inset 0 1px 1px var(--glass-shine), 0 25px 60px -10px rgba(0, 0, 0, 0.75), 0 0 45px -5px var(--nav-tint);
-      border-radius: 9999px; width: 92%; max-width: 1080px; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; transition: all 0.85s;
+      border-radius: 9999px; width: calc(100% - 20px); max-width: 1080px; height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; transition: all 0.85s;
     }
-    .nav-island.is-collapsed { width: 340px; height: 52px; border-color: var(--nav-border); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 15px 35px -5px rgba(0, 0, 0, 0.3), 0 0 35px var(--nav-tint); }
-    .nav-island.is-collapsed.island-notify { width: 395px !important; height: 58px !important; border-color: var(--accent) !important; box-shadow: inset 0 1px 1px var(--glass-shine), 0 20px 45px -5px rgba(0, 0, 0, 0.45), 0 0 50px 12px var(--nav-tint) !important; transform: scale(1.03) translateY(2px); }
+    .nav-island.is-collapsed { width: min(340px, calc(100vw - 20px)); height: 50px; border-color: var(--nav-border); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 15px 35px -5px rgba(0, 0, 0, 0.3), 0 0 35px var(--nav-tint); }
+    .nav-island.is-collapsed.island-notify { width: min(395px, calc(100vw - 16px)) !important; height: 54px !important; border-color: var(--accent) !important; box-shadow: inset 0 1px 1px var(--glass-shine), 0 20px 45px -5px rgba(0, 0, 0, 0.45), 0 0 50px 12px var(--nav-tint) !important; transform: scale(1.01) translateY(2px); }
     
     .nav-link { padding: 7px 16px; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; color: var(--text-secondary); transition: all 0.4s; }
     .nav-link:hover, .nav-link.active-section { color: var(--accent); background: var(--nav-tint); border: 1px solid var(--nav-border); box-shadow: 0 0 22px var(--glow-shadow); }
 
-    .nav-view { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; white-space: nowrap; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .nav-view { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; white-space: nowrap; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
     .nav-expanded-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
     .nav-island.is-collapsed .nav-expanded-view { opacity: 0; transform: scale(0.88) translateY(-12px); pointer-events: none; transition: opacity 0.18s 0s ease, transform 0.35s 0s ease; }
     .nav-compact-view { opacity: 0; transform: scale(0.88) translateY(12px); pointer-events: none; transition: opacity 0.18s 0s ease, transform 0.35s 0s ease; }
     .nav-island.is-collapsed .nav-compact-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; transition: opacity 0.55s 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s 0.12s cubic-bezier(0.16, 1, 0.3, 1); }
     
     #compact-section-badge { display: inline-flex; align-items: center; gap: 6px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .nav-island.island-notify #compact-section-badge { transform: scale(1.06); padding: 6px 16px; background: var(--nav-tint); border-color: var(--accent); box-shadow: 0 0 20px var(--glow-shadow); }
+    .nav-island.island-notify #compact-section-badge { transform: scale(1.04); padding: 5px 12px; background: var(--nav-tint); border-color: var(--accent); box-shadow: 0 0 20px var(--glow-shadow); }
+
+    @media (min-width: 640px) {
+      #nav-island-wrapper { top: 16px; }
+      .nav-island { width: 92%; height: 70px; padding: 0 22px; }
+      .nav-island.is-collapsed { height: 52px; }
+      .nav-island.is-collapsed.island-notify { height: 58px !important; transform: scale(1.03) translateY(2px); }
+      .nav-view { padding: 0 22px; }
+      .nav-island.island-notify #compact-section-badge { transform: scale(1.06); padding: 6px 16px; }
+    }
 
     /* ── Apple Accordion & Dynamic Drop Box ── */
     .island-drop-box {
@@ -231,9 +252,13 @@
       opacity: 0; 
     }
     .tabs-column { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
-    .apple-tab-btn { width: 100%; text-align: left; padding: 16px 22px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s; }
+    .apple-tab-btn { width: 100%; text-align: left; padding: 14px 18px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s; }
     .apple-tab-btn:hover { background: var(--nav-tint); color: var(--text-primary); border-color: var(--accent); transform: translateX(4px); }
-    .apple-tab-btn.is-bulky { transform: scale(1.05) translateX(12px) !important; padding: 22px 28px !important; background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(20, 184, 166, 0.2) 100%) !important; border-color: rgba(52, 211, 153, 0.8) !important; color: #ffffff !important; box-shadow: 0 15px 45px rgba(52, 211, 153, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5) !important; z-index: 30; }
+    .apple-tab-btn.is-bulky { transform: scale(1.01) translateX(4px) !important; padding: 16px 20px !important; background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(20, 184, 166, 0.2) 100%) !important; border-color: rgba(52, 211, 153, 0.8) !important; color: #ffffff !important; box-shadow: 0 12px 32px rgba(52, 211, 153, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5) !important; z-index: 30; }
+    @media (min-width: 1024px) {
+      .apple-tab-btn { padding: 16px 22px; border-radius: 20px; font-size: 1.05rem; }
+      .apple-tab-btn.is-bulky { transform: scale(1.05) translateX(12px) !important; padding: 22px 28px !important; box-shadow: 0 15px 45px rgba(52, 211, 153, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5) !important; }
+    }
 
     /* ── Background Utilities ── */
     .bg-grid-pattern { position: fixed; inset: 0; z-index: -25; background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
@@ -244,14 +269,20 @@
     .ambient-orb-3 { animation: floatOrb 22s ease-in-out infinite alternate; }
     @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(3%, 4%) scale(1.05); } 100% { transform: translate(-2%, -3%) scale(0.95); } }
     
-    /* Premium Original iPhone Frame */
-    .iphone-frame { width: 320px; height: 640px; background: #0a0a0a; border-radius: 60px; position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 0 0 10px #1f2937, 0 0 0 12px #334155, 0 30px 50px -15px rgba(0, 0, 0, 0.7), 0 0 40px var(--glow-shadow); padding: 12px; transform: perspective(1000px) rotateY(-8deg) rotateX(4deg); transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
-    .iphone-frame:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03); }
-    .iphone-screen { width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: #000; position: relative; }
+    /* Premium Original iPhone Frame (Native Responsive Sizing) */
+    .iphone-frame { width: 248px; height: 496px; background: #0a0a0a; border-radius: 46px; position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 0 0 7px #1f2937, 0 0 0 9px #334155, 0 24px 40px -15px rgba(0, 0, 0, 0.7), 0 0 32px var(--glow-shadow); padding: 9px; transform: none; transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .iphone-screen { width: 100%; height: 100%; border-radius: 38px; overflow: hidden; background: #000; position: relative; }
     .slideshow-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease-in-out; }
     .slideshow-img.active { opacity: 1; }
-    .dynamic-island-notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 120px; height: 32px; background: #000; border-radius: 20px; z-index: 30; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.15); }
-    .iphone-btn { position: absolute; background: #334155; border-radius: 2px; box-shadow: inset 1px 0 2px rgba(255,255,255,0.2); }
+    .dynamic-island-notch { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; background: #000; border-radius: 16px; z-index: 30; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.15); }
+    .iphone-btn { display: none; position: absolute; background: #334155; border-radius: 2px; box-shadow: inset 1px 0 2px rgba(255,255,255,0.2); }
+    @media (min-width: 640px) {
+      .iphone-frame { width: 320px; height: 640px; border-radius: 60px; padding: 12px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 0 0 10px #1f2937, 0 0 0 12px #334155, 0 30px 50px -15px rgba(0, 0, 0, 0.7), 0 0 40px var(--glow-shadow); transform: perspective(1000px) rotateY(-8deg) rotateX(4deg); }
+      .iphone-frame:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03); }
+      .iphone-screen { border-radius: 48px; }
+      .dynamic-island-notch { top: 12px; width: 120px; height: 32px; border-radius: 20px; }
+      .iphone-btn { display: block; }
+    }
 
     /* Social Links Grid */
     .social-card { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -353,11 +384,11 @@
     <nav id="dynamic-island-nav" class="nav-island">
       <!-- Full Menu -->
       <div class="nav-view nav-expanded-view flex justify-between w-full items-center">
-        <a href="#person-home" class="flex items-center gap-3 group click-shrink">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 overflow-hidden border border-white/20">
+        <a href="#person-home" class="flex items-center gap-2.5 sm:gap-3 group click-shrink">
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 overflow-hidden border border-white/20">
             <img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Logo" class="w-full h-full object-cover" />
           </div>
-          <div><span class="block text-text-primary font-bold tracking-tight leading-none text-base">SHREYASH</span><span class="block text-text-secondary text-[0.6rem] tracking-widest leading-none mt-1">VERMA</span></div>
+          <div><span class="block text-text-primary font-bold tracking-tight leading-none text-sm sm:text-base">SHREYASH</span><span class="block text-text-secondary text-[0.55rem] sm:text-[0.6rem] tracking-widest leading-none mt-1">VERMA</span></div>
         </a>
         <div id="island-links-container" class="hidden lg:flex items-center gap-1">
           <a href="#person-home" class="nav-link active-section" data-section="person-home">Home</a>
@@ -366,21 +397,21 @@
           <a href="#person-values" class="nav-link" data-section="person-values">Values</a>
           <a href="#contact" class="nav-link" data-section="contact">Contact</a>
         </div>
-        <div class="flex items-center gap-2.5 sm:gap-3">
-          <a href="index.html" class="w-9 h-9 flex items-center justify-center rounded-full glass-panel text-text-secondary hover:text-accent hover:border-accent click-shrink" title="Back to Portfolio Gateway" aria-label="Back to Portfolio Gateway"><i class="fa-solid fa-table-cells-large text-xs"></i></a>
-          <button type="button" class="theme-toggle-btn w-9 h-9 flex items-center justify-center rounded-full glass-panel hover:text-accent click-shrink" aria-label="Toggle Day / Night Mode"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="index.html" class="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full glass-panel text-text-secondary hover:text-accent hover:border-accent click-shrink" title="Back to Portfolio Gateway" aria-label="Back to Portfolio Gateway"><i class="fa-solid fa-table-cells-large text-xs"></i></a>
+          <button type="button" class="theme-toggle-btn w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full glass-panel hover:text-accent click-shrink" aria-label="Toggle Day / Night Mode"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
           <a href="#contact" class="hidden sm:inline-flex items-center px-5 py-2.5 glass-panel text-xs font-bold rounded-full hover:border-accent click-shrink gap-2"><i class="fa-solid fa-paper-plane"></i> Message Me</a>
-          <button type="button" class="mobile-menu-open-btn lg:hidden w-9 h-9 flex items-center justify-center rounded-full glass-panel text-text-primary hover:border-accent click-shrink" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer"><i class="fa-solid fa-bars text-sm"></i></button>
+          <button type="button" class="mobile-menu-open-btn lg:hidden w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full glass-panel text-text-primary hover:border-accent click-shrink" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer"><i class="fa-solid fa-bars text-sm"></i></button>
         </div>
       </div>
       <!-- Compact View -->
-      <div class="nav-view nav-compact-view flex justify-between w-full items-center">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-full overflow-hidden border border-white/20"><img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Shreyash Verma" class="w-full h-full object-cover" /></div>
-          <span class="text-text-primary font-extrabold text-sm">SHREYASH</span>
+      <div class="nav-view nav-compact-view flex justify-between w-full items-center gap-2">
+        <div class="flex items-center gap-2 shrink-0">
+          <div class="w-8 h-8 rounded-full overflow-hidden border border-white/20 shrink-0"><img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Shreyash Verma" class="w-full h-full object-cover" /></div>
+          <span class="hidden sm:inline text-text-primary font-extrabold text-sm">SHREYASH</span>
         </div>
-        <span id="compact-section-badge" class="px-3.5 py-1 bg-accent/15 border border-accent/50 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300"><i class="fa-solid fa-user text-accent mr-1"></i> <span class="font-extrabold tracking-wider">HOME</span></span>
-        <div class="flex items-center gap-1.5">
+        <span id="compact-section-badge" class="px-2.5 sm:px-3.5 py-1 bg-accent/15 border border-accent/50 rounded-full text-[0.68rem] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 truncate"><i class="fa-solid fa-user text-accent mr-1"></i> <span class="font-extrabold tracking-wider">HOME</span></span>
+        <div class="flex items-center gap-1.5 shrink-0">
           <button type="button" class="theme-toggle-btn w-8 h-8 flex items-center justify-center rounded-full glass-panel click-shrink" aria-label="Toggle Day / Night Mode"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
           <button type="button" class="mobile-menu-open-btn lg:hidden w-8 h-8 flex items-center justify-center rounded-full glass-panel text-text-primary click-shrink" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer"><i class="fa-solid fa-bars text-xs"></i></button>
         </div>
@@ -446,16 +477,16 @@
   <main class="relative z-10">
     
     <!-- Hero -->
-    <section id="person-home" data-section-name="HOME" class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center min-h-screen pt-28 pb-12">
-      <div class="space-y-8 reveal-node">
-        <h1 class="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] apple-siri-shimmer">SHREYASH<br/>VERMA</h1>
-        <p class="text-xl sm:text-2xl text-text-secondary mt-6 font-semibold">The person behind the screen</p>
-        <div class="flex gap-4 pt-4">
-          <a href="#person-hobbies" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-full click-shrink border border-white/20 shadow-lg"><i class="fa-solid fa-medal"></i> My Hobbies</a>
+    <section id="person-home" data-section-name="HOME" class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[calc(100svh-1rem)] pt-24 sm:pt-28 pb-12">
+      <div class="space-y-6 sm:space-y-8 reveal-node">
+        <h1 class="text-[2.6rem] sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.95] sm:leading-[0.9] apple-siri-shimmer break-words">SHREYASH<br/>VERMA</h1>
+        <p class="text-lg sm:text-2xl text-text-secondary mt-4 sm:mt-6 font-semibold">The person behind the screen</p>
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
+          <a href="#person-hobbies" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-full click-shrink border border-white/20 shadow-lg"><i class="fa-solid fa-medal"></i> My Hobbies</a>
         </div>
       </div>
       <div class="flex justify-center lg:justify-end reveal-node">
-        <div class="iphone-frame scale-[0.85] sm:scale-100 origin-center lg:origin-right">
+        <div class="iphone-frame">
           <div class="iphone-btn left-[-16px] top-[110px] w-[4px] h-[26px]"></div>
           <div class="iphone-btn left-[-16px] top-[160px] w-[4px] h-[50px]"></div>
           <div class="iphone-btn left-[-16px] top-[230px] w-[4px] h-[50px]"></div>
@@ -471,9 +502,9 @@
               <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80" class="slideshow-img" alt="Listening to Music">
             </div>
 
-            <div class="absolute top-4 left-6 right-6 flex items-center justify-between text-[11px] text-white/90 z-20 font-bold drop-shadow-md pointer-events-none">
+            <div class="absolute top-3 sm:top-4 left-5 sm:left-6 right-5 sm:right-6 flex items-center justify-between text-[10px] sm:text-[11px] text-white/90 z-20 font-bold drop-shadow-md pointer-events-none">
               <span>9:41</span>
-              <div class="flex gap-2"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-full"></i></div>
+              <div class="flex gap-1.5 sm:gap-2"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-full"></i></div>
             </div>
           </div>
         </div>
@@ -481,76 +512,76 @@
     </section>
 
     <!-- 3-Card Intro Section -->
-    <section id="person-intro" data-section-name="WHO I AM" class="max-w-7xl mx-auto px-6 py-24">
-      <div class="flex flex-col md:flex-row gap-6 items-stretch mb-6">
+    <section id="person-intro" data-section-name="WHO I AM" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div class="flex flex-col md:flex-row gap-5 sm:gap-6 items-stretch mb-5 sm:mb-6">
         
         <!-- Long Card: Who I Am -->
-        <div class="w-full md:w-2/3 spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node group">
-          <div class="h-2 w-16 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full mb-6 group-hover:w-24 transition-all duration-500"></div>
-          <h3 class="text-3xl font-bold mb-2 text-text-primary">01 — Who I Am</h3>
-          <p class="text-text-secondary font-bold mb-6 uppercase tracking-widest text-xs">The person behind the screen</p>
-          <ul class="space-y-4 text-text-secondary font-medium leading-relaxed">
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm"></i> I’m Shreyash, a BCA student currently in my second year.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm"></i> Beyond being a student, developer, or content creator, I’m still figuring out what I want my life to look like.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm"></i> Technology is an important part of my life, but it isn’t my entire identity.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm"></i> My life also includes family, college, fitness, friendships, entertainment, interests, and everyday experiences.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm"></i> I’m not someone who has everything figured out yet. I’m still discovering what I’m good at, what I genuinely enjoy, what I need to improve, and who I want to become.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm"></i> I don’t see uncertainty as a weakness. I see it as part of building my life.</li>
+        <div class="w-full md:w-2/3 spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 reveal-node group">
+          <div class="h-1.5 sm:h-2 w-14 sm:w-16 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full mb-5 sm:mb-6 group-hover:w-24 transition-all duration-500"></div>
+          <h3 class="text-2xl sm:text-3xl font-bold mb-2 text-text-primary">01 — Who I Am</h3>
+          <p class="text-text-secondary font-bold mb-5 sm:mb-6 uppercase tracking-widest text-xs">The person behind the screen</p>
+          <ul class="space-y-3 sm:space-y-4 text-sm sm:text-base text-text-secondary font-medium leading-relaxed">
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> I’m Shreyash, a BCA student currently in my second year.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> Beyond being a student, developer, or content creator, I’m still figuring out what I want my life to look like.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> Technology is an important part of my life, but it isn’t my entire identity.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> My life also includes family, college, fitness, friendships, entertainment, interests, and everyday experiences.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> I’m not someone who has everything figured out yet. I’m still discovering what I’m good at, what I genuinely enjoy, what I need to improve, and who I want to become.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> I don’t see uncertainty as a weakness. I see it as part of building my life.</li>
           </ul>
         </div>
 
         <!-- Short Card: Family -->
-        <div class="w-full md:w-1/3 spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node group" style="transition-delay: 0.1s;">
-          <div class="h-2 w-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full mb-6 group-hover:w-24 transition-all duration-500"></div>
-          <h3 class="text-2xl font-bold mb-6 text-text-primary">Family</h3>
-          <ul class="space-y-4 text-text-secondary font-medium leading-relaxed">
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm"></i> My family is an important part of my life.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm"></i> My father works as a private-school teacher.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm"></i> My family has taught me the value of hard work, education, responsibility, and financial independence.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm"></i> A major goal of mine is to build a career that allows me to support my family and create a more secure future for them.</li>
+        <div class="w-full md:w-1/3 spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 reveal-node group" style="transition-delay: 0.1s;">
+          <div class="h-1.5 sm:h-2 w-14 sm:w-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full mb-5 sm:mb-6 group-hover:w-24 transition-all duration-500"></div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-text-primary">Family</h3>
+          <ul class="space-y-3 sm:space-y-4 text-sm sm:text-base text-text-secondary font-medium leading-relaxed">
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> My family is an important part of my life.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> My father works as a private-school teacher.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> My family has taught me the value of hard work, education, responsibility, and financial independence.</li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> A major goal of mine is to build a career that allows me to support my family and create a more secure future for them.</li>
           </ul>
         </div>
 
       </div>
 
       <!-- Third Card: Hobbies Overview -->
-      <div class="w-full spotlight-card glass-panel rounded-3xl p-8 sm:p-10 reveal-node" style="transition-delay: 0.2s;">
-        <h3 class="text-2xl font-bold mb-6 text-text-primary">Hobbies & Interests</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div class="glass-panel p-5 rounded-2xl hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-400 flex items-center gap-4 group">
-            <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-baseball-bat-ball"></i></div>
-            <b class="text-text-primary text-lg">Cricket</b>
+      <div class="w-full spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 reveal-node" style="transition-delay: 0.2s;">
+        <h3 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-text-primary">Hobbies & Interests</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-400 flex items-center gap-4 group">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-lg sm:text-xl group-hover:scale-110 transition-transform shrink-0"><i class="fa-solid fa-baseball-bat-ball"></i></div>
+            <b class="text-text-primary text-base sm:text-lg">Cricket</b>
           </div>
-          <div class="glass-panel p-5 rounded-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-400 flex items-center gap-4 group">
-            <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-dumbbell"></i></div>
-            <b class="text-text-primary text-lg">Fitness</b>
+          <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-400 flex items-center gap-4 group">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-lg sm:text-xl group-hover:scale-110 transition-transform shrink-0"><i class="fa-solid fa-dumbbell"></i></div>
+            <b class="text-text-primary text-base sm:text-lg">Fitness</b>
           </div>
-          <div class="glass-panel p-5 rounded-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-400 flex items-center gap-4 group">
-            <div class="w-12 h-12 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-headphones"></i></div>
-            <b class="text-text-primary text-lg">Listening Music</b>
+          <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-400 flex items-center gap-4 group">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-lg sm:text-xl group-hover:scale-110 transition-transform shrink-0"><i class="fa-solid fa-headphones"></i></div>
+            <b class="text-text-primary text-base sm:text-lg">Listening Music</b>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Hobbies Accordion -->
-    <section id="person-hobbies" data-section-name="HOBBIES" class="py-24 px-6 max-w-7xl mx-auto">
-      <h2 class="text-5xl font-black mb-12 reveal-node text-center">My Interests & Hobbies</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative min-h-[400px]">
+    <section id="person-hobbies" data-section-name="HOBBIES" class="py-16 sm:py-24 px-4 sm:px-6 max-w-7xl mx-auto">
+      <h2 class="text-3xl sm:text-5xl font-black mb-8 sm:mb-12 reveal-node text-center">My Interests & Hobbies</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start relative min-h-[300px] sm:min-h-[400px]">
         
         <!-- Animated Drop Box for Person -->
         <div id="person-drop-box" class="island-drop-box w-14 h-14 rounded-full">
           <div class="drop-logo w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white font-black text-xs mr-2 shrink-0">SV</div>
-          <span class="drop-text text-lg font-black tracking-tight opacity-0 pr-3 text-white">🎾 Beyond the Code</span>
+          <span class="drop-text text-base sm:text-lg font-black tracking-tight opacity-0 pr-3 text-white">🎾 Beyond the Code</span>
         </div>
 
-        <div id="person-tabs-column" class="lg:col-span-5 flex flex-col gap-3.5 z-20 tabs-column">
+        <div id="person-tabs-column" class="lg:col-span-5 flex flex-col gap-3 sm:gap-3.5 z-20 tabs-column">
           <button class="apple-tab-btn person-tab" data-proj="per1"><span class="font-bold text-emerald-400">01 Cricket</span></button>
           <button class="apple-tab-btn person-tab" data-proj="per2"><span class="font-bold text-emerald-400">02 Fitness & Body Language</span></button>
         </div>
 
         <!-- Layout exactly matches your original portfolio to avoid lag -->
-        <div id="stage-column" class="lg:col-span-7 sticky top-28 z-10 min-h-[440px]">
+        <div id="stage-column" class="lg:col-span-7 lg:sticky lg:top-28 z-10 lg:min-h-[440px]">
           <div id="person-stage" class="w-full hidden">
             <!-- Injected by JS -->
           </div>
@@ -560,11 +591,11 @@
     </section>
 
     <!-- Vibrant Multi-Color Values & Principles -->
-    <section id="person-values" data-section-name="VALUES" class="max-w-7xl mx-auto px-6 py-24">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section id="person-values" data-section-name="VALUES" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
         <div class="reveal-node">
-          <h2 class="text-4xl font-black mb-8">What I Value</h2>
-          <ul class="space-y-4 text-text-secondary font-medium">
+          <h2 class="text-3xl sm:text-4xl font-black mb-6 sm:mb-8">What I Value</h2>
+          <ul class="space-y-3.5 sm:space-y-4 text-sm sm:text-base text-text-secondary font-medium">
             <!-- Distinct Colors & Hover Transforms -->
             <li class="glass-panel p-4 rounded-xl border-l-4 border-emerald-500 hover:border-emerald-400 hover:bg-emerald-500/10 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:-translate-y-1 transition-all duration-300">
               <b class="text-text-primary block">Continuous Growth</b> Always learning, improving, and adapting.
@@ -584,26 +615,26 @@
           </ul>
         </div>
         <div class="reveal-node" style="transition-delay: 0.15s;">
-          <h2 class="text-4xl font-black mb-8">My Principles</h2>
-          <div class="space-y-6">
-            <div class="glass-panel p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(52,211,153,0.5)] border border-border hover:border-emerald-500/50 transition-all duration-400 group">
-              <b class="text-emerald-500 font-mono text-xl block mb-2 group-hover:scale-110 origin-left transition-transform">01</b>
-              <span class="font-bold text-text-primary text-lg">Keep Growing</span>
+          <h2 class="text-3xl sm:text-4xl font-black mb-6 sm:mb-8">My Principles</h2>
+          <div class="space-y-4 sm:space-y-6">
+            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(52,211,153,0.5)] border border-border hover:border-emerald-500/50 transition-all duration-400 group">
+              <b class="text-emerald-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">01</b>
+              <span class="font-bold text-text-primary text-base sm:text-lg">Keep Growing</span>
               <p class="text-text-secondary mt-1 text-sm">I want to keep learning rather than becoming comfortable.</p>
             </div>
-            <div class="glass-panel p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.5)] border border-border hover:border-blue-500/50 transition-all duration-400 group">
-              <b class="text-blue-500 font-mono text-xl block mb-2 group-hover:scale-110 origin-left transition-transform">02</b>
-              <span class="font-bold text-text-primary text-lg">Build, Don't Pretend</span>
+            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.5)] border border-border hover:border-blue-500/50 transition-all duration-400 group">
+              <b class="text-blue-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">02</b>
+              <span class="font-bold text-text-primary text-base sm:text-lg">Build, Don't Pretend</span>
               <p class="text-text-secondary mt-1 text-sm">Real skills and practical results over simply claiming expertise.</p>
             </div>
-            <div class="glass-panel p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(168,85,247,0.5)] border border-border hover:border-purple-500/50 transition-all duration-400 group">
-              <b class="text-purple-500 font-mono text-xl block mb-2 group-hover:scale-110 origin-left transition-transform">03</b>
-              <span class="font-bold text-text-primary text-lg">Stay Curious</span>
+            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(168,85,247,0.5)] border border-border hover:border-purple-500/50 transition-all duration-400 group">
+              <b class="text-purple-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">03</b>
+              <span class="font-bold text-text-primary text-base sm:text-lg">Stay Curious</span>
               <p class="text-text-secondary mt-1 text-sm">Keep questioning and understanding things beyond the surface.</p>
             </div>
-            <div class="glass-panel p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(244,63,94,0.5)] border border-border hover:border-rose-500/50 transition-all duration-400 group">
-              <b class="text-rose-500 font-mono text-xl block mb-2 group-hover:scale-110 origin-left transition-transform">04</b>
-              <span class="font-bold text-text-primary text-lg">Build Independence</span>
+            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(244,63,94,0.5)] border border-border hover:border-rose-500/50 transition-all duration-400 group">
+              <b class="text-rose-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">04</b>
+              <span class="font-bold text-text-primary text-base sm:text-lg">Build Independence</span>
               <p class="text-text-secondary mt-1 text-sm">Become capable enough to create my own opportunities.</p>
             </div>
           </div>
@@ -612,32 +643,32 @@
     </section>
 
     <!-- Flashy Unique Note Section -->
-    <section id="person-note" data-section-name="NOTE" class="max-w-3xl mx-auto px-6 py-12 reveal-node">
+    <section id="person-note" data-section-name="NOTE" class="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-12 reveal-node">
       <!-- Applied custom flashy-note class here -->
       <div class="flashy-note text-center">
-        <i class="fa-solid fa-quote-left text-4xl text-emerald-500/50 mb-4 block"></i>
+        <i class="fa-solid fa-quote-left text-3xl sm:text-4xl text-emerald-500/50 mb-3 sm:mb-4 block"></i>
         <!-- Siri Shimmer applied to text -->
-        <h3 class="text-3xl font-black mb-4 apple-siri-shimmer inline-block">A Small Note From Me</h3>
-        <p class="text-text-secondary font-medium text-lg leading-relaxed mb-4 mt-2">I don't want this portfolio to make me look perfect or pretend that I've already figured everything out. I'm still a student. I'm still learning, experimenting, making mistakes, and changing along the way.</p>
-        <p class="text-text-secondary font-medium text-lg leading-relaxed">What I can show honestly is where I am, what I'm building, what I care about, and the direction I'm moving in. I don't have everything figured out yet — but I know I want to keep moving forward.</p>
+        <h3 class="text-2xl sm:text-3xl font-black mb-3 sm:mb-4 apple-siri-shimmer inline-block">A Small Note From Me</h3>
+        <p class="text-text-secondary font-medium text-base sm:text-lg leading-relaxed mb-4 mt-2">I don't want this portfolio to make me look perfect or pretend that I've already figured everything out. I'm still a student. I'm still learning, experimenting, making mistakes, and changing along the way.</p>
+        <p class="text-text-secondary font-medium text-base sm:text-lg leading-relaxed">What I can show honestly is where I am, what I'm building, what I care about, and the direction I'm moving in. I don't have everything figured out yet — but I know I want to keep moving forward.</p>
       </div>
     </section>
 
     <!-- Original UI Contact Block -->
-    <section id="contact" data-section-name="CONTACT" class="py-24 sm:py-32 relative z-10 border-t border-border/50">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16 reveal-node">
-          <span class="section-label glass-panel px-4 py-2 rounded-full inline-block mb-4 shadow-sm border-cyan-500/20 text-cyan-500">05 — Connect</span>
-          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mt-2 tracking-tighter text-text-primary transition-colors duration-500">Initiate Contact</h2>
-          <p class="text-text-secondary mt-4 max-w-lg mx-auto text-lg font-medium transition-colors duration-500">Find me on your preferred channel. Every platform is actively maintained.</p>
+    <section id="contact" data-section-name="CONTACT" class="py-16 sm:py-24 lg:py-32 relative z-10 border-t border-border/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 sm:mb-16 reveal-node">
+          <span class="section-label glass-panel px-4 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4 shadow-sm border-cyan-500/20 text-cyan-500 text-xs sm:text-sm font-mono font-bold">05 — Connect</span>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold mt-2 tracking-tighter text-text-primary transition-colors duration-500">Initiate Contact</h2>
+          <p class="text-text-secondary mt-3 sm:mt-4 max-w-lg mx-auto text-sm sm:text-lg font-medium transition-colors duration-500">Find me on your preferred channel. Every platform is actively maintained.</p>
         </div>
 
-        <div class="max-w-3xl mx-auto mb-16 reveal-node" style="transition-delay: 0.1s;">
-          <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-10 relative group">
+        <div class="max-w-3xl mx-auto mb-10 sm:mb-16 reveal-node" style="transition-delay: 0.1s;">
+          <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 relative group">
             <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-cyan-500/25 transition-all duration-500 ease-out"></div>
             
-            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-6 relative z-10">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-5 sm:space-y-6 relative z-10">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div class="space-y-2">
                   <label for="name" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1 transition-colors duration-500">Name</label>
                   <input type="text" id="name" name="name" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white placeholder-slate-500 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-400 shadow-inner" placeholder="John Doe">
@@ -651,7 +682,7 @@
                 <label for="message" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1 transition-colors duration-500">Message</label>
                 <textarea id="message" name="message" rows="4" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white placeholder-slate-500 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-400 shadow-inner resize-none" placeholder="Let's connect..."></textarea>
               </div>
-              <button type="submit" class="w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-4 rounded-xl font-bold shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-white/20 click-shrink">
+              <button type="submit" class="w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3.5 sm:py-4 rounded-xl font-bold shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-white/20 click-shrink">
                 <i class="fa-solid fa-paper-plane text-sm"></i> Send Message
               </button>
             </form>
@@ -659,38 +690,38 @@
         </div>
 
         <!-- Exact Original Multi-color App Grid Restored -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
-          <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card social-github spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.2s;">
-            <i class="fa-brands fa-github text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-sm font-bold tracking-wide relative z-10">GitHub</span>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-4xl mx-auto">
+          <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card social-github spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.2s;">
+            <i class="fa-brands fa-github text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">GitHub</span>
           </a>
-          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card social-linkedin spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.3s;">
-            <i class="fa-brands fa-linkedin-in text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-sm font-bold tracking-wide relative z-10">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card social-linkedin spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.3s;">
+            <i class="fa-brands fa-linkedin-in text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">LinkedIn</span>
           </a>
-          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card social-youtube spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.4s;">
-            <i class="fa-brands fa-youtube text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-sm font-bold tracking-wide relative z-10">YouTube</span>
+          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card social-youtube spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.4s;">
+            <i class="fa-brands fa-youtube text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">YouTube</span>
           </a>
-          <a href="mailto:shreyashverma.4518@gmail.com" class="group social-card hover:border-accent hover:text-accent spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.5s;">
-            <div class="relative"><div class="absolute inset-0 bg-accent blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500 ease-out"></div><i class="fa-solid fa-envelope text-4xl drop-shadow-md relative z-10 transition-transform duration-400"></i></div>
-            <span class="text-sm font-bold tracking-wide relative z-10">Email</span>
+          <a href="mailto:shreyashverma.4518@gmail.com" class="group social-card hover:border-accent hover:text-accent spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.5s;">
+            <div class="relative"><div class="absolute inset-0 bg-accent blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500 ease-out"></div><i class="fa-solid fa-envelope text-3xl sm:text-4xl drop-shadow-md relative z-10 transition-transform duration-400"></i></div>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Email</span>
           </a>
-          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card social-instagram spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.6s;">
-            <i class="fa-brands fa-instagram text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-sm font-bold tracking-wide relative z-10">Instagram</span>
+          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card social-instagram spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.6s;">
+            <i class="fa-brands fa-instagram text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Instagram</span>
           </a>
-          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card social-reddit spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.7s;">
-            <i class="fa-brands fa-reddit text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-sm font-bold tracking-wide relative z-10">Reddit</span>
+          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card social-reddit spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.7s;">
+            <i class="fa-brands fa-reddit text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Reddit</span>
           </a>
-          <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card social-x spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.8s;">
-            <i class="fa-brands fa-x-twitter text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-sm font-bold tracking-wide relative z-10">Twitter</span>
+          <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card social-x spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.8s;">
+            <i class="fa-brands fa-x-twitter text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Twitter</span>
           </a>
-          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card social-threads spotlight-card glass-panel rounded-3xl p-8 flex flex-col items-center justify-center gap-4 reveal-node text-text-secondary" style="transition-delay: 0.9s;">
-            <i class="fa-brands fa-threads text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-sm font-bold tracking-wide relative z-10">Threads</span>
+          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card social-threads spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.9s;">
+            <i class="fa-brands fa-threads text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Threads</span>
           </a>
         </div>
       </div>
@@ -873,7 +904,7 @@
             });
           }
         });
-      }, { threshold: 0.35 });
+      }, { rootMargin: '-35% 0px -50% 0px', threshold: 0 });
 
       document.querySelectorAll('section[id]').forEach(sec => sectionObserver.observe(sec));
 
@@ -889,6 +920,7 @@
         const islandRect = navIsland.getBoundingClientRect();
         const parentRect = dropBox.parentElement.getBoundingClientRect();
         const startY = islandRect.top - parentRect.top + (islandRect.height / 2) - 20;
+        const dropWidth = Math.min(370, Math.max(240, window.innerWidth - 32)) + 'px';
 
         // Stage is normally visible in DOM structure to avoid overlapping layout lag
         gsap.set(dropBox, { xPercent: -50, y: startY, scale: 0.1, opacity: 0, width: "40px", height: "40px", borderRadius: "99px" });
@@ -899,17 +931,17 @@
         tl.to(navIsland, { scale: 1.06, boxShadow: "0 0 80px rgba(52, 211, 153, 1), inset 0 0 20px rgba(52, 211, 153, 0.8)", borderColor: "rgba(52, 211, 153, 1)", duration: 0.8, ease: "power2.out" })
           .to(dropBox, { y: 70, scale: 1, opacity: 1, width: "56px", height: "56px", duration: 1.2, ease: "back.out(1.0)" }, "-=0.2")
           .to(navIsland, { scale: 1, boxShadow: "", borderColor: "", duration: 0.8, ease: "power2.inOut", clearProps: "all" }, "-=0.9")
-          .to(dropBox, { width: "370px", borderRadius: "24px", duration: 0.9, ease: "power3.inOut" }, "+=0.3")
+          .to(dropBox, { width: dropWidth, borderRadius: "24px", duration: 0.9, ease: "power3.inOut" }, "+=0.3")
           .to(dropText, { opacity: 1, duration: 0.5, onComplete: () => { dropText.classList.add('apple-siri-shimmer'); } }, "-=0.3")
           .to(dropBox, { y: 110, opacity: 0, scale: 0.9, filter: "blur(8px)", duration: 0.8, ease: "power2.in", onComplete: () => { dropBox.style.display = 'none'; } }, "+=1.5")
-          .fromTo(tabBtns, { x: -50, opacity: 0, scale: 0.95, filter: "blur(4px)" }, { x: 0, opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, stagger: 0.15, ease: "back.out(1.2)", onStart: () => { tabsColumn.style.opacity = "1"; tabsColumn.style.pointerEvents = "auto"; } }, "-=0.3")
+          .fromTo(tabBtns, { x: -30, opacity: 0, scale: 0.96, filter: "blur(4px)" }, { x: 0, opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, stagger: 0.15, ease: "back.out(1.2)", onStart: () => { tabsColumn.style.opacity = "1"; tabsColumn.style.pointerEvents = "auto"; } }, "-=0.3")
           .add(() => { document.querySelector('.person-tab[data-proj="per1"]').click(); }, "-=0.2");
       }
 
       let personDropPlayed = false;
       new IntersectionObserver((entries) => {
         entries.forEach(e => { if(e.isIntersecting && !personDropPlayed) { personDropPlayed = true; runDropAnimation(); } });
-      }, { threshold: 0.25 }).observe(document.getElementById('person-hobbies'));
+      }, { threshold: 0.2 }).observe(document.getElementById('person-hobbies'));
 
 
       // --- ACCORDION CONTENT LOGIC ---
@@ -935,19 +967,23 @@
           const stageWrapper = document.getElementById('person-stage');
           if(d) {
             stageWrapper.innerHTML = `
-              <div class="spotlight-card p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-emerald-950/80 via-slate-900/90 to-teal-950/80 border border-emerald-500/50 shadow-[0_0_60px_rgba(16,185,129,0.25)] flex flex-col justify-between min-h-[440px] text-left">
+              <div class="spotlight-card p-6 sm:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-emerald-950/80 via-slate-900/90 to-teal-950/80 border border-emerald-500/50 shadow-[0_0_60px_rgba(16,185,129,0.25)] flex flex-col justify-between min-h-[260px] sm:min-h-[440px] text-left">
                 <div>
-                  <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center font-bold mb-8 shadow-[0_0_25px_rgba(16,185,129,0.35)]">
-                    <i class="fa-solid ${d.icon} text-2xl"></i>
+                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center font-bold mb-5 sm:mb-8 shadow-[0_0_25px_rgba(16,185,129,0.35)]">
+                    <i class="fa-solid ${d.icon} text-xl sm:text-2xl"></i>
                   </div>
-                  <h3 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">${d.title}</h3>
-                  <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-medium">${d.desc}</p>
+                  <h3 class="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-3 sm:mb-4">${d.title}</h3>
+                  <p class="text-slate-200 text-sm sm:text-lg leading-relaxed font-medium">${d.desc}</p>
                 </div>
               </div>
             `;
             
             stageWrapper.style.display = 'block';
-            gsap.fromTo(stageWrapper, { x: -180, scale: 0.15, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.35)" });
+            if (window.innerWidth < 1024) {
+              gsap.fromTo(stageWrapper, { y: 18, scale: 0.96, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" });
+            } else {
+              gsap.fromTo(stageWrapper, { x: -180, scale: 0.15, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.35)" });
+            }
           }
         });
       });
