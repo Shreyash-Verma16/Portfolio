@@ -1677,8 +1677,8 @@
       if (mobileDrawer && mobileOpenBtn && mobileCloseBtn) {
         const drawerScroller = mobileDrawer.querySelector('.mobile-drawer-scroller');
         const drawerSheet = mobileDrawer.querySelector('.mobile-drawer-sheet');
-        const supportsInitialTarget = CSS.supports && CSS.supports('scroll-initial-target', 'nearest');
-        const supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline', 'scroll()');
+        const supportsInitialTarget = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('scroll-initial-target', 'nearest');
+        const supportsScrollTimeline = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline', 'scroll()');
 
         if (!supportsScrollTimeline) {
           drawerScroller.addEventListener('scroll', () => {
@@ -1747,7 +1747,6 @@
       }
 
 
-      if (typeof gsap !== 'undefined') animateFanOut();
 
 
       // =========================================================
