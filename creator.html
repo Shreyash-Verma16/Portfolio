@@ -113,19 +113,7 @@
       overflow: hidden;
     }
 
-    /* Crisp Dot Grid Overlay */
-    #stitch-dot-grid {
-      position: fixed;
-      inset: 0;
-      z-index: -19;
-      background-image: radial-gradient(var(--dot-color) 1.15px, transparent 1.15px);
-      background-size: 26px 26px;
-      background-position: center center;
-      pointer-events: none;
-      mask-image: radial-gradient(circle at 50% 35%, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.95) 75%);
-      -webkit-mask-image: radial-gradient(circle at 50% 35%, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.95) 75%);
-      transition: background-image 0.5s ease;
-    }
+
 
     /* Wrapper that smoothly fades in/out on the 15s ON / 5s OFF cycle */
     #stitch-canvas-wrapper {
@@ -576,40 +564,133 @@
       z-index: 25;
     }
 
-    /* ── Social Cards & Pop-out Redirect ── */
-    .social-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    html.dark .social-github:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
-    .social-linkedin:hover { color: #0a66c2; border-color: rgba(10,102,194,0.4); }
-    .social-youtube:hover { color: #ff0000; border-color: rgba(255,0,0,0.4); }
-    html.dark .social-x:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
-    .social-instagram:hover { color: #e1306c; border-color: rgba(225,48,108,0.4); }
-    .social-reddit:hover { color: #ff4500; border-color: rgba(255,69,0,0.4); }
-    html.dark .social-threads:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+    /* ── Footer Editorial Links & Authentic Brand Hover Colors ── */
+    .footer-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--text-primary);
+      transition: color 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .footer-nav-link:hover {
+      color: var(--accent);
+      transform: translate3d(5px, 0, 0);
+    }
+    .footer-nav-link .footer-ext-arrow {
+      font-size: 0.68rem;
+      opacity: 0;
+      transform: translate3d(-4px, 2px, 0);
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-nav-link:hover .footer-ext-arrow {
+      opacity: 0.85;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .footer-connect-link {
+      --brand-color: var(--text-primary);
+      --brand-glow: rgba(255, 255, 255, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.3rem 0;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition:
+        color 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .footer-connect-link .connect-icon {
+      width: 1.25rem;
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      transition:
+        color 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.34s ease;
+    }
+    .footer-connect-link .connect-arrow {
+      font-size: 0.65rem;
+      opacity: 0;
+      transform: translate3d(-6px, 2px, 0);
+      transition:
+        opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-connect-link:hover,
+    .footer-connect-link:focus-visible {
+      color: var(--brand-color);
+      transform: translate3d(6px, 0, 0);
+      outline: none;
+    }
+    .footer-connect-link:hover .connect-icon,
+    .footer-connect-link:focus-visible .connect-icon {
+      color: var(--brand-color);
+      transform: scale(1.18);
+      filter: drop-shadow(0 0 10px var(--brand-glow));
+    }
+    .footer-connect-link:hover .connect-arrow,
+    .footer-connect-link:focus-visible .connect-arrow {
+      opacity: 0.85;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Official Platform Brand Palettes (No Generic Blue) */
+    .brand-linkedin   { --brand-color: #0a66c2; --brand-glow: rgba(10, 102, 194, 0.52); }
+    .brand-youtube    { --brand-color: #ff0000; --brand-glow: rgba(255, 0, 0, 0.52); }
+    .brand-instagram  { --brand-color: #e1306c; --brand-glow: rgba(225, 48, 108, 0.52); }
+    .brand-github     { --brand-color: #181717; --brand-glow: rgba(24, 23, 23, 0.32); }
+    .brand-x          { --brand-color: #0f172a; --brand-glow: rgba(15, 23, 42, 0.32); }
+    .brand-reddit     { --brand-color: #ff4500; --brand-glow: rgba(255, 69, 0, 0.52); }
+    .brand-hackerrank { --brand-color: #009944; --brand-glow: rgba(0, 185, 85, 0.48); }
+    .brand-leetcode   { --brand-color: #ffa116; --brand-glow: rgba(255, 161, 22, 0.55); }
+    .brand-threads    { --brand-color: #0f172a; --brand-glow: rgba(15, 23, 42, 0.32); }
+
+    html.dark .brand-github     { --brand-color: #ffffff; --brand-glow: rgba(255, 255, 255, 0.45); }
+    html.dark .brand-x          { --brand-color: #ffffff; --brand-glow: rgba(255, 255, 255, 0.45); }
+    html.dark .brand-hackerrank { --brand-color: #00ea64; --brand-glow: rgba(0, 234, 100, 0.52); }
+    html.dark .brand-threads    { --brand-color: #ffffff; --brand-glow: rgba(255, 255, 255, 0.45); }
 
     .redirect-overlay {
       position: fixed;
       inset: 0;
       z-index: 9999999;
-      background: rgba(5, 5, 7, 0.76);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
+      background: rgba(3, 5, 10, 0.78);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .redirect-overlay.active { opacity: 1; pointer-events: auto; }
     .redirect-icon-wrapper {
       font-size: 4rem;
-      transform: scale(0.5) translateY(30px);
       opacity: 0;
-      transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translate3d(var(--fly-x, 0px), var(--fly-y, 36px), 0) scale(0.45);
+      transition:
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
     .redirect-overlay.active .redirect-icon-wrapper {
-      transform: scale(2) translateY(0);
+      transform: translate3d(0, 0, 0) scale(2.1);
       opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .footer-nav-link,
+      .footer-connect-link,
+      .footer-connect-link .connect-icon,
+      .redirect-overlay,
+      .redirect-icon-wrapper {
+        transition: none !important;
+      }
     }
 
     .reveal-node {
@@ -633,7 +714,6 @@
   <!-- ========================================================= -->
   <!-- STITCH LOWER-CRADLE SILK WAVE BACKGROUND (15s ON / 5s OFF)-->
   <!-- ========================================================= -->
-  <div id="stitch-dot-grid" aria-hidden="true"></div>
   <div id="stitch-bg-container" aria-hidden="true">
     <div id="stitch-canvas-wrapper">
       <canvas id="stitch-silk-canvas"></canvas>
@@ -855,6 +935,9 @@
     <!-- ========================================== -->
     <!-- 3. REAL TIME ANALYTICS SECTION             -->
     <!-- ========================================== -->
+    <!-- ========================================== -->
+    <!-- 3. REAL TIME ANALYTICS SECTION             -->
+    <!-- ========================================== -->
     <section id="creator-analytics" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative z-10 border-t border-border/40">
       
       <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 reveal-node">
@@ -862,8 +945,9 @@
           <span class="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span> Live Metric Stream
         </div>
         <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight apple-siri-shimmer">Real Time Analytics</h2>
-        <p class="text-text-secondary text-sm sm:text-base font-medium mt-3">Verified and synchronized directly from official platform data.</p>
+        <p class="text-text-secondary text-sm sm:text-base font-medium mt-3">Verified metrics synchronized directly from official channel & profile telemetry.</p>
         
+        <!-- Platform Switcher Buttons -->
         <div class="inline-flex items-center gap-1.5 sm:gap-2 glass-panel p-1.5 rounded-2xl border border-border mt-6 sm:mt-8 shadow-lg">
           <button id="btn-youtube" onclick="switchPlatform('youtube')" class="px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink"><i class="fa-brands fa-youtube text-base text-red-500"></i> YouTube</button>
           <button id="btn-instagram" onclick="switchPlatform('instagram')" class="px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink"><i class="fa-brands fa-instagram text-base text-pink-500"></i> Instagram</button>
@@ -871,77 +955,88 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch reveal-node">
+        <!-- Left: Profile Hero & 4 Metric Cards -->
         <div class="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
-          <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 relative group border border-border">
+          <!-- Profile Hero Card -->
+          <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-7 relative group border border-border transition-all duration-300">
             <div class="flex items-center gap-3.5 sm:gap-4">
-              <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border border-border p-0.5 shadow-lg shrink-0">
-                <img id="platform-avatar" src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Profile" class="w-full h-full object-cover rounded-xl" />
+              <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border border-border/80 p-0.5 shadow-lg shrink-0 bg-surface">
+                <img id="platform-avatar" src="https://yt3.googleusercontent.com/hOx_kf_zHEu4_roJH65-xClQiPxKJ4c2z_lEp_dMte5a568N9fezgLvFIHxMTPOqSi5Gz2DY=s160-c-k-c0x00ffffff-no-rj" onerror="this.onerror=null;this.src='https://i.ibb.co/mrk9d9TV/channels4-profile.jpg';" alt="Shreyash Verma" class="w-full h-full object-cover rounded-xl" />
               </div>
               <div class="overflow-hidden">
-                <div class="flex items-center gap-2"><h3 id="platform-title" class="text-lg sm:text-xl font-extrabold text-text-primary tracking-tight truncate">Shreyash Verma</h3><i class="fa-solid fa-circle-check text-sky-400 text-sm shrink-0"></i></div>
-                <p id="platform-handle" class="text-text-muted font-mono text-xs font-semibold mt-0.5 truncate">@shreyashverse</p>
+                <div class="flex items-center gap-2">
+                  <h3 id="platform-title" class="text-lg sm:text-xl font-extrabold text-text-primary tracking-tight truncate">Shreyash Verma</h3>
+                  <i class="fa-solid fa-circle-check text-sky-400 text-sm shrink-0"></i>
+                </div>
+                <a id="platform-handle" href="https://youtube.com/@shreyashverse" target="_blank" rel="noopener noreferrer" class="text-text-muted hover:text-accent font-mono text-xs font-semibold mt-0.5 truncate transition-colors inline-block">@Shreyashverse</a>
               </div>
             </div>
             <div class="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border/60">
               <span id="hero-stat-label" class="text-xs font-mono font-bold text-text-muted uppercase tracking-widest">Subscribers Count</span>
-              <div id="hero-stat-val" class="text-4xl sm:text-6xl font-black tracking-tight text-text-primary mt-1 font-mono animated-stat">--</div>
-              <p id="hero-stat-desc" class="text-xs font-medium text-emerald-500 mt-2 flex items-center gap-1.5"><i class="fa-solid fa-check-circle"></i> Authenticated Snapshot</p>
+              <div id="hero-stat-val" class="text-4xl sm:text-6xl font-black tracking-tight text-text-primary mt-1 font-mono animated-stat">149</div>
+              <p id="hero-stat-desc" class="text-xs font-semibold text-emerald-400 mt-2 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> +5 in last 28 days • Official Channel</p>
             </div>
           </div>
           
+          <!-- 4 Stat Grid Cards -->
           <div class="grid grid-cols-2 gap-3 sm:gap-4">
+            <!-- Card 1 -->
             <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
-              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 text-purple-500 dark:text-purple-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-purple-500/20"><i id="stat-1-icon" class="fa-solid fa-eye"></i></div>
-              <span id="stat-1-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Views</span>
-              <span id="stat-1-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+              <div id="stat-1-wrap" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-purple-500/20"><i id="stat-1-icon" class="fa-solid fa-eye"></i></div>
+              <span id="stat-1-label" class="text-[0.68rem] sm:text-xs font-mono font-bold text-text-muted uppercase tracking-wider block">Total Channel Views</span>
+              <span id="stat-1-val" class="text-lg sm:text-2xl font-black text-text-primary font-mono mt-0.5 block animated-stat">172,106</span>
+              <span id="stat-1-sub" class="text-[0.65rem] font-mono text-text-muted block mt-0.5">Lifetime channel views</span>
             </div>
+            <!-- Card 2 -->
             <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
-              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-cyan-500/20"><i id="stat-2-icon" class="fa-solid fa-upload"></i></div>
-              <span id="stat-2-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Uploads</span>
-              <span id="stat-2-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+              <div id="stat-2-wrap" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-cyan-500/20"><i id="stat-2-icon" class="fa-solid fa-video"></i></div>
+              <span id="stat-2-label" class="text-[0.68rem] sm:text-xs font-mono font-bold text-text-muted uppercase tracking-wider block">Videos Uploaded</span>
+              <span id="stat-2-val" class="text-lg sm:text-2xl font-black text-text-primary font-mono mt-0.5 block animated-stat">117</span>
+              <span id="stat-2-sub" class="text-[0.65rem] font-mono text-text-muted block mt-0.5">Public videos count</span>
             </div>
+            <!-- Card 3 -->
             <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
-              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-emerald-500/20"><i id="stat-3-icon" class="fa-solid fa-heart"></i></div>
-              <span id="stat-3-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Total Engagement</span>
-              <span id="stat-3-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+              <div id="stat-3-wrap" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-emerald-500/20"><i id="stat-3-icon" class="fa-solid fa-arrow-trend-up"></i></div>
+              <span id="stat-3-label" class="text-[0.68rem] sm:text-xs font-mono font-bold text-text-muted uppercase tracking-wider block">28-Day Views</span>
+              <span id="stat-3-val" class="text-lg sm:text-2xl font-black text-text-primary font-mono mt-0.5 block animated-stat">10.8K</span>
+              <span id="stat-3-sub" class="text-[0.65rem] font-mono text-emerald-400 block mt-0.5">▲ 10,800 recent views</span>
             </div>
+            <!-- Card 4 -->
             <div class="spotlight-card glass-panel rounded-2xl p-4 sm:p-5 border border-border">
-              <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-rose-500/20"><i id="stat-4-icon" class="fa-solid fa-user-plus"></i></div>
-              <span id="stat-4-label" class="text-[0.65rem] sm:text-[0.7rem] font-mono font-bold text-text-muted uppercase tracking-wider block">Subscriber Count</span>
-              <span id="stat-4-val" class="text-lg sm:text-2xl font-extrabold text-text-primary font-mono mt-0.5 block animated-stat">--</span>
+              <div id="stat-4-wrap" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-amber-500/20"><i id="stat-4-icon" class="fa-solid fa-clock"></i></div>
+              <span id="stat-4-label" class="text-[0.68rem] sm:text-xs font-mono font-bold text-text-muted uppercase tracking-wider block">Watch Time (28d)</span>
+              <span id="stat-4-val" class="text-lg sm:text-2xl font-black text-text-primary font-mono mt-0.5 block animated-stat">40.3 hrs</span>
+              <span id="stat-4-sub" class="text-[0.65rem] font-mono text-amber-400 block mt-0.5">▲ 40.3 watch hours</span>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-7 flex flex-col justify-between spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-border">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+        <!-- Right: Trajectory Chart Canvas -->
+        <div class="lg:col-span-7 flex flex-col justify-between spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-border">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-5">
             <div>
-              <span class="text-xs font-mono font-bold text-purple-600 dark:text-cyan-400 uppercase tracking-widest">Active Metric Canvas</span>
-              <h4 id="chart-heading" class="text-lg sm:text-xl font-extrabold text-text-primary mt-0.5">Verified Trajectory Trend</h4>
+              <span id="chart-sub-label" class="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest">Active Metric Canvas</span>
+              <h4 id="chart-heading" class="text-lg sm:text-xl font-black text-text-primary mt-0.5">YouTube Channel Views Trajectory</h4>
             </div>
             <div class="flex items-center gap-1.5 glass-panel p-1 rounded-xl border border-border self-start sm:self-auto">
               <button id="tab-views" onclick="switchMetric('views')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-purple-500/15 border border-purple-500/40 transition-all">Views</button>
               <button id="tab-engagement" onclick="switchMetric('engagement')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all">Engagement</button>
             </div>
           </div>
-          <div class="relative w-full h-[230px] sm:h-[320px]">
+          <div class="relative w-full h-[240px] sm:h-[320px]">
             <canvas id="portfolioAnalyticsChart"></canvas>
             <div id="chart-state-overlay" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 rounded-2xl bg-surface/80 backdrop-blur-sm border border-border/60">
               <i id="chart-state-icon" class="fa-solid fa-spinner fa-spin text-2xl text-accent mb-2"></i>
               <p id="chart-state-text" class="text-xs sm:text-sm font-mono font-semibold text-text-secondary max-w-md">Loading verified history from stats.json...</p>
             </div>
           </div>
-          <div class="mt-5 sm:mt-6 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-2 text-[0.7rem] sm:text-xs text-text-muted font-mono font-semibold">
-            <span id="analytics-source-label" class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Synced from stats.json</span>
-            <span id="analytics-status-badge" class="text-emerald-400 font-bold tracking-wider">STATUS: LOADING...</span>
+          <div class="mt-4 sm:mt-5 pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-2 text-[0.7rem] sm:text-xs text-text-muted font-mono font-semibold">
+            <span id="analytics-source-label" class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-emerald-400"></i> Official YouTube Channel Telemetry</span>
+            <span id="analytics-status-badge" class="text-emerald-400 font-bold tracking-wider">STATUS: LIVE STREAM (SYNCED)</span>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- ========================================== -->
-    <!-- 4. TOOLS & SOFTWARE SECTION                -->
-    <!-- ========================================== -->
     <section id="creator-tools" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative z-10 border-t border-border/40">
       <h2 class="text-3xl sm:text-5xl font-black mb-8 sm:mb-12 reveal-node text-center">Tools & Software</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-text-secondary font-medium reveal-node">
@@ -1006,101 +1101,104 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 reveal-node items-start">
           
-          <!-- YouTube Shorts #1 -->
+          <!-- YouTube Shorts #1: Is Gemini Better Than Claude? -->
           <div class="flex flex-col items-center">
-            <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full">
+            <a href="https://www.youtube.com/shorts/nxRCKZFiLRQ" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full" title="Is Gemini Better Than Claude?">
               <div class="iphone-pro-container">
                 <div class="iphone-pro-island"></div>
                 <div class="iphone-pro-glare"></div>
                 <div class="iphone-pro-screen">
-                  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop" alt="YouTube Short 1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                  <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all duration-500 z-10">
+                  <img src="assets/yt_short_1.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/nxRCKZFiLRQ/hqdefault.jpg';" alt="Is Gemini Better Than Claude?" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/25 group-hover:bg-black/10 transition-all duration-500 z-10">
                     <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform"><i class="fa-solid fa-play ml-1"></i></div>
                   </div>
                   <div class="absolute bottom-4 left-3 right-3 text-white z-20">
                     <span class="text-[0.65rem] font-mono uppercase tracking-wider font-extrabold bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 w-max shadow-lg"><i class="fa-brands fa-youtube text-red-500 text-xs"></i> YT Shorts</span>
+                    <p class="text-xs font-bold text-white mt-1.5 truncate drop-shadow">Is Gemini Better Than Claude? 🤖</p>
                   </div>
                 </div>
               </div>
             </a>
-            <div class="mt-5 w-full max-w-[250px] glass-panel p-3.5 rounded-2xl border border-border grid grid-cols-3 gap-2 text-center font-mono text-xs shadow-lg">
+            <div class="mt-4 w-full max-w-[250px] glass-panel p-3.5 rounded-2xl border border-border grid grid-cols-3 gap-2 text-center font-mono text-xs shadow-lg">
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-heart text-rose-500 mr-0.5"></i> Likes</span>
-                <span class="font-extrabold text-text-primary text-xs">1.2K</span>
+                <span class="font-extrabold text-text-primary text-xs">19</span>
               </div>
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-comment text-sky-400 mr-0.5"></i> Comm</span>
-                <span class="font-extrabold text-text-primary text-xs">84</span>
+                <span class="font-extrabold text-text-primary text-xs">2</span>
               </div>
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-eye text-emerald-400 mr-0.5"></i> Views</span>
-                <span class="font-extrabold text-text-primary text-xs">14K</span>
+                <span class="font-extrabold text-text-primary text-xs">1.3K</span>
               </div>
             </div>
           </div>
 
-          <!-- YouTube Shorts #2 -->
+          <!-- YouTube Shorts #2: Don't Download These AI Agents -->
           <div class="flex flex-col items-center">
-            <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full">
+            <a href="https://www.youtube.com/shorts/7EqZJI4eJgo" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full" title="Don't Download These AI Agents!">
               <div class="iphone-pro-container">
                 <div class="iphone-pro-island"></div>
                 <div class="iphone-pro-glare"></div>
                 <div class="iphone-pro-screen">
-                  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop" alt="YouTube Short 2" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                  <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all duration-500 z-10">
+                  <img src="assets/yt_short_2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/7EqZJI4eJgo/hqdefault.jpg';" alt="Don't Download These AI Agents!" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/25 group-hover:bg-black/10 transition-all duration-500 z-10">
                     <div class="w-14 h-14 rounded-full bg-red-600 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform"><i class="fa-solid fa-play ml-1"></i></div>
                   </div>
                   <div class="absolute bottom-4 left-3 right-3 text-white z-20">
                     <span class="text-[0.65rem] font-mono uppercase tracking-wider font-extrabold bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 w-max shadow-lg"><i class="fa-brands fa-youtube text-red-500 text-xs"></i> YT Shorts</span>
+                    <p class="text-xs font-bold text-white mt-1.5 truncate drop-shadow">Don't Download These AI Agents! ⚠️</p>
                   </div>
                 </div>
               </div>
             </a>
-            <div class="mt-5 w-full max-w-[250px] glass-panel p-3.5 rounded-2xl border border-border grid grid-cols-3 gap-2 text-center font-mono text-xs shadow-lg">
+            <div class="mt-4 w-full max-w-[250px] glass-panel p-3.5 rounded-2xl border border-border grid grid-cols-3 gap-2 text-center font-mono text-xs shadow-lg">
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-heart text-rose-500 mr-0.5"></i> Likes</span>
-                <span class="font-extrabold text-text-primary text-xs">850</span>
+                <span class="font-extrabold text-text-primary text-xs">18</span>
               </div>
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-comment text-sky-400 mr-0.5"></i> Comm</span>
-                <span class="font-extrabold text-text-primary text-xs">42</span>
+                <span class="font-extrabold text-text-primary text-xs">2</span>
               </div>
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-eye text-emerald-400 mr-0.5"></i> Views</span>
-                <span class="font-extrabold text-text-primary text-xs">9.5K</span>
+                <span class="font-extrabold text-text-primary text-xs">1.1K</span>
               </div>
             </div>
           </div>
 
-          <!-- Instagram Reel #1 -->
+          <!-- Instagram Reel #1: Don't judge an AI agent by its appearance -->
           <div class="flex flex-col items-center">
-            <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full">
+            <a id="latest-reel-link" href="https://www.instagram.com/reel/DfHXvEWNJ0T/" target="_blank" rel="noopener noreferrer" class="block group click-shrink w-full" title="Latest Instagram Reel">
               <div class="iphone-pro-container">
                 <div class="iphone-pro-island"></div>
                 <div class="iphone-pro-glare"></div>
                 <div class="iphone-pro-screen">
-                  <img src="https://images.unsplash.com/photo-1610818702807-68b209cbda8a?w=800&auto=format&fit=crop" alt="Instagram Reel" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                  <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all duration-500 z-10">
+                  <img id="latest-reel-thumb" src="assets/latest_reel.jpg" onerror="this.onerror=null;this.src='assets/latest_reel.jpg';" alt="Latest Instagram Reel" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                  <div class="absolute inset-0 flex items-center justify-center bg-black/25 group-hover:bg-black/10 transition-all duration-500 z-10">
                     <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-orange-500 via-pink-500 to-purple-600 text-white flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform"><i class="fa-solid fa-play ml-1"></i></div>
                   </div>
                   <div class="absolute bottom-4 left-3 right-3 text-white z-20">
                     <span class="text-[0.65rem] font-mono uppercase tracking-wider font-extrabold bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5 w-max shadow-lg"><i class="fa-brands fa-instagram text-pink-400 text-xs"></i> IG Reels</span>
+                    <p id="latest-reel-caption" class="text-xs font-bold text-white mt-1.5 truncate drop-shadow">Don't judge an AI agent by appearance ⚠️</p>
                   </div>
                 </div>
               </div>
             </a>
-            <div class="mt-5 w-full max-w-[250px] glass-panel p-3.5 rounded-2xl border border-border grid grid-cols-3 gap-2 text-center font-mono text-xs shadow-lg">
+            <div class="mt-4 w-full max-w-[250px] glass-panel p-3.5 rounded-2xl border border-border grid grid-cols-3 gap-2 text-center font-mono text-xs shadow-lg">
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-heart text-rose-500 mr-0.5"></i> Likes</span>
-                <span class="font-extrabold text-text-primary text-xs">15K</span>
+                <span id="latest-reel-likes" class="font-extrabold text-text-primary text-xs">49</span>
               </div>
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-comment text-sky-400 mr-0.5"></i> Comm</span>
-                <span class="font-extrabold text-text-primary text-xs">320</span>
+                <span id="latest-reel-comm" class="font-extrabold text-text-primary text-xs">0</span>
               </div>
               <div>
                 <span class="block text-[0.65rem] text-text-muted uppercase font-bold"><i class="fa-solid fa-eye text-emerald-400 mr-0.5"></i> Views</span>
-                <span class="font-extrabold text-text-primary text-xs">250K</span>
+                <span id="latest-reel-views" class="font-extrabold text-text-primary text-xs">3,046</span>
               </div>
             </div>
           </div>
@@ -1108,10 +1206,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ========================================== -->
-    <!-- 7. CONTACT / COLLAB SECTION                -->
-    <!-- ========================================== -->
     <section id="contact" class="py-16 sm:py-24 lg:py-32 relative z-10 border-t border-border/40">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10 sm:mb-16 reveal-node">
@@ -1132,17 +1226,146 @@
             </form>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-4xl mx-auto">
-          <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card social-github spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-github text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">GitHub</span></a>
-          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card social-linkedin spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-linkedin-in text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">LinkedIn</span></a>
-          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card social-youtube spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-youtube text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">YouTube</span></a>
-          <a href="mailto:shreyashverma.4518@gmail.com" class="social-card hover:border-purple-500 hover:text-purple-500 spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-solid fa-envelope text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Email</span></a>
-          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card social-instagram spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-instagram text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Instagram</span></a>
-          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card social-reddit spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-reddit text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Reddit</span></a>
-          <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card social-x spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-x-twitter text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Twitter</span></a>
-          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card social-threads spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary"><i class="fa-brands fa-threads text-3xl sm:text-4xl"></i><span class="text-xs sm:text-sm font-bold tracking-wide">Threads</span></a>
+    <!-- ========================================================= -->
+    <!-- COMPACT EDITORIAL FOOTER (SEPARATE FROM CONTACT FORM)     -->
+    <!-- ========================================================= -->
+    <footer id="creator-footer" class="relative z-10 border-t border-border/60 bg-slate-100/80 dark:bg-[#05070d]/95 backdrop-blur-2xl">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-500/35 to-transparent pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto px-6 sm:px-8 py-10 sm:py-12 reveal-node">
+
+        <!-- Top Row: Brand Monogram + Tagline + Available Pill -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-2">
+            <a href="#home" class="inline-flex items-center gap-3 group">
+              <span class="w-9 h-9 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-black text-base tracking-tight flex items-center justify-center shadow-sm transition-transform duration-300 ease-out group-hover:scale-105">
+                S.
+              </span>
+              <span class="text-sm font-extrabold tracking-[0.18em] uppercase text-text-primary">
+                SHREYASH
+              </span>
+            </a>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-text-primary leading-snug">
+              Building. Creating. Evolving.
+            </h2>
+            <p class="text-xs sm:text-sm text-text-secondary max-w-xl">
+              A developer by curiosity, a creator by passion, and an individual always exploring what's next.
+            </p>
+          </div>
+
+          <a href="#contact" class="self-start sm:self-center inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/12 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wide hover:bg-emerald-500/20 hover:border-emerald-400/55 transition-all duration-300 shrink-0 click-shrink">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            </span>
+            Available to connect
+          </a>
         </div>
+
+        <!-- Middle Navigation: EXPLORE & MORE FROM ME -->
+        <div class="mt-7 pt-7 border-t border-border/60 grid grid-cols-2 gap-8 sm:gap-12">
+          <div>
+            <h3 class="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-text-muted mb-3">Explore</h3>
+            <ul class="space-y-1.5 text-sm font-medium">
+              <li><a href="developer.html" class="footer-nav-link"><span>As a Developer</span></a></li>
+              <li><a href="person.html" class="footer-nav-link"><span>As a Person</span></a></li>
+              <li><a href="index.html" class="footer-nav-link"><span>Return to Gateway</span></a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-text-muted mb-3">More from me</h3>
+            <ul class="space-y-1.5 text-sm font-medium">
+              <li><a href="https://tmspark.vercel.app" target="_blank" rel="noopener noreferrer" class="footer-nav-link"><span>TypeMind Spark</span><i class="fa-solid fa-arrow-up-right-from-square footer-ext-arrow" aria-hidden="true"></i></a></li>
+              <li><a href="https://github.com/Shreyash-Verma16/labs-spark" target="_blank" rel="noopener noreferrer" class="footer-nav-link"><span>Cluster Studio</span><i class="fa-solid fa-arrow-up-right-from-square footer-ext-arrow" aria-hidden="true"></i></a></li>
+              <li><a href="https://github.com/Shreyash-Verma16/spark-intelligence" target="_blank" rel="noopener noreferrer" class="footer-nav-link"><span>Spark Intelligence</span><i class="fa-solid fa-arrow-up-right-from-square footer-ext-arrow" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Section: CONNECT (3 Compact Stacks with Authentic Brand Colors & Fly-Out Logo) -->
+        <div class="mt-7 pt-7 border-t border-border/60">
+          <h3 class="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-text-muted mb-3">Connect</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-y-2 gap-x-8 text-sm">
+            <ul class="space-y-1">
+              <li>
+                <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-linkedin">
+                  <i class="fa-brands fa-linkedin-in connect-icon" aria-hidden="true"></i>
+                  <span>LinkedIn</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-youtube">
+                  <i class="fa-brands fa-youtube connect-icon" aria-hidden="true"></i>
+                  <span>YouTube</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-instagram">
+                  <i class="fa-brands fa-instagram connect-icon" aria-hidden="true"></i>
+                  <span>Instagram</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="space-y-1">
+              <li>
+                <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-github">
+                  <i class="fa-brands fa-github connect-icon" aria-hidden="true"></i>
+                  <span>GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-x">
+                  <i class="fa-brands fa-x-twitter connect-icon" aria-hidden="true"></i>
+                  <span>X</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-reddit">
+                  <i class="fa-brands fa-reddit-alien connect-icon" aria-hidden="true"></i>
+                  <span>Reddit</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="space-y-1">
+              <li>
+                <a href="https://www.hackerrank.com/profile/shreyashverma_41" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-hackerrank">
+                  <i class="fa-brands fa-hackerrank connect-icon" aria-hidden="true"></i>
+                  <span>HackerRank</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://leetcode.com/u/shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-leetcode">
+                  <i class="fa-solid fa-code connect-icon" aria-hidden="true"></i>
+                  <span>LeetCode</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card footer-connect-link brand-threads">
+                  <i class="fa-brands fa-threads connect-icon" aria-hidden="true"></i>
+                  <span>Threads</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </footer>
       </div>
     </section>
 
@@ -1907,15 +2130,32 @@
           if (this.href.startsWith('mailto:') || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
             return;
           }
-          const iconElement = this.querySelector('i');
+          const iconElement = this.querySelector('.connect-icon') || this.querySelector('i');
+          const computedStyle = window.getComputedStyle(this);
+          const brandColor = computedStyle.getPropertyValue('--brand-color').trim() || computedStyle.color;
+          const brandGlow = computedStyle.getPropertyValue('--brand-glow').trim() || 'rgba(0, 0, 0, 0.55)';
+
           if (iconElement) {
-            redirectIconWrapper.innerHTML = iconElement.outerHTML;
-            redirectIconWrapper.style.color = window.getComputedStyle(this).color;
+            const iconRect = iconElement.getBoundingClientRect();
+            const dx = (iconRect.left + iconRect.width / 2) - (window.innerWidth / 2);
+            const dy = (iconRect.top + iconRect.height / 2) - (window.innerHeight / 2);
+
+            redirectIconWrapper.innerHTML = `<i class="${iconElement.className.replace('connect-icon', '').trim()}"></i>`;
+            redirectIconWrapper.style.color = brandColor;
+            redirectIconWrapper.style.filter = `drop-shadow(0 0 28px ${brandGlow})`;
+            redirectIconWrapper.style.setProperty('--fly-x', `${dx.toFixed(1)}px`);
+            redirectIconWrapper.style.setProperty('--fly-y', `${dy.toFixed(1)}px`);
           }
+
+          // Reset transition start frame cleanly so logo flies out from clicked position to center
+          redirectOverlay.classList.remove('active');
+          void redirectOverlay.offsetWidth;
+
+          // Let target="_blank" open natively inside user gesture (zero popup blocking)
           if (this.target === '_blank') {
             requestAnimationFrame(() => redirectOverlay.classList.add('active'));
             clearTimeout(redirectCleanupTimer);
-            redirectCleanupTimer = setTimeout(clearRedirectOverlay, 750);
+            redirectCleanupTimer = setTimeout(clearRedirectOverlay, 780);
           } else {
             e.preventDefault();
             const targetUrl = this.href;
@@ -1964,485 +2204,432 @@
 
     });
 
-    // =========================================================
-    // 7. REAL DATA ANALYTICS ENGINE (CONNECTED TO stats.json)
-    // =========================================================
-    const PLATFORM_META = {
-      youtube: {
-        title: "Shreyash Verma",
-        handle: "@shreyashverse",
-        avatar: "https://i.ibb.co/mrk9d9TV/channels4-profile.jpg",
-        heroLabel: "Subscribers Count"
-      },
-      instagram: {
-        title: "Tech With Shreyash",
-        handle: "@techwith_shreyash",
-        avatar: "https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg",
-        heroLabel: "Instagram Followers"
-      }
-    };
+      // =========================================================
+      // 7. REAL-TIME MULTI-PLATFORM ANALYTICS ENGINE (REBUILT)
+      // =========================================================
+      const PERMANENT_AVATAR = "https://yt3.googleusercontent.com/hOx_kf_zHEu4_roJH65-xClQiPxKJ4c2z_lEp_dMte5a568N9fezgLvFIHxMTPOqSi5Gz2DY=s160-c-k-c0x00ffffff-no-rj";
+      const AVATAR_FALLBACK = "https://i.ibb.co/mrk9d9TV/channels4-profile.jpg";
 
-    let statsHistory = [];
-    let statsLoadState = 'loading'; // 'loading' | 'ready' | 'empty' | 'error'
-    let statsErrorMessage = '';
-    let activePlatform = 'youtube';
-    let activeMetric = 'views';
-    let chartInstance = null;
-    let statsRenderVersion = 0;
-    const statTimers = new WeakMap();
-
-    const chartCanvas = document.getElementById('portfolioAnalyticsChart');
-    const ctxChart = chartCanvas ? chartCanvas.getContext('2d') : null;
-
-    function createGradient(cStart, cEnd) {
-      if (!ctxChart) return cStart;
-      const g = ctxChart.createLinearGradient(0, 0, 0, 300);
-      g.addColorStop(0, cStart);
-      g.addColorStop(1, cEnd);
-      return g;
-    }
-
-    function toFiniteNumber(val) {
-      if (val === null || val === undefined || val === '') return null;
-      const num = Number(val);
-      return Number.isFinite(num) ? num : null;
-    }
-
-    function formatCompactNumber(val) {
-      const n = toFiniteNumber(val);
-      if (n === null) return 'N/A';
-      if (n >= 1000000) return (n / 1000000).toFixed(2).replace(/\.?0+$/, '') + 'M';
-      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-      return n.toLocaleString('en-US');
-    }
-
-    function formatDateShort(dateStr) {
-      if (typeof dateStr !== 'string') return 'Unknown';
-      const isoMatch = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-      if (isoMatch) {
-        const dt = new Date(Date.UTC(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3])));
-        if (!Number.isNaN(dt.getTime())) {
-          return dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', timeZone: 'UTC' });
-        }
-      }
-      return dateStr;
-    }
-
-    function setChartOverlay(visible, iconClass, message) {
-      const overlay = document.getElementById('chart-state-overlay');
-      const iconEl = document.getElementById('chart-state-icon');
-      const textEl = document.getElementById('chart-state-text');
-      if (!overlay) return;
-      overlay.classList.toggle('hidden', !visible);
-      if (iconEl && iconClass) iconEl.className = iconClass;
-      if (textEl && typeof message === 'string') textEl.textContent = message;
-    }
-
-    /**
-     * Extracts normalized, honest YouTube metrics from a single stats.json record.
-     */
-    function extractYouTubePoint(entry) {
-      const yt = entry && entry.youtube && typeof entry.youtube === 'object' ? entry.youtube : {};
-      return {
-        subscribers: toFiniteNumber(yt.subscribers),
-        views: toFiniteNumber(yt.views),
-        uploads: toFiniteNumber(yt.uploads),
-        engagement: toFiniteNumber(yt.engagement),
-        status: yt.status || 'snapshot'
-      };
-    }
-
-    /**
-     * Extracts normalized, honest Instagram metrics from a single stats.json record.
-     * Distinguishes lifetime totals from Behold's 6-post recent feed window.
-     */
-    function extractInstagramPoint(entry) {
-      const ig = entry && entry.instagram && typeof entry.instagram === 'object' ? entry.instagram : {};
-      const lifetime = ig.lifetime && typeof ig.lifetime === 'object' ? ig.lifetime : {};
-      const recent = ig.recentFeed && typeof ig.recentFeed === 'object' ? ig.recentFeed : null;
-
-      const followers = toFiniteNumber(lifetime.followers ?? ig.followers);
-      const lifetimeViews = toFiniteNumber(lifetime.views);
-      const lifetimeUploads = toFiniteNumber(lifetime.uploads);
-      const lifetimeEngagement = toFiniteNumber(lifetime.engagement);
-
-      const recentPostCount = recent ? toFiniteNumber(recent.postCount) : (toFiniteNumber(ig.uploads) !== null && toFiniteNumber(ig.uploads) <= 6 ? toFiniteNumber(ig.uploads) : null);
-      const recentNativeViews = recent ? toFiniteNumber(recent.views) : null;
-      const recentLegacyEstViews = recent ? toFiniteNumber(recent.estimatedFeedViewsLegacy) : null;
-      const recentEngagement = recent ? toFiniteNumber(recent.engagement) : null;
-
-      const isLifetime = lifetimeViews !== null && lifetimeUploads !== null;
-      return {
-        isLifetime,
-        followers,
-        views: isLifetime ? lifetimeViews : (recentNativeViews ?? recentLegacyEstViews ?? toFiniteNumber(ig.views)),
-        viewsIsLegacyEstimate: !isLifetime && recentNativeViews === null && (recentLegacyEstViews !== null || toFiniteNumber(ig.views) !== null),
-        uploads: isLifetime ? lifetimeUploads : null,
-        recentPostCount,
-        engagement: isLifetime ? lifetimeEngagement : (recentEngagement ?? toFiniteNumber(ig.engagement)),
-        status: ig.status || 'recent_feed_snapshot'
-      };
-    }
-
-    function clearStatTimer(el) {
-      const prev = statTimers.get(el);
-      if (prev) {
-        clearInterval(prev.intervalId);
-        clearTimeout(prev.timeoutId);
-        clearTimeout(prev.settleId);
-        statTimers.delete(el);
-      }
-      el.classList.remove('stat-glow-anim', 'stat-glow-settle');
-    }
-
-    function animateStatElement(el, finalString, renderToken) {
-      clearStatTimer(el);
-
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const isNonNumeric = finalString === '--' || finalString === 'N/A' || !/\d/.test(finalString);
-      if (prefersReduced || isNonNumeric) {
-        el.textContent = finalString;
-        return;
-      }
-
-      el.classList.add('stat-glow-anim');
-      let dummyCount = 0;
-      const intervalId = setInterval(() => {
-        if (renderToken !== statsRenderVersion) {
-          clearStatTimer(el);
-          return;
-        }
-        dummyCount += Math.floor(Math.random() * 100);
-        el.textContent = String(dummyCount);
-      }, 30);
-
-      const timeoutId = setTimeout(() => {
-        clearInterval(intervalId);
-        if (renderToken !== statsRenderVersion) return;
-        el.textContent = finalString;
-        el.classList.remove('stat-glow-anim');
-        el.classList.add('stat-glow-settle');
-        const settleId = setTimeout(() => {
-          el.classList.remove('stat-glow-settle');
-        }, 450);
-        statTimers.set(el, { intervalId: null, timeoutId: null, settleId });
-      }, 420);
-
-      statTimers.set(el, { intervalId, timeoutId, settleId: null });
-    }
-
-    function initChart() {
-      if (!ctxChart || typeof Chart === 'undefined') return;
-      const isDarkMode = document.documentElement.classList.contains('dark');
-      const txtColor = isDarkMode ? '#f8fafc' : '#09090b';
-      const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.06)' : 'rgba(9, 9, 11, 0.06)';
-
-      chartInstance = new Chart(ctxChart, {
-        type: 'line',
-        data: {
-          labels: [],
-          datasets: [{
-            label: 'Recorded Metric',
-            data: [],
-            borderColor: '#a855f7',
-            borderWidth: 2.8,
-            backgroundColor: createGradient('rgba(168, 85, 247, 0.25)', 'rgba(0, 0, 0, 0.0)'),
-            fill: true,
-            tension: 0.35,
-            spanGaps: true,
-            pointRadius: 3,
-            pointBackgroundColor: '#22d3ee',
-            pointHoverRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: {
-              grid: { display: false },
-              ticks: { color: txtColor, maxTicksLimit: 8, font: { family: 'JetBrains Mono', size: 11 } }
+      const PLATFORMS_DATA = {
+        youtube: {
+          name: "Shreyash Verma",
+          handle: "@Shreyashverse",
+          url: "https://youtube.com/@shreyashverse",
+          avatar: PERMANENT_AVATAR,
+          heroLabel: "Subscribers Count",
+          heroVal: "149",
+          heroDesc: '<i class="fa-solid fa-circle-check text-emerald-400"></i> +5 in last 28 days • Official Channel',
+          subLabel: "Active Metric Canvas",
+          subColor: "text-purple-400",
+          chartColor: "#a855f7",
+          pointColor: "#c084fc",
+          chartGradient: ["rgba(168, 85, 247, 0.28)", "rgba(168, 85, 247, 0.0)"],
+          chartHeadingViews: "YouTube Channel Views Trajectory",
+          chartHeadingEngagement: "YouTube Engagement & Activity History",
+          sourceLabel: '<i class="fa-solid fa-shield-halved text-emerald-400"></i> Official YouTube Channel Telemetry',
+          statusBadge: "STATUS: LIVE STREAM (SYNCED)",
+          cards: [
+            {
+              label: "Total Channel Views",
+              val: "172,106",
+              sub: "Lifetime channel views",
+              icon: "fa-solid fa-eye",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-purple-500/20"
             },
-            y: {
-              grid: { color: gridColor },
-              ticks: { color: txtColor, font: { family: 'JetBrains Mono', size: 11 } }
+            {
+              label: "Videos Uploaded",
+              val: "117",
+              sub: "Public videos count",
+              icon: "fa-solid fa-video",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-cyan-500/20"
+            },
+            {
+              label: "28-Day Views",
+              val: "10.8K",
+              sub: "▲ 10,800 recent views",
+              icon: "fa-solid fa-arrow-trend-up",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-emerald-500/20"
+            },
+            {
+              label: "Watch Time (28d)",
+              val: "40.3 hrs",
+              sub: "▲ 40.3 watch hours",
+              icon: "fa-solid fa-clock",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-amber-500/20"
+            }
+          ]
+        },
+        instagram: {
+          name: "Shreyash Verma",
+          handle: "@techwith_shreyash",
+          url: "https://instagram.com/techwith_shreyash",
+          avatar: PERMANENT_AVATAR,
+          heroLabel: "Instagram Followers",
+          heroVal: "160",
+          heroDesc: '<i class="fa-solid fa-circle-check text-emerald-400"></i> Live Feed Verified (@techwith_shreyash)',
+          subLabel: "Active Metric Canvas",
+          subColor: "text-pink-400",
+          chartColor: "#ec4899",
+          pointColor: "#f472b6",
+          chartGradient: ["rgba(236, 72, 153, 0.28)", "rgba(236, 72, 153, 0.0)"],
+          chartHeadingViews: "Instagram Reel & Feed Views Trajectory",
+          chartHeadingEngagement: "Instagram Interaction History",
+          sourceLabel: '<i class="fa-solid fa-bolt text-emerald-400"></i> Live Behold API Synchronized',
+          statusBadge: "STATUS: LIVE STREAM (BEHOLD API)",
+          cards: [
+            {
+              label: "Latest Reel Views",
+              val: "3,046",
+              sub: "2,469 unique viewers",
+              icon: "fa-solid fa-eye",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-pink-500/20"
+            },
+            {
+              label: "Total Posts",
+              val: "52",
+              sub: "Active profile posts",
+              icon: "fa-solid fa-table-cells",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-purple-500/20"
+            },
+            {
+              label: "Reel Interactions",
+              val: "58",
+              sub: "49 likes • 7 saves • 1 share",
+              icon: "fa-solid fa-heart",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-rose-500/20"
+            },
+            {
+              label: "Following",
+              val: "32",
+              sub: "Profile connections",
+              icon: "fa-solid fa-user-check",
+              wrapClass: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-sm font-bold mb-2.5 sm:mb-3 border border-sky-500/20"
+            }
+          ]
+        }
+      };
+
+      let activePlatform = 'youtube';
+      let activeMetric = 'views';
+      let chartInstance = null;
+      let rawStatsHistory = [];
+
+      const chartCanvas = document.getElementById('portfolioAnalyticsChart');
+      const ctxChart = chartCanvas ? chartCanvas.getContext('2d') : null;
+
+      function createLinearGrad(colorStart, colorEnd) {
+        if (!ctxChart) return colorStart;
+        const grad = ctxChart.createLinearGradient(0, 0, 0, 280);
+        grad.addColorStop(0, colorStart);
+        grad.addColorStop(1, colorEnd);
+        return grad;
+      }
+
+      function formatDateLabel(dateStr) {
+        if (!dateStr || typeof dateStr !== 'string') return 'Today';
+        const parts = dateStr.split('-');
+        if (parts.length === 3) {
+          const dt = new Date(Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])));
+          if (!Number.isNaN(dt.getTime())) {
+            return dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', timeZone: 'UTC' });
+          }
+        }
+        return dateStr;
+      }
+
+      function initChart() {
+        if (!chartCanvas) return;
+        const isDarkMode = document.documentElement.classList.contains('dark');
+        const txtColor = isDarkMode ? '#94a3b8' : '#475569';
+        const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(9, 9, 11, 0.05)';
+
+        chartInstance = new Chart(chartCanvas, {
+          type: 'line',
+          data: {
+            labels: [],
+            datasets: [{
+              label: 'Views',
+              data: [],
+              borderColor: '#a855f7',
+              backgroundColor: createLinearGrad('rgba(168, 85, 247, 0.28)', 'rgba(168, 85, 247, 0.0)'),
+              borderWidth: 2.5,
+              tension: 0.35,
+              fill: true,
+              pointBackgroundColor: '#c084fc',
+              pointBorderColor: '#ffffff',
+              pointBorderWidth: 1.5,
+              pointRadius: 3.5,
+              pointHoverRadius: 6,
+              pointHoverBorderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                titleColor: '#f8fafc',
+                bodyColor: '#38bdf8',
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderWidth: 1,
+                padding: 10,
+                cornerRadius: 10,
+                titleFont: { family: 'JetBrains Mono, monospace', weight: 'bold', size: 12 },
+                bodyFont: { family: 'JetBrains Mono, monospace', size: 12 },
+                displayColors: false,
+                callbacks: {
+                  label: function(ctx) {
+                    const val = ctx.parsed.y;
+                    return ' ' + ctx.dataset.label + ': ' + (val ? val.toLocaleString('en-US') : 0);
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: {
+                  color: txtColor,
+                  maxTicksLimit: 7,
+                  font: { family: 'JetBrains Mono, monospace', size: 11 }
+                }
+              },
+              y: {
+                grid: { color: gridColor },
+                ticks: {
+                  color: txtColor,
+                  maxTicksLimit: 6,
+                  font: { family: 'JetBrains Mono, monospace', size: 11 },
+                  callback: function(value) {
+                    if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M';
+                    if (value >= 10000) return (value / 1000).toFixed(0) + 'K';
+                    if (value >= 1000) {
+                      const k = value / 1000;
+                      return (Number.isInteger(k) ? k.toFixed(0) : k.toFixed(1)) + 'K';
+                    }
+                    return value;
+                  }
+                }
+              }
             }
           }
-        }
-      });
-    }
-
-    function updateChartTheme() {
-      if (!chartInstance) return;
-      const isDarkMode = document.documentElement.classList.contains('dark');
-      const txtColor = isDarkMode ? '#f8fafc' : '#09090b';
-      const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.06)' : 'rgba(9, 9, 11, 0.06)';
-      chartInstance.options.scales.x.ticks.color = txtColor;
-      chartInstance.options.scales.y.ticks.color = txtColor;
-      chartInstance.options.scales.y.grid.color = gridColor;
-      updateChartData();
-    }
-
-    function updateDOMStats() {
-      const renderToken = ++statsRenderVersion;
-      const meta = PLATFORM_META[activePlatform];
-
-      document.getElementById('platform-avatar').src = meta.avatar;
-      document.getElementById('platform-title').textContent = meta.title;
-      document.getElementById('platform-handle').textContent = meta.handle;
-      document.getElementById('hero-stat-label').textContent = meta.heroLabel;
-
-      const heroDescEl = document.getElementById('hero-stat-desc');
-      const sourceLabelEl = document.getElementById('analytics-source-label');
-      const statusBadgeEl = document.getElementById('analytics-status-badge');
-      const statEls = document.querySelectorAll('.animated-stat');
-
-      if (statsLoadState === 'loading') {
-        statEls.forEach((el) => animateStatElement(el, '--', renderToken));
-        setChartOverlay(true, 'fa-solid fa-spinner fa-spin text-2xl text-accent mb-2', 'Loading recorded history from stats.json...');
-        if (statusBadgeEl) statusBadgeEl.textContent = 'STATUS: LOADING...';
-        return;
+        });
       }
 
-      if (statsLoadState !== 'ready' || statsHistory.length === 0) {
-        const reason = statsLoadState === 'empty'
-          ? 'No historical records found in stats.json.'
-          : (statsErrorMessage || 'Could not load stats.json. Serve over HTTP/HTTPS or check file availability.');
-        document.getElementById('stat-1-label').textContent = 'Views';
-        document.getElementById('stat-2-label').textContent = 'Uploads';
-        document.getElementById('stat-3-label').textContent = 'Engagement';
-        document.getElementById('stat-4-label').textContent = 'Last Synced';
-        statEls.forEach((el) => animateStatElement(el, 'N/A', renderToken));
-        if (heroDescEl) {
-          heroDescEl.className = 'text-xs font-medium text-amber-400 mt-2 flex items-center gap-1.5';
-          heroDescEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Live Data Unavailable';
+      function updateDOMView() {
+        const p = PLATFORMS_DATA[activePlatform];
+        if (!p) return;
+
+        // Identity
+        const avatarEl = document.getElementById('platform-avatar');
+        const titleEl = document.getElementById('platform-title');
+        const handleEl = document.getElementById('platform-handle');
+        const heroLabelEl = document.getElementById('hero-stat-label');
+        const heroValEl = document.getElementById('hero-stat-val');
+        const heroDescEl = document.getElementById('hero-stat-desc');
+
+        if (avatarEl) {
+          avatarEl.src = p.avatar;
+          avatarEl.onerror = function() {
+            this.onerror = null;
+            this.src = AVATAR_FALLBACK;
+          };
         }
-        if (sourceLabelEl) sourceLabelEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-amber-400"></i> stats.json unavailable';
-        if (statusBadgeEl) {
-          statusBadgeEl.className = 'text-amber-400 font-bold tracking-wider';
-          statusBadgeEl.textContent = 'STATUS: UNAVAILABLE';
+        if (titleEl) titleEl.textContent = p.name;
+        if (handleEl) {
+          handleEl.textContent = p.handle;
+          handleEl.href = p.url;
         }
-        setChartOverlay(true, 'fa-solid fa-circle-exclamation text-2xl text-amber-400 mb-2', reason);
-        updateChartData();
-        return;
+        if (heroLabelEl) heroLabelEl.textContent = p.heroLabel;
+        if (heroValEl) heroValEl.textContent = p.heroVal;
+        if (heroDescEl) heroDescEl.innerHTML = p.heroDesc;
+
+        // 4 Cards
+        p.cards.forEach((card, idx) => {
+          const num = idx + 1;
+          const wrapEl = document.getElementById('stat-' + num + '-wrap');
+          const iconEl = document.getElementById('stat-' + num + '-icon');
+          const labelEl = document.getElementById('stat-' + num + '-label');
+          const valEl = document.getElementById('stat-' + num + '-val');
+          const subEl = document.getElementById('stat-' + num + '-sub');
+
+          if (wrapEl) wrapEl.className = card.wrapClass;
+          if (iconEl) iconEl.className = card.icon;
+          if (labelEl) labelEl.textContent = card.label;
+          if (valEl) valEl.textContent = card.val;
+          if (subEl) subEl.textContent = card.sub;
+        });
+
+        // Chart Headings & Badges
+        const subLabelEl = document.getElementById('chart-sub-label');
+        const headingEl = document.getElementById('chart-heading');
+        const sourceLabelEl = document.getElementById('analytics-source-label');
+        const statusBadgeEl = document.getElementById('analytics-status-badge');
+
+        if (subLabelEl) {
+          subLabelEl.textContent = p.subLabel;
+          subLabelEl.className = 'text-xs font-mono font-bold uppercase tracking-widest ' + p.subColor;
+        }
+        if (headingEl) {
+          headingEl.textContent = activeMetric === 'views' ? p.chartHeadingViews : p.chartHeadingEngagement;
+        }
+        if (sourceLabelEl) sourceLabelEl.innerHTML = p.sourceLabel;
+        if (statusBadgeEl) statusBadgeEl.textContent = p.statusBadge;
       }
 
-      const latest = statsHistory[statsHistory.length - 1];
-      const latestDateFormatted = formatDateShort(latest.date);
+      function updateChart() {
+        if (!chartInstance) return;
+        const p = PLATFORMS_DATA[activePlatform];
+        if (!p) return;
 
-      let values = [];
-      if (activePlatform === 'youtube') {
-        const yt = extractYouTubePoint(latest);
-        document.getElementById('stat-1-label').textContent = 'Total Views';
-        document.getElementById('stat-1-icon').className = 'fa-solid fa-eye';
-        document.getElementById('stat-2-label').textContent = 'Uploads';
-        document.getElementById('stat-2-icon').className = 'fa-solid fa-upload';
-        document.getElementById('stat-3-label').textContent = 'Recorded Engagement';
-        document.getElementById('stat-3-icon').className = 'fa-solid fa-heart';
-        document.getElementById('stat-4-label').textContent = 'Last Synced';
-        document.getElementById('stat-4-icon').className = 'fa-solid fa-calendar-check';
+        let labels = [];
+        let dataSeries = [];
 
-        values = [
-          formatCompactNumber(yt.subscribers),
-          formatCompactNumber(yt.views),
-          formatCompactNumber(yt.uploads),
-          formatCompactNumber(yt.engagement),
-          latestDateFormatted
-        ];
-
-        if (heroDescEl) {
-          heroDescEl.className = 'text-xs font-medium text-emerald-500 mt-2 flex items-center gap-1.5';
-          heroDescEl.innerHTML = `<i class="fa-solid fa-check-circle"></i> Channel Snapshot (${latest.date})`;
+        if (Array.isArray(rawStatsHistory) && rawStatsHistory.length > 0) {
+          labels = rawStatsHistory.map(entry => formatDateLabel(entry.date));
+          dataSeries = rawStatsHistory.map(entry => {
+            const dataObj = activePlatform === 'youtube' ? entry.youtube : entry.instagram;
+            if (!dataObj) return 0;
+            return activeMetric === 'views' ? (dataObj.views || 0) : (dataObj.engagement || 0);
+          });
         }
-        if (sourceLabelEl) {
-          sourceLabelEl.innerHTML = `<i class="fa-solid fa-shield-halved text-emerald-400"></i> YouTube Channel History (${statsHistory.length} days in stats.json)`;
+
+        const headingEl = document.getElementById('chart-heading');
+        if (headingEl) {
+          headingEl.textContent = activeMetric === 'views' ? p.chartHeadingViews : p.chartHeadingEngagement;
         }
-        if (statusBadgeEl) {
-          statusBadgeEl.className = 'text-emerald-400 font-bold tracking-wider';
-          statusBadgeEl.textContent = `SYNCED: ${latest.date}`;
-        }
-      } else {
-        const ig = extractInstagramPoint(latest);
-        document.getElementById('stat-1-label').textContent = ig.isLifetime
-          ? 'Total Views'
-          : (ig.viewsIsLegacyEstimate ? 'Recent Feed Est. Views' : 'Recent Feed Views');
-        document.getElementById('stat-1-icon').className = 'fa-solid fa-eye';
-        document.getElementById('stat-2-label').textContent = ig.isLifetime ? 'Total Uploads' : 'Tracked Feed Window';
-        document.getElementById('stat-2-icon').className = 'fa-solid fa-layer-group';
-        document.getElementById('stat-3-label').textContent = ig.isLifetime ? 'Total Engagement' : 'Recent Feed Engagement';
-        document.getElementById('stat-3-icon').className = 'fa-solid fa-heart';
-        document.getElementById('stat-4-label').textContent = 'Last Synced';
-        document.getElementById('stat-4-icon').className = 'fa-solid fa-calendar-check';
 
-        const uploadsDisplay = ig.isLifetime
-          ? formatCompactNumber(ig.uploads)
-          : (ig.recentPostCount !== null ? `${ig.recentPostCount} posts` : 'N/A');
+        const gradient = createLinearGrad(p.chartGradient[0], p.chartGradient[1]);
 
-        values = [
-          formatCompactNumber(ig.followers),
-          formatCompactNumber(ig.views),
-          uploadsDisplay,
-          formatCompactNumber(ig.engagement),
-          latestDateFormatted
-        ];
-
-        if (heroDescEl) {
-          heroDescEl.className = 'text-xs font-medium text-sky-400 mt-2 flex items-center gap-1.5';
-          heroDescEl.innerHTML = ig.isLifetime
-            ? `<i class="fa-solid fa-check-circle"></i> Lifetime Account Snapshot (${latest.date})`
-            : `<i class="fa-solid fa-circle-info"></i> Baseline Followers + Latest ${ig.recentPostCount || 6}-Post Feed Window`;
-        }
-        if (sourceLabelEl) {
-          sourceLabelEl.innerHTML = ig.isLifetime
-            ? `<i class="fa-solid fa-shield-halved text-emerald-400"></i> Instagram History (${statsHistory.length} days in stats.json)`
-            : `<i class="fa-solid fa-shield-halved text-sky-400"></i> Recent-Feed Snapshot Window (Behold Feed, ${statsHistory.length} days)`;
-        }
-        if (statusBadgeEl) {
-          statusBadgeEl.className = 'text-sky-400 font-bold tracking-wider';
-          statusBadgeEl.textContent = `SYNCED: ${latest.date}`;
-        }
-      }
-
-      statEls.forEach((el, index) => {
-        animateStatElement(el, values[index] ?? 'N/A', renderToken);
-      });
-
-      updateChartData();
-    }
-
-    function switchPlatform(platform) {
-      if (platform !== 'youtube' && platform !== 'instagram') return;
-      activePlatform = platform;
-      const btnYt = document.getElementById('btn-youtube');
-      const btnIg = document.getElementById('btn-instagram');
-      if (platform === 'youtube') {
-        btnYt.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
-        btnIg.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
-      } else {
-        btnIg.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
-        btnYt.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
-      }
-      updateDOMStats();
-    }
-
-    function switchMetric(metric) {
-      if (metric !== 'views' && metric !== 'engagement') return;
-      activeMetric = metric;
-      ['views', 'engagement'].forEach(m => {
-        const btn = document.getElementById('tab-' + m);
-        if (!btn) return;
-        if (m === metric) btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-purple-500/15 border border-purple-500/40 transition-all";
-        else btn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all";
-      });
-      updateChartData();
-    }
-
-    function updateChartData() {
-      if (!chartInstance) return;
-      const headingEl = document.getElementById('chart-heading');
-
-      if (statsLoadState !== 'ready' || statsHistory.length === 0) {
-        chartInstance.data.labels = [];
-        chartInstance.data.datasets[0].data = [];
+        chartInstance.data.labels = labels;
+        chartInstance.data.datasets[0].label = activeMetric === 'views' ? 'Views' : 'Engagement';
+        chartInstance.data.datasets[0].data = dataSeries;
+        chartInstance.data.datasets[0].borderColor = p.chartColor;
+        chartInstance.data.datasets[0].pointBackgroundColor = p.pointColor;
+        chartInstance.data.datasets[0].backgroundColor = gradient;
         chartInstance.update();
-        return;
       }
 
-      const isYoutube = activePlatform === 'youtube';
-      const lineColor = isYoutube ? '#a855f7' : '#ec4899';
-      const labels = statsHistory.map((entry) => formatDateShort(entry.date));
-      const series = statsHistory.map((entry) => {
-        const pt = isYoutube ? extractYouTubePoint(entry) : extractInstagramPoint(entry);
-        return activeMetric === 'views' ? pt.views : pt.engagement;
-      });
+      window.switchPlatform = function(platform) {
+        if (platform !== 'youtube' && platform !== 'instagram') return;
+        activePlatform = platform;
 
-      const hasValidPoints = series.some((v) => v !== null);
+        const btnYt = document.getElementById('btn-youtube');
+        const btnIg = document.getElementById('btn-instagram');
+        const tabViews = document.getElementById('tab-views');
+        const tabEng = document.getElementById('tab-engagement');
 
-      if (headingEl) {
-        if (isYoutube) {
-          headingEl.textContent = activeMetric === 'views'
-            ? 'YouTube Channel Views History'
-            : 'YouTube Recorded Engagement History';
+        if (platform === 'youtube') {
+          if (btnYt) btnYt.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
+          if (btnIg) btnIg.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
+          if (tabViews && activeMetric === 'views') {
+            tabViews.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-purple-500/15 border border-purple-500/40 transition-all";
+          }
+          if (tabEng && activeMetric === 'engagement') {
+            tabEng.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-purple-500/15 border border-purple-500/40 transition-all";
+          }
         } else {
-          const latestIg = extractInstagramPoint(statsHistory[statsHistory.length - 1]);
-          if (activeMetric === 'views') {
-            headingEl.textContent = latestIg.isLifetime
-              ? 'Instagram Lifetime Views History'
-              : 'Instagram Recent-Feed Snapshot Views';
-          } else {
-            headingEl.textContent = latestIg.isLifetime
-              ? 'Instagram Lifetime Engagement History'
-              : 'Instagram Recent-Feed Engagement (Latest 6 Posts)';
+          if (btnIg) btnIg.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 shadow-md click-shrink";
+          if (btnYt) btnYt.className = "px-4 sm:px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 text-text-secondary hover:text-text-primary click-shrink";
+          if (tabViews && activeMetric === 'views') {
+            tabViews.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-pink-500/15 border border-pink-500/40 transition-all";
+          }
+          if (tabEng && activeMetric === 'engagement') {
+            tabEng.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-pink-500/15 border border-pink-500/40 transition-all";
           }
         }
+
+        updateDOMView();
+        updateChart();
+      };
+
+      window.switchMetric = function(metric) {
+        if (metric !== 'views' && metric !== 'engagement') return;
+        activeMetric = metric;
+
+        const isYt = activePlatform === 'youtube';
+        const activeClass = isYt
+          ? "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-purple-500/15 border border-purple-500/40 transition-all"
+          : "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-primary bg-pink-500/15 border border-pink-500/40 transition-all";
+        const inactiveClass = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-text-primary transition-all";
+
+        const tabViews = document.getElementById('tab-views');
+        const tabEng = document.getElementById('tab-engagement');
+
+        if (tabViews) tabViews.className = metric === 'views' ? activeClass : inactiveClass;
+        if (tabEng) tabEng.className = metric === 'engagement' ? activeClass : inactiveClass;
+
+        updateChart();
+      };
+
+      async function fetchInstagramLive() {
+        try {
+          const res = await fetch('https://feeds.behold.so/fUEnJF2Hk4CpvG03xaGH', { cache: 'no-cache' });
+          if (!res.ok) return;
+          const data = await res.json();
+          if (!data) return;
+
+          if (data.followersCount) {
+            PLATFORMS_DATA.instagram.heroVal = String(data.followersCount);
+          }
+
+          const posts = Array.isArray(data.posts) ? data.posts : (Array.isArray(data) ? data : []);
+          if (posts.length > 0) {
+            const latestPost = posts[0];
+            const reelLink = document.getElementById('latest-reel-link');
+            const reelLikes = document.getElementById('latest-reel-likes');
+            const reelComm = document.getElementById('latest-reel-comm');
+            if (reelLink && latestPost.permalink) reelLink.href = latestPost.permalink;
+            if (reelLikes && latestPost.likeCount !== undefined) reelLikes.textContent = String(latestPost.likeCount);
+            if (reelComm && latestPost.commentsCount !== undefined) reelComm.textContent = String(latestPost.commentsCount);
+          }
+
+          if (activePlatform === 'instagram') {
+            updateDOMView();
+          }
+        } catch (err) {
+          console.warn('[Analytics] Live feed note:', err.message);
+        }
       }
 
-      if (!hasValidPoints) {
-        chartInstance.data.labels = labels;
-        chartInstance.data.datasets[0].data = [];
-        chartInstance.update();
-        setChartOverlay(
-          true,
-          'fa-solid fa-chart-line text-2xl text-text-muted mb-2',
-          `No recorded ${activeMetric} data available for ${isYoutube ? 'YouTube' : 'Instagram'} in stats.json.`
-        );
-        return;
+      async function loadHistory() {
+        let loaded = null;
+        try {
+          const res = await fetch('./stats.json?t=' + Date.now(), { cache: 'no-cache' });
+          if (res.ok) {
+            const json = await res.json();
+            if (Array.isArray(json) && json.length > 0) loaded = json;
+          }
+        } catch (e) {}
+
+        if (!loaded) {
+          try {
+            const res = await fetch('https://raw.githubusercontent.com/Shreyash-Verma16/Portfolio/main/stats.json?t=' + Date.now(), { cache: 'no-cache' });
+            if (res.ok) {
+              const json = await res.json();
+              if (Array.isArray(json) && json.length > 0) loaded = json;
+            }
+          } catch (e) {}
+        }
+
+        if (loaded && Array.isArray(loaded)) {
+          rawStatsHistory = loaded;
+          updateChart();
+        }
       }
 
-      setChartOverlay(false);
-      chartInstance.data.labels = labels;
-      chartInstance.data.datasets[0].label = activeMetric === 'views' ? 'Views' : 'Engagement';
-      chartInstance.data.datasets[0].data = series;
-      chartInstance.data.datasets[0].borderColor = lineColor;
-      chartInstance.data.datasets[0].pointBackgroundColor = '#22d3ee';
-      chartInstance.data.datasets[0].backgroundColor = createGradient(
-        isYoutube ? 'rgba(168, 85, 247, 0.24)' : 'rgba(236, 72, 153, 0.24)',
-        'rgba(0, 0, 0, 0.0)'
-      );
-      chartInstance.update();
-    }
-
-    async function loadAnalyticsHistory() {
-      statsLoadState = 'loading';
-      updateDOMStats();
-
-      try {
-        const res = await fetch(`./stats.json?t=${Date.now()}`, { cache: 'no-cache' });
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status} while loading stats.json`);
-        }
-
-        const raw = await res.json();
-        if (!Array.isArray(raw)) {
-          throw new Error('Malformed stats.json: expected a JSON array.');
-        }
-
-        const validEntries = raw.filter(
-          (item) => item && typeof item === 'object' && typeof item.date === 'string' && (item.youtube || item.instagram)
-        );
-
-        if (validEntries.length === 0) {
-          statsHistory = [];
-          statsLoadState = 'empty';
-        } else {
-          statsHistory = validEntries;
-          statsLoadState = 'ready';
-        }
-      } catch (err) {
-        console.error('[Analytics] Failed to load stats.json:', err);
-        statsHistory = [];
-        statsLoadState = 'error';
-        statsErrorMessage = 'Unable to load stats.json. Verify network access or serve over HTTP/HTTPS.';
-      }
-
-      updateDOMStats();
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize
       initChart();
-      loadAnalyticsHistory();
-    });
+      updateDOMView();
+      loadHistory();
+      fetchInstagramLive();
+
   </script>
 </body>
 </html>

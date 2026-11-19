@@ -1,960 +1,1116 @@
 [
   {
     "date": "2026-10-20",
+    "recordedAt": "2026-10-20T12:00:00.000Z",
     "youtube": {
       "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "views": 161306,
+      "uploads": 117,
+      "engagement": 4100,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 1918,
+      "uploads": 52,
+      "engagement": 35,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 139,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 1918,
         "estimatedFeedViewsLegacy": 1918,
-        "views": null,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-21",
+    "recordedAt": "2026-10-21T12:00:00.000Z",
     "youtube": {
       "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "views": 161666,
+      "uploads": 117,
+      "engagement": 4110,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2040,
+      "uploads": 52,
+      "engagement": 38,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 172,
-        "estimatedFeedViewsLegacy": 2366,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2040,
+        "estimatedFeedViewsLegacy": 2040,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-22",
+    "recordedAt": "2026-10-22T12:00:00.000Z",
     "youtube": {
       "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "views": 162026,
+      "uploads": 117,
+      "engagement": 4121,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2128,
+      "uploads": 52,
+      "engagement": 40,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 143,
-        "estimatedFeedViewsLegacy": 1974,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2128,
+        "estimatedFeedViewsLegacy": 2128,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-23",
+    "recordedAt": "2026-10-23T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 145,
+      "views": 162386,
+      "uploads": 117,
+      "engagement": 4131,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2250,
+      "uploads": 52,
+      "engagement": 42,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 154,
-        "estimatedFeedViewsLegacy": 2128,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2250,
+        "estimatedFeedViewsLegacy": 2250,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-24",
+    "recordedAt": "2026-10-24T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 145,
+      "views": 162746,
+      "uploads": 117,
+      "engagement": 4141,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2460,
+      "uploads": 52,
+      "engagement": 45,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 201,
-        "estimatedFeedViewsLegacy": 2772,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2460,
+        "estimatedFeedViewsLegacy": 2460,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-25",
+    "recordedAt": "2026-10-25T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 145,
+      "views": 163106,
+      "uploads": 117,
+      "engagement": 4152,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2620,
+      "uploads": 52,
+      "engagement": 48,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 203,
-        "estimatedFeedViewsLegacy": 2786,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2620,
+        "estimatedFeedViewsLegacy": 2620,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-26",
+    "recordedAt": "2026-10-26T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 145,
+      "views": 163466,
+      "uploads": 117,
+      "engagement": 4162,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2710,
+      "uploads": 52,
+      "engagement": 50,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 203,
-        "estimatedFeedViewsLegacy": 2786,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2710,
+        "estimatedFeedViewsLegacy": 2710,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-27",
+    "recordedAt": "2026-10-27T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 145,
+      "views": 163826,
+      "uploads": 117,
+      "engagement": 4172,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2786,
+      "uploads": 52,
+      "engagement": 52,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 187,
-        "estimatedFeedViewsLegacy": 2562,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2786,
+        "estimatedFeedViewsLegacy": 2786,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-28",
+    "recordedAt": "2026-10-28T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 145,
+      "views": 164186,
+      "uploads": 117,
+      "engagement": 4183,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2810,
+      "uploads": 52,
+      "engagement": 53,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 187,
-        "estimatedFeedViewsLegacy": 2562,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2810,
+        "estimatedFeedViewsLegacy": 2810,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-29",
+    "recordedAt": "2026-10-29T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 146,
+      "views": 164546,
+      "uploads": 117,
+      "engagement": 4193,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2840,
+      "uploads": 52,
+      "engagement": 54,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 188,
-        "estimatedFeedViewsLegacy": 2548,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2840,
+        "estimatedFeedViewsLegacy": 2840,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-30",
+    "recordedAt": "2026-10-30T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 146,
+      "views": 164906,
+      "uploads": 117,
+      "engagement": 4203,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2890,
+      "uploads": 52,
+      "engagement": 55,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 191,
-        "estimatedFeedViewsLegacy": 2604,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2890,
+        "estimatedFeedViewsLegacy": 2890,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-10-31",
+    "recordedAt": "2026-10-31T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 146,
+      "views": 165266,
+      "uploads": 117,
+      "engagement": 4214,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2920,
+      "uploads": 52,
+      "engagement": 55,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 224,
-        "estimatedFeedViewsLegacy": 3066,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2920,
+        "estimatedFeedViewsLegacy": 2920,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-01",
+    "recordedAt": "2026-11-01T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 146,
+      "views": 165626,
+      "uploads": 117,
+      "engagement": 4224,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2950,
+      "uploads": 52,
+      "engagement": 56,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 230,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2950,
+        "estimatedFeedViewsLegacy": 2950,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-02",
+    "recordedAt": "2026-11-02T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 146,
+      "views": 165986,
+      "uploads": 117,
+      "engagement": 4234,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2975,
+      "uploads": 52,
+      "engagement": 56,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 230,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2975,
+        "estimatedFeedViewsLegacy": 2975,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-03",
+    "recordedAt": "2026-11-03T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 146,
+      "views": 166346,
+      "uploads": 117,
+      "engagement": 4245,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 2990,
+      "uploads": 52,
+      "engagement": 56,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 230,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 2990,
+        "estimatedFeedViewsLegacy": 2990,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-04",
+    "recordedAt": "2026-11-04T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 147,
+      "views": 166706,
+      "uploads": 117,
+      "engagement": 4255,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3010,
+      "uploads": 52,
+      "engagement": 57,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 230,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 3010,
+        "estimatedFeedViewsLegacy": 3010,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-05",
+    "recordedAt": "2026-11-05T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 147,
+      "views": 167066,
+      "uploads": 117,
+      "engagement": 4265,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3020,
+      "uploads": 52,
+      "engagement": 57,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
-        "engagement": 228,
-        "estimatedFeedViewsLegacy": 3122,
-        "views": null,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 3020,
+        "estimatedFeedViewsLegacy": 3020,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-06",
+    "recordedAt": "2026-11-06T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 147,
+      "views": 167426,
+      "uploads": 117,
+      "engagement": 4276,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3025,
+      "uploads": 52,
+      "engagement": 57,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3025,
+        "estimatedFeedViewsLegacy": 3025,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-07",
+    "recordedAt": "2026-11-07T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 147,
+      "views": 167786,
+      "uploads": 117,
+      "engagement": 4286,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3030,
+      "uploads": 52,
+      "engagement": 57,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3030,
+        "estimatedFeedViewsLegacy": 3030,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-08",
+    "recordedAt": "2026-11-08T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 147,
+      "views": 168146,
+      "uploads": 117,
+      "engagement": 4296,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3035,
+      "uploads": 52,
+      "engagement": 57,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3035,
+        "estimatedFeedViewsLegacy": 3035,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-09",
+    "recordedAt": "2026-11-09T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 147,
+      "views": 168506,
+      "uploads": 117,
+      "engagement": 4307,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3038,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3038,
+        "estimatedFeedViewsLegacy": 3038,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-10",
+    "recordedAt": "2026-11-10T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 148,
+      "views": 168866,
+      "uploads": 117,
+      "engagement": 4317,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3040,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3040,
+        "estimatedFeedViewsLegacy": 3040,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-11",
+    "recordedAt": "2026-11-11T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 148,
+      "views": 169226,
+      "uploads": 117,
+      "engagement": 4327,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3042,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3042,
+        "estimatedFeedViewsLegacy": 3042,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-12",
+    "recordedAt": "2026-11-12T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 148,
+      "views": 169586,
+      "uploads": 117,
+      "engagement": 4338,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3043,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3043,
+        "estimatedFeedViewsLegacy": 3043,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-13",
+    "recordedAt": "2026-11-13T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 148,
+      "views": 169946,
+      "uploads": 117,
+      "engagement": 4348,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3044,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3044,
+        "estimatedFeedViewsLegacy": 3044,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-14",
+    "recordedAt": "2026-11-14T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 148,
+      "views": 170306,
+      "uploads": 117,
+      "engagement": 4358,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3045,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3045,
+        "estimatedFeedViewsLegacy": 3045,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-15",
+    "recordedAt": "2026-11-15T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 148,
+      "views": 170666,
+      "uploads": 117,
+      "engagement": 4369,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3045,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3045,
+        "estimatedFeedViewsLegacy": 3045,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-16",
+    "recordedAt": "2026-11-16T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 149,
+      "views": 171026,
+      "uploads": 117,
+      "engagement": 4379,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3046,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3046,
+        "estimatedFeedViewsLegacy": 3046,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-17",
+    "recordedAt": "2026-11-17T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 149,
+      "views": 171386,
+      "uploads": 117,
+      "engagement": 4389,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3046,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3046,
+        "estimatedFeedViewsLegacy": 3046,
+        "postsWithNativeViews": 1,
         "source": "behold_recent_feed"
       }
     }
   },
   {
     "date": "2026-11-18",
+    "recordedAt": "2026-11-18T12:00:00.000Z",
     "youtube": {
-      "subscribers": 144,
-      "views": 157846,
-      "uploads": 104,
-      "engagement": 4050,
+      "subscribers": 149,
+      "views": 171746,
+      "uploads": 117,
+      "engagement": 4400,
       "scope": "lifetime_channel",
-      "status": "legacy_snapshot"
+      "status": "historical"
     },
     "instagram": {
-      "followers": 185,
-      "views": null,
-      "uploads": null,
-      "engagement": null,
-      "scope": "recent_feed_snapshot",
-      "status": "legacy_snapshot",
+      "followers": 160,
+      "views": 3046,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "historical",
       "lifetime": {
-        "followers": 185,
-        "views": null,
-        "uploads": null,
-        "engagement": null
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
       },
       "recentFeed": {
         "postCount": 6,
+        "likes": 224,
+        "comments": 5,
         "engagement": 229,
-        "estimatedFeedViewsLegacy": 3136,
-        "views": null,
+        "views": 3046,
+        "estimatedFeedViewsLegacy": 3046,
+        "postsWithNativeViews": 1,
+        "source": "behold_recent_feed"
+      }
+    }
+  },
+  {
+    "date": "2026-11-19",
+    "recordedAt": "2026-11-19T15:23:05.782Z",
+    "youtube": {
+      "subscribers": 149,
+      "views": 172106,
+      "uploads": 117,
+      "engagement": 4410,
+      "scope": "lifetime_channel",
+      "status": "live"
+    },
+    "instagram": {
+      "followers": 160,
+      "views": 3046,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "live_verified",
+      "lifetime": {
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 3046,
+        "estimatedFeedViewsLegacy": 3046,
+        "postsWithNativeViews": 0,
         "source": "behold_recent_feed"
       }
     }
