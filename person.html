@@ -2,9 +2,12 @@
 <html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Shreyash Verma — The Person</title>
+  <meta name="description" content="Personal portfolio of Shreyash Verma — BCA student, athlete, and builder. Discovering interests, fitness, values, and the human side behind the screen." />
   <meta name="color-scheme" content="dark light" />
+
+  <!-- Theme Initialization: Cinematic Dark Mode -->
   <script>
     (function () {
       try {
@@ -13,19 +16,21 @@
         document.documentElement.classList.toggle('dark', isDark);
         var meta = document.querySelector('meta[name="color-scheme"]');
         if (meta) meta.content = isDark ? 'dark' : 'light';
-      } catch (e) {}
+      } catch (e) {
+        document.documentElement.classList.add('dark');
+      }
     })();
   </script>
-  
+
+  <!-- External Assets -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <!-- Tailwind CSS & GSAP -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
+  <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -39,50 +44,60 @@
             background: 'var(--background)',
             surface: 'var(--surface)',
             border: 'var(--border)',
+            accent: 'var(--accent)',
             'text-primary': 'var(--text-primary)',
             'text-secondary': 'var(--text-secondary)',
             'text-muted': 'var(--text-muted)',
-            accent: 'var(--accent)',
           }
-        },
-      },
+        }
+      }
     };
   </script>
 
   <style>
-    /* ── Dynamic Theme Variables ── */
+    /* ── Dynamic Architectural Design Tokens: Sunset Amber / Terracotta ── */
     :root {
       color-scheme: light;
-      --background: #f3f6fc;
-      --surface: rgba(255, 255, 255, 0.78);
-      --border: rgba(203, 213, 225, 0.85);
-      --text-primary: #0f172a;
-      --text-secondary: #334155;
-      --text-muted: #64748b;
-      --accent: #10b981; 
+      --background: #FAF7F6; /* Crisp pearl rose-amber canvas */
+      --surface: rgba(255, 255, 255, 0.88);
+      --card-solid: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(252, 246, 244, 0.96) 100%);
+      --border: rgba(225, 29, 72, 0.20);
+      --text-primary: #1F1416; /* Deep crimson obsidian */
+      --text-secondary: #5C4B4E; /* Warm charcoal */
+      --text-muted: #826F72;
+      --accent: #E11D48; /* Primary: Crimson Red */
+      --accent-amber: #D97706; /* Secondary: Warm Sunset Amber */
+      --gradient-accent: linear-gradient(135deg, #E11D48 0%, #D97706 100%);
+      --dot-color: rgba(225, 29, 72, 0.16);
       --glass-shine: rgba(255, 255, 255, 0.95);
-      --glow-shadow: rgba(16, 185, 129, 0.28);
-      --grid-color: rgba(15, 23, 42, 0.045);
-      --nav-tint: rgba(16, 185, 129, 0.16);
-      --nav-border: rgba(16, 185, 129, 0.45);
-      --island-bg: rgba(255, 255, 255, 0.88);
+      --glow-shadow: rgba(225, 29, 72, 0.28);
+      --nav-tint: rgba(225, 29, 72, 0.12);
+      --nav-border: rgba(225, 29, 72, 0.35);
+      --island-bg: rgba(250, 247, 246, 0.92);
+      --canvas-blend: normal;
+      --canvas-filter: blur(14px) saturate(180%) contrast(105%);
     }
 
-    .dark {
+    html.dark {
       color-scheme: dark;
-      --background: #020617;
-      --surface: rgba(15, 23, 42, 0.72);
-      --border: rgba(255, 255, 255, 0.12);
-      --text-primary: #f8fafc;
-      --text-secondary: #cbd5e1;
-      --text-muted: #64748b;
-      --accent: #34d399; 
-      --glass-shine: rgba(255, 255, 255, 0.12);
-      --glow-shadow: rgba(52, 211, 153, 0.4);
-      --grid-color: rgba(255, 255, 255, 0.028);
-      --nav-tint: rgba(52, 211, 153, 0.18);
-      --nav-border: rgba(52, 211, 153, 0.5);
-      --island-bg: rgba(8, 12, 24, 0.96);
+      --background: #120B0D; /* Deep obsidian velvet crimson */
+      --surface: rgba(30, 18, 22, 0.82);
+      --card-solid: linear-gradient(145deg, rgba(36, 20, 25, 0.96) 0%, rgba(18, 11, 13, 0.98) 100%);
+      --border: rgba(244, 63, 94, 0.20);
+      --text-primary: #FAF2F4; /* Crisp rose white */
+      --text-secondary: #DEC2C8; /* Soft blush champagne */
+      --text-muted: #A3848B;
+      --accent: #F43F5E; /* Primary: Luminous Electric Rose */
+      --accent-amber: #F59E0B; /* Secondary: Golden Sunset Amber */
+      --gradient-accent: linear-gradient(135deg, #F43F5E 0%, #F59E0B 100%);
+      --dot-color: rgba(244, 63, 94, 0.18);
+      --glass-shine: rgba(250, 242, 244, 0.12);
+      --glow-shadow: rgba(244, 63, 94, 0.36);
+      --nav-tint: rgba(244, 63, 94, 0.15);
+      --nav-border: rgba(244, 63, 94, 0.45);
+      --island-bg: rgba(18, 11, 13, 0.92);
+      --canvas-blend: screen;
+      --canvas-filter: blur(16px) saturate(150%) contrast(115%);
     }
 
     html, body {
@@ -90,331 +105,424 @@
       max-width: 100%;
     }
     body {
-      background-color: var(--background); color: var(--text-primary);
-      transition: background-color 0.8s, color 0.8s;
-    }
-    a, button {
-      touch-action: manipulation;
+      background-color: var(--background);
+      color: var(--text-primary);
+      transition: background-color 0.5s ease, color 0.5s ease;
+      position: relative;
     }
 
-    /* ── Apple-Style Utilities ── */
+    /* ── Background Canvas Container ── */
+    #stitch-canvas-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
+    }
+
+    #stitch-canvas-wrapper.stitch-recede {
+      opacity: 0 !important;
+      transform: translateY(48px) scale(0.95) !important;
+      filter: blur(20px) !important;
+    }
+
+    #stitch-silk-canvas {
+      width: 100%;
+      height: 100%;
+      filter: var(--canvas-filter);
+      -webkit-filter: var(--canvas-filter);
+      mix-blend-mode: var(--canvas-blend);
+    }
+
+    /* ── Apple-Style Shimmer & Typing Cursor ── */
     .apple-siri-shimmer {
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 25%, #ffffff 50%, #14b8a6 75%, var(--text-primary) 100%);
-      background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background: linear-gradient(135deg, #1F1416 0%, #E11D48 35%, #D97706 68%, #1F1416 100%);
+      background-size: 280% 280%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       animation: siriShimmerFlow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
     }
-    @keyframes siriShimmerFlow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
-
-    .reveal-node {
-      opacity: 0; filter: blur(14px); transform: translateY(48px) scale(0.96);
-      transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), filter 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    html.dark .apple-siri-shimmer {
+      background: linear-gradient(135deg, #FAF2F4 0%, #F43F5E 30%, #F59E0B 70%, #FAF2F4 100%);
+      background-size: 280% 280%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: siriShimmerFlow 8s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
     }
-    .reveal-node.is-visible { opacity: 1; filter: blur(0px); transform: translateY(0px) scale(1); }
+    @keyframes siriShimmerFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
 
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.15em;
+      background-color: var(--accent);
+      margin-left: 2px;
+      vertical-align: -0.15em;
+      animation: blinkCursor 0.9s infinite;
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ── Glassmorphism & Surface Tokens ── */
     .glass-panel {
-      background: var(--surface); backdrop-filter: blur(36px); border: 1px solid var(--border);
-      box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 35px -10px rgba(15, 23, 42, 0.08); transition: all 0.7s;
+      background: var(--surface);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, transform 0.3s ease;
     }
-    .dark .glass-panel { box-shadow: inset 0 1px 1px var(--glass-shine), 0 16px 40px 0 rgba(0, 0, 0, 0.45); }
 
-    /* ── RESTORED: Spotlight Hover Cards & Blue Spinning Edge Animation ── */
     .spotlight-card {
-      position: relative; overflow: hidden; --mouse-x: 50%; --mouse-y: 50%;
-      transition: transform 0.7s, box-shadow 0.7s, border-color 0.6s;
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
     }
-    .spotlight-card:hover { transform: translateY(-8px) scale(1.015); border-color: rgba(52, 211, 153, 0.45); z-index: 10; }
+    .spotlight-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px -10px var(--glow-shadow);
+    }
     .spotlight-card::before {
-      content: ''; position: absolute; inset: 0; background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(52, 211, 153, 0.08), transparent 40%);
-      z-index: 1; pointer-events: none; opacity: 0; transition: opacity 0.6s ease;
-    }
-    .dark .spotlight-card::before { background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 40%); }
-    .spotlight-card:hover::before { opacity: 1; }
-
-    /* This creates the blue glowing line that travels along the edge */
-    @property --border-angle {
-      syntax: "<angle>"; inherits: true; initial-value: 0turn;
-    }
-    .spotlight-card::after {
-      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
-      background: conic-gradient(from var(--border-angle), transparent 60%, rgba(30, 58, 138, 0.8) 80%, rgba(56, 189, 248, 1) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      z-index: 20; pointer-events: none; animation: border-spin 4s linear infinite; opacity: 0; transition: opacity 0.5s ease;
-    }
-    .spotlight-card:hover::after { opacity: 1; }
-    @keyframes border-spin { 100% { --border-angle: 1turn; } }
-
-    .click-shrink { transition: transform 0.4s; } .click-shrink:hover { transform: translateY(-2px) scale(1.03); } .click-shrink:active { transform: scale(0.94); }
-
-    /* ── RESTORED: Cinematic Redirect Animation CSS ── */
-    .redirect-overlay {
-      position: fixed; inset: 0; z-index: 9999999;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .redirect-overlay.active {
-      opacity: 1; pointer-events: auto;
-    }
-    .redirect-icon-wrapper {
-      font-size: 4rem; 
-      transform: scale(0.5) translateY(30px);
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(800px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), var(--nav-tint), transparent 45%);
       opacity: 0;
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
     }
-    .redirect-overlay.active .redirect-icon-wrapper {
-      transform: scale(2) translateY(0);
+    .spotlight-card:hover::before {
       opacity: 1;
     }
 
-    /* ── Flashy Unique Note Section ── */
-    .flashy-note {
-      position: relative;
-      background: var(--surface);
-      border-radius: 1.5rem;
-      padding: 1.75rem 1.25rem;
-      z-index: 1;
-    }
-    @media (min-width: 640px) {
-      .flashy-note {
-        padding: 3rem;
-      }
-    }
-    .flashy-note::before {
-      content: "";
-      position: absolute;
-      inset: -3px;
-      border-radius: 1.6rem;
-      background: linear-gradient(45deg, #ff007f, #00d4ff, #7928ca, #ff007f);
-      background-size: 300%;
-      z-index: -1;
-      animation: animatedGradient 6s linear infinite;
-      filter: blur(10px);
-      opacity: 0.8;
-    }
-    .flashy-note::after {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: 1.45rem;
-      background: var(--surface);
-      z-index: -1;
-      backdrop-filter: blur(20px);
-    }
-    @keyframes animatedGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ── Adaptive Dynamic Island ── */
-    #nav-island-wrapper { position: fixed; top: 10px; left: 0; right: 0; z-index: 10000; display: flex; justify-content: center; pointer-events: none; transition: all 0.8s; opacity: 0; transform: translateY(-20px); animation: dropInNav 1s 0.2s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-    @keyframes dropInNav { to { opacity: 1; transform: translateY(0); } }
-    
-    .nav-island {
-      pointer-events: auto; background: var(--island-bg); backdrop-filter: blur(50px); border: 1.5px solid var(--nav-border);
-      box-shadow: inset 0 1px 1px var(--glass-shine), 0 25px 60px -10px rgba(0, 0, 0, 0.75), 0 0 45px -5px var(--nav-tint);
-      border-radius: 9999px; width: calc(100% - 20px); max-width: 1080px; height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; transition: all 0.85s;
-    }
-    .nav-island.is-collapsed { width: min(340px, calc(100vw - 20px)); height: 50px; border-color: var(--nav-border); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 15px 35px -5px rgba(0, 0, 0, 0.3), 0 0 35px var(--nav-tint); }
-    .nav-island.is-collapsed.island-notify { width: min(395px, calc(100vw - 16px)) !important; height: 54px !important; border-color: var(--accent) !important; box-shadow: inset 0 1px 1px var(--glass-shine), 0 20px 45px -5px rgba(0, 0, 0, 0.45), 0 0 50px 12px var(--nav-tint) !important; transform: scale(1.01) translateY(2px); }
-    
-    .nav-link { padding: 7px 16px; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; color: var(--text-secondary); transition: all 0.4s; }
-    .nav-link:hover, .nav-link.active-section { color: var(--accent); background: var(--nav-tint); border: 1px solid var(--nav-border); box-shadow: 0 0 22px var(--glow-shadow); }
-
-    .nav-view { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; white-space: nowrap; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .nav-expanded-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
-    .nav-island.is-collapsed .nav-expanded-view { opacity: 0; transform: scale(0.88) translateY(-12px); pointer-events: none; transition: opacity 0.18s 0s ease, transform 0.35s 0s ease; }
-    .nav-compact-view { opacity: 0; transform: scale(0.88) translateY(12px); pointer-events: none; transition: opacity 0.18s 0s ease, transform 0.35s 0s ease; }
-    .nav-island.is-collapsed .nav-compact-view { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; transition: opacity 0.55s 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s 0.12s cubic-bezier(0.16, 1, 0.3, 1); }
-    
-    #compact-section-badge { display: inline-flex; align-items: center; gap: 6px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .nav-island.island-notify #compact-section-badge { transform: scale(1.04); padding: 5px 12px; background: var(--nav-tint); border-color: var(--accent); box-shadow: 0 0 20px var(--glow-shadow); }
-
-    @media (min-width: 640px) {
-      #nav-island-wrapper { top: 16px; }
-      .nav-island { width: 92%; height: 70px; padding: 0 22px; }
-      .nav-island.is-collapsed { height: 52px; }
-      .nav-island.is-collapsed.island-notify { height: 58px !important; transform: scale(1.03) translateY(2px); }
-      .nav-view { padding: 0 22px; }
-      .nav-island.island-notify #compact-section-badge { transform: scale(1.06); padding: 6px 16px; }
-    }
-
-    /* ── Apple Accordion & Dynamic Drop Box ── */
-    .island-drop-box {
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      z-index: 50; display: flex; align-items: center; justify-content: center;
-      background: rgba(10, 15, 30, 0.95); border: 2px solid var(--accent);
-      box-shadow: 0 0 50px rgba(52, 211, 153, 0.6); overflow: hidden; pointer-events: none; white-space: nowrap;
-      opacity: 0; 
-    }
-    .tabs-column { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
-    .apple-tab-btn { width: 100%; text-align: left; padding: 14px 18px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s; }
-    .apple-tab-btn:hover { background: var(--nav-tint); color: var(--text-primary); border-color: var(--accent); transform: translateX(4px); }
-    .apple-tab-btn.is-bulky { transform: scale(1.01) translateX(4px) !important; padding: 16px 20px !important; background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(20, 184, 166, 0.2) 100%) !important; border-color: rgba(52, 211, 153, 0.8) !important; color: #ffffff !important; box-shadow: 0 12px 32px rgba(52, 211, 153, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.5) !important; z-index: 30; }
-    @media (min-width: 1024px) {
-      .apple-tab-btn { padding: 16px 22px; border-radius: 20px; font-size: 1.05rem; }
-      .apple-tab-btn.is-bulky { transform: scale(1.05) translateX(12px) !important; padding: 22px 28px !important; box-shadow: 0 15px 45px rgba(52, 211, 153, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5) !important; }
-    }
-
-    /* ── Background Utilities ── */
-    .bg-grid-pattern { position: fixed; inset: 0; z-index: -25; background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
-    .grain-overlay { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.04; mix-blend-mode: overlay; }
-    
-    .ambient-orb { animation: floatOrb 16s ease-in-out infinite alternate; } 
-    .ambient-orb-2 { animation: floatOrb 19s ease-in-out infinite alternate-reverse; } 
-    .ambient-orb-3 { animation: floatOrb 22s ease-in-out infinite alternate; }
-    @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(3%, 4%) scale(1.05); } 100% { transform: translate(-2%, -3%) scale(0.95); } }
-    
-    /* Premium Original iPhone Frame (Native Responsive Sizing) */
-    .iphone-frame { width: 248px; height: 496px; background: #0a0a0a; border-radius: 46px; position: relative; box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 0 0 7px #1f2937, 0 0 0 9px #334155, 0 24px 40px -15px rgba(0, 0, 0, 0.7), 0 0 32px var(--glow-shadow); padding: 9px; transform: none; transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
-    .iphone-screen { width: 100%; height: 100%; border-radius: 38px; overflow: hidden; background: #000; position: relative; }
-    .slideshow-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease-in-out; }
-    .slideshow-img.active { opacity: 1; }
-    .dynamic-island-notch { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; background: #000; border-radius: 16px; z-index: 30; box-shadow: inset 0 -1px 2px rgba(255,255,255,0.15); }
-    .iphone-btn { display: none; position: absolute; background: #334155; border-radius: 2px; box-shadow: inset 1px 0 2px rgba(255,255,255,0.2); }
-    @media (min-width: 640px) {
-      .iphone-frame { width: 320px; height: 640px; border-radius: 60px; padding: 12px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 0 0 10px #1f2937, 0 0 0 12px #334155, 0 30px 50px -15px rgba(0, 0, 0, 0.7), 0 0 40px var(--glow-shadow); transform: perspective(1000px) rotateY(-8deg) rotateX(4deg); }
-      .iphone-frame:hover { transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03); }
-      .iphone-screen { border-radius: 48px; }
-      .dynamic-island-notch { top: 12px; width: 120px; height: 32px; border-radius: 20px; }
-      .iphone-btn { display: block; }
-    }
-
-    /* Social Links Grid */
-    .social-card { transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .dark .social-github:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
-    .social-linkedin:hover { color: #0a66c2; background: rgba(10,102,194,0.1); border-color: rgba(10,102,194,0.4); box-shadow: 0 10px 25px -5px rgba(10,102,194,0.3); }
-    .social-youtube:hover { color: #ff0000; background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.4); box-shadow: 0 10px 25px -5px rgba(255,0,0,0.3); }
-    .dark .social-x:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
-    .social-instagram:hover { color: #e1306c; background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.4); box-shadow: 0 10px 25px -5px rgba(225,48,108,0.3); }
-    .social-reddit:hover { color: #ff4500; background: rgba(255,69,0,0.1); border-color: rgba(255,69,0,0.4); box-shadow: 0 10px 25px -5px rgba(255,69,0,0.3); }
-    .dark .social-threads:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); box-shadow: 0 10px 25px -5px rgba(255,255,255,0.2); }
-
-    /* ── MOBILE NAVIGATION DRAWER (Native <dialog> + Scroll-Snap Swipe) ── */
-    .mobile-drawer {
-      --drawer-width: min(20rem, 84dvw, 100dvw - 24px);
-      --drawer-backdrop: 0;
-      inset: 0;
-      width: auto;
-      height: auto;
-      max-width: none;
-      max-height: none;
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      border: 0;
-      overflow: visible;
-      color: var(--text-primary);
-    }
-    .mobile-drawer::backdrop {
-      background: rgba(2, 6, 23, 0.78);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      opacity: var(--drawer-backdrop);
-    }
-    .mobile-drawer-scroller {
-      position: relative;
-      display: grid;
-      grid-template-columns: var(--drawer-width) 100%;
-      overflow-x: scroll;
-      overscroll-behavior: none;
-      scrollbar-width: none;
-      scroll-snap-type: x mandatory;
-    }
-    .mobile-drawer-scroller::-webkit-scrollbar { display: none; }
-    @media (prefers-reduced-motion: no-preference) {
-      .mobile-drawer-scroller { scroll-behavior: smooth; }
-    }
-    .mobile-drawer-scroller::after {
-      content: '';
-      scroll-snap-align: end;
-      scroll-initial-target: nearest;
-    }
-    .mobile-drawer-sheet {
+    /* ── 2-STATE LERP NAVIGATION (ADHERENT <-> DYNAMIC ISLAND) ── */
+    #nav-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
       display: flex;
-      flex-direction: column;
-      height: 100svh;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    #dynamic-nav {
+      pointer-events: auto;
+      position: relative;
       background: var(--island-bg);
       backdrop-filter: blur(42px) saturate(180%);
       -webkit-backdrop-filter: blur(42px) saturate(180%);
-      border-right: 1px solid var(--nav-border);
-      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.75);
-      overflow-y: auto;
-      scroll-snap-align: start;
-      scrollbar-width: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      will-change: transform, width, height, border-radius, padding;
+      border-style: solid;
+      border-width: 1px;
+      border-color: var(--border);
+      transition: background-color 0.4s ease, box-shadow 0.45s ease, border-color 0.45s ease;
     }
-    @supports (animation-timeline: scroll()) {
-      .mobile-drawer {
-        timeline-scope: --drawer-fade;
-        animation: fade-drawer-backdrop linear both;
-        animation-timeline: --drawer-fade;
-      }
-      .mobile-drawer-scroller {
-        scroll-timeline: --drawer-fade x;
-      }
-      @property --drawer-backdrop {
-        syntax: '<number>';
-        inherits: true;
-        initial-value: 0;
-      }
-      @keyframes fade-drawer-backdrop {
-        0% { --drawer-backdrop: 1; }
-        100% { --drawer-backdrop: 0; }
-      }
+
+    #dynamic-nav.is-island {
+      border-color: var(--nav-border);
+      box-shadow:
+        inset 0 1px 1px var(--glass-shine),
+        0 20px 50px -10px rgba(0, 0, 0, 0.75),
+        0 0 35px -8px var(--glow-shadow);
+    }
+
+    #dynamic-nav.is-adherent {
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: var(--border);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    #island-links-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px;
+      border-radius: 9999px;
+    }
+
+    #nav-liquid-pill {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 0;
+      width: 0;
+      border-radius: 9999px;
+      background: var(--nav-tint);
+      border: 1px solid var(--nav-border);
+      box-shadow: 0 0 16px var(--glow-shadow);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .nav-link {
+      position: relative;
+      z-index: 2;
+      padding: 8px 16px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-radius: 9999px;
+      transition: color 0.25s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+    .nav-link.active-section {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── Mobile Navigation Drawer ── */
+    dialog.mobile-drawer {
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      max-width: 100vw;
+      height: 100svh;
+      max-height: 100svh;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      overflow: hidden;
+    }
+    dialog.mobile-drawer::backdrop {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    dialog.mobile-drawer[open]::backdrop {
+      opacity: 1;
+    }
+    .mobile-drawer-scroller {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .mobile-drawer-sheet {
+      width: 88vw;
+      max-width: 360px;
+      height: 100%;
+      background: var(--background);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+    }
+    dialog.mobile-drawer[open] .mobile-drawer-sheet {
+      transform: translateX(0);
+    }
+
+    /* ── Apple-Style Interactive Tabs ── */
+    .apple-tab-btn {
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-align: left;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .apple-tab-btn:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px var(--glow-shadow);
+    }
+    .apple-tab-btn.is-active {
+      background: var(--nav-tint);
+      border-color: var(--accent);
+      box-shadow: 0 8px 30px var(--glow-shadow);
+      transform: translateX(6px);
+    }
+
+    /* ── Footer Editorial Links & Authentic Brand Hover Colors ── */
+    .footer-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--text-primary);
+      transition: color 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .footer-nav-link:hover {
+      color: var(--accent);
+      transform: translate3d(5px, 0, 0);
+    }
+    .footer-nav-link .footer-ext-arrow {
+      font-size: 0.68rem;
+      opacity: 0;
+      transform: translate3d(-4px, 2px, 0);
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-nav-link:hover .footer-ext-arrow {
+      opacity: 0.85;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .footer-connect-link {
+      --brand-color: var(--text-primary);
+      --brand-glow: rgba(255, 255, 255, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.3rem 0;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: color 0.34s cubic-bezier(0.16, 1, 0.3, 1), transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .footer-connect-link .connect-icon {
+      width: 1.25rem;
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      transition: color 0.34s cubic-bezier(0.16, 1, 0.3, 1), transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), filter 0.34s ease;
+    }
+    .footer-connect-link .connect-arrow {
+      font-size: 0.65rem;
+      opacity: 0;
+      transform: translate3d(-6px, 2px, 0);
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-connect-link:hover,
+    .footer-connect-link:focus-visible {
+      color: var(--brand-color);
+      transform: translate3d(6px, 0, 0);
+      outline: none;
+    }
+    .footer-connect-link:hover .connect-icon,
+    .footer-connect-link:focus-visible .connect-icon {
+      color: var(--brand-color);
+      transform: scale(1.18);
+      filter: drop-shadow(0 0 10px var(--brand-glow));
+    }
+    .footer-connect-link:hover .connect-arrow,
+    .footer-connect-link:focus-visible .connect-arrow {
+      opacity: 0.85;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Official Brand Hover Colors */
+    .brand-linkedin   { --brand-color: #0a66c2; --brand-glow: rgba(10, 102, 194, 0.52); }
+    .brand-youtube    { --brand-color: #ff0000; --brand-glow: rgba(255, 0, 0, 0.52); }
+    .brand-instagram  { --brand-color: #e4405f; --brand-glow: rgba(228, 64, 95, 0.52); }
+    .brand-github     { --brand-color: var(--text-primary); --brand-glow: var(--glow-shadow); }
+    .brand-x          { --brand-color: var(--text-primary); --brand-glow: var(--glow-shadow); }
+    .brand-reddit     { --brand-color: #ff4500; --brand-glow: rgba(255, 69, 0, 0.52); }
+    .brand-hackerrank { --brand-color: #00ea64; --brand-glow: rgba(0, 234, 100, 0.52); }
+    .brand-leetcode   { --brand-color: #ffa116; --brand-glow: rgba(255, 161, 22, 0.52); }
+    .brand-threads    { --brand-color: var(--text-primary); --brand-glow: var(--glow-shadow); }
+
+    /* ── Micro-Interaction Shrink ── */
+    .click-shrink {
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .click-shrink:active {
+      transform: scale(0.94);
     }
   </style>
 </head>
-<body class="antialiased selection:bg-accent/30 selection:text-text-primary">
+<body class="antialiased selection:bg-rose-500/20 selection:text-rose-500">
 
-  <div class="bg-grid-pattern"></div>
-  <div class="fixed inset-0 -z-30 overflow-hidden pointer-events-none" aria-hidden="true">
-    <div class="ambient-orb absolute top-[-5%] left-[-10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-cyan-400/45 via-blue-500/35 to-indigo-600/30 blur-[130px] opacity-80 dark:opacity-75"></div>
-    <div class="ambient-orb-2 absolute bottom-[-10%] right-[-5%] w-[65vw] h-[65vw] rounded-full bg-gradient-to-tr from-fuchsia-400/40 via-purple-500/30 to-pink-500/25 blur-[150px] opacity-75 dark:opacity-65"></div>
-    <div class="ambient-orb-3 absolute top-[25%] left-[25%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-r from-emerald-400/35 via-teal-400/25 to-cyan-500/20 blur-[140px] opacity-70 dark:opacity-55"></div>
+  <!-- ========================================================= -->
+  <!-- BACKGROUND: CLASSIC X MAGNETIC SILK WAVE CANVAS          -->
+  <!-- ========================================================= -->
+  <div id="stitch-canvas-wrapper" aria-hidden="true">
+    <canvas id="stitch-silk-canvas"></canvas>
   </div>
-  <canvas id="particle-canvas" class="fixed inset-0 -z-20 pointer-events-none"></canvas>
-  <svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
 
-  <!-- ── ADAPTIVE DYNAMIC ISLAND ── -->
-  <div id="nav-island-wrapper">
-    <nav id="dynamic-island-nav" class="nav-island">
-      <!-- Full Menu -->
-      <div class="nav-view nav-expanded-view flex justify-between w-full items-center">
-        <a href="#person-home" class="flex items-center gap-2.5 sm:gap-3 group click-shrink">
-          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 overflow-hidden border border-white/20">
-            <img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Logo" class="w-full h-full object-cover" />
+  <!-- ========================================================= -->
+  <!-- 2-STATE LERP NAV: ADHERENT BAR <-> DYNAMIC ISLAND         -->
+  <!-- ========================================================= -->
+  <div id="nav-wrapper">
+    <nav id="dynamic-nav" class="is-adherent" style="width: 100%; height: 72px; border-radius: 0px; padding: 0 28px;" aria-label="Primary Navigation">
+      <div class="nav-inner">
+        
+        <!-- Left Brand -->
+        <a href="#person-home" class="flex items-center gap-3 group click-shrink shrink-0">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-rose-500 to-amber-500 p-[1.5px] overflow-hidden shadow-sm">
+            <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Shreyash Verma" width="36" height="36" class="w-full h-full rounded-full object-cover" />
           </div>
-          <div><span class="block text-text-primary font-bold tracking-tight leading-none text-sm sm:text-base">SHREYASH</span><span class="block text-text-secondary text-[0.55rem] sm:text-[0.6rem] tracking-widest leading-none mt-1">VERMA</span></div>
+          <div>
+            <span class="block text-text-primary font-bold tracking-tight leading-none text-base">SHREYASH</span>
+            <span class="block text-text-secondary text-[0.6rem] tracking-widest leading-none mt-1">VERMA</span>
+          </div>
         </a>
-        <div id="island-links-container" class="hidden lg:flex items-center gap-1">
+
+        <!-- Center Navigation Links -->
+        <div id="island-links-container" class="hidden lg:flex">
+          <div id="nav-liquid-pill"></div>
           <a href="#person-home" class="nav-link active-section" data-section="person-home">Home</a>
           <a href="#person-intro" class="nav-link" data-section="person-intro">Who I Am</a>
           <a href="#person-hobbies" class="nav-link" data-section="person-hobbies">Hobbies</a>
           <a href="#person-values" class="nav-link" data-section="person-values">Values</a>
+          <a href="#person-note" class="nav-link" data-section="person-note">Note</a>
           <a href="#contact" class="nav-link" data-section="contact">Contact</a>
         </div>
-        <div class="flex items-center gap-2 sm:gap-3">
-          <a href="index.html" class="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full glass-panel text-text-secondary hover:text-accent hover:border-accent click-shrink" title="Back to Portfolio Gateway" aria-label="Back to Portfolio Gateway"><i class="fa-solid fa-table-cells-large text-xs"></i></a>
-          <button type="button" class="theme-toggle-btn w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full glass-panel hover:text-accent click-shrink" aria-label="Toggle Day / Night Mode"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
-          <a href="#contact" class="hidden sm:inline-flex items-center px-5 py-2.5 glass-panel text-xs font-bold rounded-full hover:border-accent click-shrink gap-2"><i class="fa-solid fa-paper-plane"></i> Message Me</a>
-          <button type="button" class="mobile-menu-open-btn lg:hidden w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full glass-panel text-text-primary hover:border-accent click-shrink" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer"><i class="fa-solid fa-bars text-sm"></i></button>
+
+        <!-- Right Controls: Gateway Switcher + Message Me CTA + Mobile Hamburger -->
+        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <!-- Gateway Switcher -->
+          <a href="index.html" class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-text-secondary hover:text-accent hover:border-accent click-shrink" title="Back to Portfolio Gateway" aria-label="Back to Portfolio Gateway">
+            <i class="fa-solid fa-table-cells-large text-xs"></i>
+          </a>
+
+          <!-- Contact CTA -->
+          <a href="#contact" class="hidden sm:inline-flex items-center px-5 py-2.5 glass-panel text-xs font-bold rounded-full hover:border-accent click-shrink gap-2">
+            <i class="fa-solid fa-paper-plane text-accent"></i> Message Me
+          </a>
+
+          <!-- Mobile Hamburger -->
+          <button id="mobile-menu-open" type="button" class="lg:hidden w-9 h-9 rounded-full glass-panel flex items-center justify-center text-text-primary hover:border-accent click-shrink" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <i class="fa-solid fa-bars text-sm"></i>
+          </button>
         </div>
-      </div>
-      <!-- Compact View -->
-      <div class="nav-view nav-compact-view flex justify-between w-full items-center gap-2">
-        <div class="flex items-center gap-2 shrink-0">
-          <div class="w-8 h-8 rounded-full overflow-hidden border border-white/20 shrink-0"><img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Shreyash Verma" class="w-full h-full object-cover" /></div>
-          <span class="hidden sm:inline text-text-primary font-extrabold text-sm">SHREYASH</span>
-        </div>
-        <span id="compact-section-badge" class="px-2.5 sm:px-3.5 py-1 bg-accent/15 border border-accent/50 rounded-full text-[0.68rem] sm:text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 truncate"><i class="fa-solid fa-user text-accent mr-1"></i> <span class="font-extrabold tracking-wider">HOME</span></span>
-        <div class="flex items-center gap-1.5 shrink-0">
-          <button type="button" class="theme-toggle-btn w-8 h-8 flex items-center justify-center rounded-full glass-panel click-shrink" aria-label="Toggle Day / Night Mode"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:block text-amber-300"></i></button>
-          <button type="button" class="mobile-menu-open-btn lg:hidden w-8 h-8 flex items-center justify-center rounded-full glass-panel text-text-primary click-shrink" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer"><i class="fa-solid fa-bars text-xs"></i></button>
-        </div>
+
       </div>
     </nav>
   </div>
@@ -426,700 +534,1153 @@
         <div class="space-y-6">
           <div class="flex items-center justify-between pb-4 border-b border-border">
             <a href="#person-home" class="mobile-drawer-link flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 overflow-hidden border border-white/20">
-                <img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" alt="Shreyash Verma" class="w-full h-full object-cover" />
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-rose-500 to-amber-500 p-[1.5px] overflow-hidden">
+                <img src="https://i.ibb.co/mrk9d9TV/channels4-profile.jpg" alt="Shreyash Verma" width="36" height="36" class="w-full h-full rounded-full object-cover" />
               </div>
               <div>
                 <span class="block text-text-primary font-bold tracking-tight leading-none text-sm">SHREYASH VERMA</span>
-                <span class="block text-emerald-500 dark:text-emerald-400 text-[0.65rem] font-mono uppercase tracking-widest mt-1">Person</span>
+                <span class="block text-rose-500 text-[0.65rem] font-mono uppercase tracking-widest mt-1">The Person</span>
               </div>
             </a>
-            <button id="mobile-menu-close" type="button" autofocus class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-text-secondary hover:text-text-primary" aria-label="Close navigation menu">
+            <button id="mobile-menu-close" type="button" class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-text-secondary hover:text-text-primary" aria-label="Close menu">
               <i class="fa-solid fa-xmark text-sm"></i>
             </button>
           </div>
 
-          <div>
-            <p class="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-text-muted px-3 mb-2">On This Page</p>
-            <ul class="space-y-1">
-              <li><a href="#person-home" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-emerald-500/10 transition-colors"><i class="fa-solid fa-house w-4 text-emerald-400 text-xs"></i> Home</a></li>
-              <li><a href="#person-intro" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-emerald-500/10 transition-colors"><i class="fa-solid fa-address-card w-4 text-emerald-400 text-xs"></i> Who I Am</a></li>
-              <li><a href="#person-hobbies" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-emerald-500/10 transition-colors"><i class="fa-solid fa-medal w-4 text-emerald-400 text-xs"></i> Hobbies</a></li>
-              <li><a href="#person-values" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-emerald-500/10 transition-colors"><i class="fa-solid fa-scale-balanced w-4 text-emerald-400 text-xs"></i> Values</a></li>
-              <li><a href="#person-note" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-emerald-500/10 transition-colors"><i class="fa-solid fa-quote-left w-4 text-emerald-400 text-xs"></i> Note</a></li>
-              <li><a href="#contact" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-emerald-500/10 transition-colors"><i class="fa-solid fa-paper-plane w-4 text-emerald-400 text-xs"></i> Contact</a></li>
-            </ul>
-          </div>
+          <!-- Section Links -->
+          <ul class="space-y-2">
+            <li><a href="#person-home" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5"><i class="fa-solid fa-house w-4 text-accent text-xs"></i> Home</a></li>
+            <li><a href="#person-intro" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5"><i class="fa-solid fa-user w-4 text-accent text-xs"></i> Who I Am</a></li>
+            <li><a href="#person-hobbies" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5"><i class="fa-solid fa-baseball-bat-ball w-4 text-accent text-xs"></i> Interests & Hobbies</a></li>
+            <li><a href="#person-values" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5"><i class="fa-solid fa-compass w-4 text-accent text-xs"></i> Values & Principles</a></li>
+            <li><a href="#person-note" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5"><i class="fa-solid fa-quote-left w-4 text-accent text-xs"></i> Small Note</a></li>
+            <li><a href="#contact" class="mobile-drawer-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5"><i class="fa-solid fa-envelope w-4 text-accent text-xs"></i> Contact</a></li>
+          </ul>
 
+          <!-- Portfolio Ecosystem Switcher -->
           <div class="pt-4 border-t border-border">
             <p class="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-text-muted px-3 mb-2">Portfolio Views</p>
             <ul class="space-y-1">
-              <li><a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5 transition-colors"><i class="fa-solid fa-table-cells-large w-4 text-sky-400 text-xs"></i> Gateway</a></li>
-              <li><a href="developer.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-cyan-500/10 transition-colors"><i class="fa-solid fa-microchip w-4 text-cyan-400 text-xs"></i> Developer</a></li>
-              <li><a href="creator.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-purple-500/10 transition-colors"><i class="fa-solid fa-clapperboard w-4 text-purple-400 text-xs"></i> Creator</a></li>
-              <li><a href="person.html" aria-current="page" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30"><span class="flex items-center gap-3"><i class="fa-solid fa-id-badge w-4 text-xs"></i> Person</span><span class="text-[0.65rem] font-mono uppercase">Active</span></a></li>
+              <li>
+                <a href="index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5 transition-colors">
+                  <i class="fa-solid fa-table-cells-large w-4 text-sky-400 text-xs"></i> Gateway
+                </a>
+              </li>
+              <li>
+                <a href="developer.html" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5 transition-colors">
+                  <span class="flex items-center gap-3"><i class="fa-solid fa-code w-4 text-xs"></i> Developer</span>
+                </a>
+              </li>
+              <li>
+                <a href="creator.html" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold text-text-secondary hover:text-text-primary hover:bg-white/5 transition-colors">
+                  <span class="flex items-center gap-3"><i class="fa-solid fa-video w-4 text-xs"></i> Creator</span>
+                </a>
+              </li>
+              <li>
+                <a href="person.html" aria-current="page" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-rose-500 bg-rose-500/10 border border-rose-500/30">
+                  <span class="flex items-center gap-3"><i class="fa-solid fa-id-badge w-4 text-xs"></i> Person</span>
+                  <span class="text-[0.65rem] font-mono uppercase">Active</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
         <div class="pt-4 border-t border-border">
-          <a href="#contact" class="mobile-drawer-link w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold rounded-xl shadow-lg">
-            <i class="fa-solid fa-paper-plane"></i> Message Me
-          </a>
+          <p class="text-[0.7rem] font-mono text-text-muted text-center">Shreyash Verma • The Individual</p>
         </div>
       </nav>
     </div>
   </dialog>
 
-  <!-- ========================================== -->
-  <!-- PAGE CONTENT: THE PERSON -->
-  <!-- ========================================== -->
+  <!-- ========================================================= -->
+  <!-- MAIN CONTENT CONTAINER                                    -->
+  <!-- ========================================================= -->
   <main class="relative z-10">
-    
-    <!-- Hero -->
-    <section id="person-home" data-section-name="HOME" class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[calc(100svh-1rem)] pt-24 sm:pt-28 pb-12">
-      <div class="space-y-6 sm:space-y-8 reveal-node">
-        <h1 class="text-[2.6rem] sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.95] sm:leading-[0.9] apple-siri-shimmer break-words">SHREYASH<br/>VERMA</h1>
-        <p class="text-lg sm:text-2xl text-text-secondary mt-4 sm:mt-6 font-semibold">The person behind the screen</p>
-        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
-          <a href="#person-hobbies" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-full click-shrink border border-white/20 shadow-lg"><i class="fa-solid fa-medal"></i> My Hobbies</a>
+
+    <!-- ── 01. HERO SECTION: CRYSTAL CLEAR, PURE & MONUMENTAL ── -->
+    <section id="person-home" class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col justify-center items-center text-center min-h-[calc(100svh-1rem)] pt-24 sm:pt-36 pb-20 relative z-10">
+      
+      <!-- Monumental Typography with Apple Siri Shimmer -->
+      <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter leading-[0.92] select-none break-words apple-siri-shimmer">
+        SHREYASH<br class="hidden sm:inline" /> VERMA
+      </h1>
+
+      <!-- Dynamic Typing Subtitle -->
+      <p class="mt-6 sm:mt-8 text-lg sm:text-2xl md:text-3xl text-text-secondary font-semibold tracking-tight">
+        <span id="typing-tagline">BCA Student • Athlete • Lifelong Learner</span><span class="typing-cursor" aria-hidden="true"></span>
+      </p>
+
+      <!-- Centered Dual Action Pills -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-5 pt-8 sm:pt-10 w-full sm:w-auto">
+        <a href="#person-intro" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 text-xs sm:text-sm uppercase tracking-wider bg-gradient-to-r from-rose-500 via-rose-600 to-amber-500 text-stone-950 font-black rounded-full shadow-[0_10px_30px_-10px_rgba(244,63,94,0.4)] hover:shadow-[0_15px_35px_-5px_rgba(245,158,11,0.5)] hover:shadow-[0_15px_35px_-5px_rgba(244,63,94,0.5)] hover:scale-105 click-shrink transition-all duration-300">
+          <span>Explore My Story</span>
+          <i class="fa-solid fa-arrow-down text-xs"></i>
+        </a>
+        <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 text-xs sm:text-sm uppercase tracking-wider glass-panel text-text-primary font-bold rounded-full border border-border hover:border-accent hover:scale-105 click-shrink transition-all duration-300">
+          <i class="fa-solid fa-paper-plane text-accent"></i>
+          <span>Get in Touch</span>
+        </a>
+      </div>
+
+    </section>
+
+    <!-- ── 02. SECTION: WHO I AM (BENTO SPOTLIGHT CARDS) ── -->
+    <section id="person-intro" class="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28 border-t border-border/50">
+      
+      <!-- Section Heading Header -->
+      <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+        <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-accent font-mono text-xs font-bold uppercase tracking-widest mb-3">
+          01 — Narrative
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-text-primary">
+          The Person Behind The Screen
+        </h2>
+        <p class="text-text-secondary mt-3 text-sm sm:text-base font-medium">
+          A candid look at where I come from, what anchors me, and what matters when the IDE and editor are closed.
+        </p>
+      </div>
+
+      <!-- Bento Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch mb-8">
+        
+        <!-- Long Card (8 Cols): Who I Am In Depth -->
+        <div class="lg:col-span-8 spotlight-card glass-panel rounded-3xl p-6 sm:p-10 flex flex-col justify-between">
+          <div>
+            <div class="h-1.5 w-16 bg-gradient-to-r from-rose-500 to-amber-500 rounded-full mb-6"></div>
+            <h3 class="text-2xl sm:text-3xl font-black text-text-primary mb-2">
+              01 — Who I Am
+            </h3>
+            <p class="text-accent font-mono font-bold text-xs uppercase tracking-widest mb-6">
+              Perspective, Curiosity & Growth
+            </p>
+            <ul class="space-y-4 text-sm sm:text-base text-text-secondary font-medium leading-relaxed">
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-arrow-right text-accent mt-1 text-sm shrink-0"></i>
+                <span>I’m Shreyash, a BCA student currently navigating my second year with a continuous hunger for knowledge.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-arrow-right text-accent mt-1 text-sm shrink-0"></i>
+                <span>Beyond being a student, developer, or creator, I’m still figuring out what I want my long-term life to look like.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-arrow-right text-accent mt-1 text-sm shrink-0"></i>
+                <span>Technology is an important part of my life, but it doesn’t define my entire identity as a human being.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-arrow-right text-accent mt-1 text-sm shrink-0"></i>
+                <span>My world also includes family, training, fitness, genuine friendships, music, everyday experiences, and quiet observation.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-arrow-right text-accent mt-1 text-sm shrink-0"></i>
+                <span>I’m not someone who pretends to have everything mastered. I’m discovering what I enjoy, where my strengths lie, and how to improve.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-arrow-right text-accent mt-1 text-sm shrink-0"></i>
+                <span>I don’t view uncertainty as a weakness — I see it as the very canvas on which life is actively constructed.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Short Card (4 Cols): Family & Roots -->
+        <div class="lg:col-span-4 spotlight-card glass-panel rounded-3xl p-6 sm:p-10 flex flex-col justify-between">
+          <div>
+            <div class="h-1.5 w-16 bg-gradient-to-r from-rose-500 to-amber-500 rounded-full mb-6"></div>
+            <h3 class="text-2xl sm:text-3xl font-black text-text-primary mb-2">
+              Family & Roots
+            </h3>
+            <p class="text-accent font-mono font-bold text-xs uppercase tracking-widest mb-6">
+              Foundation & Grounding
+            </p>
+            <ul class="space-y-4 text-sm sm:text-base text-text-secondary font-medium leading-relaxed">
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-heart text-rose-500 mt-1 text-sm shrink-0"></i>
+                <span>My family is the essential anchor in my life, keeping me grounded, humble, and accountable.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-shield text-rose-500 mt-1 text-sm shrink-0"></i>
+                <span>Growing up in a quiet, disciplined environment that respects focus, patience, and mutual respect.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-seedling text-rose-500 mt-1 text-sm shrink-0"></i>
+                <span>Deep gratitude for the freedom and support to explore my technical curiosities and athletic ambitions.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 border-t border-border/50 mt-6">
+            <span class="text-xs font-mono text-text-muted">Core Anchor</span>
+            <p class="text-sm font-bold text-text-primary mt-1">Discipline • Humility • Gratitude</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Mini Bento: 3 Daily Pillars -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="glass-panel p-6 rounded-2xl flex items-center gap-4 hover:border-accent transition-colors">
+          <div class="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-baseball-bat-ball"></i>
+          </div>
+          <div>
+            <span class="block text-base font-bold text-text-primary">Athletic Mindset</span>
+            <span class="text-xs text-text-secondary">Cricket teaches composure under pressure.</span>
+          </div>
+        </div>
+        <div class="glass-panel p-6 rounded-2xl flex items-center gap-4 hover:border-accent transition-colors">
+          <div class="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-dumbbell"></i>
+          </div>
+          <div>
+            <span class="block text-base font-bold text-text-primary">Physical Resilience</span>
+            <span class="text-xs text-text-secondary">Consistent resistance training builds character.</span>
+          </div>
+        </div>
+        <div class="glass-panel p-6 rounded-2xl flex items-center gap-4 hover:border-accent transition-colors">
+          <div class="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-headphones"></i>
+          </div>
+          <div>
+            <span class="block text-base font-bold text-text-primary">Deep Focus States</span>
+            <span class="text-xs text-text-secondary">Calibrating rhythm with acoustic & ambient sound.</span>
+          </div>
         </div>
       </div>
-      <div class="flex justify-center lg:justify-end reveal-node">
-        <div class="iphone-frame">
-          <div class="iphone-btn left-[-16px] top-[110px] w-[4px] h-[26px]"></div>
-          <div class="iphone-btn left-[-16px] top-[160px] w-[4px] h-[50px]"></div>
-          <div class="iphone-btn left-[-16px] top-[230px] w-[4px] h-[50px]"></div>
-          <div class="iphone-btn right-[-16px] top-[180px] w-[4px] h-[70px]"></div>
+
+    </section>
+
+    <!-- ── 03. SECTION: INTERESTS & HOBBIES (INTERACTIVE STAGE) ── -->
+    <section id="person-hobbies" class="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28 border-t border-border/50">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+        <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-accent font-mono text-xs font-bold uppercase tracking-widest mb-3">
+          02 — Beyond The Screen
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-text-primary">
+          My Interests & Hobbies
+        </h2>
+        <p class="text-text-secondary mt-3 text-sm sm:text-base font-medium">
+          The pursuits outside software that build physical strength, mental clarity, and tactical patience.
+        </p>
+      </div>
+
+      <!-- Tab Column & Stage Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Tab Buttons Column -->
+        <div class="lg:col-span-5 flex flex-col gap-3.5 z-20" id="hobbies-tabs-column">
           
-          <div class="iphone-screen bg-black">
-            <div class="dynamic-island-notch"></div>
-            <!-- 4-Image Slideshow Container -->
-            <div class="phone-slideshow absolute inset-0 w-full h-full">
-              <img src="https://i.ibb.co/XrNLQwSC/Whats-App-Image-2026-07-01-at-1-15-10-PM.jpg" class="slideshow-img active" alt="Shreyash Verma Portrait">
-              <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=900&q=80" class="slideshow-img" alt="Cricket — Top-order Batting">
-              <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" class="slideshow-img" alt="Fitness and Gym Training">
-              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80" class="slideshow-img" alt="Listening to Music">
+          <button class="apple-tab-btn is-active flex items-center justify-between group" data-hobby="per1">
+            <div class="flex items-center gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-accent flex items-center justify-center text-lg">
+                <i class="fa-solid fa-baseball-bat-ball"></i>
+              </div>
+              <div class="text-left">
+                <span class="block text-sm font-bold text-text-primary">01 Cricket</span>
+                <span class="block text-xs text-text-secondary">Top-order batting & situational game</span>
+              </div>
             </div>
+            <i class="fa-solid fa-chevron-right text-xs text-accent group-hover:translate-x-1 transition-transform"></i>
+          </button>
 
-            <div class="absolute top-3 sm:top-4 left-5 sm:left-6 right-5 sm:right-6 flex items-center justify-between text-[10px] sm:text-[11px] text-white/90 z-20 font-bold drop-shadow-md pointer-events-none">
-              <span>9:41</span>
-              <div class="flex gap-1.5 sm:gap-2"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-full"></i></div>
+          <button class="apple-tab-btn flex items-center justify-between group" data-hobby="per2">
+            <div class="flex items-center gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-accent flex items-center justify-center text-lg">
+                <i class="fa-solid fa-dumbbell"></i>
+              </div>
+              <div class="text-left">
+                <span class="block text-sm font-bold text-text-primary">02 Fitness & Strength</span>
+                <span class="block text-xs text-text-secondary">Discipline, posture & daily conditioning</span>
+              </div>
             </div>
+            <i class="fa-solid fa-chevron-right text-xs text-accent group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+          <button class="apple-tab-btn flex items-center justify-between group" data-hobby="per3">
+            <div class="flex items-center gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-accent flex items-center justify-center text-lg">
+                <i class="fa-solid fa-headphones"></i>
+              </div>
+              <div class="text-left">
+                <span class="block text-sm font-bold text-text-primary">03 Music & Focus</span>
+                <span class="block text-xs text-text-secondary">Soundscapes, flow state & mental recharge</span>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-xs text-accent group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+          <button class="apple-tab-btn flex items-center justify-between group" data-hobby="per4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-accent flex items-center justify-center text-lg">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+              <div class="text-left">
+                <span class="block text-sm font-bold text-text-primary">04 Reading & Exploration</span>
+                <span class="block text-xs text-text-secondary">Biographies, mental models & history</span>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-xs text-accent group-hover:translate-x-1 transition-transform"></i>
+          </button>
+
+        </div>
+
+        <!-- Right: Interactive Stage Display -->
+        <div class="lg:col-span-7">
+          <div id="hobby-stage-card" class="spotlight-card glass-panel rounded-3xl p-6 sm:p-10 transition-all duration-400 min-h-[380px] flex flex-col justify-between">
+            <!-- Dynamically injected via JavaScript -->
           </div>
         </div>
+
       </div>
+
     </section>
 
-    <!-- 3-Card Intro Section -->
-    <section id="person-intro" data-section-name="WHO I AM" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-      <div class="flex flex-col md:flex-row gap-5 sm:gap-6 items-stretch mb-5 sm:mb-6">
+    <!-- ── 04. SECTION: WHAT I VALUE & PRINCIPLES ── -->
+    <section id="person-values" class="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28 border-t border-border/50">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14 sm:mb-16">
+        <span class="inline-block px-4 py-1.5 rounded-full glass-panel text-accent font-mono text-xs font-bold uppercase tracking-widest mb-3">
+          03 — Philosophy
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-text-primary">
+          What I Value & My Principles
+        </h2>
+        <p class="text-text-secondary mt-3 text-sm sm:text-base font-medium">
+          The personal compass that guides how I make decisions, invest time, and treat the people around me.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
         
-        <!-- Long Card: Who I Am -->
-        <div class="w-full md:w-2/3 spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 reveal-node group">
-          <div class="h-1.5 sm:h-2 w-14 sm:w-16 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full mb-5 sm:mb-6 group-hover:w-24 transition-all duration-500"></div>
-          <h3 class="text-2xl sm:text-3xl font-bold mb-2 text-text-primary">01 — Who I Am</h3>
-          <p class="text-text-secondary font-bold mb-5 sm:mb-6 uppercase tracking-widest text-xs">The person behind the screen</p>
-          <ul class="space-y-3 sm:space-y-4 text-sm sm:text-base text-text-secondary font-medium leading-relaxed">
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> I’m Shreyash, a BCA student currently in my second year.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> Beyond being a student, developer, or content creator, I’m still figuring out what I want my life to look like.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> Technology is an important part of my life, but it isn’t my entire identity.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> My life also includes family, college, fitness, friendships, entertainment, interests, and everyday experiences.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> I’m not someone who has everything figured out yet. I’m still discovering what I’m good at, what I genuinely enjoy, what I need to improve, and who I want to become.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-emerald-500 mt-1 text-sm shrink-0"></i> I don’t see uncertainty as a weakness. I see it as part of building my life.</li>
-          </ul>
-        </div>
-
-        <!-- Short Card: Family -->
-        <div class="w-full md:w-1/3 spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 reveal-node group" style="transition-delay: 0.1s;">
-          <div class="h-1.5 sm:h-2 w-14 sm:w-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full mb-5 sm:mb-6 group-hover:w-24 transition-all duration-500"></div>
-          <h3 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-text-primary">Family</h3>
-          <ul class="space-y-3 sm:space-y-4 text-sm sm:text-base text-text-secondary font-medium leading-relaxed">
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> My family is an important part of my life.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> My father works as a private-school teacher.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> My family has taught me the value of hard work, education, responsibility, and financial independence.</li>
-            <li class="flex items-start gap-3"><i class="fa-solid fa-arrow-right text-blue-500 mt-1 text-sm shrink-0"></i> A major goal of mine is to build a career that allows me to support my family and create a more secure future for them.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Third Card: Hobbies Overview -->
-      <div class="w-full spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 reveal-node" style="transition-delay: 0.2s;">
-        <h3 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-6 text-text-primary">Hobbies & Interests</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-          <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all duration-400 flex items-center gap-4 group">
-            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-lg sm:text-xl group-hover:scale-110 transition-transform shrink-0"><i class="fa-solid fa-baseball-bat-ball"></i></div>
-            <b class="text-text-primary text-base sm:text-lg">Cricket</b>
-          </div>
-          <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-400 flex items-center gap-4 group">
-            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center text-lg sm:text-xl group-hover:scale-110 transition-transform shrink-0"><i class="fa-solid fa-dumbbell"></i></div>
-            <b class="text-text-primary text-base sm:text-lg">Fitness</b>
-          </div>
-          <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-400 flex items-center gap-4 group">
-            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-lg sm:text-xl group-hover:scale-110 transition-transform shrink-0"><i class="fa-solid fa-headphones"></i></div>
-            <b class="text-text-primary text-base sm:text-lg">Listening Music</b>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Hobbies Accordion -->
-    <section id="person-hobbies" data-section-name="HOBBIES" class="py-16 sm:py-24 px-4 sm:px-6 max-w-7xl mx-auto">
-      <h2 class="text-3xl sm:text-5xl font-black mb-8 sm:mb-12 reveal-node text-center">My Interests & Hobbies</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start relative min-h-[300px] sm:min-h-[400px]">
-        
-        <!-- Animated Drop Box for Person -->
-        <div id="person-drop-box" class="island-drop-box w-14 h-14 rounded-full">
-          <div class="drop-logo w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white font-black text-xs mr-2 shrink-0">SV</div>
-          <span class="drop-text text-base sm:text-lg font-black tracking-tight opacity-0 pr-3 text-white">🎾 Beyond the Code</span>
-        </div>
-
-        <div id="person-tabs-column" class="lg:col-span-5 flex flex-col gap-3 sm:gap-3.5 z-20 tabs-column">
-          <button class="apple-tab-btn person-tab" data-proj="per1"><span class="font-bold text-emerald-400">01 Cricket</span></button>
-          <button class="apple-tab-btn person-tab" data-proj="per2"><span class="font-bold text-emerald-400">02 Fitness & Body Language</span></button>
-        </div>
-
-        <!-- Layout exactly matches your original portfolio to avoid lag -->
-        <div id="stage-column" class="lg:col-span-7 lg:sticky lg:top-28 z-10 lg:min-h-[440px]">
-          <div id="person-stage" class="w-full hidden">
-            <!-- Injected by JS -->
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Vibrant Multi-Color Values & Principles -->
-    <section id="person-values" data-section-name="VALUES" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-        <div class="reveal-node">
-          <h2 class="text-3xl sm:text-4xl font-black mb-6 sm:mb-8">What I Value</h2>
-          <ul class="space-y-3.5 sm:space-y-4 text-sm sm:text-base text-text-secondary font-medium">
-            <!-- Distinct Colors & Hover Transforms -->
-            <li class="glass-panel p-4 rounded-xl border-l-4 border-emerald-500 hover:border-emerald-400 hover:bg-emerald-500/10 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:-translate-y-1 transition-all duration-300">
-              <b class="text-text-primary block">Continuous Growth</b> Always learning, improving, and adapting.
+        <!-- Left: What I Value -->
+        <div class="space-y-4">
+          <h3 class="text-2xl font-black text-text-primary mb-6 flex items-center gap-3">
+            <i class="fa-solid fa-gem text-accent"></i>
+            <span>Core Values</span>
+          </h3>
+          <ul class="space-y-3.5">
+            <li class="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-rose-500 hover:shadow-lg hover:-translate-y-1 transition-all">
+              <b class="text-text-primary block text-base font-bold">Continuous Growth</b>
+              <span class="text-sm text-text-secondary">Always learning, improving, and adapting rather than settling into early comfort.</span>
             </li>
-            <li class="glass-panel p-4 rounded-xl border-l-4 border-blue-500 hover:border-blue-400 hover:bg-blue-500/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] hover:-translate-y-1 transition-all duration-300">
-              <b class="text-text-primary block">Discipline</b> Staying consistent even when motivation fades.
+            <li class="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-amber-500 hover:shadow-lg hover:-translate-y-1 transition-all">
+              <b class="text-text-primary block text-base font-bold">Discipline Over Motivation</b>
+              <span class="text-sm text-text-secondary">Staying consistent and showing up every single day even when excitement or motivation fades.</span>
             </li>
-            <li class="glass-panel p-4 rounded-xl border-l-4 border-purple-500 hover:border-purple-400 hover:bg-purple-500/10 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] hover:-translate-y-1 transition-all duration-300">
-              <b class="text-text-primary block">Curiosity</b> Understanding how and why things work.
+            <li class="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-rose-500 hover:shadow-lg hover:-translate-y-1 transition-all">
+              <b class="text-text-primary block text-base font-bold">Insatiable Curiosity</b>
+              <span class="text-sm text-text-secondary">Taking things apart to understand how and why they actually work under the hood.</span>
             </li>
-            <li class="glass-panel p-4 rounded-xl border-l-4 border-rose-500 hover:border-rose-400 hover:bg-rose-500/10 hover:shadow-[0_0_20px_rgba(244,63,94,0.2)] hover:-translate-y-1 transition-all duration-300">
-              <b class="text-text-primary block">Independence</b> Building the skills to create my own opportunities.
+            <li class="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-amber-500 hover:shadow-lg hover:-translate-y-1 transition-all">
+              <b class="text-text-primary block text-base font-bold">Independence & Self-Reliance</b>
+              <span class="text-sm text-text-secondary">Acquiring high-leverage skills to create my own opportunities instead of waiting for permission.</span>
             </li>
-            <li class="glass-panel p-4 rounded-xl border-l-4 border-cyan-500 hover:border-cyan-400 hover:bg-cyan-500/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all duration-300">
-              <b class="text-text-primary block">Balance</b> Importance to career, family, fitness, and life outside technology.
+            <li class="glass-panel p-4 sm:p-5 rounded-2xl border-l-4 border-rose-500 hover:shadow-lg hover:-translate-y-1 transition-all">
+              <b class="text-text-primary block text-base font-bold">Authenticity & Substance</b>
+              <span class="text-sm text-text-secondary">Valuing real capability and proof over performative presentation or vanity claims.</span>
             </li>
           </ul>
         </div>
-        <div class="reveal-node" style="transition-delay: 0.15s;">
-          <h2 class="text-3xl sm:text-4xl font-black mb-6 sm:mb-8">My Principles</h2>
-          <div class="space-y-4 sm:space-y-6">
-            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(52,211,153,0.5)] border border-border hover:border-emerald-500/50 transition-all duration-400 group">
-              <b class="text-emerald-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">01</b>
-              <span class="font-bold text-text-primary text-base sm:text-lg">Keep Growing</span>
-              <p class="text-text-secondary mt-1 text-sm">I want to keep learning rather than becoming comfortable.</p>
-            </div>
-            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.5)] border border-border hover:border-blue-500/50 transition-all duration-400 group">
-              <b class="text-blue-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">02</b>
-              <span class="font-bold text-text-primary text-base sm:text-lg">Build, Don't Pretend</span>
-              <p class="text-text-secondary mt-1 text-sm">Real skills and practical results over simply claiming expertise.</p>
-            </div>
-            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(168,85,247,0.5)] border border-border hover:border-purple-500/50 transition-all duration-400 group">
-              <b class="text-purple-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">03</b>
-              <span class="font-bold text-text-primary text-base sm:text-lg">Stay Curious</span>
-              <p class="text-text-secondary mt-1 text-sm">Keep questioning and understanding things beyond the surface.</p>
-            </div>
-            <div class="glass-panel p-4 sm:p-5 rounded-2xl hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(244,63,94,0.5)] border border-border hover:border-rose-500/50 transition-all duration-400 group">
-              <b class="text-rose-500 font-mono text-lg sm:text-xl block mb-1.5 sm:mb-2 group-hover:scale-110 origin-left transition-transform">04</b>
-              <span class="font-bold text-text-primary text-base sm:text-lg">Build Independence</span>
-              <p class="text-text-secondary mt-1 text-sm">Become capable enough to create my own opportunities.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Flashy Unique Note Section -->
-    <section id="person-note" data-section-name="NOTE" class="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-12 reveal-node">
-      <!-- Applied custom flashy-note class here -->
-      <div class="flashy-note text-center">
-        <i class="fa-solid fa-quote-left text-3xl sm:text-4xl text-emerald-500/50 mb-3 sm:mb-4 block"></i>
-        <!-- Siri Shimmer applied to text -->
-        <h3 class="text-2xl sm:text-3xl font-black mb-3 sm:mb-4 apple-siri-shimmer inline-block">A Small Note From Me</h3>
-        <p class="text-text-secondary font-medium text-base sm:text-lg leading-relaxed mb-4 mt-2">I don't want this portfolio to make me look perfect or pretend that I've already figured everything out. I'm still a student. I'm still learning, experimenting, making mistakes, and changing along the way.</p>
-        <p class="text-text-secondary font-medium text-base sm:text-lg leading-relaxed">What I can show honestly is where I am, what I'm building, what I care about, and the direction I'm moving in. I don't have everything figured out yet — but I know I want to keep moving forward.</p>
-      </div>
-    </section>
-
-    <!-- Original UI Contact Block -->
-    <section id="contact" data-section-name="CONTACT" class="py-16 sm:py-24 lg:py-32 relative z-10 border-t border-border/50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-10 sm:mb-16 reveal-node">
-          <span class="section-label glass-panel px-4 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4 shadow-sm border-cyan-500/20 text-cyan-500 text-xs sm:text-sm font-mono font-bold">05 — Connect</span>
-          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold mt-2 tracking-tighter text-text-primary transition-colors duration-500">Initiate Contact</h2>
-          <p class="text-text-secondary mt-3 sm:mt-4 max-w-lg mx-auto text-sm sm:text-lg font-medium transition-colors duration-500">Find me on your preferred channel. Every platform is actively maintained.</p>
-        </div>
-
-        <div class="max-w-3xl mx-auto mb-10 sm:mb-16 reveal-node" style="transition-delay: 0.1s;">
-          <div class="spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-10 relative group">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-cyan-500/25 transition-all duration-500 ease-out"></div>
+        <!-- Right: Core Principles -->
+        <div class="space-y-4">
+          <h3 class="text-2xl font-black text-text-primary mb-6 flex items-center gap-3">
+            <i class="fa-solid fa-compass text-accent"></i>
+            <span>Guiding Principles</span>
+          </h3>
+          <div class="space-y-4">
             
-            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-5 sm:space-y-6 relative z-10">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div class="glass-panel p-5 rounded-2xl hover:border-rose-500 hover:-translate-y-1 transition-all duration-300 group">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-rose-500 font-mono font-black text-xl group-hover:scale-110 transition-transform">01</span>
+                <span class="font-bold text-text-primary text-lg">Keep Growing</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed pl-8">
+                I want to keep learning rather than becoming comfortable. Comfort is the quiet enemy of skill and ambition.
+              </p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 group">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-amber-500 font-mono font-black text-xl group-hover:scale-110 transition-transform">02</span>
+                <span class="font-bold text-text-primary text-lg">Build, Don't Pretend</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed pl-8">
+                Real skills and practical results over simply claiming expertise. Let the code, projects, and execution speak for themselves.
+              </p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl hover:border-rose-500 hover:-translate-y-1 transition-all duration-300 group">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-rose-500 font-mono font-black text-xl group-hover:scale-110 transition-transform">03</span>
+                <span class="font-bold text-text-primary text-lg">Stay Curious</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed pl-8">
+                Keep questioning and understanding things beyond the surface. Curiosity is the root of all genuine engineering and creativity.
+              </p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 group">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-amber-500 font-mono font-black text-xl group-hover:scale-110 transition-transform">04</span>
+                <span class="font-bold text-text-primary text-lg">Create Opportunity</span>
+              </div>
+              <p class="text-sm text-text-secondary leading-relaxed pl-8">
+                Become capable enough to open doors for myself and others. The best way to predict the future is to actively build it.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ── 05. SECTION: PERSONAL MANIFESTO NOTE ── -->
+    <section id="person-note" class="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-24 border-t border-border/50">
+      <div class="spotlight-card glass-panel rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden">
+        
+        <i class="fa-solid fa-quote-left text-4xl sm:text-5xl text-accent/30 mb-5 block mx-auto"></i>
+        
+        <h3 class="text-2xl sm:text-4xl font-black mb-6 apple-siri-shimmer inline-block">
+          A Small Note From Me
+        </h3>
+        
+        <div class="space-y-4 max-w-2xl mx-auto text-base sm:text-lg text-text-secondary font-medium leading-relaxed">
+          <p>
+            I don't want this portfolio to make me look perfect or pretend that I've already figured everything out. 
+            I'm still a student. I'm still learning, experimenting, making mistakes, and changing along the way.
+          </p>
+          <p>
+            What I can show honestly is where I am, what I'm building, what I care about, and the direction I'm moving in. 
+            I don't have everything solved yet — but I know with complete certainty that I want to keep moving forward.
+          </p>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-border/50 inline-flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-rose-500/20 text-accent flex items-center justify-center font-bold text-xs">
+            SV
+          </div>
+          <span class="text-sm font-bold text-text-primary font-mono">— Shreyash Verma</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 06. SECTION: CONTACT & CONNECT (FORM ONLY - NO GRID ICONS) ── -->
+    <section id="contact" class="py-16 sm:py-28 relative z-10 border-t border-border/50" data-section-name="CONTACT">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        
+        <div class="text-center mb-10 sm:mb-14">
+          <span class="glass-panel px-4 py-2 rounded-full inline-block mb-4 shadow-sm border-rose-500/30 text-rose-500 font-mono font-bold text-xs uppercase tracking-wider">
+            05 — Contact
+          </span>
+          <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tighter text-text-primary">
+            Initiate Contact
+          </h2>
+          <p class="text-text-secondary mt-3 sm:mt-4 max-w-lg mx-auto text-sm sm:text-lg font-medium">
+            Have a question, collaboration, or opportunity in mind? Send me a direct message below.
+          </p>
+        </div>
+
+        <div>
+          <div class="spotlight-card glass-panel rounded-3xl p-6 sm:p-10 relative group">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-rose-500/20 transition-all duration-500 ease-out"></div>
+            
+            <form action="https://formspree.io/f/xaqgkvwy" method="POST" class="space-y-6 relative z-10">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="space-y-2">
-                  <label for="name" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1 transition-colors duration-500">Name</label>
-                  <input type="text" id="name" name="name" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white placeholder-slate-500 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-400 shadow-inner" placeholder="John Doe">
+                  <label for="contact-name" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1">Name</label>
+                  <input id="contact-name" name="name" type="text" required placeholder="Your full name" class="w-full bg-white dark:bg-stone-900/90 border border-border text-stone-900 dark:text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 shadow-inner" />
                 </div>
                 <div class="space-y-2">
-                  <label for="email" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1 transition-colors duration-500">Email</label>
-                  <input type="email" id="email" name="email" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white placeholder-slate-500 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-400 shadow-inner" placeholder="john@example.com">
+                  <label for="contact-email" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1">Email</label>
+                  <input id="contact-email" name="email" type="email" required placeholder="you@example.com" class="w-full bg-white dark:bg-stone-900/90 border border-border text-stone-900 dark:text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 shadow-inner" />
                 </div>
               </div>
+
               <div class="space-y-2">
-                <label for="message" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1 transition-colors duration-500">Message</label>
-                <textarea id="message" name="message" rows="4" required class="w-full bg-white dark:bg-slate-800 border border-border/50 text-slate-900 dark:text-white placeholder-slate-500 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-400 shadow-inner resize-none" placeholder="Let's connect..."></textarea>
+                <label for="contact-message" class="text-xs font-bold font-mono text-text-secondary uppercase tracking-wider pl-1">Message</label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Share your message or opportunity..." class="w-full bg-white dark:bg-stone-900/90 border border-border text-stone-900 dark:text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 shadow-inner resize-none"></textarea>
               </div>
-              <button type="submit" class="w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3.5 sm:py-4 rounded-xl font-bold shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-white/20 click-shrink">
-                <i class="fa-solid fa-paper-plane text-sm"></i> Send Message
+
+              <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-rose-500 via-rose-600 to-amber-500 text-stone-950 font-bold text-sm tracking-wide shadow-lg shadow-rose-500/25 hover:shadow-amber-500/35 hover:shadow-rose-500/40 hover:scale-[1.01] click-shrink transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+                <span>Send Direct Message</span>
               </button>
             </form>
+
           </div>
         </div>
 
-        <!-- Exact Original Multi-color App Grid Restored -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 max-w-4xl mx-auto">
-          <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="social-card social-github spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.2s;">
-            <i class="fa-brands fa-github text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">GitHub</span>
-          </a>
-          <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="social-card social-linkedin spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.3s;">
-            <i class="fa-brands fa-linkedin-in text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">LinkedIn</span>
-          </a>
-          <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="social-card social-youtube spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.4s;">
-            <i class="fa-brands fa-youtube text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">YouTube</span>
-          </a>
-          <a href="mailto:shreyashverma.4518@gmail.com" class="group social-card hover:border-accent hover:text-accent spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.5s;">
-            <div class="relative"><div class="absolute inset-0 bg-accent blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500 ease-out"></div><i class="fa-solid fa-envelope text-3xl sm:text-4xl drop-shadow-md relative z-10 transition-transform duration-400"></i></div>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Email</span>
-          </a>
-          <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="social-card social-instagram spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.6s;">
-            <i class="fa-brands fa-instagram text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Instagram</span>
-          </a>
-          <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="social-card social-reddit spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.7s;">
-            <i class="fa-brands fa-reddit text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Reddit</span>
-          </a>
-          <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="social-card social-x spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.8s;">
-            <i class="fa-brands fa-x-twitter text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Twitter</span>
-          </a>
-          <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="social-card social-threads spotlight-card glass-panel rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-col items-center justify-center gap-3 sm:gap-4 reveal-node text-text-secondary" style="transition-delay: 0.9s;">
-            <i class="fa-brands fa-threads text-3xl sm:text-4xl drop-shadow-md transition-transform duration-400 relative z-10"></i>
-            <span class="text-xs sm:text-sm font-bold tracking-wide relative z-10">Threads</span>
-          </a>
-        </div>
       </div>
     </section>
+
+    <!-- ── 07. MASTER EDITORIAL FOOTER (IDENTICAL TO DEV & CREATOR) ── -->
+    <footer id="person-footer" class="relative z-10 border-t border-border/60 bg-[#EDE9DF]/90 dark:bg-[#0E120D]/95 backdrop-blur-2xl">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-rose-500/40 via-amber-500/40 to-transparent pointer-events-none"></div>
+      
+      <div class="max-w-6xl mx-auto px-6 sm:px-8 py-10 sm:py-12">
+        
+        <!-- Top Row: Brand Monogram + Tagline + Available Pill -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-2">
+            <a href="#person-home" class="inline-flex items-center gap-3 group">
+              <span class="w-9 h-9 rounded-lg bg-[#1D2318] dark:bg-[#FAF8F2] text-[#FAF8F2] dark:text-[#1D2318] font-black text-base tracking-tight flex items-center justify-center shadow-sm transition-transform duration-300 ease-out group-hover:scale-105">
+                S.
+              </span>
+              <span class="text-sm font-extrabold tracking-[0.18em] uppercase text-text-primary">
+                SHREYASH
+              </span>
+            </a>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-text-primary leading-snug">
+              Building. Creating. Evolving.
+            </h2>
+            <p class="text-xs sm:text-sm text-text-secondary max-w-xl">
+              A developer by curiosity, a creator by passion, and an individual always exploring what's next.
+            </p>
+          </div>
+          <a href="#contact" class="self-start sm:self-center inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/12 border border-rose-500/30 text-rose-500 text-xs font-semibold tracking-wide hover:bg-rose-500/20 hover:border-rose-500/50 transition-all duration-300 shrink-0 click-shrink">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+            </span>
+            Available to connect
+          </a>
+        </div>
+
+        <!-- Middle Navigation: EXPLORE & FOUNDER OF -->
+        <div class="mt-7 pt-7 border-t border-border/60 grid grid-cols-2 gap-8 sm:gap-12">
+          <div>
+            <h3 class="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-text-muted mb-3">Explore</h3>
+            <ul class="space-y-1.5 text-sm font-medium">
+              <li><a href="developer.html" class="footer-nav-link"><span>As a Developer</span></a></li>
+              <li><a href="creator.html" class="footer-nav-link"><span>As a Creator</span></a></li>
+              <li><a href="index.html" class="footer-nav-link"><span>Return to Gateway</span></a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-text-muted mb-3">Founder of</h3>
+            <ul class="space-y-1.5 text-sm font-medium">
+              <li>
+                <a href="https://tmspark.vercel.app" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
+                  <span>TypeMind Spark</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square footer-ext-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/Shreyash-Verma16/labs-spark" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
+                  <span>Cluster Studio</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square footer-ext-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/Shreyash-Verma16/spark-intelligence" target="_blank" rel="noopener noreferrer" class="footer-nav-link">
+                  <span>Spark Intelligence</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square footer-ext-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Section: CONNECT (3 Compact Columns with Fly-Out Arrows) -->
+        <div class="mt-7 pt-7 border-t border-border/60">
+          <h3 class="text-[0.68rem] font-mono font-bold uppercase tracking-[0.16em] text-text-muted mb-3">Connect</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-y-2 gap-x-8 text-sm">
+            <ul class="space-y-1">
+              <li>
+                <a href="https://www.linkedin.com/in/shreyash-verma-9b791b400" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-linkedin">
+                  <i class="fa-brands fa-linkedin-in connect-icon" aria-hidden="true"></i>
+                  <span>LinkedIn</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UC-n2JCyBM5b61_gSOdsQ3sA" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-youtube">
+                  <i class="fa-brands fa-youtube connect-icon" aria-hidden="true"></i>
+                  <span>YouTube</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/techwith_shreyash/" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-instagram">
+                  <i class="fa-brands fa-instagram connect-icon" aria-hidden="true"></i>
+                  <span>Instagram</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="space-y-1">
+              <li>
+                <a href="https://github.com/Shreyash-Verma16" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-github">
+                  <i class="fa-brands fa-github connect-icon" aria-hidden="true"></i>
+                  <span>GitHub</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/Shreyash_verma_" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-x">
+                  <i class="fa-brands fa-x-twitter connect-icon" aria-hidden="true"></i>
+                  <span>X</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.reddit.com/user/Shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-reddit">
+                  <i class="fa-brands fa-reddit-alien connect-icon" aria-hidden="true"></i>
+                  <span>Reddit</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="space-y-1">
+              <li>
+                <a href="https://www.hackerrank.com/profile/shreyashverma_41" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-hackerrank">
+                  <i class="fa-brands fa-hackerrank connect-icon" aria-hidden="true"></i>
+                  <span>HackerRank</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://leetcode.com/u/shreyash_verma_16/" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-leetcode">
+                  <i class="fa-solid fa-code connect-icon" aria-hidden="true"></i>
+                  <span>LeetCode</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.threads.com/@shreyash.verma.16" target="_blank" rel="noopener noreferrer" class="footer-connect-link brand-threads">
+                  <i class="fa-brands fa-threads connect-icon" aria-hidden="true"></i>
+                  <span>Threads</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square connect-arrow" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Clean Copyright Line (No Architecture Tag) -->
+        <div class="mt-8 pt-8 border-t border-border/60 text-xs font-mono text-text-muted">
+          <span>&copy; 2026 Shreyash Verma. All rights reserved.</span>
+        </div>
+
+      </div>
+    </footer>
 
   </main>
 
-
-  <!-- ── JAVASCRIPT ENGINE ── -->
+  <!-- ========================================================= -->
+  <!-- JAVASCRIPT: DYNAMIC ISLAND, TYPING, STAGE & SILK WAVE     -->
+  <!-- ========================================================= -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const colorSchemeMeta = document.querySelector('meta[name="color-scheme"]');
 
-      // --- THEME TOGGLE + LOCALSTORAGE PERSISTENCE ---
-      function setTheme(darkState, shouldPersist = true) {
-        const isDark = Boolean(darkState);
-        document.documentElement.classList.toggle('dark', isDark);
-        if (colorSchemeMeta) colorSchemeMeta.content = isDark ? 'dark' : 'light';
-        if (shouldPersist) {
-          try { localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light'); } catch (err) {}
+      // =========================================================
+      // 1. EXACT 2-STATE LERP DYNAMIC ISLAND (PARITY WITH DEV)
+      // =========================================================
+      const navEl = document.getElementById('dynamic-nav');
+      const linksContainer = document.getElementById('island-links-container');
+      const liquidPill = document.getElementById('nav-liquid-pill');
+
+      let navMode = 'adherent';
+      let watchTimeout8s = null;
+      let isMouseOverNav = false;
+      let navRafId = null;
+
+      let curW = window.innerWidth;
+      let curH = window.innerWidth < 640 ? 64 : 72;
+      let curTop = 0;
+      let curRadius = 0;
+      let curPadX = window.innerWidth < 640 ? 14 : 28;
+
+      let pillCurX = 0, pillTargetX = 0;
+      let pillCurW = 0, pillTargetW = 0;
+      let pillReady = false;
+
+      let lastAppliedNav = { w: '', h: '', top: '', r: '', pad: '', px: '', pw: '' };
+
+      function applyNavStyles() {
+        if (!navEl) return;
+        const w = `${curW.toFixed(2)}px`;
+        const h = `${curH.toFixed(2)}px`;
+        const top = `translate3d(0, ${curTop.toFixed(2)}px, 0)`;
+        const r = `${curRadius.toFixed(2)}px`;
+        const pad = `${curPadX.toFixed(2)}px`;
+
+        if (lastAppliedNav.w !== w) { navEl.style.width = w; lastAppliedNav.w = w; }
+        if (lastAppliedNav.h !== h) { navEl.style.height = h; lastAppliedNav.h = h; }
+        if (lastAppliedNav.top !== top) { navEl.style.transform = top; lastAppliedNav.top = top; }
+        if (lastAppliedNav.r !== r) { navEl.style.borderRadius = r; lastAppliedNav.r = r; }
+        if (lastAppliedNav.pad !== pad) {
+          navEl.style.paddingLeft = pad;
+          navEl.style.paddingRight = pad;
+          lastAppliedNav.pad = pad;
+        }
+
+        if (liquidPill && pillReady) {
+          const px = `translate3d(${pillCurX.toFixed(2)}px, 0, 0)`;
+          const pw = `${pillCurW.toFixed(2)}px`;
+          if (lastAppliedNav.px !== px) { liquidPill.style.transform = px; lastAppliedNav.px = px; }
+          if (lastAppliedNav.pw !== pw) { liquidPill.style.width = pw; lastAppliedNav.pw = pw; }
         }
       }
 
-      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          setTheme(!document.documentElement.classList.contains('dark'), true);
-        });
-      });
-
-      window.addEventListener('storage', (e) => {
-        if (e.key === 'portfolio-theme' && e.newValue) {
-          setTheme(e.newValue === 'dark', false);
-        }
-      });
-
-      // --- MOBILE NAVIGATION DRAWER ---
-      const mobileDrawer = document.getElementById('mobile-drawer');
-      const mobileOpenBtns = document.querySelectorAll('.mobile-menu-open-btn');
-      const mobileCloseBtn = document.getElementById('mobile-menu-close');
-
-      if (mobileDrawer && mobileOpenBtns.length > 0 && mobileCloseBtn) {
-        const drawerScroller = mobileDrawer.querySelector('.mobile-drawer-scroller');
-        const drawerSheet = mobileDrawer.querySelector('.mobile-drawer-sheet');
-        const supportsInitialTarget = CSS.supports && CSS.supports('scroll-initial-target', 'nearest');
-        const supportsScrollTimeline = CSS.supports && CSS.supports('animation-timeline', 'scroll()');
-
-        function setExpandedState(expanded) {
-          mobileOpenBtns.forEach((b) => b.setAttribute('aria-expanded', expanded ? 'true' : 'false'));
-        }
-
-        if (!supportsScrollTimeline) {
-          drawerScroller.addEventListener('scroll', () => {
-            if (drawerSheet.offsetWidth > 0) {
-              const ratio = Math.max(0, Math.min(1, 1 - drawerScroller.scrollLeft / drawerSheet.offsetWidth));
-              mobileDrawer.style.setProperty('--drawer-backdrop', ratio.toFixed(3));
-            }
-          }, { passive: true });
-        }
-
-        async function openMobileDrawer() {
-          if (mobileDrawer.open) return;
-          mobileDrawer.showModal();
-          setExpandedState(true);
-          if (!supportsInitialTarget) {
-            drawerScroller.scrollTo({ left: drawerScroller.offsetWidth, behavior: 'instant' });
-            await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-          }
-          drawerScroller.scrollTo({ left: 0, behavior: 'auto' });
-          if (!supportsScrollTimeline) mobileDrawer.style.setProperty('--drawer-backdrop', '1');
-        }
-
-        function closeMobileDrawer() {
-          if (!mobileDrawer.open) return;
-          if (prefersReducedMotion) {
-            mobileDrawer.close();
-            setExpandedState(false);
-            return;
-          }
-          drawerScroller.scrollTo({ left: drawerScroller.offsetWidth, behavior: 'auto' });
-        }
-
-        const visibleThreshold = Math.max(0.01, 1 / Math.max(window.innerWidth, 320));
-        const drawerObserver = new IntersectionObserver((entries) => {
-          const entry = entries[entries.length - 1];
-          if (!entry) return;
-          if (mobileDrawer.open && entry.intersectionRatio < visibleThreshold) {
-            mobileDrawer.close();
-            setExpandedState(false);
-          } else if (mobileDrawer.open && entry.intersectionRatio >= 0.99) {
-            setExpandedState(true);
-          }
-        }, { root: mobileDrawer, threshold: [visibleThreshold, 1] });
-        drawerObserver.observe(drawerSheet);
-
-        mobileOpenBtns.forEach((btn) => btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openMobileDrawer();
-        }));
-        mobileCloseBtn.addEventListener('click', closeMobileDrawer);
-        mobileDrawer.addEventListener('click', (e) => {
-          if (!drawerSheet.contains(e.target)) closeMobileDrawer();
-        });
-        mobileDrawer.addEventListener('cancel', (e) => {
-          if (e.cancelable) {
-            e.preventDefault();
-            closeMobileDrawer();
-          }
-        });
-        mobileDrawer.addEventListener('close', () => setExpandedState(false));
-        mobileDrawer.querySelectorAll('.mobile-drawer-link').forEach((link) => {
-          link.addEventListener('click', () => {
-            mobileDrawer.close();
-            setExpandedState(false);
-          });
-        });
+      const lerpFactor = 0.14;
+      const SETTLE_EPSILON = 0.15;
+      function lerp(start, end, amt) {
+        return start + (end - start) * amt;
       }
 
-      // --- IPHONE HERO SLIDESHOW ---
-      const phoneSlideshows = document.querySelectorAll('.phone-slideshow');
-      phoneSlideshows.forEach(slideshow => {
-        const images = slideshow.querySelectorAll('.slideshow-img');
-        if (images.length === 0) return;
-        let currentIndex = 0;
-        setInterval(() => {
-          images[currentIndex].classList.remove('active');
-          currentIndex = (currentIndex + 1) % images.length;
-          images[currentIndex].classList.add('active');
-        }, 4000); 
+      function animateNavLerp() {
+        const isIsland = navMode === 'island';
+        const isMobile = window.innerWidth < 640;
+        const targetW = isIsland ? Math.min(window.innerWidth - (isMobile ? 20 : 32), 1020) : window.innerWidth;
+        const targetH = isMobile ? (isIsland ? 56 : 64) : (isIsland ? 62 : 72);
+        const targetTop = isIsland ? (isMobile ? 10 : 18) : 0;
+        const targetRadius = isIsland ? (isMobile ? 24 : 32) : 0;
+        const targetPadX = isMobile ? 14 : (isIsland ? 22 : 28);
+
+        curW = lerp(curW, targetW, lerpFactor);
+        curH = lerp(curH, targetH, lerpFactor);
+        curTop = lerp(curTop, targetTop, lerpFactor);
+        curRadius = lerp(curRadius, targetRadius, lerpFactor);
+        curPadX = lerp(curPadX, targetPadX, lerpFactor);
+
+        let settled =
+          Math.abs(curW - targetW) < SETTLE_EPSILON &&
+          Math.abs(curH - targetH) < SETTLE_EPSILON &&
+          Math.abs(curTop - targetTop) < SETTLE_EPSILON &&
+          Math.abs(curRadius - targetRadius) < SETTLE_EPSILON &&
+          Math.abs(curPadX - targetPadX) < SETTLE_EPSILON;
+
+        if (liquidPill && pillReady) {
+          pillCurX = lerp(pillCurX, pillTargetX, 0.24);
+          pillCurW = lerp(pillCurW, pillTargetW, 0.24);
+          const pillSettled =
+            Math.abs(pillCurX - pillTargetX) < SETTLE_EPSILON &&
+            Math.abs(pillCurW - pillTargetW) < SETTLE_EPSILON;
+          settled = settled && pillSettled;
+          if (pillSettled) {
+            pillCurX = pillTargetX;
+            pillCurW = pillTargetW;
+          }
+        }
+
+        if (settled) {
+          curW = targetW;
+          curH = targetH;
+          curTop = targetTop;
+          curRadius = targetRadius;
+          curPadX = targetPadX;
+          applyNavStyles();
+          navRafId = null;
+          return;
+        }
+
+        applyNavStyles();
+        navRafId = requestAnimationFrame(animateNavLerp);
+      }
+
+      function scheduleNavFrame() {
+        if (navRafId === null) {
+          navRafId = requestAnimationFrame(animateNavLerp);
+        }
+      }
+
+      function setLiquidPillTarget(linkEl) {
+        if (!linkEl || !linksContainer) return;
+        const cRect = linksContainer.getBoundingClientRect();
+        const lRect = linkEl.getBoundingClientRect();
+        if (lRect.width === 0) return;
+        pillTargetX = lRect.left - cRect.left;
+        pillTargetW = lRect.width;
+        if (!pillReady) {
+          pillCurX = pillTargetX;
+          pillCurW = pillTargetW;
+          pillReady = true;
+        }
+        if (liquidPill) liquidPill.style.opacity = '1';
+        scheduleNavFrame();
+      }
+
+      function syncPillToActive() {
+        const activeLink = document.querySelector('#island-links-container .nav-link.active-section');
+        if (activeLink) setLiquidPillTarget(activeLink);
+        scheduleNavFrame();
+      }
+
+      document.querySelectorAll('#island-links-container .nav-link').forEach(link => {
+        link.addEventListener('mouseenter', () => setLiquidPillTarget(link));
       });
+      if (linksContainer) {
+        linksContainer.addEventListener('mouseleave', syncPillToActive);
+      }
 
-      // --- DYNAMIC ISLAND LOGIC ---
-      const navIsland = document.getElementById('dynamic-island-nav');
-      const compactSectionBadge = document.getElementById('compact-section-badge');
-      let isHovered = false, idleTimer = null, currentSectionId = 'person-home';
+      function switchToAdherent() {
+        if (navMode === 'adherent') return;
+        navMode = 'adherent';
+        navEl.classList.add('is-adherent');
+        navEl.classList.remove('is-island');
+        scheduleNavFrame();
+      }
 
-      function expandIsland() { if (navIsland) navIsland.classList.remove('is-collapsed', 'island-notify'); }
-      function collapseIsland() { if (!isHovered && window.scrollY > 80 && navIsland) navIsland.classList.add('is-collapsed'); }
+      function switchToIsland() {
+        if (navMode === 'island') return;
+        navMode = 'island';
+        navEl.classList.add('is-island');
+        navEl.classList.remove('is-adherent');
+        scheduleNavFrame();
+      }
 
-      const wrapper = document.getElementById('nav-island-wrapper');
-      if(wrapper) {
-        wrapper.addEventListener('mouseenter', () => { isHovered = true; expandIsland(); });
-        wrapper.addEventListener('mouseleave', () => { isHovered = false; if (window.scrollY > 80) idleTimer = setTimeout(collapseIsland, 450); });
+      function schedule8sReturnToAdherent() {
+        clearTimeout(watchTimeout8s);
+        watchTimeout8s = setTimeout(() => {
+          if (!isMouseOverNav) {
+            switchToAdherent();
+          }
+        }, 8000);
       }
 
       window.addEventListener('scroll', () => {
-        clearTimeout(idleTimer);
-        if (window.scrollY > 80) {
-          if (!isHovered) navIsland.classList.add('is-collapsed');
-          idleTimer = setTimeout(() => { if (!isHovered) expandIsland(); }, 2400);
-        } else { expandIsland(); }
-      });
+        if (window.scrollY <= 10) {
+          clearTimeout(watchTimeout8s);
+          switchToAdherent();
+        } else {
+          switchToIsland();
+          schedule8sReturnToAdherent();
+        }
+      }, { passive: true });
 
-      const iconMap = {
-        'person-home': '<i class="fa-solid fa-user text-accent mr-1"></i>',
-        'person-intro': '<i class="fa-solid fa-address-card text-accent mr-1"></i>',
-        'person-hobbies': '<i class="fa-solid fa-medal text-accent mr-1"></i>',
-        'person-values': '<i class="fa-solid fa-scale-balanced text-accent mr-1"></i>',
-        'person-note': '<i class="fa-solid fa-quote-left text-accent mr-1"></i>',
-        'contact': '<i class="fa-solid fa-paper-plane text-accent mr-1"></i>'
-      };
+      if (navEl) {
+        navEl.addEventListener('mouseenter', () => {
+          isMouseOverNav = true;
+          clearTimeout(watchTimeout8s);
+        });
+
+        navEl.addEventListener('mouseleave', () => {
+          isMouseOverNav = false;
+          if (window.scrollY > 10 && navMode === 'island') {
+            schedule8sReturnToAdherent();
+          }
+        });
+      }
+
+      scheduleNavFrame();
+      setTimeout(syncPillToActive, 120);
+      window.addEventListener('resize', () => {
+        syncPillToActive();
+        scheduleNavFrame();
+      });
 
       const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const currentId = entry.target.getAttribute('id');
-            const sectionName = entry.target.getAttribute('data-section-name') || "SECTION";
-
-            if (currentSectionId !== currentId && navIsland.classList.contains('is-collapsed') && window.scrollY > 150) {
-              navIsland.classList.remove('island-notify'); void navIsland.offsetWidth; navIsland.classList.add('island-notify');
-              setTimeout(() => navIsland.classList.remove('island-notify'), 1800);
-            }
-            currentSectionId = currentId;
-            if (compactSectionBadge) compactSectionBadge.innerHTML = `${iconMap[currentId] || ''} <span class="font-extrabold tracking-wider">${sectionName}</span>`;
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-              if (link.getAttribute('href') === `#${currentId}`) link.classList.add('active-section');
-              else link.classList.remove('active-section');
+            document.querySelectorAll('#island-links-container .nav-link').forEach(link => {
+              if (link.getAttribute('data-section') === currentId) {
+                link.classList.add('active-section');
+                setLiquidPillTarget(link);
+              } else {
+                link.classList.remove('active-section');
+              }
             });
           }
         });
-      }, { rootMargin: '-35% 0px -50% 0px', threshold: 0 });
+      }, { rootMargin: '-30% 0px -40% 0px', threshold: 0 });
 
       document.querySelectorAll('section[id]').forEach(sec => sectionObserver.observe(sec));
 
-      // --- APPLE DROP ANIMATION FOR PERSON HOBBIES ---
-      // Exact restore of original fast/smooth drop animation
-      function runDropAnimation() {
-        const dropBox = document.getElementById('person-drop-box');
-        const dropText = dropBox.querySelector('.drop-text');
-        const tabsColumn = document.getElementById('person-tabs-column');
-        const tabBtns = tabsColumn.querySelectorAll('.apple-tab-btn');
-        const stage = document.getElementById('person-stage');
-        
-        const islandRect = navIsland.getBoundingClientRect();
-        const parentRect = dropBox.parentElement.getBoundingClientRect();
-        const startY = islandRect.top - parentRect.top + (islandRect.height / 2) - 20;
-        const dropWidth = Math.min(370, Math.max(240, window.innerWidth - 32)) + 'px';
+      // =========================================================
+      // 2. MOBILE MENU DRAWER DIALOG
+      // =========================================================
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      const mobileOpenBtn = document.getElementById('mobile-menu-open');
+      const mobileCloseBtn = document.getElementById('mobile-menu-close');
+      const mobileLinks = document.querySelectorAll('.mobile-drawer-link');
 
-        // Stage is normally visible in DOM structure to avoid overlapping layout lag
-        gsap.set(dropBox, { xPercent: -50, y: startY, scale: 0.1, opacity: 0, width: "40px", height: "40px", borderRadius: "99px" });
-        gsap.set(stage, { opacity: 0, scale: 0.95 });
-
-        const tl = gsap.timeline();
-
-        tl.to(navIsland, { scale: 1.06, boxShadow: "0 0 80px rgba(52, 211, 153, 1), inset 0 0 20px rgba(52, 211, 153, 0.8)", borderColor: "rgba(52, 211, 153, 1)", duration: 0.8, ease: "power2.out" })
-          .to(dropBox, { y: 70, scale: 1, opacity: 1, width: "56px", height: "56px", duration: 1.2, ease: "back.out(1.0)" }, "-=0.2")
-          .to(navIsland, { scale: 1, boxShadow: "", borderColor: "", duration: 0.8, ease: "power2.inOut", clearProps: "all" }, "-=0.9")
-          .to(dropBox, { width: dropWidth, borderRadius: "24px", duration: 0.9, ease: "power3.inOut" }, "+=0.3")
-          .to(dropText, { opacity: 1, duration: 0.5, onComplete: () => { dropText.classList.add('apple-siri-shimmer'); } }, "-=0.3")
-          .to(dropBox, { y: 110, opacity: 0, scale: 0.9, filter: "blur(8px)", duration: 0.8, ease: "power2.in", onComplete: () => { dropBox.style.display = 'none'; } }, "+=1.5")
-          .fromTo(tabBtns, { x: -30, opacity: 0, scale: 0.96, filter: "blur(4px)" }, { x: 0, opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, stagger: 0.15, ease: "back.out(1.2)", onStart: () => { tabsColumn.style.opacity = "1"; tabsColumn.style.pointerEvents = "auto"; } }, "-=0.3")
-          .add(() => { document.querySelector('.person-tab[data-proj="per1"]').click(); }, "-=0.2");
+      function openDrawer() {
+        if (mobileDrawer && typeof mobileDrawer.showModal === 'function') {
+          mobileDrawer.showModal();
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      function closeDrawer() {
+        if (mobileDrawer) {
+          mobileDrawer.close();
+          document.body.style.overflow = '';
+        }
       }
 
-      let personDropPlayed = false;
-      new IntersectionObserver((entries) => {
-        entries.forEach(e => { if(e.isIntersecting && !personDropPlayed) { personDropPlayed = true; runDropAnimation(); } });
-      }, { threshold: 0.2 }).observe(document.getElementById('person-hobbies'));
+      if (mobileOpenBtn) mobileOpenBtn.addEventListener('click', openDrawer);
+      if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeDrawer);
+      mobileLinks.forEach(link => link.addEventListener('click', closeDrawer));
+      if (mobileDrawer) {
+        mobileDrawer.addEventListener('click', (e) => {
+          if (e.target === mobileDrawer) closeDrawer();
+        });
+      }
 
+      // =========================================================
+      // 3. HERO TYPING SUBTITLE
+      // =========================================================
+      const typingEl = document.getElementById('typing-tagline');
+      const phrases = [
+        'BCA Student • Athlete • Lifelong Learner',
+        'Top-Order Batsman • Fitness Enthusiast',
+        'Curious Builder • Exploring What Next'
+      ];
+      let pIdx = 0, charIdx = 0, isDeleting = false;
 
-      // --- ACCORDION CONTENT LOGIC ---
-      const personHobbyData = {
-        "per1": { 
-          icon: "fa-baseball-bat-ball", 
-          title: "Cricket", 
-          desc: "I play as a top-order batsman at a local academy near my colony. I’ve played around 25 matches, scoring 1,196 runs with a 47.84 batting average.<br><br>What I enjoy most about cricket is the combination of technique, decision-making, consistency, and performance." 
+      function typeLoop() {
+        if (!typingEl) return;
+        const current = phrases[pIdx];
+        if (isDeleting) {
+          typingEl.textContent = current.substring(0, charIdx - 1);
+          charIdx--;
+        } else {
+          typingEl.textContent = current.substring(0, charIdx + 1);
+          charIdx++;
+        }
+
+        let speed = isDeleting ? 30 : 65;
+        if (!isDeleting && charIdx === current.length) {
+          speed = 2200;
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          pIdx = (pIdx + 1) % phrases.length;
+          speed = 400;
+        }
+        setTimeout(typeLoop, speed);
+      }
+      typeLoop();
+
+      // =========================================================
+      // 4. SPOTLIGHT CARDS CURSOR TRACKING
+      // =========================================================
+      const spotlightCards = document.querySelectorAll('.spotlight-card');
+      spotlightCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+      });
+
+      // =========================================================
+      // 5. HOBBIES INTERACTIVE STAGE LOGIC
+      // =========================================================
+      const hobbyData = {
+        per1: {
+          icon: 'fa-baseball-bat-ball',
+          title: 'Cricket — Top-Order Batsman',
+          badge: '25 Matches • 1,196 Runs • 47.84 Avg',
+          desc: 'I play as a top-order batsman at an academy near my colony. Cricket has been my primary school of discipline: learning to respect the conditions, adapt to bowler rhythm, and maintain calm decision-making under intense pressure.<br><br>What I love most is the unforgiving nature of batting: one mistake ends your turn, which teaches deep situational awareness and tactical humility.',
+          highlights: ['Technique under pressure', 'Hand-eye coordination', 'Tactical composure', 'Fitness & stamina']
         },
-        "per2": { 
-          icon: "fa-dumbbell", 
-          title: "Fitness & Body Language", 
-          desc: "I train at the gym to improve my fitness, confidence, and overall body language. I believe physical fitness plays an important role in how you carry yourself and perform in everyday life." 
+        per2: {
+          icon: 'fa-dumbbell',
+          title: 'Fitness & Physical Conditioning',
+          badge: 'Daily Resistance & Posture Training',
+          desc: 'Training at the gym is not about vanity for me — it is about building physical resilience, mental toughness, and commanding posture. The way you carry yourself physically directly influences your confidence, alertness, and clarity in everyday life.<br><br>Staying consistent when fatigue sets in builds the internal discipline that carries over into coding, studying, and creative execution.',
+          highlights: ['Progressive overload', 'Mental grit & endurance', 'Body language & presence', 'Daily energy calibration']
+        },
+        per3: {
+          icon: 'fa-headphones',
+          title: 'Music & Flow State Calibration',
+          badge: 'Lo-Fi • Ambient Soundscapes • Acoustic',
+          desc: 'Music is my primary cognitive tool for entering deep flow states. Whether debugging complex code, reading, or resetting after an intensive study session, the right acoustic landscape eliminates background friction and restores focus.<br><br>I appreciate the intricate rhythm, mixing, and emotion behind good production — music is software for the human nervous system.',
+          highlights: ['Flow state induction', 'Acoustic focus', 'Cognitive recharge', 'Creative inspiration']
+        },
+        per4: {
+          icon: 'fa-book-open',
+          title: 'Reading & Mental Models',
+          badge: 'Biographies • Tech History • Philosophy',
+          desc: 'Curiosity doesn’t stop at syntax. I enjoy exploring how great builders, athletes, and thinkers throughout history navigated uncertainty, leveraged systems, and compound-built their opportunities.<br><br>Reading provides a quiet vantage point to examine my own principles and think beyond immediate short-term goals.',
+          highlights: ['Mental models', 'First-principles thinking', 'Historical perspective', 'Unlocking leverage']
         }
       };
 
-      document.querySelectorAll('.person-tab').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.person-tab').forEach(b => { b.classList.remove('is-bulky'); b.querySelector('span').className = 'font-bold text-emerald-400'; });
-          btn.classList.add('is-bulky'); btn.querySelector('span').className = 'font-bold text-white';
-          const d = personHobbyData[btn.getAttribute('data-proj')];
-          
-          const stageWrapper = document.getElementById('person-stage');
-          if(d) {
-            stageWrapper.innerHTML = `
-              <div class="spotlight-card p-6 sm:p-12 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-emerald-950/80 via-slate-900/90 to-teal-950/80 border border-emerald-500/50 shadow-[0_0_60px_rgba(16,185,129,0.25)] flex flex-col justify-between min-h-[260px] sm:min-h-[440px] text-left">
-                <div>
-                  <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center font-bold mb-5 sm:mb-8 shadow-[0_0_25px_rgba(16,185,129,0.35)]">
-                    <i class="fa-solid ${d.icon} text-xl sm:text-2xl"></i>
-                  </div>
-                  <h3 class="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-3 sm:mb-4">${d.title}</h3>
-                  <p class="text-slate-200 text-sm sm:text-lg leading-relaxed font-medium">${d.desc}</p>
-                </div>
+      const hobbyStage = document.getElementById('hobby-stage-card');
+      const hobbyTabs = document.querySelectorAll('.apple-tab-btn');
+
+      function renderHobbyStage(key) {
+        const item = hobbyData[key];
+        if (!item || !hobbyStage) return;
+
+        hobbyStage.innerHTML = `
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-rose-500/15 to-amber-500/15 border border-rose-500/30 text-rose-400 font-mono text-xs font-bold">
+                <i class="fa-solid ${item.icon}"></i>
+                <span>${item.badge}</span>
               </div>
-            `;
-            
-            stageWrapper.style.display = 'block';
-            if (window.innerWidth < 1024) {
-              gsap.fromTo(stageWrapper, { y: 18, scale: 0.96, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" });
-            } else {
-              gsap.fromTo(stageWrapper, { x: -180, scale: 0.15, opacity: 0 }, { x: 0, scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.35)" });
-            }
-          }
+            </div>
+
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-black text-text-primary mb-3">${item.title}</h3>
+              <p class="text-text-secondary text-sm sm:text-base leading-relaxed font-medium">${item.desc}</p>
+            </div>
+
+            <div class="pt-4 border-t border-border/50">
+              <span class="block text-xs font-mono font-bold uppercase tracking-wider text-text-muted mb-3">Key Takeaways</span>
+              <div class="flex flex-wrap gap-2">
+                ${item.highlights.map(h => `<span class="px-3 py-1 rounded-lg glass-panel text-xs font-semibold text-text-primary"><i class="fa-solid fa-check text-accent text-[10px] mr-1.5"></i>${h}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      hobbyTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          hobbyTabs.forEach(t => t.classList.remove('is-active'));
+          tab.classList.add('is-active');
+          const key = tab.getAttribute('data-hobby');
+          renderHobbyStage(key);
         });
       });
+      renderHobbyStage('per1');
 
-      // --- OTHER FX (Particles, Reveal, Null-Safe Spotlight) ---
-      const revealObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); revealObserver.unobserve(e.target); } }); }, { threshold: 0.12 });
-      document.querySelectorAll('.reveal-node').forEach(node => revealObserver.observe(node));
-      
-      let isMouseMoving = false;
-      document.body.addEventListener('mousemove', (e) => {
-        const targetCard = e.target && e.target.closest ? e.target.closest('.spotlight-card') : null;
-        if (!targetCard || isMouseMoving) return;
-        const clientX = e.clientX;
-        const clientY = e.clientY;
-        isMouseMoving = true;
-        window.requestAnimationFrame(() => {
-          try {
-            if (targetCard && targetCard.isConnected) {
-              const rect = targetCard.getBoundingClientRect();
-              targetCard.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
-              targetCard.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
-            }
-          } finally {
-            isMouseMoving = false;
-          }
-        });
+      // =========================================================
+      // 6. CLASSIC X MAGNETIC SILK WAVE ENGINE
+      // =========================================================
+      const canvas = document.getElementById('stitch-silk-canvas');
+      const canvasWrapper = document.getElementById('stitch-canvas-wrapper');
+      const ctx = canvas.getContext('2d');
+      let width = 0, height = 0;
+
+      function resizeCanvas() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        if (prefersReducedMotion) drawStitchFrame();
+      }
+
+      let mouse = {
+        x: window.innerWidth * 0.5,
+        y: window.innerHeight * 0.75,
+        lx: window.innerWidth * 0.5,
+        ly: window.innerHeight * 0.75
+      };
+
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
       }, { passive: true });
 
-      // Particles (pause when tab is hidden or reduced motion is preferred)
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      let particlesArray = [];
-      let particleRafId = null;
-
-      function drawParticlesFrame() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const isDark = document.documentElement.classList.contains('dark');
-        ctx.fillStyle = isDark ? 'rgba(248, 250, 252, 0.45)' : 'rgba(16, 185, 129, 0.45)';
-        particlesArray.forEach(p => {
-          if (!prefersReducedMotion) {
-            p.x += p.speedX;
-            p.y += p.speedY;
-            if (p.x > canvas.width) p.x = 0; else if (p.x < 0) p.x = canvas.width;
-            if (p.y > canvas.height) p.y = 0; else if (p.y < 0) p.y = canvas.height;
-          }
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-
-      function initParticles() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        particlesArray = [];
-        for (let i = 0; i < 75; i++) {
-          particlesArray.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 1.6 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.35,
-            speedY: (Math.random() - 0.5) * 0.35
-          });
-        }
-        if (prefersReducedMotion) drawParticlesFrame();
-      }
-
-      function animateParticles() {
-        if (document.hidden || prefersReducedMotion) {
-          particleRafId = null;
-          return;
-        }
-        drawParticlesFrame();
-        particleRafId = requestAnimationFrame(animateParticles);
-      }
-
-      function startParticleLoop() {
-        if (prefersReducedMotion) {
-          drawParticlesFrame();
-          return;
-        }
-        if (particleRafId === null && !document.hidden) {
-          particleRafId = requestAnimationFrame(animateParticles);
+      function getStrandColor(sRatio, alpha, darkTheme) {
+        if (darkTheme) {
+          // Dynamic Sunset Blend: Electric Rose Crimson (#F43F5E) -> Golden Amber (#F59E0B)
+          const r = Math.round(244 + (245 - 244) * sRatio);
+          const g = Math.round(63 + (158 - 63) * sRatio);
+          const b = Math.round(94 + (11 - 94) * sRatio);
+          return `rgba(${r}, ${g}, ${b}, ${(alpha * 0.92).toFixed(3)})`;
+        } else {
+          // Daytime Blend: Deep Crimson (#E11D48) -> Warm Amber (#D97706)
+          const r = Math.round(225 + (217 - 225) * sRatio);
+          const g = Math.round(29 + (119 - 29) * sRatio);
+          const b = Math.round(72 + (6 - 72) * sRatio);
+          return `rgba(${r}, ${g}, ${b}, ${(alpha * 0.88).toFixed(3)})`;
         }
       }
 
-      initParticles();
-      startParticleLoop();
-      window.addEventListener('resize', initParticles);
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) startParticleLoop();
-      });
-      
-      // Popup-safe social overlay animation
-      const redirectOverlay = document.createElement('div');
-      redirectOverlay.className = 'redirect-overlay';
-      const redirectIconWrapper = document.createElement('div');
-      redirectIconWrapper.className = 'redirect-icon-wrapper';
-      redirectOverlay.appendChild(redirectIconWrapper);
-      document.body.appendChild(redirectOverlay);
+      let time = 0;
+      let stitchRafId = null;
+      let isStitchReceded = false;
 
-      let redirectCleanupTimer = null;
-      function clearRedirectOverlay() {
-        clearTimeout(redirectCleanupTimer);
-        redirectOverlay.classList.remove('active');
+      function getCradleBoundaryY(x) {
+        const u = (x / width) * 2 - 1;
+        const centerFloor = 0.76;
+        const edgeRise = 0.32 * Math.pow(u, 2);
+        return height * (centerFloor - edgeRise);
       }
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) clearRedirectOverlay();
-      });
-      window.addEventListener('pageshow', clearRedirectOverlay);
 
-      document.querySelectorAll('.social-card').forEach(link => {
-        link.addEventListener('click', function(e) {
-          if (this.href.startsWith('mailto:') || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
-            return;
+      function drawStitchFrame() {
+        ctx.clearRect(0, 0, width, height);
+        const darkTheme = document.documentElement.classList.contains('dark');
+
+        mouse.lx += (mouse.x - mouse.lx) * 0.08;
+        mouse.ly += (mouse.y - mouse.ly) * 0.08;
+
+        const ribbonCount = 5;
+        const strandsPerRibbon = 6;
+        const baseAmp = height * 0.07;
+
+        for (let r = 0; r < ribbonCount; r++) {
+          const rProg = r / (ribbonCount - 1);
+          const ribPhase = r * 0.92;
+          const ribFreq = 0.0016 + r * 0.0003;
+          const ribAmp = baseAmp * (0.8 + 0.35 * Math.sin(time * 0.6 + r));
+
+          for (let s = 0; s < strandsPerRibbon; s++) {
+            const sProg = s / (strandsPerRibbon - 1);
+            const strandOffset = (sProg - 0.5) * (height * 0.045);
+            const alpha = 0.30 + 0.50 * (1 - Math.abs(sProg - 0.5) * 1.6);
+
+            ctx.beginPath();
+            ctx.lineWidth = 1.35;
+            ctx.strokeStyle = getStrandColor(sProg, alpha, darkTheme);
+
+            const step = 8;
+            for (let x = 0; x <= width + step; x += step) {
+              const cradleY = getCradleBoundaryY(x);
+              const harmonic1 = Math.sin(x * ribFreq + time * 1.1 + ribPhase);
+              const harmonic2 = Math.cos(x * ribFreq * 2.1 - time * 0.75 + r);
+              const naturalY = cradleY + strandOffset + (harmonic1 * ribAmp) + (harmonic2 * ribAmp * 0.32);
+
+              const dx = x - mouse.lx;
+              const dy = naturalY - mouse.ly;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              const influenceRadius = Math.min(width, height) * 0.35;
+
+              let finalY = naturalY;
+              if (dist < influenceRadius) {
+                const force = Math.pow(1 - dist / influenceRadius, 2);
+                const pushY = (dy / (dist + 1e-4)) * (influenceRadius * 0.28) * force;
+                finalY += pushY;
+              }
+
+              if (x === 0) ctx.moveTo(x, finalY);
+              else ctx.lineTo(x, finalY);
+            }
+            ctx.stroke();
           }
-          const iconElement = this.querySelector('i');
-          if (iconElement) {
-            redirectIconWrapper.innerHTML = iconElement.outerHTML;
-            redirectIconWrapper.style.color = window.getComputedStyle(this).color;
-          }
-          if (this.target === '_blank') {
-            requestAnimationFrame(() => redirectOverlay.classList.add('active'));
-            clearTimeout(redirectCleanupTimer);
-            redirectCleanupTimer = setTimeout(clearRedirectOverlay, 750);
-          } else {
-            e.preventDefault();
-            const targetUrl = this.href;
-            requestAnimationFrame(() => redirectOverlay.classList.add('active'));
-            clearTimeout(redirectCleanupTimer);
-            redirectCleanupTimer = setTimeout(() => {
-              window.location.href = targetUrl;
-            }, 650);
-          }
-        });
-      });
+        }
+      }
+
+      function animateStitchCanvas() {
+        if (prefersReducedMotion) return;
+        time += 0.014;
+        drawStitchFrame();
+        stitchRafId = requestAnimationFrame(animateStitchCanvas);
+      }
+
+      window.addEventListener('resize', resizeCanvas, { passive: true });
+      resizeCanvas();
+      if (!prefersReducedMotion) animateStitchCanvas();
+
+      // Recede canvas on deep scroll
+      function checkStitchScroll() {
+        const heroEl = document.getElementById('person-home');
+        if (!heroEl) return;
+        const heroBottom = heroEl.getBoundingClientRect().bottom;
+        if (heroBottom < 100 && !isStitchReceded) {
+          isStitchReceded = true;
+          canvasWrapper.classList.add('stitch-recede');
+        } else if (heroBottom >= 100 && isStitchReceded) {
+          isStitchReceded = false;
+          canvasWrapper.classList.remove('stitch-recede');
+        }
+      }
+      window.addEventListener('scroll', checkStitchScroll, { passive: true });
+      checkStitchScroll();
+
     });
   </script>
 </body>
