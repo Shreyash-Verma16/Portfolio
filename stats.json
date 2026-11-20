@@ -1149,5 +1149,41 @@
         "source": "behold_recent_feed"
       }
     }
+  },
+  {
+    "date": "2026-11-20",
+    "recordedAt": "2026-11-20T05:08:04.320Z",
+    "youtube": {
+      "subscribers": 149,
+      "views": 172106,
+      "uploads": 117,
+      "engagement": 4050,
+      "scope": "lifetime_channel",
+      "status": "live"
+    },
+    "instagram": {
+      "followers": 160,
+      "views": 3046,
+      "uploads": 52,
+      "engagement": 58,
+      "scope": "profile_insights",
+      "status": "live_verified",
+      "lifetime": {
+        "followers": 160,
+        "views": 3046,
+        "uploads": 52,
+        "engagement": 58
+      },
+      "recentFeed": {
+        "postCount": 6,
+        "likes": 224,
+        "comments": 5,
+        "engagement": 229,
+        "views": 3046,
+        "estimatedFeedViewsLegacy": 3046,
+        "postsWithNativeViews": 0,
+        "source": "behold_recent_feed"
+      }
+    }
   }
 ]
